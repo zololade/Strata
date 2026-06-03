@@ -20,10 +20,13 @@ class EventBus {
   public publish(ev: event, data?: unknown) {
     let currEvent = this.events.get(ev);
 
-    if (currEvent)
+    if (currEvent?.length) {
       currEvent.forEach((act) => {
         act(data);
       });
+    } else {
+      throw new Error("Event needs to be registered first");
+    }
   }
 
   private unsubscribe(ev: event, act: action<unknown>) {
