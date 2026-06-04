@@ -19,10 +19,10 @@ class StoreReader {
   hydrateProject(): ProjectInput[] {
     const result: ProjectInput[] = [];
 
-    this.stored.projects.forEach((v, k) => {
+    this.stored.projects.forEach((v, _k) => {
       //the project object
       result.push({
-        id: k,
+        id: v.id,
         title: v.title,
         overview: v.overview,
         flag: v.flag,
@@ -38,9 +38,9 @@ class StoreReader {
   hydrateTask(): TaskInput[] {
     let result: TaskInput[] = [];
 
-    this.stored.tasks.forEach((v, k) => {
+    this.stored.tasks.forEach((v, _k) => {
       result.push({
-        id: k,
+        id: v.id,
         title: v.title,
         overview: v.overview,
         flag: v.flag,
@@ -54,9 +54,9 @@ class StoreReader {
   hydrateItem(): ItemInput[] {
     let result: ItemInput[] = [];
 
-    this.stored.items.forEach((v, k) => {
+    this.stored.items.forEach((v, _k) => {
       result.push({
-        id: k,
+        id: v.id,
         content: v.content,
         note: v.note,
         flag: v.flag,

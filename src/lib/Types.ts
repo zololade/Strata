@@ -30,6 +30,7 @@ interface ItemInput {
 }
 
 interface Snapshot {
+  // version: number;
   projects: ProjectInput[];
   tasks: TaskInput[];
   items: ItemInput[];

@@ -1,5 +1,5 @@
 // transformer layer that populate instances and connect them
-import type { Snapshot } from "../lib/Types";
+import type { Snapshot, StoredType } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 import { Item } from "./Item";
 import { Project } from "./Project";
@@ -10,75 +10,36 @@ function rehydrateFactory(data: Snapshot) {
   const tasks = new Map<string, Task>();
   const items = new Map<string, Item>();
 
-  data.tasks.forEach((t) => assertExists(items, t.items, "Item"));
-  data.projects.forEach((p) => assertExists(tasks, p.tasks, "Task"));
+  for (const v of data.items) {
+    items.set(v.id, new Item(v));
+  }
+  for (const v of data.tasks) {
+    tasks.set(v.id, new Task(v));
+  }
+  for (const v of data.projects) {
+    projects.set(v.id, new Project(v));
+  }
 
-  data.projects.forEach((v) => {
-    projects.set(
-      v.id,
-      new Project({
-        title: v.title,
-        overview: v.overview,
-        flag: v.flag,
-        tasks: v.tasks,
-        id: v.id,
-        createdAt: v.createdAt,
-        lastModified: v.lastModified,
-      }),
-    );
-  });
-
-  data.tasks.forEach((v) => {
-    tasks.set(
-      v.id,
-      new Task({
-        id: v.id,
-        title: v.title,
-        overview: v.overview,
-        flag: v.flag,
-        items: v.items,
-      }),
-    );
-  });
-
-  data.items.forEach((v) => {
-    items.set(
-      v.id,
-      new Item({
-        id: v.id,
-        content: v.content,
-        note: v.note,
-        flag: v.flag,
-      }),
-    );
-  });
   return { projects, tasks, items };
 }
 
 function loadSnapshot(
   incoming: unknown,
-  store: {
-    projects: Map<string, Project>;
-    tasks: Map<string, Task>;
-    items: Map<string, Item>;
-  },
+  store: StoredType<Project, Task, Item>,
 ) {
-  if (!isOutgoingType(incoming)) {
-    throw new Error("Invalid project data");
-  }
+  if (!isSnapshot(incoming)) throw new Error("Invalid project data");
+
   const graph = rehydrateFactory(incoming);
 
-  store.projects = graph.projects;
-  store.tasks = graph.tasks;
-  store.items = graph.items;
+  replaceMap(store.projects, graph.projects);
+  replaceMap(store.tasks, graph.tasks);
+  replaceMap(store.items, graph.items);
 }
 
 //helper
-function isOutgoingType(value: unknown): value is Snapshot {
+function isSnapshot(value: unknown): value is Snapshot {
   if (!hasKeys(value, ["projects", "tasks", "items"])) return false;
-
-  const v = value as any;
-
+  const v = value;
   return (
     Array.isArray(v.projects) &&
     Array.isArray(v.tasks) &&
@@ -86,11 +47,10 @@ function isOutgoingType(value: unknown): value is Snapshot {
   );
 }
 
-function assertExists<T>(map: Map<string, T>, ids: string[], label: string) {
-  for (const id of ids) {
-    if (!map.has(id)) {
-      throw new Error(`Missing ${label}: ${id}`);
-    }
+function replaceMap<T>(target: Map<string, T>, source: Map<string, T>) {
+  target.clear();
+  for (const [k, v] of source) {
+    target.set(k, v);
   }
 }
 

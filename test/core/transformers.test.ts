@@ -3,14 +3,14 @@ import { Project } from "../../src/core/Project";
 import type { StoredType } from "../../src/lib/Types";
 import { Task } from "../../src/core/Task";
 import { Item } from "../../src/core/Item";
-import { buildProjectGraph } from "../../src/core/transformer";
+import { rehydrateFactory } from "../../src/core/transformer";
 import { TestData } from "../database/TestData";
 
 describe("buildProjectGraph", () => {
   let store: StoredType<Project, Task, Item> | null = null;
   beforeAll(() => {
     let data = TestData;
-    store = buildProjectGraph(data);
+    store = rehydrateFactory(data);
   });
   it("creates correct number of project instances", () => {
     if (store) {

@@ -1,22 +1,26 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { Project } from "../../src/core/Project";
-import type { ProjectData, StoredType } from "../../src/lib/Types";
+import type { StoredType, Snapshot as Outgoing } from "../../src/lib/Types";
 import { Task } from "../../src/core/Task";
 import { Item } from "../../src/core/Item";
-import { buildProjectGraph } from "../../src/core/transformer";
+import { rehydrateFactory } from "../../src/core/transformer";
 import { TestData } from "../database/TestData";
 import { StoreReader } from "../../src/core/serializer";
 
 describe("buildProjectGraph", () => {
-  let result: ProjectData[] | null = null;
+  let result: Outgoing | null = null;
   beforeAll(() => {
     let data = TestData;
-    let store: StoredType<Project, Task, Item> = buildProjectGraph(data);
+    let store: StoredType<Project, Task, Item> = rehydrateFactory(data);
     let reader = new StoreReader(store);
-    result = reader.serializer();
+    result = {
+      projects: reader.hydrateProject(),
+      tasks: reader.hydrateTask(),
+      items: reader.hydrateItem(),
+    };
   });
 
-  it("produces correct nested ProjectData[] from populated store", () => {
+  it("produces result that match TestData", () => {
     if (result) {
       expect(result).toMatchObject(TestData);
     }
@@ -24,10 +28,9 @@ describe("buildProjectGraph", () => {
 
   it("task and item counts match original data", () => {
     if (result) {
-      expect(result[0]?.tasks.length).toBe(TestData[0]?.tasks.length);
-      expect(result[0]?.tasks[0]?.items.length).toBe(
-        TestData[0]?.tasks[0]?.items.length,
-      );
+      expect(result.projects.length).toBe(TestData.projects.length);
+      expect(result.tasks.length).toBe(TestData.tasks.length);
+      expect(result.items.length).toBe(TestData.items.length);
     }
   });
 });
