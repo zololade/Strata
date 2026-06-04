@@ -95,4 +95,4 @@ function transformer(
   graph.items.forEach((v, k) => store.items.set(k, v));
 }
 
-export { transformer };
+export { transformer, buildProjectGraph };
