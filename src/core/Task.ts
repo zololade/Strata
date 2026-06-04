@@ -14,6 +14,14 @@ class Task {
     this.flag = param.flag;
     this.items = new Set(param.items);
   }
+  /*
+  Task
+
+  edit — update title, overview
+  addItem — add item id to items Set
+  removeItem — remove item id
+
+  */
 }
 
 export { Task };

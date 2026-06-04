@@ -1,6 +1,5 @@
-import type { StoredType, ProjectInput } from "../lib/Types";
-import type { Item } from "./Item";
-import type { Task } from "./Task";
+import type { ProjectInput } from "../lib/Types";
+
 //Captial "I" > "Incoming"
 class Project {
   id: string;
@@ -10,9 +9,8 @@ class Project {
   tasks: Set<string>;
   createdAt: number;
   lastModified: number;
-  store: StoredType<Project, Task, Item> | undefined;
 
-  constructor(param: ProjectInput, store?: StoredType<Project, Task, Item>) {
+  constructor(param: ProjectInput) {
     this.id = param.id ?? crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;
@@ -20,8 +18,20 @@ class Project {
     this.tasks = new Set(param.tasks);
     this.createdAt = param.createdAt ?? Date.now();
     this.lastModified = param.lastModified ?? 0;
-    this.store = store;
   }
+
+  /*
+  Project
+
+  edit — update title, overview
+  toggleFlag — add/remove a flag
+  save — publish to databaseBus
+  delete — remove from store, publish
+  achieve — toggle achieved flag specifically
+  addTask — add task id to tasks Set
+  removeTask — remove task id from tasks Set
+
+  */
 }
 
 export { Project };

@@ -1,5 +1,5 @@
 // transformer layer that populate instances and connect them
-import type { ProjectData, StoredType } from "../lib/Types";
+import type { ProjectData } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 import { Item } from "./Item";
 import { Project } from "./Project";
@@ -13,10 +13,7 @@ function isProject(value: unknown): value is ProjectData[] {
   );
 }
 
-function buildProjectGraph(
-  data: ProjectData[],
-  store?: StoredType<Project, Task, Item>,
-) {
+function buildProjectGraph(data: ProjectData[]) {
   const projects = new Map<string, Project>();
   const tasks = new Map<string, Task>();
   const items = new Map<string, Item>();
@@ -57,18 +54,15 @@ function buildProjectGraph(
 
     projects.set(
       projectData.id,
-      new Project(
-        {
-          title: projectData.title,
-          overview: projectData.overview,
-          flag: projectData.flag,
-          tasks: taskIds,
-          id: projectData.id,
-          createdAt: projectData.createdAt,
-          lastModified: projectData.lastModified,
-        },
-        store,
-      ),
+      new Project({
+        title: projectData.title,
+        overview: projectData.overview,
+        flag: projectData.flag,
+        tasks: taskIds,
+        id: projectData.id,
+        createdAt: projectData.createdAt,
+        lastModified: projectData.lastModified,
+      }),
     );
   }
 
@@ -84,7 +78,7 @@ function transformer(
   },
 ) {
   if (!isProject(incoming)) return;
-  const graph = buildProjectGraph(incoming, store);
+  const graph = buildProjectGraph(incoming);
 
   store.projects.clear();
   store.tasks.clear();

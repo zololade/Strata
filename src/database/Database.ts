@@ -1,6 +1,6 @@
 import type { Item } from "../core/Item";
 import type { Project } from "../core/Project";
-import { serializer } from "../core/serializer";
+import { StoreReader } from "../core/serializer";
 import type { Task } from "../core/Task";
 import { databaseBus } from "../lib/Buses";
 import type { ProjectData, StoredType } from "../lib/Types";
@@ -18,7 +18,8 @@ function getProjects(): ProjectData[] {
 function putProjects(incoming: unknown) {
   if (isStoredType(incoming)) {
     if (typeof localStorage !== "undefined") {
-      let data = serializer(incoming);
+      let reader = new StoreReader(incoming);
+      let data = reader.serializer();
       workingProjectData = data;
       localStorage.setItem("todoData", JSON.stringify(data));
     }
