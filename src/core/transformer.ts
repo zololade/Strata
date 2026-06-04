@@ -1,4 +1,9 @@
 // transformer layer that populate instances and connect them
+/*
+Todo
+- Snapshot versioning
+- flag validation
+*/
 import type {
   Snapshot,
   StoredType,
