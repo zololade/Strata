@@ -4,16 +4,22 @@ Todo
 - Snapshot versioning
 - flag validation
 */
-import type { Snapshot, StoredType } from "../lib/Types";
+import type {
+  ItemInstance,
+  ProjectInstance,
+  Snapshot,
+  StoredType,
+  TaskInstance,
+} from "../lib/Types";
 import { isSnapshot } from "./guards";
 import { Item } from "./Item";
 import { Project } from "./Project";
 import { Task } from "./Task";
 
 function rehydrateFactory(data: Snapshot) {
-  const projects = new Map<string, Project>();
-  const tasks = new Map<string, Task>();
-  const items = new Map<string, Item>();
+  const projects = new Map<string, ProjectInstance>();
+  const tasks = new Map<string, TaskInstance>();
+  const items = new Map<string, ItemInstance>();
 
   for (const v of data.items) {
     checkDuplicate(items, v.id, "Items");
@@ -33,10 +39,7 @@ function rehydrateFactory(data: Snapshot) {
   return { projects, tasks, items };
 }
 
-function loadSnapshot(
-  incoming: unknown,
-  store: StoredType<Project, Task, Item>,
-) {
+function loadSnapshot(incoming: unknown, store: StoredType) {
   if (!isSnapshot(incoming)) throw new Error("Invalid project data");
 
   const graph = rehydrateFactory(incoming);

@@ -8,7 +8,7 @@ import { badData, TestData } from "../database/TestData";
 
 describe("rehydrateFactory", () => {
   describe("good data", () => {
-    let store: StoredType<Project, Task, Item> | null = null;
+    let store: StoredType | null = null;
     beforeAll(() => {
       let data = TestData;
       store = rehydrateFactory(data);

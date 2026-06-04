@@ -4,15 +4,13 @@ import type {
   StoredType,
   TaskInput,
 } from "../lib/Types";
-import type { Item } from "./Item";
-import type { Project } from "./Project";
-import type { Task } from "./Task";
+
 // serializer builds from project map
 // it works with StoredType and build projects
 
 class StoreReader {
-  private stored: StoredType<Project, Task, Item>;
-  constructor(stored: StoredType<Project, Task, Item>) {
+  private stored: StoredType;
+  constructor(stored: StoredType) {
     this.stored = stored;
   }
 

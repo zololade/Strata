@@ -1,9 +1,3 @@
-type StoredType<P, T, I> = {
-  projects: Map<string, P>;
-  tasks: Map<string, T>;
-  items: Map<string, I>;
-};
-
 interface ProjectInput {
   id: string;
   title: string;
@@ -36,4 +30,54 @@ interface Snapshot {
   items: ItemInput[];
 }
 
-export type { StoredType, ProjectInput, TaskInput, ItemInput, Snapshot };
+type Command = { type: "removeTask"; projectId: string; taskId: string };
+
+//app instance
+type ProjectInstance = {
+  id: string;
+  title: string;
+  overview: string;
+  flag: string[] | null;
+  tasks: Set<string>;
+  createdAt: number;
+  lastModified: number;
+
+  removeTask(id: string): void;
+};
+
+type TaskInstance = {
+  id: string;
+  title: string;
+  overview: string;
+  flag: string[] | null;
+  items: Set<string>;
+
+  // edit(title: string, overview: string): void;
+  // addItem(id: string): void;
+  // removeItem(id: string): void;
+};
+
+type ItemInstance = {
+  id: string;
+  content: string;
+  note: string;
+  flag: string[] | null;
+};
+
+type StoredType = {
+  projects: Map<string, ProjectInstance>;
+  tasks: Map<string, TaskInstance>;
+  items: Map<string, ItemInstance>;
+};
+
+export type {
+  StoredType,
+  ProjectInput,
+  TaskInput,
+  ItemInput,
+  Snapshot,
+  Command,
+  ProjectInstance,
+  TaskInstance,
+  ItemInstance,
+};

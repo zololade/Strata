@@ -1,3 +1,4 @@
+import { storeBus } from "../lib/Buses";
 import type { ProjectInput } from "../lib/Types";
 
 //Captial "I" > "Incoming"
@@ -30,8 +31,14 @@ class Project {
   achieve — toggle achieved flag specifically
   addTask — add task id to tasks Set
   removeTask — remove task id from tasks Set
-
   */
+
+  removeTask(id: string) {
+    storeBus.publish("Project:removeTask", {
+      projectId: this.id,
+      taskId: id,
+    });
+  }
 }
 
 export { Project };

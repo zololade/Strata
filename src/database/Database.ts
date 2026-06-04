@@ -1,7 +1,4 @@
-import { Item } from "../core/Item";
-import type { Project } from "../core/Project";
 import { StoreReader } from "../core/serializer";
-import { Task } from "../core/Task";
 import { databaseBus } from "../lib/Buses";
 import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
@@ -36,9 +33,7 @@ function putProjects(incoming: unknown) {
 databaseBus.subscribe("database:save", putProjects);
 
 //helper
-function isStoredType(
-  value: unknown,
-): value is StoredType<Project, Task, Item> {
+function isStoredType(value: unknown): value is StoredType {
   return hasKeys(value, ["projects", "tasks", "items"]);
 }
 
