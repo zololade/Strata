@@ -1,24 +1,26 @@
-interface Project {
+interface ProjectData {
   id: string;
   title: string;
   overview: string;
   flag: null | string[];
-  tasks: Task[];
+  tasks: TaskData[];
   createdAt: number;
   lastModified: number;
 }
 
-interface Task {
+interface TaskData {
   id: string;
   title: string;
   overview: string;
-  items: Item[];
+  flag: null | string[];
+  items: ItemData[];
 }
 
-interface Item {
+interface ItemData {
+  id: string;
   content: string;
   note?: string;
   flag: null | string[];
 }
 
-export type { Project, Task, Item };
+export type { ProjectData, TaskData, ItemData };

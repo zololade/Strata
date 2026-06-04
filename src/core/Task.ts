@@ -1,30 +1,24 @@
 //Captial "I" > "Incoming"
-class Project {
+class Task {
   id: string;
   title: string;
   overview: string;
   flag: string[] | null;
-  tasks: Set<string>;
-  createdAt: number;
-  lastModified: number;
+  items: Set<string>;
 
   constructor(
     Ititle: string,
     Ioverview: string,
     Iflag: string[] | null,
-    taskArr: string[],
+    itemesData: string[],
     Iid: string = crypto.randomUUID(),
-    IcreatedAt: number = Date.now(),
-    IlastModified: number = 0,
   ) {
     this.id = Iid;
     this.title = Ititle;
     this.overview = Ioverview;
     this.flag = Iflag;
-    this.tasks = new Set(taskArr);
-    this.createdAt = IcreatedAt;
-    this.lastModified = IlastModified;
+    this.items = new Set(itemesData);
   }
 }
 
-export { Project };
+export { Task };
