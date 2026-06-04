@@ -5,7 +5,7 @@ type SelectHnd = {
 };
 
 let eventsMap = new Map<string, SelectHnd[]>([
-  ["click", [{ selector: "string", handler: dummyEvent }]],
+  ["click", [{ selector: "#string", handler: dummyEvent }]],
 ]);
 
 let events = new Set(eventsMap.keys());

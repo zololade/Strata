@@ -4,6 +4,7 @@ import { serializer } from "../core/serializer";
 import type { Task } from "../core/Task";
 import { databaseBus } from "../lib/Buses";
 import type { ProjectData, StoredType } from "../lib/Types";
+import { hasKeys } from "../lib/utils";
 
 const storedData =
   typeof localStorage !== "undefined" && localStorage.getItem("todoData");
@@ -30,14 +31,7 @@ databaseBus.subscribe("database:save", putProjects);
 function isStoredType(
   value: unknown,
 ): value is StoredType<Project, Task, Item> {
-  if (typeof value === "object" && value) {
-    let projects = "projects" in value;
-    let tasks = "tasks" in value;
-    let items = "items" in value;
-
-    return projects && items && tasks;
-  }
-  return false;
+  return hasKeys(value, ["projects", "tasks", "items"]);
 }
 
 export { putProjects, getProjects };

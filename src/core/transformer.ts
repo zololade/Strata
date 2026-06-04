@@ -1,19 +1,16 @@
 // transformer layer that populate instances and connect them
 import type { ProjectData, StoredType } from "../lib/Types";
+import { hasKeys } from "../lib/utils";
 import { Item } from "./Item";
 import { Project } from "./Project";
 import { Task } from "./Task";
 
 function isProject(value: unknown): value is ProjectData[] {
-  if (Array.isArray(value) && value.length > 0) {
-    let id = "id" in value[0];
-    let title = "title" in value[0];
-    let overview = "overview" in value[0];
-    let tasks = "tasks" in value[0];
-
-    return id && title && overview && tasks;
-  }
-  return false;
+  return (
+    Array.isArray(value) &&
+    value.length > 0 &&
+    hasKeys(value[0], ["id", "title", "overview", "tasks"])
+  );
 }
 
 function buildProjectGraph(
