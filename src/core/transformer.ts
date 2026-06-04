@@ -1,17 +1,9 @@
 // transformer layer that populate instances and connect them
-import type { ProjectData } from "../lib/Types";
+import type { ProjectData, TaskData, ItemData } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 import { Item } from "./Item";
 import { Project } from "./Project";
 import { Task } from "./Task";
-
-function isProject(value: unknown): value is ProjectData[] {
-  return (
-    Array.isArray(value) &&
-    value.length > 0 &&
-    hasKeys(value[0], ["id", "title", "overview", "tasks"])
-  );
-}
 
 function buildProjectGraph(data: ProjectData[]) {
   const projects = new Map<string, Project>();
@@ -20,11 +12,20 @@ function buildProjectGraph(data: ProjectData[]) {
 
   for (const projectData of data) {
     const taskIds: string[] = [];
+    if (projects.has(projectData.id)) {
+      throw new Error(`Duplicate Project ID: ${projectData.id}`);
+    }
 
     for (const taskData of projectData.tasks) {
       const itemIds: string[] = [];
+      if (tasks.has(taskData.id)) {
+        throw new Error(`Duplicate Task ID: ${taskData.id}`);
+      }
 
       for (const itemData of taskData.items) {
+        if (items.has(itemData.id)) {
+          throw new Error(`Duplicate Item ID: ${itemData.id}`);
+        }
         itemIds.push(itemData.id);
 
         items.set(
@@ -77,7 +78,9 @@ function transformer(
     items: Map<string, Item>;
   },
 ) {
-  if (!isProject(incoming)) return;
+  if (!isProjectArray(incoming)) {
+    throw new Error("Invalid project data");
+  }
   const graph = buildProjectGraph(incoming);
 
   store.projects.clear();
@@ -87,6 +90,42 @@ function transformer(
   graph.projects.forEach((v, k) => store.projects.set(k, v));
   graph.tasks.forEach((v, k) => store.tasks.set(k, v));
   graph.items.forEach((v, k) => store.items.set(k, v));
+}
+
+//helper
+function isItemData(value: unknown): value is ItemData {
+  return (
+    hasKeys(value, ["id", "content", "flag"]) &&
+    typeof value.id === "string" &&
+    typeof value.content === "string"
+  );
+}
+function isTaskData(value: unknown): value is TaskData {
+  return (
+    hasKeys(value, ["id", "title", "overview", "flag", "items"]) &&
+    Array.isArray(value.items) &&
+    value.items.every(isItemData)
+  );
+}
+
+function isProjectData(value: unknown): value is ProjectData {
+  return (
+    hasKeys(value, [
+      "id",
+      "title",
+      "overview",
+      "flag",
+      "tasks",
+      "createdAt",
+      "lastModified",
+    ]) &&
+    Array.isArray(value.tasks) &&
+    value.tasks.every(isTaskData)
+  );
+}
+
+function isProjectArray(value: unknown): value is ProjectData[] {
+  return Array.isArray(value) && value.every(isProjectData);
 }
 
 export { transformer, buildProjectGraph };
