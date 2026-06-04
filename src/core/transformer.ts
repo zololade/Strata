@@ -1,76 +1,61 @@
 // transformer layer that populate instances and connect them
-import type { ProjectData, TaskData, ItemData } from "../lib/Types";
+import type { Snapshot } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 import { Item } from "./Item";
 import { Project } from "./Project";
 import { Task } from "./Task";
 
-function buildProjectGraph(data: ProjectData[]) {
+function rehydrateFactory(data: Snapshot) {
   const projects = new Map<string, Project>();
   const tasks = new Map<string, Task>();
   const items = new Map<string, Item>();
 
-  for (const projectData of data) {
-    const taskIds: string[] = [];
-    if (projects.has(projectData.id)) {
-      throw new Error(`Duplicate Project ID: ${projectData.id}`);
-    }
+  data.tasks.forEach((t) => assertExists(items, t.items, "Item"));
+  data.projects.forEach((p) => assertExists(tasks, p.tasks, "Task"));
 
-    for (const taskData of projectData.tasks) {
-      const itemIds: string[] = [];
-      if (tasks.has(taskData.id)) {
-        throw new Error(`Duplicate Task ID: ${taskData.id}`);
-      }
-
-      for (const itemData of taskData.items) {
-        if (items.has(itemData.id)) {
-          throw new Error(`Duplicate Item ID: ${itemData.id}`);
-        }
-        itemIds.push(itemData.id);
-
-        items.set(
-          itemData.id,
-          new Item({
-            content: itemData.content,
-            note: itemData.note,
-            flag: itemData.flag,
-            id: itemData.id,
-          }),
-        );
-      }
-
-      taskIds.push(taskData.id);
-
-      tasks.set(
-        taskData.id,
-        new Task({
-          title: taskData.title,
-          overview: taskData.overview,
-          flag: taskData.flag,
-          items: itemIds,
-          id: taskData.id,
-        }),
-      );
-    }
-
+  data.projects.forEach((v) => {
     projects.set(
-      projectData.id,
+      v.id,
       new Project({
-        title: projectData.title,
-        overview: projectData.overview,
-        flag: projectData.flag,
-        tasks: taskIds,
-        id: projectData.id,
-        createdAt: projectData.createdAt,
-        lastModified: projectData.lastModified,
+        title: v.title,
+        overview: v.overview,
+        flag: v.flag,
+        tasks: v.tasks,
+        id: v.id,
+        createdAt: v.createdAt,
+        lastModified: v.lastModified,
       }),
     );
-  }
+  });
 
+  data.tasks.forEach((v) => {
+    tasks.set(
+      v.id,
+      new Task({
+        id: v.id,
+        title: v.title,
+        overview: v.overview,
+        flag: v.flag,
+        items: v.items,
+      }),
+    );
+  });
+
+  data.items.forEach((v) => {
+    items.set(
+      v.id,
+      new Item({
+        id: v.id,
+        content: v.content,
+        note: v.note,
+        flag: v.flag,
+      }),
+    );
+  });
   return { projects, tasks, items };
 }
 
-function transformer(
+function loadSnapshot(
   incoming: unknown,
   store: {
     projects: Map<string, Project>;
@@ -78,54 +63,35 @@ function transformer(
     items: Map<string, Item>;
   },
 ) {
-  if (!isProjectArray(incoming)) {
+  if (!isOutgoingType(incoming)) {
     throw new Error("Invalid project data");
   }
-  const graph = buildProjectGraph(incoming);
+  const graph = rehydrateFactory(incoming);
 
-  store.projects.clear();
-  store.tasks.clear();
-  store.items.clear();
-
-  graph.projects.forEach((v, k) => store.projects.set(k, v));
-  graph.tasks.forEach((v, k) => store.tasks.set(k, v));
-  graph.items.forEach((v, k) => store.items.set(k, v));
+  store.projects = graph.projects;
+  store.tasks = graph.tasks;
+  store.items = graph.items;
 }
 
 //helper
-function isItemData(value: unknown): value is ItemData {
+function isOutgoingType(value: unknown): value is Snapshot {
+  if (!hasKeys(value, ["projects", "tasks", "items"])) return false;
+
+  const v = value as any;
+
   return (
-    hasKeys(value, ["id", "content", "flag"]) &&
-    typeof value.id === "string" &&
-    typeof value.content === "string"
-  );
-}
-function isTaskData(value: unknown): value is TaskData {
-  return (
-    hasKeys(value, ["id", "title", "overview", "flag", "items"]) &&
-    Array.isArray(value.items) &&
-    value.items.every(isItemData)
+    Array.isArray(v.projects) &&
+    Array.isArray(v.tasks) &&
+    Array.isArray(v.items)
   );
 }
 
-function isProjectData(value: unknown): value is ProjectData {
-  return (
-    hasKeys(value, [
-      "id",
-      "title",
-      "overview",
-      "flag",
-      "tasks",
-      "createdAt",
-      "lastModified",
-    ]) &&
-    Array.isArray(value.tasks) &&
-    value.tasks.every(isTaskData)
-  );
+function assertExists<T>(map: Map<string, T>, ids: string[], label: string) {
+  for (const id of ids) {
+    if (!map.has(id)) {
+      throw new Error(`Missing ${label}: ${id}`);
+    }
+  }
 }
 
-function isProjectArray(value: unknown): value is ProjectData[] {
-  return Array.isArray(value) && value.every(isProjectData);
-}
-
-export { transformer, buildProjectGraph };
+export { loadSnapshot, rehydrateFactory };

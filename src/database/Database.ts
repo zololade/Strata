@@ -1,29 +1,36 @@
-import type { Item } from "../core/Item";
+import { Item } from "../core/Item";
 import type { Project } from "../core/Project";
 import { StoreReader } from "../core/serializer";
-import type { Task } from "../core/Task";
+import { Task } from "../core/Task";
 import { databaseBus } from "../lib/Buses";
-import type { ProjectData, StoredType } from "../lib/Types";
+import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 
 const storedData =
   typeof localStorage !== "undefined" && localStorage.getItem("todoData");
 
-let workingProjectData = !storedData ? [] : [...JSON.parse(storedData)];
+let workingProjectData: Outgoing | null = storedData
+  ? JSON.parse(storedData)
+  : null;
 
-function getProjects(): ProjectData[] {
+function getStoredData(): Outgoing | null {
   return workingProjectData;
 }
 
 function putProjects(incoming: unknown) {
-  if (isStoredType(incoming)) {
-    if (typeof localStorage !== "undefined") {
-      let reader = new StoreReader(incoming);
-      let data = reader.serializer();
-      workingProjectData = data;
-      localStorage.setItem("todoData", JSON.stringify(data));
-    }
-  }
+  if (!isStoredType(incoming)) return;
+  if (typeof localStorage === "undefined") return;
+
+  let reader = new StoreReader(incoming);
+
+  const data: Outgoing = {
+    projects: reader.hydrateProject(),
+    tasks: reader.hydrateTask(),
+    items: reader.hydrateItem(),
+  };
+
+  workingProjectData = data;
+  localStorage.setItem("todoData", JSON.stringify(data));
 }
 
 databaseBus.subscribe("database:save", putProjects);
@@ -35,4 +42,4 @@ function isStoredType(
   return hasKeys(value, ["projects", "tasks", "items"]);
 }
 
-export { putProjects, getProjects };
+export { putProjects, getStoredData };

@@ -1,4 +1,9 @@
-import type { ItemData, ProjectData, StoredType, TaskData } from "../lib/Types";
+import type {
+  ItemInput,
+  ProjectInput,
+  StoredType,
+  TaskInput,
+} from "../lib/Types";
 import type { Item } from "./Item";
 import type { Project } from "./Project";
 import type { Task } from "./Task";
@@ -11,64 +16,53 @@ class StoreReader {
     this.stored = stored;
   }
 
-  serializer(): ProjectData[] {
-    let projectAggregate: ProjectData[] = [];
+  hydrateProject(): ProjectInput[] {
+    const result: ProjectInput[] = [];
 
     this.stored.projects.forEach((v, k) => {
       //the project object
-      let project = {
+      result.push({
         id: k,
         title: v.title,
         overview: v.overview,
         flag: v.flag,
-        tasks: this.hydrateTask(v.tasks),
+        tasks: [...v.tasks],
         createdAt: v.createdAt,
         lastModified: v.lastModified,
-      };
-
-      projectAggregate.push(project);
+      });
     });
 
-    return projectAggregate;
+    return result;
   }
 
-  private hydrateTask(taskId: Set<string>): TaskData[] {
-    let taskAggregate: TaskData[] = [];
+  hydrateTask(): TaskInput[] {
+    let result: TaskInput[] = [];
 
-    taskId.forEach((val) => {
-      let currTask = this.stored.tasks.get(val);
-      if (currTask) {
-        let task = {
-          id: currTask.id,
-          title: currTask.title,
-          overview: currTask.overview,
-          flag: currTask.flag,
-          items: this.hydrateItem(currTask.items),
-        };
-        taskAggregate.push(task);
-      }
+    this.stored.tasks.forEach((v, k) => {
+      result.push({
+        id: k,
+        title: v.title,
+        overview: v.overview,
+        flag: v.flag,
+        items: [...v.items],
+      });
     });
 
-    return taskAggregate;
+    return result;
   }
 
-  private hydrateItem(itemId: Set<string>): ItemData[] {
-    let itemAggregate: ItemData[] = [];
+  hydrateItem(): ItemInput[] {
+    let result: ItemInput[] = [];
 
-    itemId.forEach((val) => {
-      let currItem = this.stored.items.get(val);
-      if (currItem) {
-        let item = {
-          id: currItem.id,
-          content: currItem.content,
-          note: currItem.note,
-          flag: currItem.flag,
-        };
-
-        itemAggregate.push(item);
-      }
+    this.stored.items.forEach((v, k) => {
+      result.push({
+        id: k,
+        content: v.content,
+        note: v.note,
+        flag: v.flag,
+      });
     });
-    return itemAggregate;
+    return result;
   }
 }
 

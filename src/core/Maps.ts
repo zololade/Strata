@@ -3,7 +3,7 @@ import { databaseBus } from "../lib/Buses";
 import type { Project } from "./Project";
 import type { Task } from "./Task";
 import type { Item } from "./Item";
-import { transformer } from "./transformer";
+import { loadSnapshot } from "./transformer";
 
 class ProjectStore {
   projects = new Map<string, Project>();
@@ -14,7 +14,7 @@ class ProjectStore {
 let store = new ProjectStore();
 
 databaseBus.subscribe("database:change", (data) => {
-  transformer(data, {
+  loadSnapshot(data, {
     projects: store.projects,
     tasks: store.tasks,
     items: store.items,

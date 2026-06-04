@@ -1,4 +1,4 @@
 import { databaseBus } from "../lib/Buses";
-import { getProjects } from "./Database";
+import { getStoredData } from "./Database";
 
-databaseBus.publish("database:change", getProjects());
+databaseBus.publish("database:change", getStoredData());
