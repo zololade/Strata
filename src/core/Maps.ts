@@ -1,10 +1,24 @@
 // project map shared state
-import type { Item } from "./Item";
+import { databaseBus } from "../lib/Buses";
 import type { Project } from "./Project";
 import type { Task } from "./Task";
+import type { Item } from "./Item";
+import { transformer } from "./transformer";
 
-let ProjectMap = new Map<string, Project>();
-let TaskMap = new Map<string, Task>();
-let ItemMap = new Map<string, Item>();
+class ProjectStore {
+  projects = new Map<string, Project>();
+  tasks = new Map<string, Task>();
+  items = new Map<string, Item>();
+}
 
-export { ProjectMap, TaskMap, ItemMap };
+let store = new ProjectStore();
+
+databaseBus.subscribe("database:change", (data) => {
+  transformer(data, {
+    projects: store.projects,
+    tasks: store.tasks,
+    items: store.items,
+  });
+});
+
+export { store as storedProjects };

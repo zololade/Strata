@@ -1,8 +1,6 @@
 // transformer layer that populate instances and connect them
-import { databaseBus } from "../lib/Buses";
 import type { ProjectData } from "../lib/Types";
 import { Item } from "./Item";
-import { ItemMap, ProjectMap, TaskMap } from "./Maps";
 import { Project } from "./Project";
 import { Task } from "./Task";
 
@@ -18,49 +16,80 @@ function isProject(value: unknown): value is ProjectData[] {
   return false;
 }
 
-function transformer(incoming: unknown) {
-  if (isProject(incoming)) {
-    let data = incoming;
-    data.forEach((val) => {
-      let tasksArr: string[] = [];
-      val.tasks.forEach((Tval) => {
-        let itemsArr: string[] = [];
-        tasksArr.push(Tval.id);
+function buildProjectGraph(data: ProjectData[]) {
+  const projects = new Map<string, Project>();
+  const tasks = new Map<string, Task>();
+  const items = new Map<string, Item>();
 
-        Tval.items.forEach((Ival) => {
-          itemsArr.push(Ival.id);
+  for (const projectData of data) {
+    const taskIds: string[] = [];
 
-          ItemMap.set(
-            Ival.id,
-            new Item(
-              Ival.content,
-              Ival.note ? Ival.note : "",
-              Ival.flag,
-              Ival.id,
-            ),
-          );
-        });
+    for (const taskData of projectData.tasks) {
+      const itemIds: string[] = [];
 
-        TaskMap.set(
-          Tval.id,
-          new Task(Tval.title, Tval.overview, Tval.flag, itemsArr, Tval.id),
+      for (const itemData of taskData.items) {
+        itemIds.push(itemData.id);
+
+        items.set(
+          itemData.id,
+          new Item({
+            content: itemData.content,
+            note: itemData.note,
+            flag: itemData.flag,
+            id: itemData.id,
+          }),
         );
-      });
+      }
 
-      ProjectMap.set(
-        val.id,
-        new Project(
-          val.title,
-          val.overview,
-          val.flag,
-          tasksArr,
-          val.id,
-          val.createdAt,
-          val.lastModified,
-        ),
+      taskIds.push(taskData.id);
+
+      tasks.set(
+        taskData.id,
+        new Task({
+          title: taskData.title,
+          overview: taskData.overview,
+          flag: taskData.flag,
+          items: itemIds,
+          id: taskData.id,
+        }),
       );
-    });
+    }
+
+    projects.set(
+      projectData.id,
+      new Project({
+        title: projectData.title,
+        overview: projectData.overview,
+        flag: projectData.flag,
+        tasks: taskIds,
+        id: projectData.id,
+        createdAt: projectData.createdAt,
+        lastModified: projectData.lastModified,
+      }),
+    );
   }
+
+  return { projects, tasks, items };
 }
 
-databaseBus.subscribe("database:change", transformer);
+function transformer(
+  incoming: unknown,
+  store: {
+    projects: Map<string, Project>;
+    tasks: Map<string, Task>;
+    items: Map<string, Item>;
+  },
+) {
+  if (!isProject(incoming)) return;
+  const graph = buildProjectGraph(incoming);
+
+  store.projects.clear();
+  store.tasks.clear();
+  store.items.clear();
+
+  graph.projects.forEach((v, k) => store.projects.set(k, v));
+  graph.tasks.forEach((v, k) => store.tasks.set(k, v));
+  graph.items.forEach((v, k) => store.items.set(k, v));
+}
+
+export { transformer };

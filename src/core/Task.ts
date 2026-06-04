@@ -1,4 +1,5 @@
-//Captial "I" > "Incoming"
+import type { TaskInput } from "../lib/Types";
+
 class Task {
   id: string;
   title: string;
@@ -6,18 +7,12 @@ class Task {
   flag: string[] | null;
   items: Set<string>;
 
-  constructor(
-    Ititle: string,
-    Ioverview: string,
-    Iflag: string[] | null,
-    itemesData: string[],
-    Iid: string = crypto.randomUUID(),
-  ) {
-    this.id = Iid;
-    this.title = Ititle;
-    this.overview = Ioverview;
-    this.flag = Iflag;
-    this.items = new Set(itemesData);
+  constructor(param: TaskInput) {
+    this.id = param.id;
+    this.title = param.title;
+    this.overview = param.overview;
+    this.flag = param.flag;
+    this.items = new Set(param.items);
   }
 }
 

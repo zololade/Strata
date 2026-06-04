@@ -1,3 +1,6 @@
+import type { StoredType, ProjectInput } from "../lib/Types";
+import type { Item } from "./Item";
+import type { Task } from "./Task";
 //Captial "I" > "Incoming"
 class Project {
   id: string;
@@ -7,23 +10,17 @@ class Project {
   tasks: Set<string>;
   createdAt: number;
   lastModified: number;
+  store: StoredType<Project, Task, Item> | undefined;
 
-  constructor(
-    Ititle: string,
-    Ioverview: string,
-    Iflag: string[] | null,
-    taskArr: string[],
-    Iid: string = crypto.randomUUID(),
-    IcreatedAt: number = Date.now(),
-    IlastModified: number = 0,
-  ) {
-    this.id = Iid;
-    this.title = Ititle;
-    this.overview = Ioverview;
-    this.flag = Iflag;
-    this.tasks = new Set(taskArr);
-    this.createdAt = IcreatedAt;
-    this.lastModified = IlastModified;
+  constructor(param: ProjectInput, store?: StoredType<Project, Task, Item>) {
+    this.id = param.id ?? crypto.randomUUID();
+    this.title = param.title;
+    this.overview = param.overview;
+    this.flag = param.flag;
+    this.tasks = new Set(param.tasks);
+    this.createdAt = param.createdAt ?? Date.now();
+    this.lastModified = param.lastModified ?? 0;
+    this.store = store;
   }
 }
 
