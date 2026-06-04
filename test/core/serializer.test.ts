@@ -22,7 +22,7 @@ describe("buildProjectGraph", () => {
 
   it("produces result that match TestData", () => {
     if (result) {
-      expect(result).toMatchObject(TestData);
+      expect(result).toEqual(TestData);
     }
   });
 
