@@ -1,6 +1,4 @@
 import { databaseBus } from "../lib/Buses";
-import { bindStore } from "../core/state/Maps";
+import { handleDatabaseChange } from "./handlers";
 
-databaseBus.subscribe("database:change", (data) => {
-  bindStore(data);
-});
+databaseBus.subscribe("database:change", handleDatabaseChange);
