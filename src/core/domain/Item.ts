@@ -12,13 +12,6 @@ class Item {
     this.content = param.content;
     this.flag = param.flag;
   }
-
-  /*
-  Item
-
-  edit — update content, note
-  toggleFlag — done, important etc
-  */
 }
 
 export { Item };

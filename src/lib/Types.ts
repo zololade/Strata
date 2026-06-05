@@ -39,8 +39,6 @@ type ProjectInstance = {
   tasks: Set<string>;
   createdAt: number;
   lastModified: number;
-
-  removeTask(id: string): void;
 };
 
 type TaskInstance = {
@@ -49,10 +47,6 @@ type TaskInstance = {
   overview: string;
   flag: string[] | null;
   items: Set<string>;
-
-  // edit(title: string, overview: string): void;
-  // addItem(id: string): void;
-  // removeItem(id: string): void;
 };
 
 type ItemInstance = {

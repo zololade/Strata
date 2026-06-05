@@ -1,6 +1,4 @@
 import type { ProjectInput } from "../../lib/Types";
-import { dispatch } from "../state/dispatch";
-import { storedProjects } from "../state/Maps";
 
 //Captial "I" > "Incoming"
 class Project {
@@ -20,29 +18,6 @@ class Project {
     this.tasks = new Set(param.tasks);
     this.createdAt = param.createdAt ?? Date.now();
     this.lastModified = param.lastModified ?? 0;
-  }
-
-  /*
-  Project
-
-  edit — update title, overview
-  toggleFlag — add/remove a flag
-  save — publish to databaseBus
-  delete — remove from store, publish
-  achieve — toggle achieved flag specifically
-  addTask — add task id to tasks Set
-  removeTask — remove task id from tasks Set
-  */
-
-  removeTask(id: string) {
-    dispatch(
-      {
-        type: "removeTask",
-        projectId: this.id,
-        taskId: id,
-      },
-      storedProjects,
-    );
   }
 }
 
