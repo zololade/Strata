@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Project } from "../../src/core/Project";
+import { Project } from "../../src/core/domain/Project";
 import type { StoredType } from "../../src/lib/Types";
-import { Task } from "../../src/core/Task";
-import { Item } from "../../src/core/Item";
-import { rehydrateFactory } from "../../src/core/transformer";
+import { Task } from "../../src/core/domain/Task";
+import { Item } from "../../src/core/domain/Item";
+import { rehydrateFactory } from "../../src/core/snapshot/transformer";
 import { badData, TestData } from "../database/TestData";
 
 describe("rehydrateFactory", () => {

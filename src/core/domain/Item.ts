@@ -1,4 +1,4 @@
-import type { ItemInput } from "../lib/Types";
+import type { ItemInput } from "../../lib/Types";
 
 class Item {
   id: string;

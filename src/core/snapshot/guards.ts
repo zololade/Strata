@@ -1,10 +1,10 @@
-import { hasKeys } from "../lib/utils";
+import { hasKeys } from "../../lib/utils";
 import type {
   Snapshot,
   ItemInput,
   ProjectInput,
   TaskInput,
-} from "../lib/Types";
+} from "../../lib/Types";
 
 function isItem(v: unknown): v is ItemInput {
   return (

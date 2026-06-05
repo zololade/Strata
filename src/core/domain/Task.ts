@@ -1,4 +1,4 @@
-import type { TaskInput } from "../lib/Types";
+import type { TaskInput } from "../../lib/Types";
 
 class Task {
   id: string;

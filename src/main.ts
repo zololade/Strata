@@ -1,7 +1,7 @@
-import "./core/Maps";
+import "./core/state/Maps";
 import "./database/index";
 import "./styles/app.css";
-import "./core/eventDelegation";
+import "./core/events/eventDelegation";
 
 //declare the app
 let app = document.querySelector("#app");

@@ -1,7 +1,11 @@
 // project map shared state
-import { databaseBus } from "../lib/Buses";
-import { loadSnapshot } from "./transformer";
-import type { ItemInstance, ProjectInstance, TaskInstance } from "../lib/Types";
+import { databaseBus } from "../../lib/Buses";
+import { loadSnapshot } from "../snapshot/transformer";
+import type {
+  ItemInstance,
+  ProjectInstance,
+  TaskInstance,
+} from "../../lib/Types";
 
 class ProjectStore {
   projects = new Map<string, ProjectInstance>();

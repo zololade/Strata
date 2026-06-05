@@ -3,7 +3,7 @@ import type {
   ProjectInput,
   StoredType,
   TaskInput,
-} from "../lib/Types";
+} from "../../lib/Types";
 
 // serializer builds from project map
 // it works with StoredType and build projects

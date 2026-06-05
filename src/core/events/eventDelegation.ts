@@ -1,4 +1,4 @@
-import { app } from "../main";
+import { app } from "../../main";
 type SelectHnd = {
   selector: string;
   handler: (match: HTMLElement, e: Event) => void;

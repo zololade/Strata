@@ -1,4 +1,4 @@
-import { StoreReader } from "../core/serializer";
+import { StoreReader } from "../core/snapshot/serializer";
 import { databaseBus } from "../lib/Buses";
 import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";

@@ -1,5 +1,6 @@
-import { storeBus } from "../lib/Buses";
-import type { ProjectInput } from "../lib/Types";
+import type { ProjectInput } from "../../lib/Types";
+import { dispatch } from "../state/dispatch";
+import { storedProjects } from "../state/Maps";
 
 //Captial "I" > "Incoming"
 class Project {
@@ -34,10 +35,14 @@ class Project {
   */
 
   removeTask(id: string) {
-    storeBus.publish("Project:removeTask", {
-      projectId: this.id,
-      taskId: id,
-    });
+    dispatch(
+      {
+        type: "removeTask",
+        projectId: this.id,
+        taskId: id,
+      },
+      storedProjects,
+    );
   }
 }
 

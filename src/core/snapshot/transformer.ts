@@ -10,11 +10,11 @@ import type {
   Snapshot,
   StoredType,
   TaskInstance,
-} from "../lib/Types";
+} from "../../lib/Types";
 import { isSnapshot } from "./guards";
-import { Item } from "./Item";
-import { Project } from "./Project";
-import { Task } from "./Task";
+import { Item } from "../domain/Item";
+import { Project } from "../domain/Project";
+import { Task } from "../domain/Task";
 
 function rehydrateFactory(data: Snapshot) {
   const projects = new Map<string, ProjectInstance>();

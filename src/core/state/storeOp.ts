@@ -1,4 +1,4 @@
-import type { StoredType } from "../lib/Types";
+import type { StoredType } from "../../lib/Types";
 // handlers
 function removeTask(
   store: StoredType,

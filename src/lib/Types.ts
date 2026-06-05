@@ -30,8 +30,6 @@ interface Snapshot {
   items: ItemInput[];
 }
 
-type Command = { type: "removeTask"; projectId: string; taskId: string };
-
 //app instance
 type ProjectInstance = {
   id: string;
@@ -76,7 +74,6 @@ export type {
   TaskInput,
   ItemInput,
   Snapshot,
-  Command,
   ProjectInstance,
   TaskInstance,
   ItemInstance,

@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import type { StoredType, Snapshot as Outgoing } from "../../src/lib/Types";
-import { rehydrateFactory } from "../../src/core/transformer";
+import { rehydrateFactory } from "../../src/core/snapshot/transformer";
 import { TestData } from "../database/TestData";
-import { StoreReader } from "../../src/core/serializer";
+import { StoreReader } from "../../src/core/snapshot/serializer";
 
 describe("buildProjectGraph", () => {
   let result: Outgoing | null = null;
