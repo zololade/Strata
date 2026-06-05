@@ -1,5 +1,4 @@
 // project map shared state
-import { databaseBus } from "../../lib/Buses";
 import { loadSnapshot } from "../snapshot/transformer";
 import type {
   ItemInstance,
@@ -15,12 +14,12 @@ class ProjectStore {
 
 let store = new ProjectStore();
 
-databaseBus.subscribe("database:change", (data) => {
+function bindStore(data: unknown) {
   loadSnapshot(data, {
     projects: store.projects,
     tasks: store.tasks,
     items: store.items,
   });
-});
+}
 
-export { store as storedProjects };
+export { store as storedProjects, bindStore };
