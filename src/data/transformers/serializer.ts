@@ -43,6 +43,8 @@ class StoreReader {
         overview: v.overview,
         flag: v.flag,
         items: [...v.items],
+        createdAt: v.createdAt,
+        lastModified: v.lastModified,
       });
     });
 
@@ -58,6 +60,8 @@ class StoreReader {
         content: v.content,
         note: v.note,
         flag: v.flag,
+        createdAt: v.createdAt,
+        lastModified: v.lastModified,
       });
     });
     return result;

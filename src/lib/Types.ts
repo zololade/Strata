@@ -1,26 +1,39 @@
-interface ProjectInput {
-  id?: string;
+interface NewProjectInput {
   title: string;
   overview: string;
   flag: null | string[];
   tasks: string[];
-  createdAt?: number;
-  lastModified?: number;
 }
 
-interface TaskInput {
-  id?: string;
+interface NewTaskInput {
   title: string;
   overview: string;
   flag: null | string[];
   items: string[];
 }
 
-interface ItemInput {
-  id?: string;
+interface NewItemInput {
   content: string;
   note: string;
   flag: null | string[];
+}
+
+interface ProjectInput extends NewProjectInput {
+  id: string;
+  createdAt?: number;
+  lastModified?: number;
+}
+
+interface TaskInput extends NewTaskInput {
+  id: string;
+  createdAt?: number;
+  lastModified?: number;
+}
+
+interface ItemInput extends NewItemInput {
+  id: string;
+  createdAt?: number;
+  lastModified?: number;
 }
 
 interface Snapshot {
@@ -47,6 +60,8 @@ type TaskInstance = {
   overview: string;
   flag: string[] | null;
   items: Set<string>;
+  createdAt: number;
+  lastModified: number;
 };
 
 type ItemInstance = {
@@ -54,6 +69,8 @@ type ItemInstance = {
   content: string;
   note: string;
   flag: string[] | null;
+  createdAt: number;
+  lastModified: number;
 };
 
 type StoredType = {
@@ -63,6 +80,9 @@ type StoredType = {
 };
 
 export type {
+  NewProjectInput,
+  NewTaskInput,
+  NewItemInput,
   StoredType,
   ProjectInput,
   TaskInput,

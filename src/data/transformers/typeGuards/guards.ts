@@ -8,19 +8,38 @@ import type {
 
 function isItem(v: unknown): v is ItemInput {
   return (
-    hasKeys(v, ["id", "content", "flag", "note"]) &&
+    hasKeys(v, [
+      "id",
+      "content",
+      "flag",
+      "note",
+      "createdAt",
+      "lastModified",
+    ]) &&
     typeof v.id === "string" &&
     typeof v.content === "string" &&
+    typeof v.createdAt === "number" &&
+    typeof v.lastModified === "number" &&
     (v.note === null || typeof v.note === "string")
   );
 }
 
 function isTask(v: unknown): v is TaskInput {
   return (
-    hasKeys(v, ["id", "title", "overview", "flag", "items"]) &&
+    hasKeys(v, [
+      "id",
+      "title",
+      "overview",
+      "flag",
+      "items",
+      "createdAt",
+      "lastModified",
+    ]) &&
     typeof v.id === "string" &&
     typeof v.title === "string" &&
     typeof v.overview === "string" &&
+    typeof v.createdAt === "number" &&
+    typeof v.lastModified === "number" &&
     Array.isArray(v.items) &&
     v.items.every((id) => typeof id === "string")
   );

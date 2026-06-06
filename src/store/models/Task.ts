@@ -1,4 +1,4 @@
-import type { TaskInput } from "../../lib/Types";
+import type { NewTaskInput, TaskInput } from "../../lib/Types";
 
 class Task {
   id: string;
@@ -6,13 +6,17 @@ class Task {
   overview: string;
   flag: string[] | null;
   items: Set<string>;
+  createdAt: number;
+  lastModified: number;
 
-  constructor(param: TaskInput) {
-    this.id = param.id ?? crypto.randomUUID();
+  constructor(param: NewTaskInput | TaskInput) {
+    this.id = "id" in param ? param.id : crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;
     this.flag = param.flag;
     this.items = new Set(param.items);
+    this.createdAt = "createdAt" in param ? param.createdAt : Date.now();
+    this.lastModified = "lastModified" in param ? param.lastModified : 0;
   }
 }
 

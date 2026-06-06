@@ -1,19 +1,26 @@
-import type { ItemInput, ProjectInput, TaskInput } from "./Types";
+import type {
+  ItemInput,
+  NewItemInput,
+  NewProjectInput,
+  NewTaskInput,
+  ProjectInput,
+  TaskInput,
+} from "./Types";
 
 type Command =
   | {
       type: "createProject";
-      data: ProjectInput;
+      data: NewProjectInput;
     }
   | {
       type: "createTask";
       projectId: string;
-      data: TaskInput;
+      data: NewTaskInput;
     }
   | {
       type: "createItem";
       taskId: string;
-      data: ItemInput;
+      data: NewItemInput;
     }
   | {
       type: "removeProject";
@@ -36,7 +43,19 @@ type Command =
       };
     }
   | {
-      type: "update";
+      type: "updatedProject";
+      projectId: string;
+      data: Partial<Pick<ProjectInput, keyof ProjectInput>>;
+    }
+  | {
+      type: "updatedTask";
+      taskId: string;
+      data: Partial<Pick<TaskInput, keyof TaskInput>>;
+    }
+  | {
+      type: "updatedItem";
+      itemId: string;
+      data: Partial<Pick<ItemInput, keyof ItemInput>>;
     };
 
 type Result =
@@ -46,6 +65,9 @@ type Result =
   | { type: "createdProject"; id: string }
   | { type: "createdTask"; id: string }
   | { type: "createdItem"; id: string }
+  | { type: "updatedProject"; id: string }
+  | { type: "updatedTask"; id: string }
+  | { type: "updatedItem"; id: string }
   | { type: "notFound"; entity: "project" | "task" | "item" };
 
 export type { Command, Result };

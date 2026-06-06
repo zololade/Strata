@@ -1,4 +1,4 @@
-import type { ProjectInput } from "../../lib/Types";
+import type { NewProjectInput, ProjectInput } from "../../lib/Types";
 
 //Captial "I" > "Incoming"
 class Project {
@@ -10,14 +10,14 @@ class Project {
   createdAt: number;
   lastModified: number;
 
-  constructor(param: ProjectInput) {
-    this.id = param.id ?? crypto.randomUUID();
+  constructor(param: NewProjectInput | ProjectInput) {
+    this.id = "id" in param ? param.id : crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;
     this.flag = param.flag;
     this.tasks = new Set(param.tasks);
-    this.createdAt = param.createdAt ?? Date.now();
-    this.lastModified = param.lastModified ?? 0;
+    this.createdAt = "createdAt" in param ? param.createdAt : Date.now();
+    this.lastModified = "lastModified" in param ? param.lastModified : 0;
   }
 }
 

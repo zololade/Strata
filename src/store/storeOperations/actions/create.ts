@@ -1,22 +1,22 @@
 import type { Result } from "../../../lib/command";
 import type {
-  ItemInput,
-  ProjectInput,
+  NewItemInput,
+  NewProjectInput,
+  NewTaskInput,
   StoredType,
-  TaskInput,
 } from "../../../lib/Types";
 import { Item } from "../../models/Item";
 import { Project } from "../../models/Project";
 import { Task } from "../../models/Task";
 
 const createHandler = {
-  createProject(store: StoredType, payload: ProjectInput): Result {
+  createProject(store: StoredType, payload: NewProjectInput): Result {
     let project = new Project(payload);
     store.projects.set(project.id, project);
     return { type: "createdProject", id: project.id };
   },
 
-  createTask(store: StoredType, projectId: string, payload: TaskInput) {
+  createTask(store: StoredType, projectId: string, payload: NewTaskInput) {
     let task = new Task(payload);
     let project = store.projects.get(projectId);
 
@@ -26,7 +26,7 @@ const createHandler = {
     return { type: "createdTask", id: task.id };
   },
 
-  createItem(store: StoredType, taskId: string, payload: ItemInput) {
+  createItem(store: StoredType, taskId: string, payload: NewItemInput) {
     let item = new Item(payload);
     let task = store.tasks.get(taskId);
 

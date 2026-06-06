@@ -2,7 +2,7 @@ import type { Command } from "../../lib/command";
 import { storedProjects as store } from "../Store";
 import { createHandler } from "./actions/create";
 import { removeHandler } from "./actions/remove";
-import { update } from "./actions/update";
+import { updateHandler } from "./actions/update";
 
 function reducer(command: Command) {
   switch (command.type) {
@@ -24,8 +24,18 @@ function reducer(command: Command) {
     case "createItem": {
       return createHandler.createItem(store, command.taskId, command.data);
     }
-    case "update": {
-      return update(store);
+    case "updatedProject": {
+      return updateHandler.updateProject(
+        store,
+        command.projectId,
+        command.data,
+      );
+    }
+    case "updatedTask": {
+      return updateHandler.updateTask(store, command.taskId, command.data);
+    }
+    case "updatedItem": {
+      return updateHandler.updateItem(store, command.itemId, command.data);
     }
   }
 }
