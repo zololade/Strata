@@ -1,10 +1,6 @@
 // project map shared state
-import { loadSnapshot } from "../snapshot/transformer";
-import type {
-  ItemInstance,
-  ProjectInstance,
-  TaskInstance,
-} from "../../lib/Types";
+import { loadSnapshot } from "../data/transformers/rehydrate";
+import type { ItemInstance, ProjectInstance, TaskInstance } from "../lib/Types";
 
 class ProjectStore {
   projects = new Map<string, ProjectInstance>();

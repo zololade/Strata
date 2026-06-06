@@ -1,10 +1,10 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Project } from "../../src/core/domain/Project";
+import { Project } from "../../src/store/models/Project";
 import type { StoredType } from "../../src/lib/Types";
-import { Task } from "../../src/core/domain/Task";
-import { Item } from "../../src/core/domain/Item";
-import { rehydrateFactory } from "../../src/core/snapshot/transformer";
-import { badData, TestData } from "../database/TestData";
+import { Task } from "../../src/store/models/Task";
+import { Item } from "../../src/store/models/Item";
+import { rehydrateFactory } from "../../src/data/transformers/rehydrate";
+import { badData, TestData } from "./TestData";
 
 describe("rehydrateFactory", () => {
   describe("good data", () => {

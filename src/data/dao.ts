@@ -1,4 +1,5 @@
-import { StoreReader } from "../core/snapshot/serializer";
+//data access object
+import { StoreReader } from "./transformers/serializer";
 import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 
@@ -19,11 +20,7 @@ function putProjects(incoming: unknown) {
 
   let reader = new StoreReader(incoming);
 
-  const data: Outgoing = {
-    projects: reader.hydrateProject(),
-    tasks: reader.hydrateTask(),
-    items: reader.hydrateItem(),
-  };
+  const data: Outgoing = reader.hydrateAll();
 
   workingProjectData = data;
   localStorage.setItem("todoData", JSON.stringify(data));

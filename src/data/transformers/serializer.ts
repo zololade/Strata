@@ -62,6 +62,16 @@ class StoreReader {
     });
     return result;
   }
+
+  hydrateAll() {
+    const data = {
+      projects: this.hydrateProject(),
+      tasks: this.hydrateTask(),
+      items: this.hydrateItem(),
+    };
+
+    return data;
+  }
 }
 
 export { StoreReader };

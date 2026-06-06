@@ -1,5 +1,5 @@
-import { bindStore } from "../core/state/Maps";
-import { putProjects } from "../database/Database";
+import { bindStore } from "../store/Store";
+import { putProjects } from "../data/dao";
 
 function handleDatabaseChange(data: unknown) {
   bindStore(data);
