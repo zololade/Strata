@@ -1,3 +1,4 @@
+import "./app/init";
 import "./core/state/Maps";
 import "./database/index";
 import "./styles/app.css";

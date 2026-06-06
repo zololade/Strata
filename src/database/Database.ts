@@ -1,5 +1,4 @@
 import { StoreReader } from "../core/snapshot/serializer";
-import { databaseBus } from "../lib/Buses";
 import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
 
@@ -29,8 +28,6 @@ function putProjects(incoming: unknown) {
   workingProjectData = data;
   localStorage.setItem("todoData", JSON.stringify(data));
 }
-
-databaseBus.subscribe("database:save", putProjects);
 
 //helper
 function isStoredType(value: unknown): value is StoredType {
