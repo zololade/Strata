@@ -1,14 +1,11 @@
 import type { Result } from "../../../lib/command";
 import type {
-  NewItemInput,
-  NewProjectInput,
-  NewTaskInput,
+  ItemUpdate,
+  ProjectUpdate,
+  TaskUpdate,
   StoredType,
 } from "../../../lib/Types";
-//update type
-type ProjectUpdate = Partial<NewProjectInput>;
-type TaskUpdate = Partial<NewTaskInput>;
-type ItemUpdate = Partial<NewItemInput>;
+
 // handler
 const updateHandler = {
   updateProject(

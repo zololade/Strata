@@ -1,3 +1,9 @@
+type EntityMeta = {
+  id: string;
+  createdAt: number;
+  lastModified: number;
+};
+
 interface NewProjectInput {
   title: string;
   overview: string;
@@ -18,23 +24,25 @@ interface NewItemInput {
   flag: null | string[];
 }
 
-interface ProjectInput extends NewProjectInput {
-  id: string;
-  createdAt?: number;
-  lastModified?: number;
-}
+type ProjectInput = EntityMeta & {
+  title: string;
+  overview: string;
+  flag: null | string[];
+  tasks: string[];
+};
 
-interface TaskInput extends NewTaskInput {
-  id: string;
-  createdAt?: number;
-  lastModified?: number;
-}
+type TaskInput = EntityMeta & {
+  title: string;
+  overview: string;
+  flag: null | string[];
+  items: string[];
+};
 
-interface ItemInput extends NewItemInput {
-  id: string;
-  createdAt?: number;
-  lastModified?: number;
-}
+type ItemInput = EntityMeta & {
+  content: string;
+  note: string;
+  flag: null | string[];
+};
 
 interface Snapshot {
   // version: number;
@@ -44,40 +52,50 @@ interface Snapshot {
 }
 
 //app instance
-type ProjectInstance = {
-  id: string;
+interface ProjectInstance extends EntityMeta {
   title: string;
   overview: string;
   flag: string[] | null;
   tasks: Set<string>;
-  createdAt: number;
-  lastModified: number;
-};
+}
 
-type TaskInstance = {
-  id: string;
+interface TaskInstance extends EntityMeta {
   title: string;
   overview: string;
   flag: string[] | null;
   items: Set<string>;
-  createdAt: number;
-  lastModified: number;
-};
+}
 
-type ItemInstance = {
-  id: string;
+interface ItemInstance extends EntityMeta {
   content: string;
   note: string;
   flag: string[] | null;
-  createdAt: number;
-  lastModified: number;
-};
+}
 
 type StoredType = {
   projects: Map<string, ProjectInstance>;
   tasks: Map<string, TaskInstance>;
   items: Map<string, ItemInstance>;
 };
+
+// update
+interface ProjectUpdate {
+  title?: string;
+  overview?: string;
+  flag?: string[] | null;
+}
+
+interface TaskUpdate {
+  title?: string;
+  overview?: string;
+  flag?: string[] | null;
+}
+
+interface ItemUpdate {
+  content?: string;
+  note?: string;
+  flag?: string[] | null;
+}
 
 export type {
   NewProjectInput,
@@ -91,4 +109,7 @@ export type {
   ProjectInstance,
   TaskInstance,
   ItemInstance,
+  ProjectUpdate,
+  TaskUpdate,
+  ItemUpdate,
 };
