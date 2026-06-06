@@ -1,4 +1,6 @@
-import { app } from "../../main";
+import type { Command } from "../../lib/command";
+import { dispatch } from "../../store/storeOperations/dispatch";
+import { app } from "../../ui/home/testBtn";
 type SelectHnd = {
   selector: string;
   handler: (match: HTMLElement, e: Event) => void;
@@ -31,5 +33,16 @@ events.forEach((val) => {
 });
 
 function dummyEvent() {
-  console.log("hello");
+  // let command: Command = {
+  //   action: "remove",
+  //   type: "removeItem",
+  //   itemId: "item-1",
+  //   taskId: "task-1",
+  // };
+
+  let command2: Command = {
+    action: "update",
+  };
+
+  dispatch(command2);
 }

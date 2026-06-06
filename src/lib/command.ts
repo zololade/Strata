@@ -1,6 +1,15 @@
+type IdMap = "projectId" | "taskId" | "itemId";
+type IdType = {
+  [key in IdMap]?: string;
+};
+
 type Command =
-  | { type: "removeTask"; projectId: string; taskId: string }
-  | { type: "addTask"; projectId: string; taskId: string }
-  | { type: "editProject"; projectId: string; title: string };
+  | ({
+      action: "remove";
+      type: "removeProject" | "removeTask" | "removeItem";
+    } & IdType)
+  | {
+      action: "update";
+    };
 
 export type { Command };

@@ -18,8 +18,7 @@ function putProjects(incoming: unknown) {
   if (!isStoredType(incoming)) return;
   if (typeof localStorage === "undefined") return;
 
-  let reader = new StoreReader(incoming);
-
+  const reader = new StoreReader(incoming);
   const data: Outgoing = reader.hydrateAll();
 
   workingProjectData = data;

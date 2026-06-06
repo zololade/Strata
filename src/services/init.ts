@@ -1,5 +1,5 @@
 import { databaseBus } from "../lib/Buses";
-import { handleDatabaseChange, handleDatabaseSave } from "./handlers";
+import { handleDatabaseChange, handleDatabaseUpdate } from "./handlers";
 
-databaseBus.subscribe("database:change", handleDatabaseChange);
-databaseBus.subscribe("database:save", handleDatabaseSave);
+databaseBus.subscribe("database:changed", handleDatabaseChange);
+databaseBus.subscribe("database:update", handleDatabaseUpdate);

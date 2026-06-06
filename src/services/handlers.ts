@@ -5,8 +5,8 @@ function handleDatabaseChange(data: unknown) {
   bindStore(data);
 }
 
-function handleDatabaseSave(data: unknown) {
+function handleDatabaseUpdate(data: unknown) {
   putProjects(data);
 }
 
-export { handleDatabaseChange, handleDatabaseSave };
+export { handleDatabaseChange, handleDatabaseUpdate };

@@ -1,9 +1,9 @@
 import { reducer } from "./reducer";
-import type { StoredType } from "../../lib/Types";
 import type { Command } from "../../lib/command";
+import { storedProjects } from "../Store";
 
-function dispatch(command: Command, store: StoredType) {
-  reducer(command, store);
+function dispatch(command: Command) {
+  reducer(command, storedProjects);
 }
 
 export { dispatch };

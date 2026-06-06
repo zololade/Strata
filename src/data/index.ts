@@ -1,4 +1,4 @@
 import { databaseBus } from "../lib/Buses";
 import { getStoredData } from "./dao";
 
-databaseBus.publish("database:change", getStoredData());
+databaseBus.publish("database:changed", getStoredData());
