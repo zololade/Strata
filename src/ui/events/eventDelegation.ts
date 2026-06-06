@@ -38,9 +38,9 @@ function dummyEvent() {
     data: { projectId: "proj-1" },
   };
 
-  let command2: Command = {
-    type: "update",
-  };
+  // let command2: Command = {
+  //   type: "update",
+  // };
   // dispatch(command1);
 
   // let command1: Command = {
@@ -53,6 +53,5 @@ function dummyEvent() {
   //   },
   // };
 
-  dispatch(command1);
-  dispatch(command2);
+  console.log(dispatch(command1));
 }

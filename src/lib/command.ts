@@ -39,4 +39,13 @@ type Command =
       type: "update";
     };
 
-export type { Command };
+type Result =
+  | { type: "removedProject"; id: string }
+  | { type: "removedTask"; id: string }
+  | { type: "removedItem"; id: string }
+  | { type: "createdProject"; id: string }
+  | { type: "createdTask"; id: string }
+  | { type: "createdItem"; id: string }
+  | { type: "notFound"; entity: "project" | "task" | "item" };
+
+export type { Command, Result };

@@ -1,38 +1,31 @@
-import type { StoredType } from "../../lib/Types";
 import type { Command } from "../../lib/command";
+import { storedProjects as store } from "../Store";
 import { createHandler } from "./actions/create";
 import { removeHandler } from "./actions/remove";
 import { update } from "./actions/update";
 
-function reducer(command: Command, store: StoredType) {
+function reducer(command: Command) {
   switch (command.type) {
     case "removeProject": {
-      removeHandler.removeProject(store, command.data);
-      break;
+      return removeHandler.removeProject(store, command.data);
     }
     case "removeTask": {
-      removeHandler.removeTask(store, command.data);
-      break;
+      return removeHandler.removeTask(store, command.data);
     }
     case "removeItem": {
-      removeHandler.removeItem(store, command.data);
-      break;
+      return removeHandler.removeItem(store, command.data);
     }
     case "createProject": {
-      createHandler.createProject(store, command.data);
-      break;
+      return createHandler.createProject(store, command.data);
     }
     case "createTask": {
-      createHandler.createTask(store, command.projectId, command.data);
-      break;
+      return createHandler.createTask(store, command.projectId, command.data);
     }
     case "createItem": {
-      createHandler.createItem(store, command.taskId, command.data);
-      break;
+      return createHandler.createItem(store, command.taskId, command.data);
     }
     case "update": {
-      update(store);
-      break;
+      return update(store);
     }
   }
 }

@@ -1,3 +1,4 @@
+import type { Result } from "../../../lib/command";
 import type {
   ItemInput,
   ProjectInput,
@@ -9,10 +10,10 @@ import { Project } from "../../models/Project";
 import { Task } from "../../models/Task";
 
 const createHandler = {
-  createProject(store: StoredType, payload: ProjectInput) {
+  createProject(store: StoredType, payload: ProjectInput): Result {
     let project = new Project(payload);
     store.projects.set(project.id, project);
-    return project;
+    return { type: "createdProject", id: project.id };
   },
 
   createTask(store: StoredType, projectId: string, payload: TaskInput) {
@@ -22,7 +23,7 @@ const createHandler = {
     if (!project) return;
     project.tasks.add(task.id);
     store.tasks.set(task.id, task);
-    return task;
+    return { type: "createdTask", id: task.id };
   },
 
   createItem(store: StoredType, taskId: string, payload: ItemInput) {
@@ -32,7 +33,7 @@ const createHandler = {
     if (!task) return;
     task.items.add(item.id);
     store.items.set(item.id, item);
-    return item;
+    return { type: "createItem", id: item.id };
   },
 };
 
