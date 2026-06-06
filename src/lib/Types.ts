@@ -9,7 +9,7 @@ interface ProjectInput {
 }
 
 interface TaskInput {
-  id: string;
+  id?: string;
   title: string;
   overview: string;
   flag: null | string[];
@@ -17,7 +17,7 @@ interface TaskInput {
 }
 
 interface ItemInput {
-  id: string;
+  id?: string;
   content: string;
   note: string;
   flag: null | string[];

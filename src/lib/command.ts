@@ -1,4 +1,4 @@
-import type { ProjectInput } from "./Types";
+import type { ItemInput, ProjectInput, TaskInput } from "./Types";
 
 type Command =
   | {
@@ -6,18 +6,34 @@ type Command =
       data: ProjectInput;
     }
   | {
-      type: "removeProject";
+      type: "createTask";
       projectId: string;
+      data: TaskInput;
+    }
+  | {
+      type: "createItem";
+      taskId: string;
+      data: ItemInput;
+    }
+  | {
+      type: "removeProject";
+      data: {
+        projectId: string;
+      };
     }
   | {
       type: "removeTask";
-      taskId: string;
-      projectId: string;
+      data: {
+        taskId: string;
+        projectId: string;
+      };
     }
   | {
       type: "removeItem";
-      itemId: string;
-      taskId: string;
+      data: {
+        itemId: string;
+        taskId: string;
+      };
     }
   | {
       type: "update";

@@ -7,7 +7,7 @@ class Item {
   flag: null | string[];
 
   constructor(param: ItemInput) {
-    this.id = param.id;
+    this.id = param.id ?? crypto.randomUUID();
     this.note = param.note ?? "";
     this.content = param.content;
     this.flag = param.flag;

@@ -8,7 +8,7 @@ class Task {
   items: Set<string>;
 
   constructor(param: TaskInput) {
-    this.id = param.id;
+    this.id = param.id ?? crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;
     this.flag = param.flag;

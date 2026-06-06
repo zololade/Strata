@@ -33,26 +33,25 @@ events.forEach((val) => {
 });
 
 function dummyEvent() {
-  // let command1: Command = {
-  //   action: "remove",
-  //   type: "removeProject",
-  //   projectId: "proj-1",
-  // };
+  let command1: Command = {
+    type: "removeProject",
+    data: { projectId: "proj-1" },
+  };
 
   let command2: Command = {
     type: "update",
   };
   // dispatch(command1);
 
-  let command1: Command = {
-    type: "createProject",
-    data: {
-      title: "New project",
-      overview: "This is created to test my system",
-      flag: null,
-      tasks: [],
-    },
-  };
+  // let command1: Command = {
+  //   type: "createProject",
+  //   data: {
+  //     title: "New project",
+  //     overview: "This is created to test my system",
+  //     flag: null,
+  //     tasks: [],
+  //   },
+  // };
 
   dispatch(command1);
   dispatch(command2);

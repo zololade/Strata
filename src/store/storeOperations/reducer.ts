@@ -6,31 +6,34 @@ import { update } from "./actions/update";
 
 function reducer(command: Command, store: StoredType) {
   switch (command.type) {
-    case "removeProject":
-      removeHandler.removeProject(store, { projectId: command.projectId });
+    case "removeProject": {
+      removeHandler.removeProject(store, command.data);
       break;
-
-    case "removeTask":
-      removeHandler.removeTask(store, {
-        taskId: command.taskId,
-        projectId: command.projectId,
-      });
+    }
+    case "removeTask": {
+      removeHandler.removeTask(store, command.data);
       break;
-
-    case "removeItem":
-      removeHandler.removeItem(store, {
-        taskId: command.taskId,
-        itemId: command.itemId,
-      });
+    }
+    case "removeItem": {
+      removeHandler.removeItem(store, command.data);
       break;
-
-    case "createProject":
+    }
+    case "createProject": {
       createHandler.createProject(store, command.data);
       break;
-
-    case "update":
-      update(store, command);
+    }
+    case "createTask": {
+      createHandler.createTask(store, command.projectId, command.data);
       break;
+    }
+    case "createItem": {
+      createHandler.createItem(store, command.taskId, command.data);
+      break;
+    }
+    case "update": {
+      update(store);
+      break;
+    }
   }
 }
 
