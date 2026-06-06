@@ -33,16 +33,15 @@ events.forEach((val) => {
 });
 
 function dummyEvent() {
-  // let command: Command = {
-  //   action: "remove",
-  //   type: "removeItem",
-  //   itemId: "item-1",
-  //   taskId: "task-1",
-  // };
+  let command1: Command = {
+    action: "remove",
+    type: "removeProject",
+    projectId: "proj-1",
+  };
 
   let command2: Command = {
     action: "update",
   };
-
+  dispatch(command1);
   dispatch(command2);
 }
