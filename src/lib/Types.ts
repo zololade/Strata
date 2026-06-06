@@ -1,11 +1,11 @@
 interface ProjectInput {
-  id: string;
+  id?: string;
   title: string;
   overview: string;
   flag: null | string[];
   tasks: string[];
-  createdAt: number;
-  lastModified: number;
+  createdAt?: number;
+  lastModified?: number;
 }
 
 interface TaskInput {

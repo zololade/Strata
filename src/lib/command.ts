@@ -1,23 +1,26 @@
+import type { ProjectInput } from "./Types";
+
 type Command =
   | {
-      action: "remove";
+      type: "createProject";
+      data: ProjectInput;
+    }
+  | {
       type: "removeProject";
       projectId: string;
     }
   | {
-      action: "remove";
       type: "removeTask";
       taskId: string;
       projectId: string;
     }
   | {
-      action: "remove";
       type: "removeItem";
       itemId: string;
       taskId: string;
     }
   | {
-      action: "update";
+      type: "update";
     };
 
 export type { Command };
