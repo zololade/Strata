@@ -30,4 +30,4 @@ function isStoredType(value: unknown): value is StoredType {
   return hasKeys(value, ["projects", "tasks", "items"]);
 }
 
-export { putProjects, getStoredData };
+export { putProjects, getStoredData, isStoredType };

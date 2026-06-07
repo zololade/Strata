@@ -1,12 +1,19 @@
-import { bindStore } from "../store/Store";
+import { bindStore, getStore } from "../store/Store";
 import { putProjects } from "../data/dao";
+import { initialRender } from "../ui";
+import { appBus } from "../lib/Buses";
 
-function handleDatabaseChange(data: unknown) {
+function handleDatabaseLoaded(data: unknown) {
   bindStore(data);
+
+  appBus.publish("store:ready", getStore());
 }
 
 function handleDatabaseUpdate(data: unknown) {
   putProjects(data);
 }
 
-export { handleDatabaseChange, handleDatabaseUpdate };
+function handleStoreLoaded(data: unknown) {
+  initialRender(data);
+}
+export { handleDatabaseLoaded, handleDatabaseUpdate, handleStoreLoaded };

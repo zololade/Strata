@@ -1,0 +1,80 @@
+@layer reset {
+  /* 1. Global Box-Sizing & Reset Defaults */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 2. Document & Layout Basics */
+  html {
+    color-scheme: light dark; /* Native dark mode foundation */
+    -webkit-font-smoothing: antialiased; /* Crisp text rendering */
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 3. Typography & Smart Wrapping */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance; /* Prevents single-word hanging orphans */
+  }
+
+  p,
+  li,
+  figcaption {
+    text-wrap: pretty; /* Prevents typographic orphans in body copy */
+  }
+
+  /* 4. Fluid Media Baseline */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 5. Seamless Form Inheritance & Auto-Sizing */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  textarea {
+    field-sizing: content; /* Auto-grows vertically as user types */
+    min-height: 3lh; /* Keeps standard vertical height visible initially */
+  }
+
+  /* 6. Accessible Interactivity */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

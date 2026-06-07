@@ -2,8 +2,7 @@ import "./services/init";
 import "./store/Store";
 import "./data/index";
 import "./ui/styles/app.css";
-import "./ui/home/testBtn";
-import "./ui/events/eventDelegation";
+import "./ui/index";
 
 //declare the app
 
