@@ -16,7 +16,7 @@ function projectLoader(snapshot: StoredType): PageData {
             content: [
               {
                 tag: "button",
-                id: k,
+                ["data-id"]: k,
                 content: [
                   { tag: "h3", content: v.title },
                   { tag: "p", content: v.overview },

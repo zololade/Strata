@@ -1,4 +1,8 @@
 .projectsList {
+  /*remember to remove*/
+  list-style-type: none;
+  padding: 5px;
+
   button {
     display: block;
     text-align: left;

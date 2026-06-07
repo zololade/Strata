@@ -2,6 +2,7 @@ import { bindStore, getStore } from "../store/Store";
 import { putProjects } from "../data/dao";
 import { initialRender } from "../ui";
 import { appBus } from "../lib/Buses";
+import { updateView } from "../ui/home/home";
 
 function handleDatabaseLoaded(data: unknown) {
   bindStore(data);
@@ -16,4 +17,14 @@ function handleDatabaseUpdate(data: unknown) {
 function handleStoreLoaded(data: unknown) {
   initialRender(data);
 }
-export { handleDatabaseLoaded, handleDatabaseUpdate, handleStoreLoaded };
+
+function handleViewProject(data: unknown) {
+  updateView(data, getStore());
+}
+
+export {
+  handleDatabaseLoaded,
+  handleDatabaseUpdate,
+  handleStoreLoaded,
+  handleViewProject,
+};

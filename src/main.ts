@@ -3,6 +3,7 @@ import "./store/Store";
 import "./data/index";
 import "./ui/styles/app.css";
 import "./ui/index";
+import "./ui/events/eventDelegation";
 
 //declare the app
 
