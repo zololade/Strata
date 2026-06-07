@@ -5,6 +5,7 @@ import type { StoredType } from "../../../lib/Types";
 function projectLoader(snapshot: StoredType): PageData {
   return {
     tag: "aside",
+    class: "projListContainer",
     content: [
       { tag: "h2", content: "Projects" },
       {

@@ -1,1 +1,19 @@
 @import url("./buttons.css");
+@import url("./detail.css");
+
+#app {
+  display: flex;
+  height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  #app {
+    display: block;
+
+    > * {
+      width: auto;
+      border: none;
+    }
+  }
+}
