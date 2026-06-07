@@ -30,67 +30,63 @@ function viewProject(projectId: unknown, store: StoredType): PageData {
     return errorData;
   }
 
-  return {
-    tag: "section",
-    class: "projectView",
-    content: [
-      {
-        tag: "header",
-        content: [
-          {
-            tag: "h2",
-            content: project.title,
-          },
-          {
-            tag: "p",
-            content: project.overview,
-          },
-        ],
-      },
+  return [
+    {
+      tag: "header",
+      content: [
+        {
+          tag: "h2",
+          content: project.title,
+        },
+        {
+          tag: "p",
+          content: project.overview,
+        },
+      ],
+    },
 
-      {
-        tag: "div",
-        class: "taskList",
-        content: [
-          {
-            tag: "h3",
-            content: "Tasks",
-          },
+    {
+      tag: "div",
+      class: "taskList",
+      content: [
+        {
+          tag: "h3",
+          content: "Tasks",
+        },
 
-          ...[...project.tasks].map((taskId) => {
-            const task = store.tasks.get(taskId);
+        ...[...project.tasks].map((taskId) => {
+          const task = store.tasks.get(taskId);
 
-            if (!task) {
-              return {
-                tag: "div",
-                class: "task missing",
-                content: "Missing task",
-              };
-            }
-
+          if (!task) {
             return {
-              tag: "article",
-              class: "task",
-              id: task.id,
-              content: [
-                {
-                  tag: "h4",
-                  content: task.title,
-                },
-                {
-                  tag: "p",
-                  content: task.overview,
-                },
-                {
-                  tag: "small",
-                  content: `${task.items.size} item(s)`,
-                },
-              ],
+              tag: "div",
+              class: "task missing",
+              content: "Missing task",
             };
-          }),
-        ],
-      },
-    ],
-  };
+          }
+
+          return {
+            tag: "article",
+            class: "task",
+            id: task.id,
+            content: [
+              {
+                tag: "h4",
+                content: task.title,
+              },
+              {
+                tag: "p",
+                content: task.overview,
+              },
+              {
+                tag: "small",
+                content: `${task.items.size} item(s)`,
+              },
+            ],
+          };
+        }),
+      ],
+    },
+  ];
 }
 export { detailComponent, viewProject };
