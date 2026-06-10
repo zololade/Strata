@@ -40,7 +40,10 @@ function rehydrateFactory(data: Snapshot) {
 }
 
 function loadSnapshot(incoming: unknown, store: StoredType) {
-  if (!isSnapshot(incoming)) throw new Error("Invalid project data");
+  if (!incoming || !isSnapshot(incoming)) {
+    console.warn("Invalid or missing snapshot data");
+    return;
+  }
 
   const graph = rehydrateFactory(incoming);
 

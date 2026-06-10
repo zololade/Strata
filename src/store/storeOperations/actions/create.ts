@@ -37,7 +37,7 @@ const createHandler = {
     task.items.add(item.id);
     store.items.set(item.id, item);
     databaseBus.publish("database:update", store);
-    return { type: "createItem", id: item.id };
+    return { type: "createdItem", id: item.id };
   },
 };
 

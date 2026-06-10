@@ -2,6 +2,7 @@
 import { StoreReader } from "./transformers/serializer";
 import type { StoredType, Snapshot as Outgoing } from "../lib/Types";
 import { hasKeys } from "../lib/utils";
+import { seedData } from "./seedData";
 
 const storedData =
   typeof localStorage !== "undefined" && localStorage.getItem("todoData");
@@ -9,6 +10,17 @@ const storedData =
 let workingProjectData: Outgoing | null = storedData
   ? JSON.parse(storedData)
   : null;
+
+// ==================== SEED INITIAL DATA ====================
+if (!workingProjectData) {
+  workingProjectData = seedData;
+
+  // Persist the seed data immediately
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem("todoData", JSON.stringify(workingProjectData));
+  }
+}
+// ===========================================================
 
 function getStoredData(): Outgoing | null {
   return workingProjectData;
