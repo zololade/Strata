@@ -11,24 +11,26 @@ function projectLoader(snapshot: StoredType): PageData {
       {
         tag: "ul",
         class: "projectsList",
-        content: [
-          [...snapshot.projects].flatMap(([k, v]) => ({
-            tag: "li",
-            content: [
-              {
-                tag: "button",
-                ["data-id"]: k,
-                content: [
-                  { tag: "h3", content: v.title },
-                  { tag: "p", content: v.overview },
-                ],
-              },
-            ],
-          })),
-        ],
+        content: [generateList(snapshot)],
       },
     ],
   };
 }
 
-export { projectLoader };
+function generateList(snapshot: StoredType): PageData {
+  return [...snapshot.projects].flatMap(([k, v]) => ({
+    tag: "li",
+    content: [
+      {
+        tag: "button",
+        ["data-id"]: k,
+        content: [
+          { tag: "h3", content: v.title },
+          { tag: "p", content: v.overview },
+        ],
+      },
+    ],
+  }));
+}
+
+export { projectLoader, generateList };

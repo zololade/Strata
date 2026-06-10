@@ -4,32 +4,42 @@ import type { StoredType } from "../../lib/Types";
 import { storedProjects } from "../../store/Store";
 import { detailComponent, viewProject } from "./component/detail";
 import { newProject } from "./component/newProject";
-import { projectLoader } from "./component/projectList";
+import { generateList, projectLoader } from "./component/projectList";
 
+//initial render
+function appShell(snapshot: StoredType): PageData {
+  return [projectLoader(snapshot), [newProject(), detailComponent()]];
+}
+
+//subsequent render
 let selectedProjectId: string | null = null;
 
-function selectProject(host: HTMLElement, id: string) {
+//select project to view
+function selectProject(
+  host: HTMLElement,
+  id: string,
+  afterRender?: () => void,
+) {
   selectedProjectId = id;
-  render(host);
+  render(host, afterRender);
 }
 
-function appShell(snapshot: StoredType): PageData {
-  return [
-    projectLoader(snapshot),
-    {
-      tag: "div",
-      class: "rightSide",
-      content: [newProject(), detailComponent()],
-    },
-  ];
-}
-
-function render(host: HTMLElement) {
+function render(host: HTMLElement, afterRender?: () => void) {
   if (!selectedProjectId) {
     renderElement(host, detailComponent());
     return;
   }
-  renderElement(host, viewProject(selectedProjectId, storedProjects));
+  renderElement(
+    host,
+    viewProject(selectedProjectId, storedProjects),
+    false,
+    afterRender,
+  );
 }
 
-export { appShell, render, selectProject };
+//update list
+function refreshList(host: HTMLElement, afterRender?: () => void) {
+  renderElement(host, generateList(storedProjects), false, afterRender);
+}
+
+export { appShell, render, selectProject, refreshList };

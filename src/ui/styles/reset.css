@@ -49,13 +49,13 @@
   }
 
   /* 5. Seamless Form Inheritance & Auto-Sizing */
-  /*input,
+  input,
   button,
   textarea,
   select {
     font: inherit;
     color: inherit;
-  }*/
+  }
 
   textarea {
     field-sizing: content;

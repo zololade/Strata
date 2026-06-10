@@ -1,8 +1,6 @@
-.rightSide {
+.projectsView {
   contain: layout paint;
   flex: 1;
   overflow-y: auto;
-  .projectsView {
-    padding: 1.5rem;
-  }
+  padding: 1.5rem;
 }
