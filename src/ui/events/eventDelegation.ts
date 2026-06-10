@@ -1,4 +1,5 @@
 import { main } from "../index";
+import { handleNewProj } from "./handlers/addNewProj";
 import { handleProjectView } from "./handlers/viewProject";
 type SelectHnd = {
   selector: string;
@@ -8,7 +9,10 @@ type SelectHnd = {
 let eventsMap = new Map<string, SelectHnd[]>([
   [
     "click",
-    [{ selector: ".projectsList button[data-id]", handler: handleProjectView }],
+    [
+      { selector: ".projectsList button[data-id]", handler: handleProjectView },
+      { selector: "#newProjBtn", handler: handleNewProj },
+    ],
   ],
 ]);
 

@@ -1,6 +1,6 @@
 .projListContainer {
   width: 280px;
-  border-right: 1px solid #ddd;
+  /*border-right: 1px solid #ddd;*/
   padding: 1rem;
   overflow-y: auto;
   scrollbar-width: thin;

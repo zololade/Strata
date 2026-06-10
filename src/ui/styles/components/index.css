@@ -1,9 +1,11 @@
 @import url("./buttons.css");
 @import url("./detail.css");
+@import url("./form.css");
 
 #app {
   display: flex;
-  height: 100vh;
+  /*height: 100vh;
+  height: 100dvh;*/
   font-family: system-ui, sans-serif;
 }
 
@@ -13,7 +15,7 @@
 
     > * {
       width: auto;
-      border: none;
+      /*border: none;*/
     }
   }
 }

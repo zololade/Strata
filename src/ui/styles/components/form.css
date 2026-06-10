@@ -1,0 +1,50 @@
+form {
+  max-width: 450px;
+  margin: auto;
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+
+  * {
+    display: block;
+  }
+
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    *:not(input, textarea) {
+      margin-top: 1rem;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: 5px;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #f0f0f0;
+    }
+
+    textarea {
+      resize: vertical;
+      word-break: break-word;
+    }
+
+    .formBtns {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+
+      > * {
+        border: none;
+        border-radius: 5px;
+        padding: 0.25rem 0.5rem;
+      }
+      #newProjBtn {
+        background-color: #eda59e;
+        color: #fff;
+      }
+    }
+  }
+}

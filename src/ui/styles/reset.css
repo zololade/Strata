@@ -9,14 +9,14 @@
   }
 
   /* 2. Document & Layout Basics */
-  html {
-    color-scheme: light dark; /* Native dark mode foundation */
-    -webkit-font-smoothing: antialiased; /* Crisp text rendering */
-  }
+  /*html {
+    color-scheme: light dark;
+    -webkit-font-smoothing: antialiased;
+  }*/
 
   body {
     min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    min-height: 100dvh;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
@@ -28,13 +28,13 @@
   h4,
   h5,
   h6 {
-    text-wrap: balance; /* Prevents single-word hanging orphans */
+    text-wrap: balance;
   }
 
   p,
   li,
   figcaption {
-    text-wrap: pretty; /* Prevents typographic orphans in body copy */
+    text-wrap: pretty;
   }
 
   /* 4. Fluid Media Baseline */
@@ -49,17 +49,17 @@
   }
 
   /* 5. Seamless Form Inheritance & Auto-Sizing */
-  input,
+  /*input,
   button,
   textarea,
   select {
     font: inherit;
     color: inherit;
-  }
+  }*/
 
   textarea {
-    field-sizing: content; /* Auto-grows vertically as user types */
-    min-height: 3lh; /* Keeps standard vertical height visible initially */
+    field-sizing: content;
+    min-height: 3lh;
   }
 
   /* 6. Accessible Interactivity */
