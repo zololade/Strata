@@ -6,6 +6,20 @@
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
 
+  > * {
+    padding: 5px;
+  }
+
+  .projectsHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .add-project-btn {
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
   &:hover {
     scrollbar-color: #fff transparent;
   }
@@ -13,7 +27,6 @@
   .projectsList {
     /*remember to remove*/
     list-style-type: none;
-    padding: 5px;
 
     button {
       width: 100%;

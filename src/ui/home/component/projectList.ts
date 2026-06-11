@@ -7,7 +7,19 @@ function projectLoader(snapshot: StoredType): PageData {
     tag: "aside",
     class: "projListContainer",
     content: [
-      { tag: "h2", content: "Projects" },
+      {
+        tag: "div",
+        class: "projectsHeader",
+        content: [
+          { tag: "h2", content: "Projects" },
+          {
+            tag: "button",
+            id: "openNewProjBtn",
+            class: "add-project-btn",
+            content: "＋",
+          },
+        ],
+      },
       {
         tag: "ul",
         class: "projectsList",

@@ -3,6 +3,7 @@ import type { PageData } from "../../../lib/Page";
 function newProject(): PageData {
   return {
     tag: "dialog",
+    class: "new-proj-dialog",
     content: [
       {
         tag: "form",

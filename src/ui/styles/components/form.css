@@ -1,49 +1,60 @@
-form {
-  max-width: 450px;
-  margin: auto;
-  border: 2px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
+.new-proj-dialog {
+  min-width: 100%;
+  min-height: 100%;
+  place-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border: none;
+  padding: 1rem;
 
-  * {
-    display: block;
-  }
+  form {
+    background-color: #fff;
+    max-width: 450px;
+    margin: auto;
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
 
-  fieldset {
-    border: none;
-    margin: 0;
-    padding: 0;
-
-    *:not(input, textarea) {
-      margin-top: 1rem;
+    * {
+      display: block;
     }
 
-    input,
-    textarea {
-      width: 100%;
-      border-radius: 5px;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid #f0f0f0;
-    }
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
 
-    textarea {
-      resize: vertical;
-      word-break: break-word;
-    }
+      *:not(input, textarea) {
+        margin-top: 1rem;
+      }
 
-    .formBtns {
-      display: flex;
-      gap: 1rem;
-      justify-content: flex-end;
-
-      > * {
-        border: none;
+      input,
+      textarea {
+        width: 100%;
         border-radius: 5px;
         padding: 0.25rem 0.5rem;
+        border: 1px solid #f0f0f0;
       }
-      #newProjBtn {
-        background-color: #eda59e;
-        color: #fff;
+
+      textarea {
+        resize: vertical;
+        word-break: break-word;
+      }
+
+      .formBtns {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+
+        > * {
+          border: none;
+          border-radius: 5px;
+          padding: 0.25rem 0.5rem;
+        }
+        #newProjBtn {
+          background-color: #eda59e;
+          color: #fff;
+        }
       }
     }
   }
