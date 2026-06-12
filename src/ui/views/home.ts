@@ -28,13 +28,7 @@ function selectProject(id: string) {
 
 //refresh list
 function refreshList() {
-  const listHost = document.querySelector(
-    ".projectsList",
-  ) as HTMLUListElement | null;
-
-  console.log(listHost);
-  if (!listHost) return;
-  return (afterRender: () => void) =>
+  return (listHost: HTMLElement, afterRender: () => void) =>
     renderElement(listHost, generateList(getStore()), false, afterRender);
 }
 

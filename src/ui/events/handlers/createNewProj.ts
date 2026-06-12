@@ -11,6 +11,9 @@ function handleCreateProj(_match: HTMLElement, _e: Event) {
   let overviewField = document.querySelector(
     "#projOverview",
   ) as HTMLInputElement | null;
+  const listHost = document.querySelector(
+    ".projectsList",
+  ) as HTMLUListElement | null;
 
   if (titleField && overviewField) {
     let command: Command = {
@@ -27,13 +30,12 @@ function handleCreateProj(_match: HTMLElement, _e: Event) {
     //few things to do before rendering
     titleField.value = "";
     overviewField.value = "";
-    //
+    //some side effects
     ModalManager.close(".new-proj-dialog");
-
     let afterRender = refreshList();
     //render created project
-    if (projData?.type === "createdProject" && afterRender)
-      afterRender(() => selectProject(projData.id));
+    if (projData?.type === "createdProject" && listHost)
+      afterRender(listHost, () => selectProject(projData.id));
   }
 }
 
