@@ -36,6 +36,7 @@ function generateList(snapshot: StoredType): PageData {
     content: [
       {
         tag: "button",
+        ["data-action"]: "select-project",
         ["data-id"]: k,
         content: [
           { tag: "h3", content: v.title },

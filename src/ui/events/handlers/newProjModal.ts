@@ -1,4 +1,4 @@
-import { ModalManager } from "../../home/component/Modal";
+import { ModalManager } from "../../views/component/Modal";
 
 //open modal
 function handleOpenModal(_match: HTMLElement, _e: Event) {
@@ -6,10 +6,12 @@ function handleOpenModal(_match: HTMLElement, _e: Event) {
 }
 
 //close modal
-function handleHideModal(match: HTMLElement, _e: Event) {
-  if (match instanceof HTMLDialogElement) {
+function handleHideModal(_match: HTMLElement, e: Event) {
+  let target = e.target as HTMLElement | null;
+
+  if (target instanceof HTMLDialogElement) {
     ModalManager.close(".new-proj-dialog");
-  } else if (match.id === "cancelProjBtn") {
+  } else if (target && target.id === "cancelProjBtn") {
     ModalManager.close(".new-proj-dialog");
   } else return;
 }
