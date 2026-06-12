@@ -1,7 +1,7 @@
 import { renderElement } from "../../lib/renderUtilities";
 import { getStore } from "../../store/Store";
 import { viewProject } from "./component/detailPanel";
-import { newProject } from "./component/newProject";
+import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
 
 let main = document.querySelector("#app") as HTMLElement;

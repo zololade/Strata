@@ -1,55 +1,24 @@
-import { handleNewProj } from "./handlers/addNewProj";
-import {
-  handleCancelProj,
-  handleNewProjBtn,
-  hideModalHandler,
-} from "./handlers/addProjHnd";
-
-import { handleProjectView } from "./handlers/viewProject";
+import { handleCreateProj } from "./handlers/createNewProj";
+import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
 
 let main = document.querySelector("#app") as HTMLElement;
-type SelectHnd = {
-  selector: string;
-  handler: (match: HTMLElement, e: Event) => void;
-};
 
 function initializeEvents() {
-  let eventsMap = new Map<string, SelectHnd[]>([
-    [
-      "click",
-      [
-        {
-          selector: ".projectsList button[data-id]",
-          handler: handleProjectView,
-        },
-        { selector: "#newProjBtn", handler: handleNewProj },
-        { selector: "#openNewProjBtn", handler: handleNewProjBtn },
-        { selector: "#cancelProjBtn", handler: handleCancelProj },
-        { selector: ".new-proj-dialog", handler: hideModalHandler },
-      ],
-    ],
-  ]);
+  const actionHandlers = {
+    "create-project": handleCreateProj,
+    "open-modal": handleOpenModal,
+    "close-modal": handleHideModal,
+  };
 
-  let events = new Set(eventsMap.keys());
+  main.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+    const el = target.closest("[data-action]") as HTMLElement;
 
-  events.forEach((val) => {
-    if (!main) return;
-
-    let event = eventsMap.get(val);
-    if (event) {
-      main.addEventListener(val, (e) => {
-        let target = e.target as HTMLElement;
-        for (const { selector, handler } of event) {
-          if (target) {
-            let match = target.closest(selector) as HTMLElement;
-            if (match) {
-              handler(match, e);
-              break;
-            }
-          }
-        }
-      });
-    }
+    if (!el) return;
+    const action = el.dataset["action"];
+    const handler = actionHandlers[action as keyof typeof actionHandlers];
+    if (handler) handler(target, e);
   });
 }
 

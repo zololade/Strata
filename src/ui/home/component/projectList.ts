@@ -16,6 +16,7 @@ function projectLoader(snapshot: StoredType): PageData {
             tag: "button",
             id: "openNewProjBtn",
             class: "add-project-btn",
+            ["data-action"]: "open-modal",
             content: "＋",
           },
         ],

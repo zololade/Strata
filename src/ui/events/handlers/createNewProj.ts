@@ -2,7 +2,7 @@ import type { Command } from "../../../lib/command";
 import { dispatch } from "../../../store/storeOperations/dispatch";
 import { refreshList, selectProject } from "../../home/home";
 
-function handleNewProj(_match: HTMLElement, e: Event) {
+function handleCreateProj(_match: HTMLElement, e: Event) {
   e.preventDefault();
   let target = e.target as HTMLElement;
   let mainHost = target.closest("#app") as HTMLElement;
@@ -65,4 +65,4 @@ function handleNewProj(_match: HTMLElement, e: Event) {
   }
 }
 
-export { handleNewProj };
+export { handleCreateProj };

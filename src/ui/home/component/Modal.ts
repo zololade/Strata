@@ -4,6 +4,7 @@ function newProject(): PageData {
   return {
     tag: "dialog",
     class: "new-proj-dialog",
+    ["data-action"]: "close-modal",
     content: [
       {
         tag: "form",
@@ -31,12 +32,14 @@ function newProject(): PageData {
                 content: [
                   {
                     tag: "button",
+                    ["data-action"]: "close-modal",
                     content: "cancel",
                     type: "button",
                     id: "cancelProjBtn",
                   },
                   {
                     tag: "button",
+                    ["data-action"]: "create-project",
                     content: "submit",
                     type: "submit",
                     id: "newProjBtn",
@@ -51,4 +54,17 @@ function newProject(): PageData {
   };
 }
 
-export { newProject };
+// src/ui/components/Modal.ts (new file)
+class ModalManager {
+  static open(selector: string) {
+    const dialog = document.querySelector(selector) as HTMLDialogElement;
+    dialog?.showModal();
+  }
+
+  static close(selector: string) {
+    const dialog = document.querySelector(selector) as HTMLDialogElement;
+    dialog?.close();
+  }
+}
+
+export { newProject, ModalManager };
