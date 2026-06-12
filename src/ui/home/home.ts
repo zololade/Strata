@@ -1,20 +1,19 @@
-// import type { PageData } from "../../lib/Page";
 import { renderElement } from "../../lib/renderUtilities";
-// import type { StoredType } from "../../lib/Types";
 import { getStore } from "../../store/Store";
-import { viewProject } from "./component/detail";
+import { viewProject } from "./component/detailPanel";
 import { newProject } from "./component/newProject";
 import { generateList, projectLoader } from "./component/projectList";
 
 let main = document.querySelector("#app") as HTMLElement;
+let selectedProjectId: string | null = null;
 
 //initial render
 function appShell() {
-  renderElement(main, [projectLoader(getStore()), [newProject()]]);
+  renderElement(main, [
+    projectLoader(getStore()),
+    [newProject(), viewProject(true, null, null)],
+  ]);
 }
-
-//subsequent render
-let selectedProjectId: string | null = null;
 
 //select project to view
 function selectProject(
@@ -33,7 +32,7 @@ function render(host: HTMLElement, afterRender?: () => void) {
   }
   renderElement(
     host,
-    viewProject(selectedProjectId, getStore()),
+    viewProject(false, selectedProjectId, getStore()),
     false,
     afterRender,
   );
