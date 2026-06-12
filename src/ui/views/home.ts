@@ -3,7 +3,7 @@ import { renderElement } from "../../lib/renderUtilities";
 import { getStore } from "../../store/Store";
 import { viewProject } from "./component/detailPanel";
 import { newProject } from "./component/Modal";
-import { projectLoader } from "./component/projectList";
+import { generateList, projectLoader } from "./component/projectList";
 
 let main = document.querySelector("#app") as HTMLElement;
 let selectedProjectId: string | null = null;
@@ -26,4 +26,23 @@ function selectProject(id: string) {
   appBus.publish("view:project", id);
 }
 
-export { appShell, getCurrProjId, selectProject, getPrevProjId, setPrevProjId };
+//refresh list
+function refreshList() {
+  const listHost = document.querySelector(
+    ".projectsList",
+  ) as HTMLUListElement | null;
+
+  console.log(listHost);
+  if (!listHost) return;
+  return (afterRender: () => void) =>
+    renderElement(listHost, generateList(getStore()), false, afterRender);
+}
+
+export {
+  appShell,
+  getCurrProjId,
+  selectProject,
+  getPrevProjId,
+  setPrevProjId,
+  refreshList,
+};

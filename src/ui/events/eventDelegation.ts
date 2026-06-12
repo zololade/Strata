@@ -1,4 +1,4 @@
-// import { handleCreateProj } from "./handlers/createNewProj";
+import { handleCreateProj } from "./handlers/createNewProj";
 import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
 import { handleSelectProj } from "./handlers/viewProject";
 
@@ -6,7 +6,7 @@ let main = document.querySelector("#app") as HTMLElement;
 
 function initializeEvents() {
   const actionHandlers = {
-    // "create-project": handleCreateProj,
+    "create-project": handleCreateProj,
     "open-modal": handleOpenModal,
     "close-modal": handleHideModal,
     "select-project": handleSelectProj,
