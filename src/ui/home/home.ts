@@ -27,7 +27,6 @@ function selectProject(
 
 function render(host: HTMLElement, afterRender?: () => void) {
   if (!selectedProjectId) {
-    // renderElement(host);
     return;
   }
   renderElement(

@@ -60,6 +60,8 @@ function handleNewProj(_match: HTMLElement, e: Event) {
 
     Title.value = "";
     Overview.value = "";
+    let dialog = mainHost.querySelector(".new-proj-dialog");
+    if (dialog) (dialog as HTMLDialogElement).close();
   }
 }
 

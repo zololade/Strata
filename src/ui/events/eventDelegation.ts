@@ -1,7 +1,10 @@
 import { handleNewProj } from "./handlers/addNewProj";
-import { handleCancelProj } from "./handlers/cancelProj";
-import { hideModalHandler } from "./handlers/hideModal";
-import { handleNewProjBtn } from "./handlers/newProj";
+import {
+  handleCancelProj,
+  handleNewProjBtn,
+  hideModalHandler,
+} from "./handlers/addProjHnd";
+
 import { handleProjectView } from "./handlers/viewProject";
 
 let main = document.querySelector("#app") as HTMLElement;
