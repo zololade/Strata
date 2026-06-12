@@ -1,5 +1,6 @@
 import { main } from "../index";
 import { handleNewProj } from "./handlers/addNewProj";
+import { handleCancelProj } from "./handlers/cancelProj";
 import { hideModalHandler } from "./handlers/hideModal";
 import { handleNewProjBtn } from "./handlers/newProj";
 import { handleProjectView } from "./handlers/viewProject";
@@ -15,6 +16,7 @@ let eventsMap = new Map<string, SelectHnd[]>([
       { selector: ".projectsList button[data-id]", handler: handleProjectView },
       { selector: "#newProjBtn", handler: handleNewProj },
       { selector: "#openNewProjBtn", handler: handleNewProjBtn },
+      { selector: "#cancelProjBtn", handler: handleCancelProj },
       { selector: ".new-proj-dialog", handler: hideModalHandler },
     ],
   ],
