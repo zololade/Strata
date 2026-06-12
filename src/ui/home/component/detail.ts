@@ -1,14 +1,15 @@
 import type { PageData } from "../../../lib/Page";
 import type { StoredType } from "../../../lib/Types";
 
-// load projects
-function detailComponent(): PageData {
-  return {
-    tag: "section",
-    class: "projectsView",
-    content: [{ tag: "h2", content: "welcome" }],
-  };
-}
+// initial project view
+// function detailComponent(): PageData {
+//   return {
+//     tag: "section",
+//     class: "projectsView",
+//     content: [{ tag: "h2", content: "welcome" }],
+//   };
+// }
+
 //selected project
 function viewProject(projectId: unknown, store: StoredType): PageData {
   let errorData = {
@@ -89,4 +90,4 @@ function viewProject(projectId: unknown, store: StoredType): PageData {
     },
   ];
 }
-export { detailComponent, viewProject };
+export { viewProject };

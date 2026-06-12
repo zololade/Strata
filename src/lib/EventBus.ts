@@ -25,7 +25,7 @@ class EventBus {
         act(data);
       });
     } else {
-      throw new Error("Event needs to be registered first");
+      throw new Error(`${ev} needs to be registered first`);
     }
   }
 

@@ -1,14 +1,15 @@
-import type { PageData } from "../../lib/Page";
+// import type { PageData } from "../../lib/Page";
 import { renderElement } from "../../lib/renderUtilities";
-import type { StoredType } from "../../lib/Types";
+import { main } from "../../main";
+// import type { StoredType } from "../../lib/Types";
 import { storedProjects } from "../../store/Store";
-import { detailComponent, viewProject } from "./component/detail";
+import { viewProject } from "./component/detail";
 import { newProject } from "./component/newProject";
 import { generateList, projectLoader } from "./component/projectList";
 
 //initial render
-function appShell(snapshot: StoredType): PageData {
-  return [projectLoader(snapshot), [newProject(), detailComponent()]];
+function appShell() {
+  renderElement(main, [projectLoader(storedProjects), [newProject()]]);
 }
 
 //subsequent render
@@ -26,7 +27,7 @@ function selectProject(
 
 function render(host: HTMLElement, afterRender?: () => void) {
   if (!selectedProjectId) {
-    renderElement(host, detailComponent());
+    // renderElement(host);
     return;
   }
   renderElement(

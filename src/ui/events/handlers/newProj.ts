@@ -1,4 +1,4 @@
-import { main } from "../..";
+import { main } from "../../../main";
 
 function handleNewProjBtn(_match: HTMLElement, _e: Event) {
   let dialog = main.querySelector("dialog");

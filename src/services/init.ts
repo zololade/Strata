@@ -5,7 +5,11 @@ import {
   handleStoreLoaded,
 } from "./handlers";
 
-databaseBus.subscribe("database:loaded", handleDatabaseLoaded);
-databaseBus.subscribe("database:update", handleDatabaseUpdate);
+function initializeServices() {
+  databaseBus.subscribe("database:loaded", handleDatabaseLoaded);
+  databaseBus.subscribe("database:update", handleDatabaseUpdate);
 
-appBus.subscribe("store:ready", handleStoreLoaded);
+  appBus.subscribe("store:ready", handleStoreLoaded);
+}
+
+export { initializeServices };

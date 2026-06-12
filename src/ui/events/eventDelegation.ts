@@ -1,4 +1,4 @@
-import { main } from "../index";
+import { main } from "../../main";
 import { handleNewProj } from "./handlers/addNewProj";
 import { handleCancelProj } from "./handlers/cancelProj";
 import { hideModalHandler } from "./handlers/hideModal";
@@ -24,22 +24,26 @@ let eventsMap = new Map<string, SelectHnd[]>([
 
 let events = new Set(eventsMap.keys());
 
-events.forEach((val) => {
-  if (!main) return;
+function initializeEvents() {
+  events.forEach((val) => {
+    if (!main) return;
 
-  let event = eventsMap.get(val);
-  if (event) {
-    main.addEventListener(val, (e) => {
-      let target = e.target as HTMLElement;
-      for (const { selector, handler } of event) {
-        if (target) {
-          let match = target.closest(selector) as HTMLElement;
-          if (match) {
-            handler(match, e);
-            break;
+    let event = eventsMap.get(val);
+    if (event) {
+      main.addEventListener(val, (e) => {
+        let target = e.target as HTMLElement;
+        for (const { selector, handler } of event) {
+          if (target) {
+            let match = target.closest(selector) as HTMLElement;
+            if (match) {
+              handler(match, e);
+              break;
+            }
           }
         }
-      }
-    });
-  }
-});
+      });
+    }
+  });
+}
+
+export { initializeEvents };
