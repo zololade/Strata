@@ -18,6 +18,8 @@ let data = {
       overview: "Gather all background information needed",
       flag: null,
       items: ["item-1", "item-2"],
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
   ],
 
@@ -27,6 +29,8 @@ let data = {
       content: "Check Wikipedia",
       flag: null,
       note: "",
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
 
     {
@@ -34,6 +38,8 @@ let data = {
       content: "Read similar projects on GitHub",
       flag: null,
       note: "",
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
   ],
 };
@@ -58,6 +64,8 @@ let badData = {
       overview: "Gather all background information needed",
       flag: null,
       items: ["item-1", "item-1"],
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
   ],
 

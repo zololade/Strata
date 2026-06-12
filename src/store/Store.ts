@@ -31,4 +31,4 @@ function getStore() {
   return store;
 }
 
-export { store as storedProjects, bindStore, getStore };
+export { bindStore, getStore };

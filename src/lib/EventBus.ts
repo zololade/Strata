@@ -11,10 +11,6 @@ class EventBus {
     } else {
       this.events.set(ev, [act]);
     }
-
-    return () => {
-      this.unsubscribe(ev, act);
-    };
   }
 
   public publish(ev: event, data?: unknown) {
@@ -29,7 +25,7 @@ class EventBus {
     }
   }
 
-  private unsubscribe(ev: event, act: action<unknown>) {
+  public unsubscribe(ev: event, act: action<unknown>) {
     let currEvent = this.events.get(ev);
 
     if (currEvent)

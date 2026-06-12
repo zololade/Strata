@@ -1,30 +1,34 @@
-import { main } from "../../main";
 import { handleNewProj } from "./handlers/addNewProj";
 import { handleCancelProj } from "./handlers/cancelProj";
 import { hideModalHandler } from "./handlers/hideModal";
 import { handleNewProjBtn } from "./handlers/newProj";
 import { handleProjectView } from "./handlers/viewProject";
+
+let main = document.querySelector("#app") as HTMLElement;
 type SelectHnd = {
   selector: string;
   handler: (match: HTMLElement, e: Event) => void;
 };
 
-let eventsMap = new Map<string, SelectHnd[]>([
-  [
-    "click",
-    [
-      { selector: ".projectsList button[data-id]", handler: handleProjectView },
-      { selector: "#newProjBtn", handler: handleNewProj },
-      { selector: "#openNewProjBtn", handler: handleNewProjBtn },
-      { selector: "#cancelProjBtn", handler: handleCancelProj },
-      { selector: ".new-proj-dialog", handler: hideModalHandler },
-    ],
-  ],
-]);
-
-let events = new Set(eventsMap.keys());
-
 function initializeEvents() {
+  let eventsMap = new Map<string, SelectHnd[]>([
+    [
+      "click",
+      [
+        {
+          selector: ".projectsList button[data-id]",
+          handler: handleProjectView,
+        },
+        { selector: "#newProjBtn", handler: handleNewProj },
+        { selector: "#openNewProjBtn", handler: handleNewProjBtn },
+        { selector: "#cancelProjBtn", handler: handleCancelProj },
+        { selector: ".new-proj-dialog", handler: hideModalHandler },
+      ],
+    ],
+  ]);
+
+  let events = new Set(eventsMap.keys());
+
   events.forEach((val) => {
     if (!main) return;
 

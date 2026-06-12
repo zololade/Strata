@@ -3,15 +3,15 @@ import { EventBus } from "../../src/lib/EventBus";
 
 describe("EventBus", () => {
   let testEvent: EventBus;
-  let unsubscribe: () => void;
   let message: string | null = null;
+  let action: (data: unknown) => void = (data) => {
+    if (typeof data === "string") message = data;
+  };
 
   beforeEach(() => {
     message = null;
     testEvent = new EventBus();
-    unsubscribe = testEvent.subscribe("shout hello", (data) => {
-      if (typeof data === "string") message = data;
-    });
+    testEvent.subscribe("shout hello", action);
   });
 
   it("subscriber receives published data", () => {
@@ -20,10 +20,10 @@ describe("EventBus", () => {
   });
 
   it("unsubscribe event should throw error", () => {
-    unsubscribe();
+    testEvent.unsubscribe("shout hello", action);
     expect(() => {
       testEvent.publish("shout hello", "hello");
-    }).toThrow("Event needs to be registered first");
+    }).toThrow("shout hello needs to be registered first");
   });
 
   it("multiple subscriber receives published data", () => {

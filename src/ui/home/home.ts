@@ -1,15 +1,16 @@
 // import type { PageData } from "../../lib/Page";
 import { renderElement } from "../../lib/renderUtilities";
-import { main } from "../../main";
 // import type { StoredType } from "../../lib/Types";
-import { storedProjects } from "../../store/Store";
+import { getStore } from "../../store/Store";
 import { viewProject } from "./component/detail";
 import { newProject } from "./component/newProject";
 import { generateList, projectLoader } from "./component/projectList";
 
+let main = document.querySelector("#app") as HTMLElement;
+
 //initial render
 function appShell() {
-  renderElement(main, [projectLoader(storedProjects), [newProject()]]);
+  renderElement(main, [projectLoader(getStore()), [newProject()]]);
 }
 
 //subsequent render
@@ -32,7 +33,7 @@ function render(host: HTMLElement, afterRender?: () => void) {
   }
   renderElement(
     host,
-    viewProject(selectedProjectId, storedProjects),
+    viewProject(selectedProjectId, getStore()),
     false,
     afterRender,
   );
@@ -40,7 +41,7 @@ function render(host: HTMLElement, afterRender?: () => void) {
 
 //update list
 function refreshList(host: HTMLElement, afterRender?: () => void) {
-  renderElement(host, generateList(storedProjects), false, afterRender);
+  renderElement(host, generateList(getStore()), false, afterRender);
 }
 
 export { appShell, render, selectProject, refreshList };
