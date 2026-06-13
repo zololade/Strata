@@ -43,7 +43,7 @@
     }
 
     .projectKebab,
-    #detailBackBtn {
+    #sideNavBtn {
       background: none;
       border: none;
       cursor: pointer;
@@ -53,18 +53,23 @@
       height: fit-content;
       border-radius: var(--circle);
       padding: var(--sm-btn-padding);
-
-      &:hover {
-        background-color: var(--bg-sidebar);
-      }
     }
 
-    #detailBackBtn {
+    #sideNavBtn {
       display: none;
+      color: var(--content-dim-color);
+
+      &:hover {
+        color: var(--content-highlight-color);
+      }
     }
 
     .projectKebab {
       display: grid;
+
+      &:hover {
+        background-color: var(--add-btn-color-sec);
+      }
     }
   }
 

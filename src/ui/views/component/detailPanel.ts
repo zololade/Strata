@@ -108,14 +108,14 @@ function detailPanelShell(): PageData {
             content: [
               {
                 tag: "button",
-                id: "detailBackBtn",
+                id: "sideNavBtn",
                 ["aria-label"]: "Go back",
-                ["data-action"]: "back",
+                ["data-action"]: "show-nav",
                 content: [
                   {
                     tag: "span",
                     class: "material-symbols-outlined",
-                    content: "chevron_backward",
+                    content: "side_navigation",
                   },
                 ],
               },

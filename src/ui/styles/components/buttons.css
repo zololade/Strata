@@ -1,5 +1,5 @@
 .projListContainer {
-  width: 280px;
+  width: auto;
   height: var(--panel-height);
   height: var(--dynamic-panel-height);
   overflow-y: auto;
@@ -74,9 +74,7 @@
         background-color: var(--btn-hover-color);
       }
     }
-    /*button:hover {
-      background: #eee;
-    }*/
+
     button:active {
       transform: scale(0.98);
     }
@@ -85,4 +83,20 @@
       color: var(--content-highlight-color);
     }
   }
+}
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
+
+  /* Modern backdrop blur effects */
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+
+  /* Initially hidden hidden state */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-speed) ease-in-out;
 }
