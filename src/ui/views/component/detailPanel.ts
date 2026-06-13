@@ -97,7 +97,56 @@ function detailPanelShell(): PageData {
   return {
     tag: "section",
     class: "projectsView",
-    content: [viewProject(null, null)],
+    content: [
+      {
+        tag: "header",
+        class: "panelHeader",
+        content: [
+          {
+            tag: "div",
+            class: "headerGroup",
+            content: [
+              {
+                tag: "button",
+                id: "detailBackBtn",
+                ["aria-label"]: "Go back",
+                ["data-action"]: "back",
+                content: [
+                  {
+                    tag: "span",
+                    class: "material-symbols-outlined",
+                    content: "chevron_backward",
+                  },
+                ],
+              },
+              {
+                tag: "span",
+                ["aria-hidden"]: true,
+                id: "projDetailTitle",
+                content: "dummy header",
+              },
+            ],
+          },
+          {
+            tag: "button",
+            class: "projectKebab",
+            ["aria-label"]: "Project options",
+            content: [
+              {
+                tag: "span",
+                class: "material-symbols-outlined",
+                content: "more_horiz",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tag: "div",
+        class: "projectContent",
+        content: [viewProject(null, null)],
+      },
+    ],
   };
 }
 
