@@ -34,7 +34,7 @@
       display: grid;
       width: fit-content;
       height: fit-content;
-      background: var(--bg-base-color);
+      background: var(--add-btn-color-sec-big);
       border: var(--border);
       cursor: pointer;
       border-radius: var(--circle);
@@ -43,7 +43,7 @@
       color: var(--content-highlight-color);
 
       &:hover {
-        background-color: var(--bg-sidebar);
+        background-color: var(--add-btn-hover-color-sec-big);
       }
     }
   }
