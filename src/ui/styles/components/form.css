@@ -2,16 +2,17 @@
   min-width: 100%;
   min-height: 100%;
   place-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background-color: var(--dialog-backdrop);
+  backdrop-filter: blur(0px);
   border: none;
   padding: 1rem;
 
   form {
-    background-color: #fff;
+    background-color: var(--bg-card);
+    box-shadow: var(--form-card-shadow);
     max-width: 450px;
     margin: auto;
-    border: 2px solid #ccc;
+    border: var(--border-lg);
     padding: 20px;
     border-radius: 8px;
 
@@ -33,11 +34,13 @@
         width: 100%;
         border-radius: 5px;
         padding: 0.25rem 0.5rem;
-        border: 1px solid #f0f0f0;
+        border: none;
+        outline: none;
+        background-color: var(--bg-card);
       }
 
       textarea {
-        resize: vertical;
+        resize: none;
         word-break: break-word;
       }
 
@@ -48,12 +51,20 @@
 
         > * {
           border: none;
+          background-color: var(--bg-card);
+          border: var(--border-dk);
           border-radius: 5px;
           padding: 0.25rem 0.5rem;
         }
         #newProjBtn {
-          background-color: #eda59e;
-          color: #fff;
+          background-color: var(--new-btn-lg);
+          color: var(--bg-card);
+        }
+        #newProjBtn:hover {
+          background-color: var(--new-btn-dk);
+        }
+        #cancelProjBtn:hover {
+          background-color: var(--bg-app);
         }
       }
     }

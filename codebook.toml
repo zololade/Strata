@@ -2,6 +2,9 @@ words = [
     "dvh",
     "hmr",
     "horiz",
+    "opsz",
+    "preconnect",
     "proj",
     "vitest",
+    "wght",
 ]

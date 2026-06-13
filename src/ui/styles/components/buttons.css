@@ -1,27 +1,38 @@
 .projListContainer {
   width: 280px;
-  /*border-right: 1px solid #ddd;*/
-  padding: 1rem;
+  height: var(--panel-height);
+  height: var(--dynamic-panel-height);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
+  scrollbar-color: var(--bg-app) transparent;
 
-  > * {
-    padding: 5px;
+  .projectsHeader,
+  .projectsList {
+    padding: var(--padding-sidebar);
   }
 
   .projectsHeader {
+    position: sticky;
+    top: 0;
     display: flex;
+    background-color: var(--bg-app);
     justify-content: space-between;
-    margin-bottom: 1rem;
 
     .add-project-btn {
-      padding: 0.25rem 0.5rem;
-    }
-  }
+      display: grid;
+      width: fit-content;
+      height: fit-content;
+      background: var(--bg-card);
+      border: var(--border-dk);
+      cursor: pointer;
+      border-radius: var(--circle);
+      padding: var(--sm-btn-padding);
+      place-content: center;
 
-  &:hover {
-    scrollbar-color: #fff transparent;
+      &:hover {
+        background-color: var(--bg-app);
+      }
+    }
   }
 
   .projectsList {
@@ -34,7 +45,7 @@
       padding: 0.75rem;
       margin-bottom: 0.5rem;
       border: 1px solid transparent;
-      background: #f7f7f7;
+      background-color: var(--bg-app);
       border-radius: 8px;
       cursor: pointer;
 
@@ -44,15 +55,14 @@
         overflow: hidden;
       }
     }
-    button:hover {
+    /*button:hover {
       background: #eee;
-    }
+    }*/
     button:active {
       transform: scale(0.98);
     }
     button.active {
       border: 1px solid #333;
-      background: #e9e9e9;
     }
   }
 }

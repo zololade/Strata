@@ -13,19 +13,28 @@ function newProject(): PageData {
           {
             tag: "fieldset",
             content: [
-              { tag: "legend", content: "Add Project" },
+              { tag: "legend", content: "New project" },
               {
                 tag: "label",
                 for: "projTitle",
                 content: "Title",
               },
-              { tag: "input", id: "projTitle", type: "text" },
+              {
+                tag: "input",
+                id: "projTitle",
+                type: "text",
+                placeholder: "Project name",
+              },
               {
                 tag: "label",
                 for: "projOverview",
                 content: "Overview",
               },
-              { tag: "textarea", id: "projOverview" },
+              {
+                tag: "textarea",
+                id: "projOverview",
+                placeholder: "Add a short summary...",
+              },
               {
                 tag: "div",
                 class: "formBtns",

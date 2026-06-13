@@ -8,7 +8,7 @@ function projectLoader(snapshot: StoredType): PageData {
     class: "projListContainer",
     content: [
       {
-        tag: "div",
+        tag: "header",
         class: "projectsHeader",
         content: [
           { tag: "h2", content: "Projects" },
@@ -17,7 +17,14 @@ function projectLoader(snapshot: StoredType): PageData {
             id: "openNewProjBtn",
             class: "add-project-btn",
             ["data-action"]: "open-modal",
-            content: "＋",
+            ["aria-label"]: "Add new project",
+            content: [
+              {
+                tag: "span",
+                class: "material-symbols-outlined",
+                content: "edit_square",
+              },
+            ],
           },
         ],
       },
