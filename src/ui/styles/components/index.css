@@ -16,5 +16,20 @@
     > * {
       width: auto;
     }
+    .projListContainer {
+      display: block;
+    }
+    .projectsView {
+      display: none;
+    }
+  }
+
+  #app.project-selected {
+    .projListContainer {
+      display: none;
+    }
+    .projectsView {
+      display: block;
+    }
   }
 }

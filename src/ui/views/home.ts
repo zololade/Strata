@@ -1,7 +1,7 @@
 import { appBus } from "../../lib/Buses";
 import { renderElement } from "../../lib/renderUtilities";
 import { getStore } from "../../store/Store";
-import { viewProject } from "./component/detailPanel";
+import { detailPanelShell } from "./component/detailPanel";
 import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
 
@@ -16,7 +16,7 @@ let setPrevProjId = (id: string) => (prevSelectedProjId = id);
 function appShell() {
   renderElement(main, [
     projectLoader(getStore()),
-    [newProject(), viewProject(true, null, null)],
+    [newProject(), detailPanelShell()],
   ]);
 }
 
@@ -24,6 +24,7 @@ function appShell() {
 function selectProject(id: string) {
   selectedProjectId = id;
   appBus.publish("view:project", id);
+  main.classList.add("project-selected");
 }
 
 //refresh list

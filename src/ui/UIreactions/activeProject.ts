@@ -8,7 +8,7 @@ function showActiveProject(data: unknown) {
   if (viewPanel && typeof data === "string") {
     renderElement(
       viewPanel,
-      viewProject(false, data, getStore()),
+      viewProject(data, getStore()),
       // false, () =>
       // updateList(data),
     );
