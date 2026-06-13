@@ -34,6 +34,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 0.35rem;
 
         span {
           font-size: 0.8rem;
@@ -66,6 +67,7 @@
 
     .projectKebab {
       display: grid;
+      margin-right: 0.35rem;
 
       &:hover {
         background-color: var(--add-btn-color-sec);

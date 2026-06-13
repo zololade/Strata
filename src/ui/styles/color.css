@@ -26,7 +26,7 @@
   --dynamic-height: 100dvh;
   --panel-height: calc(100vh - 2rem);
   --dynamic-panel-height: calc(100dvh - 2rem);
-  --padding-sidebar: 0.6rem 1rem;
+  --padding-sidebar: 0.5rem 0.5rem;
   --sm-btn-padding: 0.35rem 0.35rem;
 
   --circle: 100%;
