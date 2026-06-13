@@ -109,7 +109,7 @@ function detailPanelShell(): PageData {
               {
                 tag: "button",
                 id: "sideNavBtn",
-                ["aria-label"]: "Go back",
+                ["aria-label"]: "Show nav bar",
                 ["data-action"]: "show-nav",
                 content: [
                   {
