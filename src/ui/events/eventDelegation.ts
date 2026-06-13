@@ -5,23 +5,33 @@ import { handleSelectProj } from "./handlers/viewProject";
 let main = document.querySelector("#app") as HTMLElement;
 
 function initializeEvents() {
-  const actionHandlers = {
-    "create-project": handleCreateProj,
-    "open-modal": handleOpenModal,
-    "close-modal": handleHideModal,
-    "select-project": handleSelectProj,
-  };
+  const actionHandlers = new Map([
+    [
+      "click",
+      {
+        "create-project": handleCreateProj,
+        "open-modal": handleOpenModal,
+        "close-modal": handleHideModal,
+        "select-project": handleSelectProj,
+      },
+    ],
+  ]);
 
-  main.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    if (!target) return;
-    const el = target.closest("[data-action]") as HTMLElement | null;
+  actionHandlers.forEach((_v, k) =>
+    main.addEventListener(k, (e) => {
+      const target = e.target as HTMLElement;
+      if (!target) return;
+      const el = target.closest("[data-action]") as HTMLElement | null;
 
-    if (!el) return;
-    const action = el.dataset["action"];
-    const handler = actionHandlers[action as keyof typeof actionHandlers];
-    if (handler) handler(el, e);
-  });
+      if (!el) return;
+      const action = el.dataset["action"];
+      const eventType = actionHandlers.get(k);
+      if (eventType) {
+        const handler = eventType[action as keyof typeof eventType];
+        if (handler) handler(el, e);
+      }
+    }),
+  );
 }
 
 export { initializeEvents };
