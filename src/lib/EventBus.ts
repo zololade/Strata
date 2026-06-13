@@ -11,10 +11,6 @@ class EventBus {
     } else {
       this.events.set(ev, [act]);
     }
-
-    return () => {
-      this.unsubscribe(ev, act);
-    };
   }
 
   public publish(ev: event, data?: unknown) {
@@ -25,11 +21,11 @@ class EventBus {
         act(data);
       });
     } else {
-      throw new Error("Event needs to be registered first");
+      throw new Error(`${ev} needs to be registered first`);
     }
   }
 
-  private unsubscribe(ev: event, act: action<unknown>) {
+  public unsubscribe(ev: event, act: action<unknown>) {
     let currEvent = this.events.get(ev);
 
     if (currEvent)

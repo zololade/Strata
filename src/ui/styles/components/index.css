@@ -1,0 +1,35 @@
+@import url("./buttons.css");
+@import url("./detail.css");
+@import url("./form.css");
+
+#app {
+  display: flex;
+  height: calc(100% - 50px);
+  font-family: system-ui, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  #app {
+    display: block;
+    height: auto;
+
+    > * {
+      width: auto;
+    }
+    .projListContainer {
+      display: block;
+    }
+    .projectsView {
+      display: none;
+    }
+  }
+
+  #app.project-selected {
+    .projListContainer {
+      display: none;
+    }
+    .projectsView {
+      display: block;
+    }
+  }
+}

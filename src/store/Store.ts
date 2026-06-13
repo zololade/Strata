@@ -11,11 +11,24 @@ class ProjectStore {
 let store = new ProjectStore();
 
 function bindStore(data: unknown) {
-  loadSnapshot(data, {
-    projects: store.projects,
-    tasks: store.tasks,
-    items: store.items,
-  });
+  if (!data) {
+    console.warn("No project data available — using empty store");
+    return;
+  }
+
+  try {
+    loadSnapshot(data, {
+      projects: store.projects,
+      tasks: store.tasks,
+      items: store.items,
+    });
+  } catch (err) {
+    console.error("Failed to load project data:", err);
+  }
 }
 
-export { store as storedProjects, bindStore };
+function getStore() {
+  return store;
+}
+
+export { bindStore, getStore };

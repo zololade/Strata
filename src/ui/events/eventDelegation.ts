@@ -1,61 +1,37 @@
-import type { Command } from "../../lib/command";
-import { dispatch } from "../../store/storeOperations/dispatch";
-import { app } from "../../ui/home/testBtn";
-type SelectHnd = {
-  selector: string;
-  handler: (match: HTMLElement, e: Event) => void;
-};
+import { handleCreateProj } from "./handlers/createNewProj";
+import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
+import { handleSelectProj } from "./handlers/viewProject";
 
-let eventsMap = new Map<string, SelectHnd[]>([
-  ["click", [{ selector: "#string", handler: dummyEvent }]],
-]);
+let main = document.querySelector("#app") as HTMLElement;
 
-let events = new Set(eventsMap.keys());
+function initializeEvents() {
+  const actionHandlers = new Map([
+    [
+      "click",
+      {
+        "create-project": handleCreateProj,
+        "open-modal": handleOpenModal,
+        "close-modal": handleHideModal,
+        "select-project": handleSelectProj,
+      },
+    ],
+  ]);
 
-events.forEach((val) => {
-  if (!app) return;
+  actionHandlers.forEach((_v, k) =>
+    main.addEventListener(k, (e) => {
+      const target = e.target as HTMLElement;
+      if (!target) return;
+      const el = target.closest("[data-action]") as HTMLElement | null;
 
-  let event = eventsMap.get(val);
-  if (event) {
-    app.addEventListener(val, (e) => {
-      let target = e.target as HTMLElement;
-      for (const { selector, handler } of event) {
-        if (target) {
-          let match = target.closest(selector) as HTMLElement;
-          if (match) {
-            handler(match, e);
-            break;
-          }
-        }
+      if (!el) return;
+      const action = el.dataset["action"];
+      const eventType = actionHandlers.get(k);
+      if (eventType) {
+        const handler = eventType[action as keyof typeof eventType];
+        if (handler) handler(el, e);
       }
-    });
-  }
-});
-
-function dummyEvent() {
-  // let command1: Command = {
-  //   type: "removeProject",
-  //   data: { projectId: "proj-1" },
-  // };
-
-  // let command2: Command = {
-  //   type: "updatedProject",
-  //   projectId: "proj-1",
-  //   data: {
-  //     flag: ["boy"],
-  //   },
-  // };
-
-  let command1: Command = {
-    type: "createProject",
-    data: {
-      title: "New project",
-      overview: "This is created to test my system",
-      flag: null,
-      tasks: [],
-    },
-  };
-
-  // dispatch(command);
-  console.log(dispatch(command1));
+    }),
+  );
 }
+
+export { initializeEvents };

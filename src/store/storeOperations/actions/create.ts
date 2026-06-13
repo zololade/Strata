@@ -1,3 +1,4 @@
+import { databaseBus } from "../../../lib/Buses";
 import type { Result } from "../../../lib/command";
 import type {
   NewItemInput,
@@ -13,6 +14,7 @@ const createHandler = {
   createProject(store: StoredType, payload: NewProjectInput): Result {
     let project = new Project(payload);
     store.projects.set(project.id, project);
+    databaseBus.publish("database:update", store);
     return { type: "createdProject", id: project.id };
   },
 
@@ -23,6 +25,7 @@ const createHandler = {
     if (!project) return;
     project.tasks.add(task.id);
     store.tasks.set(task.id, task);
+    databaseBus.publish("database:update", store);
     return { type: "createdTask", id: task.id };
   },
 
@@ -33,7 +36,8 @@ const createHandler = {
     if (!task) return;
     task.items.add(item.id);
     store.items.set(item.id, item);
-    return { type: "createItem", id: item.id };
+    databaseBus.publish("database:update", store);
+    return { type: "createdItem", id: item.id };
   },
 };
 

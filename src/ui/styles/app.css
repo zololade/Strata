@@ -1,9 +1,9 @@
+@import url("./reset.css");
+@import url("./components/index.css");
+
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100vh;
   height: 100dvh;
-  background-color: black;
-  margin: auto;
-  padding: 0;
+  padding: 1rem;
+  /*overflow: hidden;*/
 }

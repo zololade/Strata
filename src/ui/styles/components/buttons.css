@@ -1,0 +1,58 @@
+.projListContainer {
+  width: 280px;
+  /*border-right: 1px solid #ddd;*/
+  padding: 1rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  > * {
+    padding: 5px;
+  }
+
+  .projectsHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+
+    .add-project-btn {
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  &:hover {
+    scrollbar-color: #fff transparent;
+  }
+
+  .projectsList {
+    /*remember to remove*/
+    list-style-type: none;
+
+    button {
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid transparent;
+      background: #f7f7f7;
+      border-radius: 8px;
+      cursor: pointer;
+
+      p {
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    button:hover {
+      background: #eee;
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    button.active {
+      border: 1px solid #333;
+      background: #e9e9e9;
+    }
+  }
+}
