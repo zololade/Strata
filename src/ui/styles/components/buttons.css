@@ -4,7 +4,7 @@
   height: var(--dynamic-panel-height);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--bg-app) transparent;
+  scrollbar-color: var(--bg-sidebar) transparent;
 
   .projectsHeader,
   .projectsList {
@@ -15,22 +15,27 @@
     position: sticky;
     top: 0;
     display: flex;
-    background-color: var(--bg-app);
+    background-color: var(--bg-sidebar);
     justify-content: space-between;
+
+    h2 {
+      color: var(--content-highlight-color);
+    }
 
     .add-project-btn {
       display: grid;
       width: fit-content;
       height: fit-content;
-      background: var(--bg-card);
-      border: var(--border-dk);
+      background: var(--bg-base-color);
+      border: var(--border);
       cursor: pointer;
       border-radius: var(--circle);
       padding: var(--sm-btn-padding);
       place-content: center;
+      color: var(--content-highlight-color);
 
       &:hover {
-        background-color: var(--bg-app);
+        background-color: var(--bg-sidebar);
       }
     }
   }
@@ -45,7 +50,7 @@
       padding: 0.75rem;
       margin-bottom: 0.5rem;
       border: 1px solid transparent;
-      background-color: var(--bg-app);
+      background-color: var(--bg-sidebar);
       border-radius: 8px;
       cursor: pointer;
 
@@ -63,6 +68,7 @@
     }
     button.active {
       border: 1px solid #333;
+      color: var(--content-highlight-color);
     }
   }
 }

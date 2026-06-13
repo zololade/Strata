@@ -8,11 +8,11 @@
   padding: 1rem;
 
   form {
-    background-color: var(--bg-card);
+    background-color: var(--bg-base-color);
     box-shadow: var(--form-card-shadow);
     max-width: 450px;
     margin: auto;
-    border: var(--border-lg);
+    border: var(--border);
     padding: 20px;
     border-radius: 8px;
 
@@ -24,6 +24,7 @@
       border: none;
       margin: 0;
       padding: 0;
+      color: var(--content-highlight-color);
 
       *:not(input, textarea) {
         margin-top: 1rem;
@@ -36,7 +37,7 @@
         padding: 0.25rem 0.5rem;
         border: none;
         outline: none;
-        background-color: var(--bg-card);
+        background-color: var(--bg-base-color);
       }
 
       textarea {
@@ -51,20 +52,23 @@
 
         > * {
           border: none;
-          background-color: var(--bg-card);
-          border: var(--border-dk);
+          background-color: var(--bg-base-color);
+          border: var(--border);
           border-radius: 5px;
           padding: 0.25rem 0.5rem;
         }
         #newProjBtn {
           background-color: var(--new-btn-lg);
-          color: var(--bg-card);
+          color: var(--form-btn-x);
         }
         #newProjBtn:hover {
           background-color: var(--new-btn-dk);
         }
+        #cancelProjBtn {
+          color: var(--form-btn-y);
+        }
         #cancelProjBtn:hover {
-          background-color: var(--bg-app);
+          background-color: var(--bg-sidebar);
         }
       }
     }
