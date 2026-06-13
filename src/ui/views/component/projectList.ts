@@ -11,7 +11,16 @@ function projectLoader(snapshot: StoredType): PageData {
         tag: "header",
         class: "projectsHeader",
         content: [
-          { tag: "h2", content: "Projects" },
+          {
+            tag: "div",
+            class: "projListHeading",
+            content: [
+              {
+                tag: "h2",
+                content: "Projects",
+              },
+            ],
+          },
           {
             tag: "button",
             id: "openNewProjBtn",
@@ -45,10 +54,7 @@ function generateList(snapshot: StoredType): PageData {
         tag: "button",
         ["data-action"]: "select-project",
         ["data-id"]: k,
-        content: [
-          { tag: "h3", content: v.title },
-          { tag: "p", content: v.overview },
-        ],
+        content: [{ tag: "h3", content: v.title }],
       },
     ],
   }));

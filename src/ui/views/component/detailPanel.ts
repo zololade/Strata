@@ -120,10 +120,16 @@ function detailPanelShell(): PageData {
                 ],
               },
               {
-                tag: "span",
+                tag: "div",
                 ["aria-hidden"]: true,
-                id: "projDetailTitle",
-                content: "dummy header",
+                content: [
+                  {
+                    tag: "span",
+                    ["aria-hidden"]: true,
+                    id: "projDetailTitle",
+                    content: "dummy header",
+                  },
+                ],
               },
             ],
           },

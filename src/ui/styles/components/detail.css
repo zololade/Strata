@@ -7,7 +7,7 @@
   height: var(--dynamic-panel-height);
   border: var(--border);
   border-radius: 10px;
-  margin: 0.5rem 0.5rem 0.5rem 0;
+  margin: 0.5rem 0.5rem 1.5rem 0;
 
   @media only screen and (max-width: 600px) {
     border: none;
@@ -22,13 +22,24 @@
     color: var(--content-highlight-color);
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: var(--padding-sidebar);
     border-bottom: var(--border);
 
     .headerGroup {
       display: flex;
       align-items: center;
       gap: 0.25rem;
+
+      [aria-hidden="true"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          font-size: 0.8rem;
+          font-weight: 500;
+        }
+      }
     }
 
     .projectKebab,
