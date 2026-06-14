@@ -1,14 +1,32 @@
 import type { PageData } from "../../../lib/Page";
-import type { ProjectInstance, StoredType } from "../../../lib/Types";
+import type { StoredType } from "../../../lib/Types";
+import { selectedProj } from "./selectedProj";
 
 //default data
-const defaultData = [
-  { tag: "h2", content: "Project Detail" },
-  {
-    tag: "p",
-    content: "Select a project to view",
-  },
-];
+const defaultData = {
+  tag: "div",
+  class: "emptyState",
+  content: [
+    {
+      tag: "span",
+      class: "material-symbols-outlined",
+      ["aria-hidden"]: true,
+      content: "layers",
+    },
+    { tag: "h2", content: "No project selected" },
+    {
+      tag: "p",
+      content:
+        "Select a project from the list or create a new one to get started",
+    },
+    {
+      tag: "button",
+      class: "emptyStateBtn",
+      ["data-action"]: "open-modal",
+      content: "New project",
+    },
+  ],
+};
 
 //errorData
 const errorData = [
@@ -16,66 +34,6 @@ const errorData = [
   {
     tag: "p",
     content: "The selected project could not be loaded.",
-  },
-];
-
-//selected project data
-let selectedProj = (project: ProjectInstance, store: StoredType) => [
-  {
-    tag: "header",
-    content: [
-      {
-        tag: "h2",
-        content: project.title,
-      },
-      {
-        tag: "p",
-        content: project.overview,
-      },
-    ],
-  },
-
-  {
-    tag: "div",
-    class: "taskList",
-    content: [
-      {
-        tag: "h3",
-        content: "Tasks",
-      },
-
-      ...[...project.tasks].map((taskId) => {
-        const task = store.tasks.get(taskId);
-
-        if (!task) {
-          return {
-            tag: "div",
-            class: "task missing",
-            content: "Missing task",
-          };
-        }
-
-        return {
-          tag: "article",
-          class: "task",
-          id: task.id,
-          content: [
-            {
-              tag: "h4",
-              content: task.title,
-            },
-            {
-              tag: "p",
-              content: task.overview,
-            },
-            {
-              tag: "small",
-              content: `${task.items.size} item(s)`,
-            },
-          ],
-        };
-      }),
-    ],
   },
 ];
 

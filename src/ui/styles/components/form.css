@@ -69,7 +69,7 @@
           color: var(--form-btn-y);
         }
         #cancelProjBtn:hover {
-          background-color: var(--bg-sidebar);
+          background-color: var(--add-btn-hover-color-sec);
         }
       }
     }

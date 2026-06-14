@@ -29,3 +29,12 @@ body {
     border: 0;
   }
 }
+
+/* Target the container, not the br */
+[contenteditable]:empty::before,
+[contenteditable]:has(br:only-child)::before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  position: absolute;
+  pointer-events: none;
+}

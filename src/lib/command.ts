@@ -43,17 +43,17 @@ type Command =
       };
     }
   | {
-      type: "updatedProject";
+      type: "updateProject";
       projectId: string;
       data: Partial<Pick<ProjectInput, keyof ProjectInput>>;
     }
   | {
-      type: "updatedTask";
+      type: "updateTask";
       taskId: string;
       data: Partial<Pick<TaskInput, keyof TaskInput>>;
     }
   | {
-      type: "updatedItem";
+      type: "updateItem";
       itemId: string;
       data: Partial<Pick<ItemInput, keyof ItemInput>>;
     };

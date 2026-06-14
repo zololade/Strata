@@ -1,6 +1,9 @@
 .projectsView {
   contain: layout paint;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow-y: auto;
   background-color: var(--bg-base-color);
   height: var(--panel-height);
@@ -8,6 +11,10 @@
   border: var(--border);
   border-radius: 10px;
   margin: 0 0.5rem;
+
+  & > * {
+    width: 100%;
+  }
 
   @media only screen and (max-width: 768px) {
     border: none;
@@ -76,7 +83,93 @@
   }
 
   .projectContent {
-    padding: var(--padding-sidebar);
-    color: var(--content-highlight-color);
+    padding: 0rem 2rem;
+    flex: 1;
+    color: var(--content-dim-color);
+    max-width: 900px;
+
+    .emptyState {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      gap: 0.75rem;
+      padding: 2rem;
+
+      .material-symbols-outlined {
+        font-size: 3rem;
+      }
+
+      h2 {
+        color: var(--content-highlight-color);
+        font-size: 1.1rem;
+      }
+
+      p {
+        max-width: 300px;
+        font-size: 0.875rem;
+      }
+
+      .emptyStateBtn {
+        margin-top: 0.5rem;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        border: none;
+        background-color: var(--new-btn-lg);
+        color: var(--form-btn-x);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--new-btn-dk);
+        }
+      }
+    }
+
+    .contentContainer {
+      > * {
+        margin-top: 0.5rem;
+      }
+
+      h2,
+      p {
+        outline: none;
+        color: var(--content-highlight-color);
+      }
+      hr {
+        margin-bottom: 2rem;
+        border: none;
+        border-top: var(--border);
+      }
+
+      .decIcon {
+        padding-top: 3.5rem;
+        .material-symbols-outlined {
+          font-weight: normal;
+          font-size: 1.5rem;
+        }
+      }
+
+      .flags {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.25rem;
+
+        button {
+          font-size: 0.8rem;
+          border: none;
+          padding: 0rem 0.35rem;
+          border-radius: 15px;
+          background: var(--add-btn-color-sec);
+          border: var(--border);
+
+          &:hover {
+            background-color: var(--add-btn-hover-color-sec);
+          }
+        }
+      }
+    }
   }
 }

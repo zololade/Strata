@@ -18,8 +18,8 @@
   --content-highlight-color: rgb(24, 24, 24);
   --form-card-shadow: 0px 0px 10px 2px #b0b0b0;
   --dialog-backdrop: rgba(0, 0, 0, 0.1);
-  --new-btn-lg: #eda59e;
-  --new-btn-dk: #e8837a;
+  --new-btn-lg: #dc2626;
+  --new-btn-dk: #b91c1c;
   --form-btn-x: #fcfcfd;
 
   --height: 100vh;
@@ -55,8 +55,8 @@
     --content-highlight-color: rgb(252, 252, 253);
     --form-card-shadow: 0px 0px 10px 2px #0a0a0a;
     --dialog-backdrop: rgba(0, 0, 0, 0.5);
-    --new-btn-lg: #e8837a;
-    --new-btn-dk: #eda59e;
+    --new-btn-lg: #dc2626;
+    --new-btn-dk: #b91c1c;
     --form-btn-x: #fcfcfd;
     --form-btn-y: #fcfcfd;
   }

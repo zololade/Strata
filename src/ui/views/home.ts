@@ -15,6 +15,7 @@ let setPrevProjId = (id: string) => (prevSelectedProjId = id);
 //initial render
 function appShell() {
   renderElement(main, [
+    { tag: "h1", class: "accessible", content: "Strata" },
     {
       tag: "div",
       class: "drawer-backdrop",
