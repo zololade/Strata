@@ -19,6 +19,7 @@ let selectedProj = (project: ProjectInstance, _store: StoredType) => [
     contenteditable: true,
     ["data-action"]: "update-title",
     content: project.title,
+    "data-placeholder": "New project",
   },
   {
     tag: "ul",
@@ -40,6 +41,7 @@ let selectedProj = (project: ProjectInstance, _store: StoredType) => [
   {
     tag: "p",
     contenteditable: true,
+    "data-placeholder": "Project overview...",
     ["data-action"]: "update-overview",
     content: project.overview,
   },
