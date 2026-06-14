@@ -3,13 +3,30 @@ import type { StoredType } from "../../../lib/Types";
 import { selectedProj } from "./selectedProj";
 
 //default data
-const defaultData = [
-  { tag: "h2", content: "Project Detail" },
-  {
-    tag: "p",
-    content: "Select a project to view",
-  },
-];
+const defaultData = {
+  tag: "div",
+  class: "emptyState",
+  content: [
+    {
+      tag: "span",
+      class: "material-symbols-outlined",
+      ["aria-hidden"]: true,
+      content: "layers",
+    },
+    { tag: "h2", content: "No project selected" },
+    {
+      tag: "p",
+      content:
+        "Select a project from the list or create a new one to get started",
+    },
+    {
+      tag: "button",
+      class: "emptyStateBtn",
+      ["data-action"]: "open-modal",
+      content: "New project",
+    },
+  ],
+};
 
 //errorData
 const errorData = [

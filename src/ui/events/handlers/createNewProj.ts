@@ -20,7 +20,8 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
     let command: Command = {
       type: "createProject",
       data: {
-        title: titleField.value,
+        title:
+          titleField.value.trim().length < 1 ? "New project" : titleField.value,
         overview: overviewField.value,
         flag: null,
         tasks: [],

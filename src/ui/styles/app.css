@@ -31,6 +31,7 @@ body {
 }
 
 /* Target the container, not the br */
+[contenteditable]:empty::before,
 [contenteditable]:has(br:only-child)::before {
   content: attr(data-placeholder);
   color: #aaa;
