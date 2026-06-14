@@ -75,6 +75,8 @@ let badData = {
       content: "Check Wikipedia",
       flag: null,
       note: "",
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
 
     {
@@ -82,6 +84,8 @@ let badData = {
       content: "Read similar projects on GitHub",
       flag: null,
       note: "",
+      createdAt: 1700000000000,
+      lastModified: 0,
     },
   ],
 };
