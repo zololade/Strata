@@ -1,5 +1,6 @@
 import type { PageData } from "../../../lib/Page";
-import type { ProjectInstance, StoredType } from "../../../lib/Types";
+import type { StoredType } from "../../../lib/Types";
+import { selectedProj } from "./selectedProj";
 
 //default data
 const defaultData = [
@@ -16,66 +17,6 @@ const errorData = [
   {
     tag: "p",
     content: "The selected project could not be loaded.",
-  },
-];
-
-//selected project data
-let selectedProj = (project: ProjectInstance, store: StoredType) => [
-  {
-    tag: "header",
-    content: [
-      {
-        tag: "h2",
-        content: project.title,
-      },
-      {
-        tag: "p",
-        content: project.overview,
-      },
-    ],
-  },
-
-  {
-    tag: "div",
-    class: "taskList",
-    content: [
-      {
-        tag: "h3",
-        content: "Tasks",
-      },
-
-      ...[...project.tasks].map((taskId) => {
-        const task = store.tasks.get(taskId);
-
-        if (!task) {
-          return {
-            tag: "div",
-            class: "task missing",
-            content: "Missing task",
-          };
-        }
-
-        return {
-          tag: "article",
-          class: "task",
-          id: task.id,
-          content: [
-            {
-              tag: "h4",
-              content: task.title,
-            },
-            {
-              tag: "p",
-              content: task.overview,
-            },
-            {
-              tag: "small",
-              content: `${task.items.size} item(s)`,
-            },
-          ],
-        };
-      }),
-    ],
   },
 ];
 

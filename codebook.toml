@@ -1,5 +1,7 @@
 words = [
+    "contenteditable",
     "dvh",
+    "focusout",
     "hmr",
     "horiz",
     "opsz",
