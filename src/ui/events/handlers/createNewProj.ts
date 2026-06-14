@@ -3,7 +3,8 @@ import { dispatch } from "../../../store/storeOperations/dispatch";
 import { ModalManager } from "../../views/component/Modal";
 import { refreshList, selectProject } from "../../views/home";
 
-function handleCreateProj(_match: HTMLElement, _e: Event) {
+function handleCreateProj(_match: HTMLElement, e: Event) {
+  e.preventDefault();
   //first you build the data
   let titleField = document.querySelector(
     "#projTitle",
