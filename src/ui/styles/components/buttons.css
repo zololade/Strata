@@ -1,5 +1,6 @@
 .projListContainer {
   width: auto;
+  min-width: 300px;
   height: var(--panel-height);
   height: var(--dynamic-panel-height);
   overflow-y: auto;
