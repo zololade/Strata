@@ -2,5 +2,81 @@
   contain: layout paint;
   flex: 1;
   overflow-y: auto;
-  padding: 1.5rem;
+  background-color: var(--bg-base-color);
+  height: var(--panel-height);
+  height: var(--dynamic-panel-height);
+  border: var(--border);
+  border-radius: 10px;
+  margin: 0 0.5rem;
+
+  @media only screen and (max-width: 600px) {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    height: var(--height);
+    height: var(--dynamic-height);
+  }
+
+  .panelHeader {
+    display: flex;
+    color: var(--content-highlight-color);
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding-sidebar);
+    border-bottom: var(--border);
+
+    .headerGroup {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      [aria-hidden="true"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0.35rem;
+
+        span {
+          font-size: 0.8rem;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .projectKebab,
+    #sideNavBtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      place-content: center;
+      display: grid;
+      width: fit-content;
+      height: fit-content;
+      border-radius: var(--circle);
+      padding: var(--sm-btn-padding);
+    }
+
+    #sideNavBtn {
+      display: none;
+      color: var(--content-dim-color);
+
+      &:hover {
+        color: var(--content-highlight-color);
+      }
+    }
+
+    .projectKebab {
+      display: grid;
+      margin-right: 0.35rem;
+
+      &:hover {
+        background-color: var(--add-btn-color-sec);
+      }
+    }
+  }
+
+  .projectContent {
+    padding: var(--padding-sidebar);
+    color: var(--content-highlight-color);
+  }
 }

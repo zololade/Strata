@@ -1,3 +1,4 @@
+import { handleNavBtn, handleNavClose } from "./handlers/navTrigger";
 import { handleCreateProj } from "./handlers/createNewProj";
 import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
 import { handleSelectProj } from "./handlers/viewProject";
@@ -13,6 +14,8 @@ function initializeEvents() {
         "open-modal": handleOpenModal,
         "close-modal": handleHideModal,
         "select-project": handleSelectProj,
+        "show-nav": handleNavBtn,
+        "close-nav": handleNavClose,
       },
     ],
   ]);

@@ -2,16 +2,18 @@
   min-width: 100%;
   min-height: 100%;
   place-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  background-color: var(--dialog-backdrop);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
   border: none;
   padding: 1rem;
 
   form {
-    background-color: #fff;
+    background-color: var(--bg-base-color);
+    box-shadow: var(--form-card-shadow);
     max-width: 450px;
     margin: auto;
-    border: 2px solid #ccc;
+    border: var(--border);
     padding: 20px;
     border-radius: 8px;
 
@@ -23,6 +25,7 @@
       border: none;
       margin: 0;
       padding: 0;
+      color: var(--content-highlight-color);
 
       *:not(input, textarea) {
         margin-top: 1rem;
@@ -33,11 +36,13 @@
         width: 100%;
         border-radius: 5px;
         padding: 0.25rem 0.5rem;
-        border: 1px solid #f0f0f0;
+        border: none;
+        outline: none;
+        background-color: var(--bg-base-color);
       }
 
       textarea {
-        resize: vertical;
+        resize: none;
         word-break: break-word;
       }
 
@@ -48,12 +53,23 @@
 
         > * {
           border: none;
+          background-color: var(--bg-base-color);
+          border: var(--border);
           border-radius: 5px;
           padding: 0.25rem 0.5rem;
         }
         #newProjBtn {
-          background-color: #eda59e;
-          color: #fff;
+          background-color: var(--new-btn-lg);
+          color: var(--form-btn-x);
+        }
+        #newProjBtn:hover {
+          background-color: var(--new-btn-dk);
+        }
+        #cancelProjBtn {
+          color: var(--form-btn-y);
+        }
+        #cancelProjBtn:hover {
+          background-color: var(--bg-sidebar);
         }
       }
     }

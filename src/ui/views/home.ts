@@ -15,6 +15,12 @@ let setPrevProjId = (id: string) => (prevSelectedProjId = id);
 //initial render
 function appShell() {
   renderElement(main, [
+    {
+      tag: "div",
+      class: "drawer-backdrop",
+      id: "backdrop",
+      ["data-action"]: "close-nav",
+    },
     projectLoader(getStore()),
     [newProject(), detailPanelShell()],
   ]);

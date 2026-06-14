@@ -52,7 +52,9 @@
   input,
   button,
   textarea,
-  select {
+  select,
+  legend,
+  fieldset {
     font: inherit;
     color: inherit;
   }

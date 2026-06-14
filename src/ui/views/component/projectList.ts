@@ -8,16 +8,32 @@ function projectLoader(snapshot: StoredType): PageData {
     class: "projListContainer",
     content: [
       {
-        tag: "div",
+        tag: "header",
         class: "projectsHeader",
         content: [
-          { tag: "h2", content: "Projects" },
+          {
+            tag: "div",
+            class: "projListHeading",
+            content: [
+              {
+                tag: "h2",
+                content: "Projects",
+              },
+            ],
+          },
           {
             tag: "button",
             id: "openNewProjBtn",
             class: "add-project-btn",
             ["data-action"]: "open-modal",
-            content: "＋",
+            ["aria-label"]: "Add new project",
+            content: [
+              {
+                tag: "span",
+                class: "material-symbols-outlined",
+                content: "edit_square",
+              },
+            ],
           },
         ],
       },
@@ -38,10 +54,7 @@ function generateList(snapshot: StoredType): PageData {
         tag: "button",
         ["data-action"]: "select-project",
         ["data-id"]: k,
-        content: [
-          { tag: "h3", content: v.title },
-          { tag: "p", content: v.overview },
-        ],
+        content: [{ tag: "h3", content: v.title }],
       },
     ],
   }));
