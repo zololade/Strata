@@ -28,17 +28,17 @@ function reducer(command: Command) {
     case "createItem": {
       return createHandler.createItem(getStore(), command.taskId, command.data);
     }
-    case "updatedProject": {
+    case "updateProject": {
       return updateHandler.updateProject(
         getStore(),
         command.projectId,
         command.data,
       );
     }
-    case "updatedTask": {
+    case "updateTask": {
       return updateHandler.updateTask(getStore(), command.taskId, command.data);
     }
-    case "updatedItem": {
+    case "updateItem": {
       return updateHandler.updateItem(getStore(), command.itemId, command.data);
     }
   }

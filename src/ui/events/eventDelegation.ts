@@ -3,6 +3,7 @@ import { handleCreateProj } from "./handlers/createNewProj";
 import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
 import { handleSelectProj } from "./handlers/viewProject";
 import {
+  handlePreventNewLine,
   handleUpdateOverview,
   handleUpdateTitle,
 } from "./handlers/updateFields";
@@ -29,6 +30,12 @@ function initializeEvents() {
         "update-overview": handleUpdateOverview,
       },
     ],
+    [
+      "keydown",
+      {
+        "prevent-newline": handlePreventNewLine,
+      },
+    ],
   ]);
 
   actionHandlers.forEach((_v, k) =>
@@ -39,10 +46,13 @@ function initializeEvents() {
 
       if (!el) return;
       const action = el.dataset["action"];
+      const actions = action?.split(" ") ?? [];
       const eventType = actionHandlers.get(k);
       if (eventType) {
-        const handler = eventType[action as keyof typeof eventType];
-        if (handler) handler(el, e);
+        actions.forEach((a) => {
+          const handler = eventType[a as keyof typeof eventType];
+          if (handler) handler(el, e);
+        });
       }
     }),
   );

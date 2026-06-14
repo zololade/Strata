@@ -1,3 +1,4 @@
+import { databaseBus } from "../../../lib/Buses";
 import type { Result } from "../../../lib/command";
 import type {
   ItemUpdate,
@@ -30,6 +31,7 @@ const updateHandler = {
     }
 
     project.lastModified = Date.now();
+    databaseBus.publish("database:update", store);
     return { type: "updatedProject", id: projectId };
   },
   updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Result {
@@ -50,6 +52,7 @@ const updateHandler = {
     }
 
     task.lastModified = Date.now();
+    databaseBus.publish("database:update", store);
     return { type: "updatedTask", id: taskId };
   },
   updateItem(store: StoredType, itemId: string, payload: ItemUpdate): Result {
@@ -70,6 +73,7 @@ const updateHandler = {
     }
 
     item.lastModified = Date.now();
+    databaseBus.publish("database:update", store);
     return { type: "updatedItem", id: itemId };
   },
 };
