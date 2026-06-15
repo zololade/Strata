@@ -85,7 +85,7 @@ function detailPanelShell(): PageData {
                     tag: "span",
                     ["aria-hidden"]: true,
                     id: "projDetailTitle",
-                    content: "dummy header",
+                    content: "Project",
                   },
                 ],
               },

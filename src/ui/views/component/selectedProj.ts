@@ -1,7 +1,8 @@
+import type { PageData } from "../../../lib/Page";
 import type { ProjectInstance, StoredType } from "../../../lib/Types";
 
 //selected project data
-let selectedProj = (project: ProjectInstance, _store: StoredType) => {
+let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
   return {
     tag: "div",
     class: "contentContainer",
@@ -49,8 +50,37 @@ let selectedProj = (project: ProjectInstance, _store: StoredType) => {
         ["data-action"]: "update-overview prevent-newline",
         content: project.overview,
       },
+      {
+        tag: "div",
+        class: "taskContainer",
+        content: generateTasks([...project.tasks], store),
+      },
     ],
   };
 };
+
+function generateTasks(ids: string[], store: StoredType): PageData[] {
+  return ids.map((val) => {
+    let currTask = store.tasks.get(val);
+    if (currTask) {
+      return {
+        tag: "article",
+        "data-id": currTask.id,
+        content: [
+          {
+            tag: "h3",
+            content: currTask.title,
+          },
+          {
+            tag: "p",
+            content: currTask.overview,
+          },
+        ],
+      };
+    } else {
+      return [];
+    }
+  });
+}
 
 export { selectedProj };
