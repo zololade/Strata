@@ -16,6 +16,7 @@ function newProject(): PageData {
               { tag: "legend", content: "New project" },
               {
                 tag: "label",
+                class: "accessible",
                 for: "projTitle",
                 content: "Title",
               },
@@ -27,6 +28,7 @@ function newProject(): PageData {
               },
               {
                 tag: "label",
+                class: "accessible",
                 for: "projOverview",
                 content: "Overview",
               },

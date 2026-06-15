@@ -25,19 +25,25 @@
       border: none;
       margin: 0;
       padding: 0;
-      color: var(--content-highlight-color);
+      color: var(--content-dim-color);
 
-      *:not(input, textarea) {
+      legend {
+        color: var(--content-highlight-color);
+      }
+
+      * {
         margin-top: 1rem;
       }
 
       input,
       textarea {
+        margin-top: 1.5rem;
         width: 100%;
         border-radius: 5px;
         padding: 0.25rem 0.5rem;
         border: none;
         outline: none;
+        color: var(--content-highlight-color);
         background-color: var(--bg-base-color);
       }
 
