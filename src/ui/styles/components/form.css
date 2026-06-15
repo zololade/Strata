@@ -4,7 +4,6 @@
   place-content: center;
   background-color: var(--dialog-backdrop);
   backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
   border: none;
   padding: 1rem;
 
