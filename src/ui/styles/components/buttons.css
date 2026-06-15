@@ -95,7 +95,6 @@
 
   /* Modern backdrop blur effects */
   backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
 
   /* Initially hidden hidden state */
   opacity: 0;
