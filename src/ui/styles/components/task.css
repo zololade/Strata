@@ -1,0 +1,22 @@
+.taskContainer {
+  margin-top: 2rem;
+
+  > article {
+    border: var(--border);
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    > * {
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      color: var(--content-highlight-color);
+      font-size: 0.95rem;
+    }
+    p {
+      color: var(--content-dim-color);
+      font-size: 0.8rem;
+    }
+  }
+}

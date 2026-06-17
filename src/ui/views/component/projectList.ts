@@ -1,5 +1,6 @@
 import type { PageData } from "../../../lib/Page";
 import type { StoredType } from "../../../lib/Types";
+import { button } from "./btn";
 
 // load projects
 function projectLoader(snapshot: StoredType): PageData {
@@ -21,20 +22,7 @@ function projectLoader(snapshot: StoredType): PageData {
               },
             ],
           },
-          {
-            tag: "button",
-            id: "openNewProjBtn",
-            class: "add-project-btn",
-            ["data-action"]: "open-modal",
-            ["aria-label"]: "Add new project",
-            content: [
-              {
-                tag: "span",
-                class: "material-symbols-outlined",
-                content: "edit_square",
-              },
-            ],
-          },
+          button("add-project-btn", "Add new project", "open-modal", "edit"),
         ],
       },
       {

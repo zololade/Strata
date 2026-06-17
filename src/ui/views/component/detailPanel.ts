@@ -1,5 +1,6 @@
 import type { PageData } from "../../../lib/Page";
 import type { StoredType } from "../../../lib/Types";
+import { button } from "./btn";
 import { selectedProj } from "./selectedProj";
 
 //default data
@@ -64,19 +65,7 @@ function detailPanelShell(): PageData {
             tag: "div",
             class: "headerGroup",
             content: [
-              {
-                tag: "button",
-                id: "sideNavBtn",
-                ["aria-label"]: "Show nav bar",
-                ["data-action"]: "show-nav",
-                content: [
-                  {
-                    tag: "span",
-                    class: "material-symbols-outlined",
-                    content: "side_navigation",
-                  },
-                ],
-              },
+              button("sideNavBtn", "Show nav bar", "show-nav", "sideNav"),
               {
                 tag: "div",
                 ["aria-hidden"]: true,
@@ -91,18 +80,7 @@ function detailPanelShell(): PageData {
               },
             ],
           },
-          {
-            tag: "button",
-            class: "projectKebab",
-            ["aria-label"]: "Project options",
-            content: [
-              {
-                tag: "span",
-                class: "material-symbols-outlined",
-                content: "more_horiz",
-              },
-            ],
-          },
+          button("projectKebab", "Project options", "not-set", "more"),
         ],
       },
       {

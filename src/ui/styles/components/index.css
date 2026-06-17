@@ -1,6 +1,7 @@
 @import url("./buttons.css");
 @import url("./detail.css");
 @import url("./form.css");
+@import url("./task.css");
 
 #app {
   display: flex;
@@ -22,7 +23,7 @@
       width: auto;
     }
 
-    #sideNavBtn {
+    .sideNavBtn {
       display: grid;
     }
 

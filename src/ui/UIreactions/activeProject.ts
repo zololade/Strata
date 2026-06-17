@@ -15,12 +15,7 @@ function showActiveProject(data: unknown) {
     const project = getStore().projects.get(data);
     projectHeaderTitle.textContent = project ? project.title : "";
 
-    renderElement(
-      viewPanel,
-      viewProject(data, getStore()),
-      // false, () =>
-      // updateList(data),
-    );
+    renderElement(viewPanel, viewProject(data, getStore()));
 
     updateList(data);
   }

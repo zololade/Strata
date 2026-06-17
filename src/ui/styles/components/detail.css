@@ -51,7 +51,7 @@
     }
 
     .projectKebab,
-    #sideNavBtn {
+    .sideNavBtn {
       background: none;
       border: none;
       cursor: pointer;
@@ -63,7 +63,7 @@
       padding: var(--sm-btn-padding);
     }
 
-    #sideNavBtn {
+    .sideNavBtn {
       display: none;
       color: var(--content-dim-color);
 
@@ -128,12 +128,12 @@
     }
 
     .contentContainer {
-      > * {
+      > *:not(.taskContainer) {
         margin-top: 0.5rem;
       }
 
-      h2,
-      p {
+      > h2,
+      > p {
         outline: none;
         color: var(--content-highlight-color);
       }
