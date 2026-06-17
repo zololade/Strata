@@ -35,6 +35,16 @@ function handlePreventNewLine(match: HTMLElement, e: Event) {
   }
 }
 
+function handlePasteAsPlainText(match: HTMLElement, e: Event) {
+  const pasteEvent = e as ClipboardEvent;
+  pasteEvent.preventDefault();
+
+  const text = pasteEvent.clipboardData?.getData("text/plain") || "";
+  if (text) {
+    document.execCommand("insertText", false, text);
+  }
+}
+
 function handleUpdateOverview(match: HTMLElement, _e: Event) {
   const id = getCurrProjId();
   if (!id || !match) return;
@@ -48,4 +58,4 @@ function handleUpdateOverview(match: HTMLElement, _e: Event) {
   dispatch(command);
 }
 
-export { handleUpdateOverview, handleUpdateTitle, handlePreventNewLine };
+export { handleUpdateOverview, handleUpdateTitle, handlePreventNewLine, handlePasteAsPlainText };

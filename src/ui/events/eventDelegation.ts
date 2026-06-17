@@ -6,6 +6,7 @@ import {
   handlePreventNewLine,
   handleUpdateOverview,
   handleUpdateTitle,
+  handlePasteAsPlainText,
 } from "./handlers/updateFields";
 
 let main = document.querySelector("#app") as HTMLElement;
@@ -34,6 +35,12 @@ function initializeEvents() {
       "keydown",
       {
         "prevent-newline": handlePreventNewLine,
+      },
+    ],
+    [
+      "paste",
+      {
+        "paste-plain-text": handlePasteAsPlainText,
       },
     ],
   ]);

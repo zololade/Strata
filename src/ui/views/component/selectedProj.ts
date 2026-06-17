@@ -21,7 +21,7 @@ let selectedProj = (project: ProjectInstance, _store: StoredType) => {
       {
         tag: "h2",
         contenteditable: true,
-        ["data-action"]: "update-title prevent-newline",
+        ["data-action"]: "update-title prevent-newline paste-plain-text",
         content: project.title,
         "data-placeholder": "New project",
       },
@@ -46,7 +46,7 @@ let selectedProj = (project: ProjectInstance, _store: StoredType) => {
         tag: "p",
         contenteditable: true,
         "data-placeholder": "Project overview...",
-        ["data-action"]: "update-overview prevent-newline",
+        ["data-action"]: "update-overview prevent-newline paste-plain-text",
         content: project.overview,
       },
     ],
