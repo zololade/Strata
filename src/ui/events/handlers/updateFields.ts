@@ -28,21 +28,65 @@ function handleUpdateTitle(match: HTMLElement, _e: Event) {
 }
 
 function handlePreventNewLine(match: HTMLElement, e: Event) {
-  const keyEvent = e as KeyboardEvent;
-  if (keyEvent.key === "Enter") {
+  const inputEvent = e as InputEvent;
+
+  if (inputEvent.inputType === "insertParagraph") {
     e.preventDefault();
     match.blur();
   }
 }
 
-function handlePasteAsPlainText(match: HTMLElement, e: Event) {
-  const pasteEvent = e as ClipboardEvent;
-  pasteEvent.preventDefault();
+function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
+  const event = e as ClipboardEvent;
+  event.preventDefault();
 
-  const text = pasteEvent.clipboardData?.getData("text/plain") || "";
-  if (text) {
-    document.execCommand("insertText", false, text);
+  const text = event.clipboardData?.getData("text/plain") || "";
+  if (!text) return;
+
+  const selection = window.getSelection();
+  if (!selection || !selection.rangeCount) return;
+
+  // 1. Snapshot all active ranges into a clean array first
+  const ranges: Range[] = [];
+  for (let i = 0; i < selection.rangeCount; i++) {
+    ranges.push(selection.getRangeAt(i));
   }
+
+  // 2. Clear out the active layout selection
+  selection.removeAllRanges();
+
+  // 3. Loop through every single active range (Perfect for Firefox)
+  ranges.forEach((range) => {
+    const container = range.commonAncestorContainer as HTMLElement;
+
+    // Find the master parent contenteditable block
+    const editableElement =
+      (container.closest?.("[contenteditable]") as HTMLElement) ||
+      (container.nodeType === Node.ELEMENT_NODE
+        ? container
+        : container.parentElement);
+
+    // 4. Check if the element only contains your placeholder <br> tag
+    if (editableElement && editableElement.querySelector("br:only-child")) {
+      editableElement.textContent = ""; // Wipe out the break node
+      range.selectNodeContents(editableElement); // Target the empty layout space
+      range.collapse(true);
+    } else {
+      // Standard behavior: erase whatever subset of text is highlighted
+      range.deleteContents();
+    }
+
+    // 5. Create and drop the clean text node string
+    const textNode = document.createTextNode(text);
+    range.insertNode(textNode);
+
+    // 6. Reset cursor boundary profile
+    range.setStartAfter(textNode);
+    range.collapse(true);
+
+    // 7. Hand the updated tracking range back to the browser layout engine
+    selection.addRange(range);
+  });
 }
 
 function handleUpdateOverview(match: HTMLElement, _e: Event) {
@@ -58,4 +102,9 @@ function handleUpdateOverview(match: HTMLElement, _e: Event) {
   dispatch(command);
 }
 
-export { handleUpdateOverview, handleUpdateTitle, handlePreventNewLine, handlePasteAsPlainText };
+export {
+  handleUpdateOverview,
+  handleUpdateTitle,
+  handlePreventNewLine,
+  handlePasteAsPlainText,
+};

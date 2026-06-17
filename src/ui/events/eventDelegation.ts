@@ -32,7 +32,7 @@ function initializeEvents() {
       },
     ],
     [
-      "keydown",
+      "beforeinput",
       {
         "prevent-newline": handlePreventNewLine,
       },
