@@ -1,4 +1,4 @@
-@import url("./buttons.css");
+@import url("./projectNav.css");
 @import url("./detail.css");
 @import url("./form.css");
 @import url("./task.css");
@@ -23,7 +23,7 @@
       width: auto;
     }
 
-    .mainContent-header .toolbar__side-nav {
+    .mainContent__header .toolbar__side-nav {
       display: grid;
     }
 

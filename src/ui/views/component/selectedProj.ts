@@ -45,7 +45,6 @@ let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
             content: [
               {
                 tag: "button",
-                class: "flagsBtn",
                 content: val,
               },
             ],
