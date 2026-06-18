@@ -58,7 +58,7 @@
       margin-right: 0.35rem;
 
       &:hover {
-        background-color: var(--add-btn-color-sec);
+        background-color: var(--add-btn-hover-color-sec);
       }
     }
   }

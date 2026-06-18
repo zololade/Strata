@@ -8,13 +8,14 @@
   --btn-active-color: #e5e5e6;
   --btn-hover-color-sec: #f4f4f5;
   --add-btn-color-sec: #ffffff;
-  --add-btn-hover-color-sec: #f7f7f7;
+  --add-btn-hover-color-sec: #f3f3f4;
   --add-btn-color-sec-big: var(--bg-base-color);
   --add-btn-hover-color-sec-big: var(--add-btn-hover-color-sec);
   --btn-active-color-sec: #eeeeef;
   --border: 1px solid var(--bg-border-color);
-  --content-color: lch(19.788% 1.25 282 / 1);
+  --content-color: rgb(47, 48, 50);
   --content-dim-color: #5a5a5c;
+  --content-dimmer-color: #5a5a5c6e;
   --content-highlight-color: rgb(24, 24, 24);
   --form-card-shadow: 0px 0px 10px 2px #b0b0b0;
   --dialog-backdrop: rgba(0, 0, 0, 0.1);
@@ -52,6 +53,7 @@
     --border: 1px solid var(--bg-border-color);
     --content-color: rgb(187, 187, 191);
     --content-dim-color: #949496;
+    --content-dimmer-color: #9494967d;
     --content-highlight-color: rgb(252, 252, 253);
     --form-card-shadow: 0px 0px 10px 2px #0a0a0a;
     --dialog-backdrop: rgba(0, 0, 0, 0.5);

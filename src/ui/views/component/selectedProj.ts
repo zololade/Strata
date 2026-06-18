@@ -57,7 +57,22 @@ const selectedProj = (
       {
         tag: "div",
         class: "workspace__task",
-        content: generateTasks([...project.tasks], store),
+        content: [
+          {
+            tag: "div",
+            class: "tasks__mainHeader",
+            content: [
+              { tag: "p", content: "Add task" },
+              button(
+                "mainHeader__menu",
+                `General tasks header option`,
+                "not-set",
+                "add",
+              ),
+            ],
+          },
+          generateTasks([...project.tasks], store),
+        ],
       },
     ],
   };

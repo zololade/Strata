@@ -5,6 +5,7 @@ const btnTypes = {
   more: "more_horiz",
   edit: "edit_square",
   favor: "favorite",
+  add: "add_2",
 };
 
 function button(

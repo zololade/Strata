@@ -3,6 +3,7 @@
 .mainContent__header .toolbar__menu,
 .mainContent__header .toolbar__side-nav,
 .task__favorite,
+.tasks__mainHeader .mainHeader__menu,
 .task__menu {
   display: grid;
   width: fit-content;
@@ -18,7 +19,8 @@
 /*flex*/
 .mainNav__toolbar,
 .mainContent__header,
-.task__header {
+.task__header,
+.tasks__mainHeader {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
