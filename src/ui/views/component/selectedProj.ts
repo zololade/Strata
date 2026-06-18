@@ -4,7 +4,7 @@ import type { ProjectInstance, StoredType } from "../../../lib/Types";
 import { button } from "./btn";
 
 //selected project data
-let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
+const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
   return {
     tag: "div",
     class: "workspace__container",
@@ -63,7 +63,7 @@ let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
 function generateTasks(ids: string[], store: StoredType): PageData[] {
   return ids
     .map((val) => {
-      let currTask = store.tasks.get(val);
+      const currTask = store.tasks.get(val);
 
       if (currTask) {
         const lastUpdated =

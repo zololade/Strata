@@ -13,7 +13,7 @@ function handleDatabaseLoaded(data: unknown) {
 function handleDatabaseUpdate(data: unknown) {
   putProjects(data);
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleStoreLoaded(_data: unknown) {
   appShell();
 }

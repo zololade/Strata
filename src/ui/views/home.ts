@@ -5,12 +5,12 @@ import { detailPanelShell } from "./component/detailPanel";
 import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
 
-let main = document.querySelector("#app") as HTMLElement;
+const main = document.querySelector("#app") as HTMLElement;
 let selectedProjectId: string | null = null;
 let prevSelectedProjId: string | null = null;
-let getCurrProjId = () => selectedProjectId;
-let getPrevProjId = () => prevSelectedProjId;
-let setPrevProjId = (id: string) => (prevSelectedProjId = id);
+const getCurrProjId = () => selectedProjectId;
+const getPrevProjId = () => prevSelectedProjId;
+const setPrevProjId = (id: string) => (prevSelectedProjId = id);
 
 //initial render
 function appShell() {

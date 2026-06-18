@@ -8,7 +8,7 @@ class ProjectStore {
   items = new Map<string, ItemInstance>();
 }
 
-let store = new ProjectStore();
+const store = new ProjectStore();
 
 function bindStore(data: unknown) {
   if (!data) {

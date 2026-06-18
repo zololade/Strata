@@ -1,13 +1,15 @@
 import { ModalManager } from "../../views/component/Modal";
 
 //open modal
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleOpenModal(_match: HTMLElement, _e: Event) {
   ModalManager.open(".dialog");
 }
 
 //close modal
+ 
 function handleHideModal(_match: HTMLElement, e: Event) {
-  let target = e.target as HTMLElement | null;
+  const target = e.target as HTMLElement | null;
 
   if (target instanceof HTMLDialogElement) {
     ModalManager.close(".dialog");

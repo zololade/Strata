@@ -12,15 +12,15 @@ import { Task } from "../../models/Task";
 
 const createHandler = {
   createProject(store: StoredType, payload: NewProjectInput): Result {
-    let project = new Project(payload);
+    const project = new Project(payload);
     store.projects.set(project.id, project);
     databaseBus.publish("database:update", store);
     return { type: "createdProject", id: project.id };
   },
 
   createTask(store: StoredType, projectId: string, payload: NewTaskInput) {
-    let task = new Task(payload);
-    let project = store.projects.get(projectId);
+    const task = new Task(payload);
+    const project = store.projects.get(projectId);
 
     if (!project) return;
     project.tasks.add(task.id);
@@ -30,8 +30,8 @@ const createHandler = {
   },
 
   createItem(store: StoredType, taskId: string, payload: NewItemInput) {
-    let item = new Item(payload);
-    let task = store.tasks.get(taskId);
+    const item = new Item(payload);
+    const task = store.tasks.get(taskId);
 
     if (!task) return;
     task.items.add(item.id);

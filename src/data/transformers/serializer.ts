@@ -16,7 +16,7 @@ class StoreReader {
 
   hydrateProject(): ProjectInput[] {
     const result: ProjectInput[] = [];
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.stored.projects.forEach((v, _k) => {
       //the project object
       result.push({
@@ -34,8 +34,8 @@ class StoreReader {
   }
 
   hydrateTask(): TaskInput[] {
-    let result: TaskInput[] = [];
-
+    const result: TaskInput[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.stored.tasks.forEach((v, _k) => {
       result.push({
         id: v.id,
@@ -52,8 +52,8 @@ class StoreReader {
   }
 
   hydrateItem(): ItemInput[] {
-    let result: ItemInput[] = [];
-
+    const result: ItemInput[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.stored.items.forEach((v, _k) => {
       result.push({
         id: v.id,

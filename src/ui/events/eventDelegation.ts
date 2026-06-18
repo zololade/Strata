@@ -9,7 +9,7 @@ import {
   handlePasteAsPlainText,
 } from "./handlers/updateFields";
 
-let main = document.querySelector("#app") as HTMLElement;
+const main = document.querySelector("#app") as HTMLElement;
 
 function initializeEvents() {
   const actionHandlers = new Map([

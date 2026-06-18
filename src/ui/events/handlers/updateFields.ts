@@ -1,11 +1,11 @@
 import type { Command } from "../../../lib/command";
 import { dispatch } from "../../../store/storeOperations/dispatch";
 import { getCurrProjId } from "../../views/home";
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateTitle(match: HTMLElement, _e: Event) {
   const id = getCurrProjId();
   if (!id || !match) return;
-  let text =
+  const text =
     match.textContent.trim().length < 1 ? "New project" : match.textContent;
   const command: Command = {
     type: "updateProject",
@@ -17,8 +17,8 @@ function handleUpdateTitle(match: HTMLElement, _e: Event) {
   dispatch(command);
 
   //update ui
-  let toolbar = document.querySelector("#projDetailTitle");
-  let btn = document.querySelector(
+  const toolbar = document.querySelector("#projDetailTitle");
+  const btn = document.querySelector(
     `[data-action="select-project"][data-id="${id}"] h3`,
   );
   if (btn && toolbar) {
@@ -35,7 +35,7 @@ function handlePreventNewLine(match: HTMLElement, e: Event) {
     match.blur();
   }
 }
-
+ 
 function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
   const event = e as ClipboardEvent;
   event.preventDefault();
@@ -88,7 +88,7 @@ function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
     selection.addRange(range);
   });
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateOverview(match: HTMLElement, _e: Event) {
   const id = getCurrProjId();
   if (!id || !match) return;

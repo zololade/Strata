@@ -1,7 +1,7 @@
 import { selectProject } from "../../views/home";
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleSelectProj(match: HTMLElement, _e: Event) {
-  let btn = match.dataset["id"];
+  const btn = match.dataset["id"];
 
   if (btn) {
     selectProject(btn);

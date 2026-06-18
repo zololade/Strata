@@ -6,7 +6,7 @@ const removeHandler = {
   removeProject(store: StoredType, payload: { projectId: string }): Result {
     const { projectId } = payload;
     //clean up tasks
-    let tasks = store.projects.get(projectId)?.tasks;
+    const tasks = store.projects.get(projectId)?.tasks;
     if (tasks)
       [...tasks].forEach((task) => {
         const newPayload = {
@@ -27,7 +27,7 @@ const removeHandler = {
   ): Result {
     const { taskId, projectId } = payload;
     //clean up items
-    let items = store.tasks.get(taskId)?.items;
+    const items = store.tasks.get(taskId)?.items;
 
     if (items)
       [...items].forEach((item) => {

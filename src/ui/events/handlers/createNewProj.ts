@@ -6,10 +6,10 @@ import { refreshList, selectProject } from "../../views/home";
 function handleCreateProj(_match: HTMLElement, e: Event) {
   e.preventDefault();
   //first you build the data
-  let titleField = document.querySelector(
+  const titleField = document.querySelector(
     "#projTitle",
   ) as HTMLInputElement | null;
-  let overviewField = document.querySelector(
+  const overviewField = document.querySelector(
     "#projOverview",
   ) as HTMLInputElement | null;
   const listHost = document.querySelector(
@@ -17,7 +17,7 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
   ) as HTMLUListElement | null;
 
   if (titleField && overviewField) {
-    let command: Command = {
+    const command: Command = {
       type: "createProject",
       data: {
         title:
@@ -27,14 +27,14 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
         tasks: [],
       },
     };
-    let projData = dispatch(command);
+    const projData = dispatch(command);
 
     //few things to do before rendering
     titleField.value = "";
     overviewField.value = "";
     //some side effects
     ModalManager.close(".new-proj-dialog");
-    let afterRender = refreshList();
+    const afterRender = refreshList();
     //render created project
     if (projData?.type === "createdProject" && listHost)
       afterRender(listHost, () => selectProject(projData.id));

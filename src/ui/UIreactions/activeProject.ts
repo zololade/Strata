@@ -4,10 +4,10 @@ import { viewProject } from "../views/component/detailPanel";
 import { getPrevProjId, setPrevProjId } from "../views/home";
 
 function showActiveProject(data: unknown) {
-  let viewPanel = document.querySelector(
+  const viewPanel = document.querySelector(
     ".mainContent__workspace",
   ) as HTMLElement | null;
-  let projectHeaderTitle = document.querySelector(
+  const projectHeaderTitle = document.querySelector(
     "#projDetailTitle",
   ) as HTMLElement | null;
 
@@ -27,8 +27,8 @@ function updateList(id: string) {
   ) as HTMLDialogElement | null;
 
   if (listContainer) {
-    let prev = listContainer.querySelector(`[data-id="${getPrevProjId()}"]`);
-    let active = listContainer.querySelector(`[data-id="${id}"]`);
+    const prev = listContainer.querySelector(`[data-id="${getPrevProjId()}"]`);
+    const active = listContainer.querySelector(`[data-id="${id}"]`);
     if (prev) prev.classList.remove("active");
     if (active) active.classList.add("active");
     setPrevProjId(id);
