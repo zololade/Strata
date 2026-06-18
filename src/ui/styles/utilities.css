@@ -1,0 +1,44 @@
+/*buttons*/
+.add-project-btn,
+.projectKebab,
+.sideNavBtn,
+.favor,
+.taskKebab {
+  display: grid;
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--circle);
+  padding: var(--sm-btn-padding);
+  place-content: center;
+  background: none;
+}
+
+/*flex*/
+.projectsHeader,
+.panelHeader,
+.task-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projListHeading,
+.headerGroup,
+.rightGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.flags,
+.task-flags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}

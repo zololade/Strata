@@ -91,19 +91,25 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
               class: "task-toolbar",
               content: [
                 {
-                  tag: "p",
-                  class: "status",
-                  content: "ongoing",
-                },
-                {
-                  tag: "div",
-                  class: "separator",
-                  content: "•",
-                },
-                {
-                  tag: "p",
-                  class: "task-date",
-                  content: `${duration} ago`,
+                  tag: "dive",
+                  class: "rightGroup",
+                  content: [
+                    {
+                      tag: "p",
+                      class: "status",
+                      content: "ongoing",
+                    },
+                    {
+                      tag: "div",
+                      class: "separator",
+                      content: "•",
+                    },
+                    {
+                      tag: "p",
+                      class: "task-date",
+                      content: `${duration} ago`,
+                    },
+                  ],
                 },
 
                 button("taskKebab", `task option`, "not-set", "more"),
@@ -126,18 +132,7 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
                 {
                   tag: "li",
                   content: [
-                    {
-                      tag: "button",
-                      class: "task-flagsBtn",
-                      content: [
-                        button(
-                          "favor",
-                          `Add Task to favorite`,
-                          "not-set",
-                          "favor",
-                        ),
-                      ],
-                    },
+                    button("favor", `Add Task to favorite`, "not-set", "favor"),
                   ],
                 },
               ],

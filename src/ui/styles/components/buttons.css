@@ -16,15 +16,9 @@
   .projectsHeader {
     position: sticky;
     top: 0;
-    display: flex;
     background-color: var(--bg-sidebar);
-    justify-content: space-between;
 
     .projListHeading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
       h2 {
         color: var(--content-highlight-color);
         font-size: 0.8rem;
@@ -33,17 +27,9 @@
     }
 
     .add-project-btn {
-      display: grid;
-      width: fit-content;
-      height: fit-content;
       background: var(--add-btn-color-sec-big);
       border: var(--border);
-      cursor: pointer;
-      border-radius: var(--circle);
-      padding: var(--sm-btn-padding);
-      place-content: center;
       color: var(--content-highlight-color);
-
       &:hover {
         background-color: var(--add-btn-hover-color-sec-big);
       }
@@ -63,9 +49,10 @@
       background-color: var(--bg-sidebar);
       border-radius: 8px;
       cursor: pointer;
-      text-wrap: nowrap;
-      text-overflow: ellipsis;
+      min-width: 0;
       overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       h3 {
         font-size: 0.75rem;

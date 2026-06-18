@@ -67,16 +67,10 @@ function detailPanelShell(): PageData {
             content: [
               button("sideNavBtn", "Show nav bar", "show-nav", "sideNav"),
               {
-                tag: "div",
+                tag: "span",
                 ["aria-hidden"]: true,
-                content: [
-                  {
-                    tag: "span",
-                    ["aria-hidden"]: true,
-                    id: "projDetailTitle",
-                    content: "Project",
-                  },
-                ],
+                id: "projDetailTitle",
+                content: "Project",
               },
             ],
           },
