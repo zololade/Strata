@@ -5,7 +5,7 @@ import { getPrevProjId, setPrevProjId } from "../views/home";
 
 function showActiveProject(data: unknown) {
   let viewPanel = document.querySelector(
-    ".projectContent",
+    ".mainContent__workspace",
   ) as HTMLElement | null;
   let projectHeaderTitle = document.querySelector(
     "#projDetailTitle",
@@ -23,7 +23,7 @@ function showActiveProject(data: unknown) {
 
 function updateList(id: string) {
   const listContainer = document.querySelector(
-    ".projectsList",
+    ".mainNav__list",
   ) as HTMLDialogElement | null;
 
   if (listContainer) {

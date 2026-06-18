@@ -6,28 +6,23 @@ import { button } from "./btn";
 function projectLoader(snapshot: StoredType): PageData {
   return {
     tag: "aside",
-    class: "projListContainer",
+    class: "mainNav",
     content: [
       {
         tag: "header",
-        class: "projectsHeader",
+        class: "mainNav__toolbar",
         content: [
           {
-            tag: "div",
-            class: "projListHeading",
-            content: [
-              {
-                tag: "h2",
-                content: "Projects",
-              },
-            ],
+            tag: "h2",
+            class: "mainNav__title",
+            content: "Projects",
           },
-          button("add-project-btn", "Add new project", "open-modal", "edit"),
+          button("mainNav__createBtn", "Add new project", "open-modal", "edit"),
         ],
       },
       {
         tag: "ul",
-        class: "projectsList",
+        class: "mainNav__list",
         content: [generateList(snapshot)],
       },
     ],

@@ -13,7 +13,7 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
     "#projOverview",
   ) as HTMLInputElement | null;
   const listHost = document.querySelector(
-    ".projectsList",
+    ".mainNav__list",
   ) as HTMLUListElement | null;
 
   if (titleField && overviewField) {

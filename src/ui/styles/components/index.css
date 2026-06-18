@@ -23,11 +23,11 @@
       width: auto;
     }
 
-    .sideNavBtn {
+    .mainContent > .toolbar .toolbar__side-nav {
       display: grid;
     }
 
-    .projListContainer {
+    .mainNav {
       background-color: var(--bg-base-color);
       position: fixed;
       left: 0;
@@ -39,7 +39,7 @@
       z-index: 100;
       border: var(--border);
       box-shadow: var(--form-card-shadow);
-      .add-project-btn {
+      .mainNav__createBtn {
         background: var(--add-btn-color-sec);
 
         &:hover {
@@ -51,7 +51,7 @@
       button {
         background-color: var(--bg-base-color);
       }
-      .projectsList {
+      .mainNav__list {
         button:hover {
           background-color: var(--btn-hover-color-sec);
         }
@@ -63,7 +63,7 @@
     }
   }
   #app.is_open {
-    .projListContainer {
+    .mainNav {
       transform: translateX(0);
     }
 

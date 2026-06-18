@@ -1,7 +1,7 @@
 /*buttons*/
-.add-project-btn,
-.projectKebab,
-.sideNavBtn,
+.mainNav__createBtn,
+.mainContent > .toolbar .toolbar__menu,
+.mainContent > .toolbar .toolbar__side-nav,
 .favor,
 .taskKebab {
   display: grid;
@@ -16,8 +16,8 @@
 }
 
 /*flex*/
-.projectsHeader,
-.panelHeader,
+.mainNav__toolbar,
+.mainContent > .toolbar,
 .task-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -25,8 +25,8 @@
   align-items: center;
 }
 
-.projListHeading,
-.headerGroup,
+.mainNav__title,
+.mainContent > .toolbar .toolbar__left,
 .rightGroup {
   display: flex;
   flex-wrap: wrap;

@@ -1,4 +1,4 @@
-.projListContainer {
+.mainNav {
   width: auto;
   min-width: 240px;
   max-width: 280px;
@@ -8,25 +8,23 @@
   scrollbar-width: thin;
   scrollbar-color: var(--bg-sidebar) transparent;
 
-  .projectsHeader,
-  .projectsList {
+  .mainNav__toolbar,
+  .mainNav__list {
     padding: var(--padding-sidebar);
   }
 
-  .projectsHeader {
+  .mainNav__toolbar {
     position: sticky;
     top: 0;
     background-color: var(--bg-sidebar);
 
-    .projListHeading {
-      h2 {
-        color: var(--content-highlight-color);
-        font-size: 0.8rem;
-        font-weight: 500;
-      }
+    .mainNav__title {
+      color: var(--content-highlight-color);
+      font-size: 0.8rem;
+      font-weight: 500;
     }
 
-    .add-project-btn {
+    .mainNav__createBtn {
       background: var(--add-btn-color-sec-big);
       border: var(--border);
       color: var(--content-highlight-color);
@@ -36,7 +34,7 @@
     }
   }
 
-  .projectsList {
+  .mainNav__list {
     /*remember to remove*/
     list-style-type: none;
 

@@ -22,7 +22,7 @@ const defaultData = {
     },
     {
       tag: "button",
-      class: "emptyStateBtn",
+      class: "emptyState__button",
       ["data-action"]: "open-modal",
       content: "New project",
     },
@@ -55,17 +55,22 @@ function viewProject(
 function detailPanelShell(): PageData {
   return {
     tag: "section",
-    class: "projectsView",
+    class: "mainContent",
     content: [
       {
         tag: "header",
-        class: "panelHeader",
+        class: "toolbar",
         content: [
           {
             tag: "div",
-            class: "headerGroup",
+            class: "toolbar__left",
             content: [
-              button("sideNavBtn", "Show nav bar", "show-nav", "sideNav"),
+              button(
+                "toolbar__side-nav",
+                "Show nav bar",
+                "show-nav",
+                "sideNav",
+              ),
               {
                 tag: "span",
                 ["aria-hidden"]: true,
@@ -74,12 +79,12 @@ function detailPanelShell(): PageData {
               },
             ],
           },
-          button("projectKebab", "Project options", "not-set", "more"),
+          button("toolbar__menu", "Project options", "not-set", "more"),
         ],
       },
       {
         tag: "div",
-        class: "projectContent",
+        class: "mainContent__workspace",
         content: [viewProject(null, null)],
       },
     ],

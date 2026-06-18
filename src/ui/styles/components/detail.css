@@ -1,4 +1,4 @@
-.projectsView {
+.mainContent {
   contain: layout paint;
   flex: 1;
   display: flex;
@@ -24,12 +24,12 @@
     height: var(--dynamic-height);
   }
 
-  .panelHeader {
+  .toolbar {
     color: var(--content-highlight-color);
     padding: var(--padding-sidebar);
     border-bottom: var(--border);
 
-    .headerGroup {
+    .toolbar__left {
       min-width: 0;
       gap: 0.25rem;
 
@@ -45,7 +45,7 @@
       }
     }
 
-    .sideNavBtn {
+    .toolbar__side-nav {
       display: none;
       color: var(--content-dim-color);
 
@@ -54,7 +54,7 @@
       }
     }
 
-    .projectKebab {
+    .toolbar__menu {
       display: grid;
       margin-right: 0.35rem;
 
@@ -64,7 +64,7 @@
     }
   }
 
-  .projectContent {
+  .mainContent__workspace {
     padding: 0rem 2rem;
     flex: 1;
     color: var(--content-dim-color);
@@ -94,7 +94,7 @@
         font-size: 0.875rem;
       }
 
-      .emptyStateBtn {
+      .emptyState__button {
         margin-top: 0.5rem;
         padding: 0.4rem 1rem;
         border-radius: 20px;
