@@ -6,17 +6,72 @@
     padding: 1rem;
     margin-bottom: 1rem;
 
-    > * {
-      margin-bottom: 1rem;
+    .favor,
+    .taskKebab {
+      background: none;
+      border: none;
+      cursor: pointer;
+      place-content: center;
+      display: grid;
+      width: fit-content;
+      height: fit-content;
+      border-radius: var(--circle);
+      padding: var(--sm-btn-padding);
+      margin-left: auto;
+
+      &:hover {
+        background-color: var(--add-btn-color-sec);
+        color: var(--content-highlight-color);
+      }
     }
 
-    h3 {
+    .task-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      p {
+        font-size: 0.75rem;
+      }
+
+      .separator {
+        display: grid;
+        place-content: center;
+        font-size: 0.5rem;
+      }
+    }
+
+    .task-head,
+    .task-overview {
+      margin-bottom: 0.35rem;
+    }
+
+    .task-head {
       color: var(--content-highlight-color);
       font-size: 0.95rem;
     }
-    p {
+    .task-overview {
       color: var(--content-dim-color);
       font-size: 0.8rem;
+    }
+
+    .task-flags {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        border: none;
+        padding: 0rem 0.35rem;
+        background: none;
+
+        &:hover {
+          color: var(--content-highlight-color);
+          background-color: none;
+        }
+      }
     }
   }
 }

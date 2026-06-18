@@ -87,11 +87,6 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
           "data-id": currTask.id,
           content: [
             {
-              tag: "p",
-              class: "update-info",
-              content: "Last updated",
-            },
-            {
               tag: "div",
               class: "task-toolbar",
               content: [
@@ -101,20 +96,51 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
                   content: "ongoing",
                 },
                 {
+                  tag: "div",
+                  class: "separator",
+                  content: "•",
+                },
+                {
                   tag: "p",
                   class: "task-date",
                   content: `${duration} ago`,
                 },
+
                 button("taskKebab", `task option`, "not-set", "more"),
               ],
             },
             {
               tag: "h3",
+              class: "task-head",
               content: currTask.title,
             },
             {
               tag: "p",
+              class: "task-overview",
               content: currTask.overview,
+            },
+            {
+              tag: "ul",
+              class: "task-flags",
+              content: [
+                {
+                  tag: "li",
+                  content: [
+                    {
+                      tag: "button",
+                      class: "task-flagsBtn",
+                      content: [
+                        button(
+                          "favor",
+                          `Add Task to favorite`,
+                          "not-set",
+                          "favor",
+                        ),
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         };

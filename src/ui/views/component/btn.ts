@@ -4,6 +4,7 @@ const btnTypes = {
   sideNav: "side_navigation",
   more: "more_horiz",
   edit: "edit_square",
+  favor: "favorite",
 };
 
 function button(
