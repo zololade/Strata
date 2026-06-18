@@ -15,11 +15,11 @@ type TimeObject = {
 let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
   return {
     tag: "div",
-    class: "contentContainer",
+    class: "workspace__container",
     content: [
       {
         tag: "div",
-        class: "decIcon",
+        class: "workspace__icon",
         ["aria-hidden"]: true,
         content: [
           {
@@ -38,7 +38,7 @@ let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
       },
       {
         tag: "ul",
-        class: "flags",
+        class: "project__flags",
         content: ["important", "favorite"].map((val) => {
           return {
             tag: "li",
@@ -62,7 +62,7 @@ let selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
       },
       {
         tag: "div",
-        class: "taskContainer",
+        class: "workspace__task",
         content: generateTasks([...project.tasks], store),
       },
     ],
@@ -88,11 +88,11 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
           content: [
             {
               tag: "div",
-              class: "task-toolbar",
+              class: "task__header",
               content: [
                 {
-                  tag: "dive",
-                  class: "rightGroup",
+                  tag: "div",
+                  class: "task__left",
                   content: [
                     {
                       tag: "p",
@@ -112,27 +112,32 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
                   ],
                 },
 
-                button("taskKebab", `task option`, "not-set", "more"),
+                button("task__menu", `task option`, "not-set", "more"),
               ],
             },
             {
               tag: "h3",
-              class: "task-head",
+              class: "task__title",
               content: currTask.title,
             },
             {
               tag: "p",
-              class: "task-overview",
+              class: "task__overview",
               content: currTask.overview,
             },
             {
               tag: "ul",
-              class: "task-flags",
+              class: "task__flags",
               content: [
                 {
                   tag: "li",
                   content: [
-                    button("favor", `Add Task to favorite`, "not-set", "favor"),
+                    button(
+                      "task__favorite",
+                      `Add Task to favorite`,
+                      "not-set",
+                      "favor",
+                    ),
                   ],
                 },
               ],

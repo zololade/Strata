@@ -24,7 +24,7 @@
     height: var(--dynamic-height);
   }
 
-  .toolbar {
+  > .mainContent__header {
     color: var(--content-highlight-color);
     padding: var(--padding-sidebar);
     border-bottom: var(--border);
@@ -109,8 +109,8 @@
       }
     }
 
-    .contentContainer {
-      > *:not(.taskContainer) {
+    .workspace__container {
+      > *:not(.workspace__task) {
         margin-top: 0.5rem;
       }
 
@@ -125,7 +125,7 @@
         border-top: var(--border);
       }
 
-      .decIcon {
+      .workspace__icon {
         padding-top: 3.5rem;
         .material-symbols-outlined {
           font-weight: normal;
@@ -133,7 +133,7 @@
         }
       }
 
-      .flags {
+      .project__flags {
         margin-top: 1.25rem;
 
         button {

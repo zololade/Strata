@@ -3,12 +3,12 @@ import type { PageData } from "../../../lib/Page";
 function newProject(): PageData {
   return {
     tag: "dialog",
-    class: "new-proj-dialog",
+    class: "dialog",
     ["data-action"]: "close-modal",
     content: [
       {
         tag: "form",
-        class: "newProject",
+        class: "dialog__form",
         content: [
           {
             tag: "fieldset",
@@ -39,7 +39,7 @@ function newProject(): PageData {
               },
               {
                 tag: "div",
-                class: "formBtns",
+                class: "form__buttons",
                 content: [
                   {
                     tag: "button",

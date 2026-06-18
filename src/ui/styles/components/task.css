@@ -1,4 +1,4 @@
-.taskContainer {
+.workspace__task {
   margin-top: 2rem;
 
   > article {
@@ -6,19 +6,21 @@
     padding: 1rem;
     margin-bottom: 1rem;
 
-    .favor,
-    .taskKebab {
+    .task__favorite,
+    .task__menu {
       &:hover {
         background-color: var(--add-btn-color-sec);
         color: var(--content-highlight-color);
       }
     }
 
-    .task-toolbar {
+    .mainContent__header,
+    .task__header {
       gap: 0.5rem;
       margin-bottom: 1rem;
+      border: none;
 
-      .rightGroup {
+      .task__left {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -37,16 +39,16 @@
       }
     }
 
-    .task-head,
-    .task-overview {
+    .task__title,
+    .task__overview {
       margin-bottom: 0.35rem;
     }
 
-    .task-head {
+    .task__title {
       color: var(--content-highlight-color);
       font-size: 0.95rem;
     }
-    .task-overview {
+    .task__overview {
       color: var(--content-dim-color);
       font-size: 0.8rem;
       min-width: 0;
@@ -55,7 +57,7 @@
       white-space: nowrap;
     }
 
-    .task-flags {
+    .task__flags {
       margin-top: 1rem;
 
       button {

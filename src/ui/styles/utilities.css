@@ -1,9 +1,9 @@
 /*buttons*/
 .mainNav__createBtn,
-.mainContent > .toolbar .toolbar__menu,
-.mainContent > .toolbar .toolbar__side-nav,
-.favor,
-.taskKebab {
+.mainContent__header .toolbar__menu,
+.mainContent__header .toolbar__side-nav,
+.task__favorite,
+.task__menu {
   display: grid;
   width: fit-content;
   height: fit-content;
@@ -17,8 +17,8 @@
 
 /*flex*/
 .mainNav__toolbar,
-.mainContent > .toolbar,
-.task-toolbar {
+.mainContent__header,
+.task__header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -26,16 +26,16 @@
 }
 
 .mainNav__title,
-.mainContent > .toolbar .toolbar__left,
-.rightGroup {
+.mainContent__header .toolbar__left,
+.task__left {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-.flags,
-.task-flags {
+.task__flags,
+.project__flags {
   list-style: none;
   display: flex;
   flex-wrap: wrap;

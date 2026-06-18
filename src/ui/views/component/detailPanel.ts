@@ -59,7 +59,7 @@ function detailPanelShell(): PageData {
     content: [
       {
         tag: "header",
-        class: "toolbar",
+        class: "mainContent__header",
         content: [
           {
             tag: "div",

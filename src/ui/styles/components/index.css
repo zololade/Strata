@@ -23,7 +23,7 @@
       width: auto;
     }
 
-    .mainContent > .toolbar .toolbar__side-nav {
+    .mainContent-header .toolbar__side-nav {
       display: grid;
     }
 
