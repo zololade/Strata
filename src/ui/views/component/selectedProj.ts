@@ -4,7 +4,10 @@ import type { ProjectInstance, StoredType } from "../../../lib/Types";
 import { button } from "./btn";
 
 //selected project data
-const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
+const selectedProj = (
+  project: ProjectInstance,
+  store: StoredType,
+): PageData => {
   return {
     tag: "div",
     class: "workspace__container",

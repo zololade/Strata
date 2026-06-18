@@ -7,7 +7,7 @@ function handleOpenModal(_match: HTMLElement, _e: Event) {
 }
 
 //close modal
- 
+
 function handleHideModal(_match: HTMLElement, e: Event) {
   const target = e.target as HTMLElement | null;
 

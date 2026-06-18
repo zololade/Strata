@@ -35,7 +35,7 @@ function handlePreventNewLine(match: HTMLElement, e: Event) {
     match.blur();
   }
 }
- 
+
 function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
   const event = e as ClipboardEvent;
   event.preventDefault();
