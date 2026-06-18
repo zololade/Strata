@@ -80,6 +80,12 @@ const selectedProj = (
 
 function generateTasks(ids: string[], store: StoredType): PageData[] {
   return ids
+    .filter((id) => store.tasks.has(id))
+    .sort((a, b) => {
+      const taskA = store.tasks.get(a)!;
+      const taskB = store.tasks.get(b)!;
+      return taskB.createdAt - taskA.createdAt;
+    })
     .map((val) => {
       const currTask = store.tasks.get(val);
 
