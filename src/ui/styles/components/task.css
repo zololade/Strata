@@ -54,9 +54,6 @@
       color: var(--content-dim-color);
       font-size: 0.8rem;
       min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .task__flags {

@@ -71,6 +71,8 @@ function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     data: { overview: match.textContent || "" },
   };
   dispatch(command);
+
+  refreshTask();
 }
 
 //misc
