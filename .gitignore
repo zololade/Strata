@@ -15,6 +15,7 @@ coverage
 
 # Editor directories and files
 .vscode/*
+.cspell/*
 !.vscode/extensions.json
 .idea
 .DS_Store
