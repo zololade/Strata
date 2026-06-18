@@ -105,19 +105,28 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
                     },
                   ],
                 },
-
                 button("task__menu", `task option`, "not-set", "more"),
               ],
             },
             {
               tag: "h3",
               class: "task__title",
-              content: currTask.title,
+              contenteditable: true,
+              ["data-action"]:
+                "update-task-title prevent-newline paste-plain-text",
+              ["data-task-id"]: currTask.id,
+              content: currTask.title || "",
+              "data-placeholder": "Task title",
             },
             {
               tag: "p",
               class: "task__overview",
-              content: currTask.overview,
+              contenteditable: true,
+              ["data-action"]:
+                "update-task-overview prevent-newline paste-plain-text",
+              ["data-task-id"]: currTask.id,
+              content: currTask.overview || "",
+              "data-placeholder": "Task overview...",
             },
             {
               tag: "ul",

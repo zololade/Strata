@@ -1,5 +1,6 @@
 import type { Command } from "../../../lib/command";
 import { dispatch } from "../../../store/storeOperations/dispatch";
+import { refreshTask } from "../../UIreactions/taskReaction";
 import { getCurrProjId } from "../../views/home";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateTitle(match: HTMLElement, _e: Event) {
@@ -27,6 +28,52 @@ function handleUpdateTitle(match: HTMLElement, _e: Event) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handleUpdateOverview(match: HTMLElement, _e: Event) {
+  const id = getCurrProjId();
+  if (!id || !match) return;
+  const command: Command = {
+    type: "updateProject",
+    projectId: id,
+    data: {
+      overview: match.textContent,
+    },
+  };
+  dispatch(command);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
+  const taskId = match.dataset["taskId"];
+  if (!taskId || !match) return;
+
+  const text = match.textContent?.trim() || "New task";
+  const command: Command = {
+    type: "updateTask",
+    taskId: taskId,
+    data: { title: text },
+  };
+
+  dispatch(command);
+
+  // Refresh current project view
+  refreshTask();
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
+  const taskId = match.dataset["taskId"];
+  if (!taskId || !match) return;
+
+  const command: Command = {
+    type: "updateTask",
+    taskId: taskId,
+    data: { overview: match.textContent || "" },
+  };
+  dispatch(command);
+}
+
+//misc
 function handlePreventNewLine(match: HTMLElement, e: Event) {
   const inputEvent = e as InputEvent;
 
@@ -88,23 +135,12 @@ function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
     selection.addRange(range);
   });
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleUpdateOverview(match: HTMLElement, _e: Event) {
-  const id = getCurrProjId();
-  if (!id || !match) return;
-  const command: Command = {
-    type: "updateProject",
-    projectId: id,
-    data: {
-      overview: match.textContent,
-    },
-  };
-  dispatch(command);
-}
 
 export {
   handleUpdateOverview,
   handleUpdateTitle,
   handlePreventNewLine,
   handlePasteAsPlainText,
+  handleUpdateTaskOverview,
+  handleUpdateTaskTitle,
 };

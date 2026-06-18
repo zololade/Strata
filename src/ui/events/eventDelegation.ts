@@ -7,6 +7,8 @@ import {
   handleUpdateOverview,
   handleUpdateTitle,
   handlePasteAsPlainText,
+  handleUpdateTaskOverview,
+  handleUpdateTaskTitle,
 } from "./handlers/updateFields";
 
 const main = document.querySelector("#app") as HTMLElement;
@@ -29,6 +31,8 @@ function initializeEvents() {
       {
         "update-title": handleUpdateTitle,
         "update-overview": handleUpdateOverview,
+        "update-task-overview": handleUpdateTaskOverview,
+        "update-task-title": handleUpdateTaskTitle,
       },
     ],
     [

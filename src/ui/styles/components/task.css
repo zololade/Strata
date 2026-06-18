@@ -41,6 +41,8 @@
     .task__title,
     .task__overview {
       margin-bottom: 0.35rem;
+      outline: none;
+      border: none;
     }
 
     .task__title {
