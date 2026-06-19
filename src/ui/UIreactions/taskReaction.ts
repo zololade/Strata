@@ -1,6 +1,8 @@
 import { renderElement } from "../../lib/renderUtilities";
+import { formatDuration, getTimeObj } from "../../lib/time";
 import { getStore } from "../../store/Store";
 import { viewProject } from "../views/component/detailPanel";
+import { generateTaskContent } from "../views/component/selectedProj";
 import { getCurrProjId } from "../views/home";
 
 function refreshTask() {
@@ -16,4 +18,20 @@ function refreshTask() {
   }
 }
 
-export { refreshTask };
+function refreshCurrTask(Id: string) {
+  const currTask = getStore().tasks.get(Id);
+  const host = document.querySelector(
+    `article[data-id="${Id}"]`,
+  ) as HTMLElement;
+
+  if (currTask && host) {
+    const lastUpdated =
+      currTask.lastModified === 0 ? currTask.createdAt : currTask.lastModified;
+
+    const duration = formatDuration(getTimeObj(lastUpdated));
+
+    renderElement(host, generateTaskContent(currTask, duration));
+  }
+}
+
+export { refreshTask, refreshCurrTask };

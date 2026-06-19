@@ -1,8 +1,10 @@
 import type { Command } from "../../../lib/command";
 import { dispatch } from "../../../store/storeOperations/dispatch";
+import { refreshTask } from "../../UIreactions/taskReaction";
 import { ModalManager } from "../../views/component/Modal";
-import { refreshList, selectProject } from "../../views/home";
+import { getCurrProjId, refreshList, selectProject } from "../../views/home";
 
+// create new project
 function handleCreateProj(_match: HTMLElement, e: Event) {
   e.preventDefault();
   //first you build the data
@@ -33,7 +35,7 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
     titleField.value = "";
     overviewField.value = "";
     //some side effects
-    ModalManager.close(".new-proj-dialog");
+    ModalManager.close(".dialog");
     const afterRender = refreshList();
     //render created project
     if (projData?.type === "createdProject" && listHost)
@@ -41,4 +43,26 @@ function handleCreateProj(_match: HTMLElement, e: Event) {
   }
 }
 
-export { handleCreateProj };
+//create new task
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function handleCreateTask(_match: HTMLElement, _e: Event) {
+  const id = getCurrProjId();
+  if (id) {
+    const command: Command = {
+      projectId: id,
+      type: "createTask",
+      data: {
+        title: "New Task",
+        overview: "Task overview...",
+        flag: null,
+        items: [],
+      },
+    };
+
+    dispatch(command);
+
+    refreshTask();
+  }
+}
+
+export { handleCreateProj, handleCreateTask };

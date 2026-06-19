@@ -10,6 +10,8 @@
   border: var(--border);
   border-radius: 10px;
   margin: 0 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-border-color) transparent;
 
   & > * {
     width: 100%;
@@ -27,6 +29,9 @@
     color: var(--content-highlight-color);
     padding: var(--padding-sidebar);
     border-bottom: var(--border);
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-base-color);
 
     .toolbar__left {
       min-width: 0;

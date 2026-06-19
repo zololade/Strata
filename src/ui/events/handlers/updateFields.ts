@@ -1,6 +1,6 @@
 import type { Command } from "../../../lib/command";
 import { dispatch } from "../../../store/storeOperations/dispatch";
-import { refreshTask } from "../../UIreactions/taskReaction";
+import { refreshCurrTask } from "../../UIreactions/taskReaction";
 import { getCurrProjId } from "../../views/home";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateTitle(match: HTMLElement, _e: Event) {
@@ -54,10 +54,12 @@ function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
     data: { title: text },
   };
 
-  dispatch(command);
+  const result = dispatch(command);
 
   // Refresh current project view
-  refreshTask();
+  if (result?.type === "updatedTask") {
+    refreshCurrTask(result.id);
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -70,9 +72,11 @@ function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     taskId: taskId,
     data: { overview: match.textContent || "" },
   };
-  dispatch(command);
+  const result = dispatch(command);
 
-  refreshTask();
+  if (result?.type === "updatedTask") {
+    refreshCurrTask(result.id);
+  }
 }
 
 //misc

@@ -1,5 +1,5 @@
 import { handleNavBtn, handleNavClose } from "./handlers/navTrigger";
-import { handleCreateProj } from "./handlers/createNewProj";
+import { handleCreateProj, handleCreateTask } from "./handlers/createNew";
 import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
 import { handleSelectProj } from "./handlers/viewProject";
 import {
@@ -19,6 +19,7 @@ function initializeEvents() {
       "click",
       {
         "create-project": handleCreateProj,
+        "create-task": handleCreateTask,
         "open-modal": handleOpenModal,
         "close-modal": handleHideModal,
         "select-project": handleSelectProj,

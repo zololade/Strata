@@ -32,6 +32,10 @@ body {
 }
 
 /* Target the container, not the br */
+[contenteditable] {
+  position: relative;
+}
+
 [contenteditable]:empty::before,
 [contenteditable]:has(br:only-child)::before {
   content: attr(data-placeholder);

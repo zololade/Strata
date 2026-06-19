@@ -1,6 +1,10 @@
 import type { PageData } from "../../../lib/Page";
 import { formatDuration, getTimeObj } from "../../../lib/time";
-import type { ProjectInstance, StoredType } from "../../../lib/Types";
+import type {
+  ProjectInstance,
+  StoredType,
+  TaskInstance,
+} from "../../../lib/Types";
 import { button } from "./btn";
 
 //selected project data
@@ -65,8 +69,8 @@ const selectedProj = (
               { tag: "p", content: "Add task" },
               button(
                 "mainHeader__menu",
-                `General tasks header option`,
-                "not-set",
+                `Create tasks button`,
+                "create-task",
                 "add",
               ),
             ],
@@ -100,73 +104,7 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
         return {
           tag: "article",
           "data-id": currTask.id,
-          content: [
-            {
-              tag: "div",
-              class: "task__header",
-              content: [
-                {
-                  tag: "div",
-                  class: "task__left",
-                  content: [
-                    {
-                      tag: "p",
-                      class: "status",
-                      content: "ongoing",
-                    },
-                    {
-                      tag: "div",
-                      class: "separator",
-                      content: "•",
-                    },
-                    {
-                      tag: "p",
-                      class: "task-date",
-                      content: `${duration} ago`,
-                    },
-                  ],
-                },
-                button("task__menu", `task option`, "not-set", "more"),
-              ],
-            },
-            {
-              tag: "h3",
-              class: "task__title",
-              contenteditable: true,
-              ["data-action"]:
-                "update-task-title prevent-newline paste-plain-text",
-              ["data-task-id"]: currTask.id,
-              content: currTask.title || "",
-              "data-placeholder": "Task title",
-            },
-            {
-              tag: "p",
-              class: "task__overview",
-              contenteditable: true,
-              ["data-action"]:
-                "update-task-overview prevent-newline paste-plain-text",
-              ["data-task-id"]: currTask.id,
-              content: currTask.overview || "",
-              "data-placeholder": "Task overview...",
-            },
-            {
-              tag: "ul",
-              class: "task__flags",
-              content: [
-                {
-                  tag: "li",
-                  content: [
-                    button(
-                      "task__favorite",
-                      `Add Task to favorite`,
-                      "not-set",
-                      "favor",
-                    ),
-                  ],
-                },
-              ],
-            },
-          ],
+          content: generateTaskContent(currTask, duration),
         };
       } else {
         return null;
@@ -175,4 +113,75 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
     .filter((val) => val !== null);
 }
 
-export { selectedProj };
+function generateTaskContent(
+  currTask: TaskInstance,
+  duration: string,
+): PageData[] {
+  return [
+    {
+      tag: "div",
+      class: "task__header",
+      content: [
+        {
+          tag: "div",
+          class: "task__left",
+          content: [
+            {
+              tag: "p",
+              class: "status",
+              content: "ongoing",
+            },
+            {
+              tag: "div",
+              class: "separator",
+              content: "•",
+            },
+            {
+              tag: "p",
+              class: "task-date",
+              content: `${duration} ago`,
+            },
+          ],
+        },
+        button("task__menu", `task option`, "not-set", "more"),
+      ],
+    },
+    {
+      tag: "h3",
+      class: "task__title",
+      contenteditable: true,
+      ["data-action"]: "update-task-title prevent-newline paste-plain-text",
+      ["data-task-id"]: currTask.id,
+      content: currTask.title || "",
+      "data-placeholder": "Task title",
+    },
+    {
+      tag: "p",
+      class: "task__overview",
+      contenteditable: true,
+      ["data-action"]: "update-task-overview prevent-newline paste-plain-text",
+      ["data-task-id"]: currTask.id,
+      content: currTask.overview || "",
+      "data-placeholder": "Task overview...",
+    },
+    {
+      tag: "ul",
+      class: "task__flags",
+      content: [
+        {
+          tag: "li",
+          content: [
+            button(
+              "task__favorite",
+              `Add Task to favorite`,
+              "not-set",
+              "favor",
+            ),
+          ],
+        },
+      ],
+    },
+  ];
+}
+
+export { selectedProj, generateTaskContent };
