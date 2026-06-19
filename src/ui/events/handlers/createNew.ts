@@ -5,7 +5,7 @@ import { ModalManager } from "../../views/component/Modal";
 import { getCurrProjId, refreshList, selectProject } from "../../views/home";
 
 // create new project
-function handleCreateProj(match: HTMLElement, e: Event) {
+function handleCreateProj(_match: HTMLElement, e: Event) {
   e.preventDefault();
   //first you build the data
   const titleField = document.querySelector(
