@@ -34,6 +34,7 @@ body {
 /* Target the container, not the br */
 [contenteditable] {
   position: relative;
+  font-size: 1rem;
 }
 
 [contenteditable]:empty::before,
