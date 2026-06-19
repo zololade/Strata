@@ -67,22 +67,8 @@ function handleCreateTask(_match: HTMLElement, _e: Event) {
       const selector = `h3[contenteditable="true"][data-task-id="${result.id}"]`;
       const heading3 = document.querySelector(selector) as HTMLElement | null;
 
-      if (heading3) focusAtEnd(heading3);
+      if (heading3) heading3.focus();
     });
-  }
-}
-
-function focusAtEnd(element: HTMLElement) {
-  element.focus(); // First, bring focus to the element
-
-  const selection = window.getSelection(); // Get the browser's selection object
-  const range = document.createRange(); // Create a new text range
-
-  range.selectNodeContents(element); // Select all contents of the editable element
-  range.collapse(false); // Collapse the range to the end (false = end, true = start)
-  if (selection) {
-    selection.removeAllRanges(); // Clear any existing text selections
-    selection.addRange(range); // Apply the new range to move the cursor
   }
 }
 
