@@ -1,8 +1,8 @@
-import { bindStore, getStore } from "../store/Store";
-import { putProjects } from "../data/dao";
-import { appBus } from "../lib/Buses";
-import { appShell } from "../ui/views/home";
-import { showActiveProject } from "../ui/UIreactions/activeProject";
+import { bindStore, getStore } from "../../store/Store";
+import { putProjects } from "../../data/dao";
+import { appBus } from "../../lib/Buses";
+import { appShell } from "../../ui/views/home";
+import { showActiveProject } from "../../ui/UIreactions/activeProject";
 
 function handleDatabaseLoaded(data: unknown) {
   bindStore(data);

@@ -1,10 +1,10 @@
-import { appBus, databaseBus } from "../lib/Buses";
+import { appBus, databaseBus } from "../../lib/Buses";
 import {
   handleDatabaseLoaded,
   handleDatabaseUpdate,
   handleProjectSelection,
   handleStoreLoaded,
-} from "./handlers";
+} from "../../handlers/busHandlers/handlers";
 
 function initializeServices() {
   databaseBus.subscribe("database:loaded", handleDatabaseLoaded);
