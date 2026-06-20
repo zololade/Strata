@@ -58,34 +58,52 @@
       }
     }
 
+    /* ==================================== */
+    /* the following numbers must be updated together
+    font-size:1rem;
+
+    transform: scale(0.9);
+    width: calc(100% / 0.9);
+
+    transform: scale(0.8);
+    width: calc(100% / 0.8);
+
+    max-height: calc(1rem * 1.5);
+    */
     .task__title,
     .task__overview {
       margin-bottom: 0.35rem;
       outline: none;
       border: none;
+      transform-origin: top left;
+      font-size: 1rem;
     }
 
     .task__title {
       color: var(--content-highlight-color);
-      font-size: 0.9rem;
       font-weight: 380;
+      transform: scale(0.9);
+      width: calc(100% / 0.9);
     }
     .task__overview {
       color: var(--content-dim-color);
-      font-size: 0.8rem;
       min-width: 0;
+      transform: scale(0.8);
+      width: calc(100% / 0.8);
     }
 
     /* chrome bug */
     .task__title:empty,
     .task__title:has(br:only-child) {
-      max-height: calc(0.9rem * 1.5);
+      max-height: calc(1rem * 1.5);
     }
 
     .task__overview:empty,
     .task__overview:has(br:only-child) {
-      max-height: calc(0.8rem * 1.5);
+      max-height: calc(1rem * 1.5);
     }
+
+    /* ====================================== */
 
     .task__flags {
       margin-top: 1rem;
