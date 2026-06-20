@@ -1,63 +1,17 @@
-import {
-  handleNavBtn,
-  handleNavClose,
-} from "../handlers/domHandlers/navTrigger";
-import {
-  handleCreateProj,
-  handleCreateTask,
-} from "../handlers/domHandlers/createNew";
-import {
-  handleHideModal,
-  handleOpenModal,
-} from "../handlers/domHandlers/newProjModal";
-import { handleSelectProj } from "../handlers/domHandlers/viewProject";
-import {
-  handlePreventNewLine,
-  handleUpdateOverview,
-  handleUpdateTitle,
-  handlePasteAsPlainText,
-  handleUpdateTaskOverview,
-  handleUpdateTaskTitle,
-} from "../handlers/domHandlers/updateFields";
+type HandlerFn = (match: HTMLElement, e: Event) => void;
 
-const main = document.querySelector("#app") as HTMLElement;
+type HandlersByEvent = {
+  click?: Record<string, HandlerFn>;
+  focusout?: Record<string, HandlerFn>;
+  beforeinput?: Record<string, HandlerFn>;
+  paste?: Record<string, HandlerFn>;
+};
 
-function initializeEvents() {
-  const actionHandlers = new Map([
-    [
-      "click",
-      {
-        "create-project": handleCreateProj,
-        "create-task": handleCreateTask,
-        "open-modal": handleOpenModal,
-        "close-modal": handleHideModal,
-        "select-project": handleSelectProj,
-        "show-nav": handleNavBtn,
-        "close-nav": handleNavClose,
-      },
-    ],
-    [
-      "focusout",
-      {
-        "update-title": handleUpdateTitle,
-        "update-overview": handleUpdateOverview,
-        "update-task-overview": handleUpdateTaskOverview,
-        "update-task-title": handleUpdateTaskTitle,
-      },
-    ],
-    [
-      "beforeinput",
-      {
-        "prevent-newline": handlePreventNewLine,
-      },
-    ],
-    [
-      "paste",
-      {
-        "paste-plain-text": handlePasteAsPlainText,
-      },
-    ],
-  ]);
+function initializeEvents(handlers: HandlersByEvent) {
+  const main = document.querySelector("#app") as HTMLElement;
+  const actionHandlers = new Map(
+    Object.entries(handlers) as [string, Record<string, HandlerFn>][],
+  );
 
   actionHandlers.forEach((_v, k) =>
     main.addEventListener(k, (e) => {
@@ -71,7 +25,7 @@ function initializeEvents() {
       const eventType = actionHandlers.get(k);
       if (eventType) {
         actions.forEach((a) => {
-          const handler = eventType[a as keyof typeof eventType];
+          const handler = eventType[a];
           if (handler) handler(el, e);
         });
       }
@@ -79,4 +33,4 @@ function initializeEvents() {
   );
 }
 
-export { initializeEvents };
+export { initializeEvents, type HandlersByEvent };

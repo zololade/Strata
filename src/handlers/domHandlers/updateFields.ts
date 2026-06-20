@@ -1,88 +1,96 @@
-import type { Command } from "../../types/command";
-import { dispatch } from "../../store/dispatch";
-import { refreshCurrTask } from "../../ui/reactions/taskReaction";
-import { getCurrProjId } from "../../ui/views/home";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleUpdateTitle(match: HTMLElement, _e: Event) {
-  const id = getCurrProjId();
-  if (!id || !match) return;
-  const text =
-    match.textContent.trim().length < 1 ? "New project" : match.textContent;
-  const command: Command = {
-    type: "updateProject",
-    projectId: id,
-    data: {
-      title: text,
-    },
-  };
-  dispatch(command);
+import type { Command, Result } from "../../types/command";
+import type { EventBus } from "../../lib/EventBus";
 
-  //update ui
-  const toolbar = document.querySelector("#projDetailTitle");
-  const btn = document.querySelector(
-    `[data-action="select-project"][data-id="${id}"] h3`,
-  );
-  if (btn && toolbar) {
-    btn.textContent = text;
-    toolbar.textContent = text;
-  }
+type UpdateProjectDeps = {
+  dispatch: (command: Command) => Result;
+  getCurrProjId: () => string | null;
+  bus: EventBus;
+};
+
+function createHandleUpdateTitle({
+  dispatch,
+  getCurrProjId,
+  bus,
+}: UpdateProjectDeps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateTitle(match: HTMLElement, _e: Event) {
+    const id = getCurrProjId();
+    if (!id || !match) return;
+    const text =
+      match.textContent.trim().length < 1 ? "New project" : match.textContent;
+    const command: Command = {
+      type: "updateProject",
+      projectId: id,
+      data: { title: text },
+    };
+    dispatch(command);
+
+    bus.publish("project:title-updated", { id, title: text });
+  };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleUpdateOverview(match: HTMLElement, _e: Event) {
-  const id = getCurrProjId();
-  if (!id || !match) return;
-  const command: Command = {
-    type: "updateProject",
-    projectId: id,
-    data: {
-      overview: match.textContent,
-    },
+function createHandleUpdateOverview({
+  dispatch,
+  getCurrProjId,
+}: Omit<UpdateProjectDeps, "bus">) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateOverview(match: HTMLElement, _e: Event) {
+    const id = getCurrProjId();
+    if (!id || !match) return;
+    const command: Command = {
+      type: "updateProject",
+      projectId: id,
+      data: { overview: match.textContent },
+    };
+    dispatch(command);
   };
-  dispatch(command);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
-  const taskId = match.dataset["taskId"];
-  if (!taskId || !match) return;
+type UpdateTaskDeps = {
+  dispatch: (command: Command) => Result;
+  refreshCurrTask: (id: string) => void;
+};
 
-  const text = match.textContent?.trim() || "New task";
-  const command: Command = {
-    type: "updateTask",
-    taskId: taskId,
-    data: { title: text },
+function createHandleUpdateTaskTitle({
+  dispatch,
+  refreshCurrTask,
+}: UpdateTaskDeps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
+    const taskId = match.dataset["taskId"];
+    if (!taskId || !match) return;
+    const text = match.textContent?.trim() || "New task";
+    const command: Command = {
+      type: "updateTask",
+      taskId,
+      data: { title: text },
+    };
+    const result = dispatch(command);
+    if (result?.type === "updatedTask") refreshCurrTask(result.id);
   };
-
-  const result = dispatch(command);
-
-  // Refresh current project view
-  if (result?.type === "updatedTask") {
-    refreshCurrTask(result.id);
-  }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
-  const taskId = match.dataset["taskId"];
-  if (!taskId || !match) return;
-
-  const command: Command = {
-    type: "updateTask",
-    taskId: taskId,
-    data: { overview: match.textContent || "" },
+function createHandleUpdateTaskOverview({
+  dispatch,
+  refreshCurrTask,
+}: UpdateTaskDeps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
+    const taskId = match.dataset["taskId"];
+    if (!taskId || !match) return;
+    const command: Command = {
+      type: "updateTask",
+      taskId,
+      data: { overview: match.textContent || "" },
+    };
+    const result = dispatch(command);
+    if (result?.type === "updatedTask") refreshCurrTask(result.id);
   };
-  const result = dispatch(command);
-
-  if (result?.type === "updatedTask") {
-    refreshCurrTask(result.id);
-  }
 }
 
 //misc
 function handlePreventNewLine(match: HTMLElement, e: Event) {
   const inputEvent = e as InputEvent;
-
   if (inputEvent.inputType === "insertParagraph") {
     e.preventDefault();
     match.blur();
@@ -143,10 +151,10 @@ function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
 }
 
 export {
-  handleUpdateOverview,
-  handleUpdateTitle,
+  createHandleUpdateTitle,
+  createHandleUpdateOverview,
+  createHandleUpdateTaskTitle,
+  createHandleUpdateTaskOverview,
   handlePreventNewLine,
   handlePasteAsPlainText,
-  handleUpdateTaskOverview,
-  handleUpdateTaskTitle,
 };

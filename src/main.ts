@@ -1,12 +1,8 @@
-import { initializeServices } from "./bootstrap/initializers/eventInit";
-import { initializeDatabase } from "./bootstrap/initializers/databaseInit";
-import { initializeEvents } from "./ui/eventDelegation";
+import { init } from "./bootstrap/init";
 import "./ui/styles/app.css";
 
 //initialize app
-initializeServices();
-initializeDatabase();
-initializeEvents();
+init();
 
 window.addEventListener("load", () => {
   document.body.style.opacity = "1";

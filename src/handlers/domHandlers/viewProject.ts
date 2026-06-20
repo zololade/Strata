@@ -1,11 +1,11 @@
-import { selectProject } from "../../ui/views/home";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleSelectProj(match: HTMLElement, _e: Event) {
-  const btn = match.dataset["id"];
-
-  if (btn) {
-    selectProject(btn);
-  }
+function createHandleSelectProj(selectProject: (id: string) => void) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleSelectProj(match: HTMLElement, _e: Event) {
+    const btn = match.dataset["id"];
+    if (btn) {
+      selectProject(btn);
+    }
+  };
 }
 
-export { handleSelectProj };
+export { createHandleSelectProj };

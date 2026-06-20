@@ -1,75 +1,84 @@
-import type { Command } from "../../types/command";
-import { dispatch } from "../../store/dispatch";
-import { refreshTask } from "../../ui/reactions/taskReaction";
+import type { Command, Result } from "../../types/command";
 import { ModalManager } from "../../ui/views/component/Modal";
-import { getCurrProjId, refreshList, selectProject } from "../../ui/views/home";
 
-// create new project
-function handleCreateProj(_match: HTMLElement, e: Event) {
-  e.preventDefault();
-  //first you build the data
-  const titleField = document.querySelector(
-    "#projTitle",
-  ) as HTMLInputElement | null;
-  const overviewField = document.querySelector(
-    "#projOverview",
-  ) as HTMLInputElement | null;
-  const listHost = document.querySelector(
-    ".mainNav__list",
-  ) as HTMLUListElement | null;
+type CreateProjDeps = {
+  dispatch: (command: Command) => Result;
+  refreshList: () => (listHost: HTMLElement, cb: () => void) => void;
+  selectProject: (id: string) => void;
+};
 
-  if (titleField && overviewField) {
-    const command: Command = {
-      type: "createProject",
-      data: {
-        title:
-          titleField.value.trim().length < 1 ? "New project" : titleField.value,
-        overview: overviewField.value,
-        flag: null,
-        tasks: [],
-      },
-    };
-    const projData = dispatch(command);
+function createHandleCreateProj({
+  dispatch,
+  refreshList,
+  selectProject,
+}: CreateProjDeps) {
+  return function handleCreateProj(_match: HTMLElement, e: Event) {
+    e.preventDefault();
+    const titleField = document.querySelector(
+      "#projTitle",
+    ) as HTMLInputElement | null;
+    const overviewField = document.querySelector(
+      "#projOverview",
+    ) as HTMLInputElement | null;
+    const listHost = document.querySelector(
+      ".mainNav__list",
+    ) as HTMLUListElement | null;
 
-    //few things to do before rendering
-    titleField.value = "";
-    overviewField.value = "";
-    //some side effects
-    ModalManager.close(".dialog");
-    const afterRender = refreshList();
-    //render created project
-    if (projData?.type === "createdProject" && listHost)
-      afterRender(listHost, () => selectProject(projData.id));
-  }
+    if (titleField && overviewField) {
+      const command: Command = {
+        type: "createProject",
+        data: {
+          title:
+            titleField.value.trim().length < 1
+              ? "New project"
+              : titleField.value,
+          overview: overviewField.value,
+          flag: null,
+          tasks: [],
+        },
+      };
+      const projData = dispatch(command);
+
+      titleField.value = "";
+      overviewField.value = "";
+      ModalManager.close(".dialog");
+      const afterRender = refreshList();
+      if (projData?.type === "createdProject" && listHost)
+        afterRender(listHost, () => selectProject(projData.id));
+    }
+  };
 }
 
-//create new task
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleCreateTask(_match: HTMLElement, _e: Event) {
-  const id = getCurrProjId();
-  if (id) {
-    const command: Command = {
-      projectId: id,
-      type: "createTask",
-      data: {
-        title: "",
-        overview: "",
-        flag: null,
-        items: [],
-      },
-    };
+type CreateTaskDeps = {
+  dispatch: (command: Command) => Result;
+  refreshTask: (cb: () => void) => void;
+  getCurrProjId: () => string | null;
+};
 
-    const result = dispatch(command);
+function createHandleCreateTask({
+  dispatch,
+  refreshTask,
+  getCurrProjId,
+}: CreateTaskDeps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleCreateTask(_match: HTMLElement, _e: Event) {
+    const id = getCurrProjId();
+    if (id) {
+      const command: Command = {
+        projectId: id,
+        type: "createTask",
+        data: { title: "", overview: "", flag: null, items: [] },
+      };
+      const result = dispatch(command);
 
-    refreshTask(() => {
-      if (result?.type !== "createdTask") return;
-
-      const selector = `h3[contenteditable="true"][data-task-id="${result.id}"]`;
-      const heading3 = document.querySelector(selector) as HTMLElement | null;
-
-      if (heading3) heading3.focus();
-    });
-  }
+      refreshTask(() => {
+        if (result?.type !== "createdTask") return;
+        const selector = `h3[contenteditable="true"][data-task-id="${result.id}"]`;
+        const heading3 = document.querySelector(selector) as HTMLElement | null;
+        if (heading3) heading3.focus();
+      });
+    }
+  };
 }
 
-export { handleCreateProj, handleCreateTask };
+export { createHandleCreateProj, createHandleCreateTask };

@@ -1,30 +1,40 @@
-import { bindStore, getStore } from "../../store/Store";
 import { putProjects } from "../../storage/dao";
-import { appBus } from "../../bootstrap/initializers/eventInit";
-import { appShell } from "../../ui/views/home";
-import { showActiveProject } from "../../ui/reactions/activeProject";
+import type { EventBus } from "../../lib/EventBus";
+import type { StoredType } from "../../types/Types";
 
-function handleDatabaseLoaded(data: unknown) {
-  bindStore(data);
-
-  appBus.publish("store:ready", getStore());
+function createHandleDatabaseLoaded(
+  bind: (data: unknown) => void,
+  store: StoredType,
+  appBus: EventBus,
+) {
+  return function handleDatabaseLoaded(data: unknown) {
+    bind(data);
+    appBus.publish("store:ready", store);
+  };
 }
 
 function handleDatabaseUpdate(data: unknown) {
   putProjects(data);
 }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function handleStoreLoaded(_data: unknown) {
-  appShell();
+
+function createHandleStoreLoaded(appShell: () => void) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleStoreLoaded(_data: unknown) {
+    appShell();
+  };
 }
 
-function handleProjectSelection(data: unknown) {
-  showActiveProject(data);
+function createHandleProjectSelection(
+  showActiveProject: (data: unknown) => void,
+) {
+  return function handleProjectSelection(data: unknown) {
+    showActiveProject(data);
+  };
 }
 
 export {
-  handleDatabaseLoaded,
+  createHandleDatabaseLoaded,
   handleDatabaseUpdate,
-  handleStoreLoaded,
-  handleProjectSelection,
+  createHandleStoreLoaded,
+  createHandleProjectSelection,
 };

@@ -1,37 +1,51 @@
 import { renderElement } from "../../lib/renderUtilities";
-import { getStore } from "../../store/Store";
 import { viewProject } from "../views/component/detailPanel";
-import { getPrevProjId, setPrevProjId } from "../views/home";
+import type { StoredType } from "../../types/Types";
 
-function showActiveProject(data: unknown) {
-  const viewPanel = document.querySelector(
-    ".mainContent__workspace",
-  ) as HTMLElement | null;
-  const projectHeaderTitle = document.querySelector(
-    "#projDetailTitle",
-  ) as HTMLElement | null;
+type ShowActiveProjectDeps = {
+  store: StoredType;
+  getPrevProjId: () => string | null;
+  setPrevProjId: (id: string) => void;
+};
 
-  if (viewPanel && projectHeaderTitle && typeof data === "string") {
-    const project = getStore().projects.get(data);
-    projectHeaderTitle.textContent = project ? project.title : "";
+function createShowActiveProject({
+  store,
+  getPrevProjId,
+  setPrevProjId,
+}: ShowActiveProjectDeps) {
+  function updateList(id: string) {
+    const listContainer = document.querySelector(
+      ".mainNav__list",
+    ) as HTMLDialogElement | null;
 
-    renderElement(viewPanel, viewProject(data, getStore()));
-
-    updateList(data);
+    if (listContainer) {
+      const prev = listContainer.querySelector(
+        `[data-id="${getPrevProjId()}"]`,
+      );
+      const active = listContainer.querySelector(`[data-id="${id}"]`);
+      if (prev) prev.classList.remove("active");
+      if (active) active.classList.add("active");
+      setPrevProjId(id);
+    }
   }
+
+  return function showActiveProject(data: unknown) {
+    const viewPanel = document.querySelector(
+      ".mainContent__workspace",
+    ) as HTMLElement | null;
+    const projectHeaderTitle = document.querySelector(
+      "#projDetailTitle",
+    ) as HTMLElement | null;
+
+    if (viewPanel && projectHeaderTitle && typeof data === "string") {
+      const project = store.projects.get(data);
+      projectHeaderTitle.textContent = project ? project.title : "";
+
+      renderElement(viewPanel, viewProject(data, store));
+
+      updateList(data);
+    }
+  };
 }
 
-function updateList(id: string) {
-  const listContainer = document.querySelector(
-    ".mainNav__list",
-  ) as HTMLDialogElement | null;
-
-  if (listContainer) {
-    const prev = listContainer.querySelector(`[data-id="${getPrevProjId()}"]`);
-    const active = listContainer.querySelector(`[data-id="${id}"]`);
-    if (prev) prev.classList.remove("active");
-    if (active) active.classList.add("active");
-    setPrevProjId(id);
-  }
-}
-export { showActiveProject };
+export { createShowActiveProject };

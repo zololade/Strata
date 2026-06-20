@@ -1,46 +1,53 @@
 import { renderElement } from "../../lib/renderUtilities";
 import { formatDuration, getTimeObj } from "../../lib/time";
-import { getStore } from "../../store/Store";
 import { viewProject } from "../views/component/detailPanel";
 import { generateTaskContent } from "../views/component/selectedProj";
-import { getCurrProjId } from "../views/home";
+import type { StoredType } from "../../types/Types";
 
-function refreshTask(afterRender?: () => void) {
-  const projId = getCurrProjId();
-  if (projId) {
-    const viewPanel = document.querySelector(
-      ".mainContent__workspace",
-    ) as HTMLElement;
-    if (viewPanel) {
-      const store = getStore(); // you'll need to import getStore
-      if (afterRender) {
-        renderElement(
-          viewPanel,
-          viewProject(projId, store),
-          false,
-          afterRender,
-        );
-      } else {
-        renderElement(viewPanel, viewProject(projId, store));
+type TaskReactionDeps = {
+  store: StoredType;
+  getCurrProjId: () => string | null;
+};
+
+function createTaskReactions({ store, getCurrProjId }: TaskReactionDeps) {
+  function refreshTask(afterRender?: () => void) {
+    const projId = getCurrProjId();
+    if (projId) {
+      const viewPanel = document.querySelector(
+        ".mainContent__workspace",
+      ) as HTMLElement;
+      if (viewPanel) {
+        if (afterRender) {
+          renderElement(
+            viewPanel,
+            viewProject(projId, store),
+            false,
+            afterRender,
+          );
+        } else {
+          renderElement(viewPanel, viewProject(projId, store));
+        }
       }
     }
   }
-}
 
-function refreshCurrTask(Id: string) {
-  const currTask = getStore().tasks.get(Id);
-  const host = document.querySelector(
-    `article[data-id="${Id}"]`,
-  ) as HTMLElement;
+  function refreshCurrTask(id: string) {
+    const currTask = store.tasks.get(id);
+    const host = document.querySelector(
+      `article[data-id="${id}"]`,
+    ) as HTMLElement;
 
-  if (currTask && host) {
-    const lastUpdated =
-      currTask.lastModified === 0 ? currTask.createdAt : currTask.lastModified;
-
-    const duration = formatDuration(getTimeObj(lastUpdated));
-
-    renderElement(host, generateTaskContent(currTask, duration));
+    if (currTask && host) {
+      const lastUpdated =
+        currTask.lastModified === 0
+          ? currTask.createdAt
+          : currTask.lastModified;
+      const duration = formatDuration(getTimeObj(lastUpdated));
+      renderElement(host, generateTaskContent(currTask, duration));
+    }
   }
+
+  return { refreshTask, refreshCurrTask };
 }
 
-export { refreshTask, refreshCurrTask };
+export { createTaskReactions };

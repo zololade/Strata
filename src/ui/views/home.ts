@@ -1,50 +1,52 @@
-import { appBus } from "../../bootstrap/initializers/eventInit";
 import { renderElement } from "../../lib/renderUtilities";
-import { getStore } from "../../store/Store";
 import { detailPanelShell } from "./component/detailPanel";
 import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
+import type { ProjectStore } from "../../store/Store";
+import type { EventBus } from "../../lib/EventBus";
 
-const main = document.querySelector("#app") as HTMLElement;
-let selectedProjectId: string | null = null;
-let prevSelectedProjId: string | null = null;
-const getCurrProjId = () => selectedProjectId;
-const getPrevProjId = () => prevSelectedProjId;
-const setPrevProjId = (id: string) => (prevSelectedProjId = id);
+function createAppShell(store: ProjectStore, bus: EventBus) {
+  const main = document.querySelector("#app") as HTMLElement;
+  let selectedProjectId: string | null = null;
+  let prevSelectedProjId: string | null = null;
 
-//initial render
-function appShell() {
-  renderElement(main, [
-    { tag: "h1", class: "accessible", content: "Strata" },
-    {
-      tag: "div",
-      class: "drawer-backdrop",
-      id: "backdrop",
-      ["data-action"]: "close-nav",
-    },
-    projectLoader(getStore()),
-    [newProject(), detailPanelShell()],
-  ]);
+  const getCurrProjId = () => selectedProjectId;
+  const getPrevProjId = () => prevSelectedProjId;
+  const setPrevProjId = (id: string) => (prevSelectedProjId = id);
+
+  function appShell() {
+    renderElement(main, [
+      { tag: "h1", class: "accessible", content: "Strata" },
+      {
+        tag: "div",
+        class: "drawer-backdrop",
+        id: "backdrop",
+        ["data-action"]: "close-nav",
+      },
+      projectLoader(store),
+      [newProject(), detailPanelShell()],
+    ]);
+  }
+
+  function selectProject(id: string) {
+    selectedProjectId = id;
+    bus.publish("view:project", id);
+    main.classList.add("project-selected");
+  }
+
+  function refreshList() {
+    return (listHost: HTMLElement, afterRender: () => void) =>
+      renderElement(listHost, generateList(store), false, afterRender);
+  }
+
+  return {
+    appShell,
+    getCurrProjId,
+    selectProject,
+    getPrevProjId,
+    setPrevProjId,
+    refreshList,
+  };
 }
 
-//select project to view
-function selectProject(id: string) {
-  selectedProjectId = id;
-  appBus.publish("view:project", id);
-  main.classList.add("project-selected");
-}
-
-//refresh list
-function refreshList() {
-  return (listHost: HTMLElement, afterRender: () => void) =>
-    renderElement(listHost, generateList(getStore()), false, afterRender);
-}
-
-export {
-  appShell,
-  getCurrProjId,
-  selectProject,
-  getPrevProjId,
-  setPrevProjId,
-  refreshList,
-};
+export { createAppShell };
