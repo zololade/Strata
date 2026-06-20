@@ -2,7 +2,6 @@ import { EventBus } from "../../lib/EventBus";
 
 const databaseBus = new EventBus();
 const appBus = new EventBus();
-const storeBus = new EventBus();
 
 import {
   createHandleDatabaseLoaded,
@@ -39,4 +38,4 @@ function initializeServices(
   appBus.subscribe("project:title-updated", handleTitleUpdated);
 }
 
-export { databaseBus, appBus, storeBus, initializeServices };
+export { databaseBus, appBus, initializeServices };
