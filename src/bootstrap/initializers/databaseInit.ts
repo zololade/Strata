@@ -1,4 +1,4 @@
-import { databaseBus } from "../../lib/Buses";
+import { databaseBus } from "./eventInit";
 import { getStoredData } from "../../storage/dao";
 
 function initializeDatabase() {

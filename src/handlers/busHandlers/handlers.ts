@@ -1,6 +1,6 @@
 import { bindStore, getStore } from "../../store/Store";
 import { putProjects } from "../../storage/dao";
-import { appBus } from "../../lib/Buses";
+import { appBus } from "../../bootstrap/initializers/eventInit";
 import { appShell } from "../../ui/views/home";
 import { showActiveProject } from "../../ui/reactions/activeProject";
 

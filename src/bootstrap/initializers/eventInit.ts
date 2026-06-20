@@ -1,4 +1,9 @@
-import { appBus, databaseBus } from "../../lib/Buses";
+import { EventBus } from "../../lib/EventBus";
+
+const databaseBus = new EventBus();
+const appBus = new EventBus();
+const storeBus = new EventBus();
+
 import {
   handleDatabaseLoaded,
   handleDatabaseUpdate,
@@ -14,4 +19,4 @@ function initializeServices() {
   appBus.subscribe("view:project", handleProjectSelection);
 }
 
-export { initializeServices };
+export { databaseBus, appBus, storeBus, initializeServices };

@@ -4,7 +4,7 @@ import type {
   ProjectUpdate,
   StoredType,
 } from "../../types/Types";
-import { databaseBus } from "../../lib/Buses";
+import { databaseBus } from "../../bootstrap/initializers/eventInit";
 import type { Result } from "../../types/command";
 import { Task } from "./Task";
 

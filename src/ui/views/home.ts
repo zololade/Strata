@@ -1,4 +1,4 @@
-import { appBus } from "../../lib/Buses";
+import { appBus } from "../../bootstrap/initializers/eventInit";
 import { renderElement } from "../../lib/renderUtilities";
 import { getStore } from "../../store/Store";
 import { detailPanelShell } from "./component/detailPanel";

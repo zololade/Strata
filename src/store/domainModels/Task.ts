@@ -1,4 +1,4 @@
-import { databaseBus } from "../../lib/Buses";
+import { databaseBus } from "../../bootstrap/initializers/eventInit";
 import type { Result } from "../../types/command";
 import type {
   NewTaskInput,
