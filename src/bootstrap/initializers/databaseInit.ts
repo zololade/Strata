@@ -1,5 +1,5 @@
-import { databaseBus } from "../lib/Buses";
-import { getStoredData } from "./dao";
+import { databaseBus } from "../../lib/Buses";
+import { getStoredData } from "../../storage/dao";
 
 function initializeDatabase() {
   databaseBus.publish("database:loaded", getStoredData());
