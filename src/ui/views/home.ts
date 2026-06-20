@@ -4,6 +4,7 @@ import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
 import type { ProjectStore } from "../../store/Store";
 import type { EventBus } from "../../lib/EventBus";
+import { button } from "./component/btn";
 
 function createAppShell(store: ProjectStore, bus: EventBus) {
   const main = document.querySelector("#app") as HTMLElement;
@@ -23,6 +24,7 @@ function createAppShell(store: ProjectStore, bus: EventBus) {
         id: "backdrop",
         ["data-action"]: "close-nav",
       },
+      button("mainNav__close", "Close navigation", "close-nav", "close"),
       projectLoader(store),
       [newProject(), detailPanelShell()],
     ]);

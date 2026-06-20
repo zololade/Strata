@@ -14,12 +14,28 @@
   font-size: 1rem;
 }
 
+.mainNav__close {
+  position: fixed;
+  top: 0.6rem;
+  left: 260px;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity var(--transition-speed) ease-in-out,
+    visibility var(--transition-speed) ease-in-out;
+  color: var(--content-highlight-color);
+  .material-symbols-outlined {
+    font-size: 1.15rem;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   #app {
     display: block;
     height: auto;
 
-    > * {
+    > *:not(.mainNav) {
       width: auto;
     }
 
@@ -65,6 +81,11 @@
   #app.is_open {
     .mainNav {
       transform: translateX(0);
+    }
+
+    .mainNav__close {
+      visibility: visible;
+      opacity: 1;
     }
 
     .drawer-backdrop {
