@@ -3,9 +3,9 @@ import type {
   ProjectInput,
   ProjectUpdate,
   StoredType,
-} from "../../lib/Types";
+} from "../../types/Types";
 import { databaseBus } from "../../lib/Buses";
-import type { Result } from "../../lib/command";
+import type { Result } from "../../types/command";
 import { Task } from "./Task";
 
 class Project {

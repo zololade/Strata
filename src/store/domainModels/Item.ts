@@ -1,11 +1,11 @@
 import { databaseBus } from "../../lib/Buses";
-import type { Result } from "../../lib/command";
+import type { Result } from "../../types/command";
 import type {
   ItemInput,
   ItemUpdate,
   NewItemInput,
   StoredType,
-} from "../../lib/Types";
+} from "../../types/Types";
 
 class Item {
   id: string;

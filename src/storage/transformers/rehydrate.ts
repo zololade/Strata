@@ -10,7 +10,7 @@ import type {
   Snapshot,
   StoredType,
   TaskInstance,
-} from "../../lib/Types";
+} from "../../types/Types";
 import { isSnapshot } from "./typeGuards/guards";
 import { Item } from "../../store/domainModels/Item";
 import { Project } from "../../store/domainModels/Project";

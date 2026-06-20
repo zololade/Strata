@@ -1,4 +1,4 @@
-import type { Command } from "../../lib/command";
+import type { Command } from "../../types/command";
 import { dispatch } from "../../store/dispatch";
 import { refreshCurrTask } from "../../ui/reactions/taskReaction";
 import { getCurrProjId } from "../../ui/views/home";

@@ -4,7 +4,7 @@ import type {
   ItemInput,
   ProjectInput,
   TaskInput,
-} from "../../../lib/Types";
+} from "../../../types/Types";
 
 function isItem(v: unknown): v is ItemInput {
   return (

@@ -4,7 +4,7 @@ import type {
   ProjectInstance,
   StoredType,
   TaskInstance,
-} from "../../../lib/Types";
+} from "../../../types/Types";
 import { button } from "./btn";
 
 //selected project data

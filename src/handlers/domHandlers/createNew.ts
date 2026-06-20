@@ -1,4 +1,4 @@
-import type { Command } from "../../lib/command";
+import type { Command } from "../../types/command";
 import { dispatch } from "../../store/dispatch";
 import { refreshTask } from "../../ui/reactions/taskReaction";
 import { ModalManager } from "../../ui/views/component/Modal";

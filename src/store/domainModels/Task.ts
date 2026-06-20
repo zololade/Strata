@@ -1,11 +1,11 @@
 import { databaseBus } from "../../lib/Buses";
-import type { Result } from "../../lib/command";
+import type { Result } from "../../types/command";
 import type {
   NewTaskInput,
   StoredType,
   TaskInput,
   TaskUpdate,
-} from "../../lib/Types";
+} from "../../types/Types";
 import { Item } from "./Item";
 
 class Task {

@@ -1,5 +1,5 @@
 import type { PageData } from "../../../lib/Page";
-import type { StoredType } from "../../../lib/Types";
+import type { StoredType } from "../../../types/Types";
 import { button } from "./btn";
 import { selectedProj } from "./selectedProj";
 

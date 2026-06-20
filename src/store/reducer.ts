@@ -1,4 +1,4 @@
-import type { Command } from "../lib/command";
+import type { Command } from "../types/command";
 import { Item } from "./domainModels/Item";
 import { Project } from "./domainModels/Project";
 import { getStore } from "./Store";
