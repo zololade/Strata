@@ -62,24 +62,52 @@ const selectedProj = (
         tag: "div",
         class: "workspace__task",
         content: [
-          {
-            tag: "div",
-            class: "tasks__mainHeader",
-            content: [
-              { tag: "p", content: "Add task" },
-              button(
-                "mainHeader__menu",
-                `Create tasks button`,
-                "create-task",
-                "add",
-              ),
-            ],
-          },
-          generateTasks([...project.tasks], store),
+          project.tasks.size > 0
+            ? {
+                tag: "div",
+                class: "tasks__mainHeader",
+                content: [
+                  { tag: "p", content: "Add task" },
+                  button(
+                    "mainHeader__menu",
+                    `Create tasks button`,
+                    "create-task",
+                    "add",
+                  ),
+                ],
+              }
+            : [],
+          project.tasks.size > 0
+            ? generateTasks([...project.tasks], store)
+            : noTasksState,
         ],
       },
     ],
   };
+};
+
+const noTasksState: PageData = {
+  tag: "div",
+  class: "emptyState emptyState--tasks",
+  content: [
+    {
+      tag: "span",
+      class: "material-symbols-outlined",
+      ["aria-hidden"]: true,
+      content: "checklist",
+    },
+    { tag: "h3", content: "No tasks yet" },
+    {
+      tag: "p",
+      content: "Break this project down into smaller, actionable tasks.",
+    },
+    {
+      tag: "button",
+      class: "emptyState__button",
+      ["data-action"]: "create-task",
+      content: "+ Add task",
+    },
+  ],
 };
 
 function generateTasks(ids: string[], store: StoredType): PageData[] {
