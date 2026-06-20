@@ -4,6 +4,7 @@ Todo
 - Snapshot versioning
 - flag validation
 */
+
 import type {
   ItemInstance,
   ProjectInstance,
@@ -12,9 +13,9 @@ import type {
   TaskInstance,
 } from "../../types/Types";
 import { isSnapshot } from "./typeGuards/guards";
-import { Item } from "../../store/Items/Item";
-import { Project } from "../../store/domainModels/Project";
-import { Task } from "../../store/Tasks/Task";
+import { Item } from "../../store/Items";
+import { Project } from "../../store/Projects";
+import { Task } from "../../store/Tasks";
 
 function rehydrateFactory(data: Snapshot) {
   const projects = new Map<string, ProjectInstance>();
