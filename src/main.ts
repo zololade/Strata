@@ -1,6 +1,6 @@
 import { initializeServices } from "./bootstrap/initializers/eventInit";
 import { initializeDatabase } from "./bootstrap/initializers/databaseInit";
-import { initializeEvents } from "./ui/events/eventDelegation";
+import { initializeEvents } from "./ui/eventDelegation";
 import "./ui/styles/app.css";
 
 //initialize app

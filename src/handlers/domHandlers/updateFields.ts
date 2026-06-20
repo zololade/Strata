@@ -1,6 +1,6 @@
 import type { Command } from "../../lib/command";
 import { dispatch } from "../../store/dispatch";
-import { refreshCurrTask } from "../../ui/UIreactions/taskReaction";
+import { refreshCurrTask } from "../../ui/reactions/taskReaction";
 import { getCurrProjId } from "../../ui/views/home";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateTitle(match: HTMLElement, _e: Event) {

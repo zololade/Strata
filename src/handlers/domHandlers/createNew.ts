@@ -1,6 +1,6 @@
 import type { Command } from "../../lib/command";
 import { dispatch } from "../../store/dispatch";
-import { refreshTask } from "../../ui/UIreactions/taskReaction";
+import { refreshTask } from "../../ui/reactions/taskReaction";
 import { ModalManager } from "../../ui/views/component/Modal";
 import { getCurrProjId, refreshList, selectProject } from "../../ui/views/home";
 
