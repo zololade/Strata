@@ -32,6 +32,7 @@
     position: sticky;
     top: 0;
     background-color: var(--bg-base-color);
+    z-index: 98;
 
     .toolbar__left {
       min-width: 0;
