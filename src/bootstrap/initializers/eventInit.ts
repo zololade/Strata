@@ -13,6 +13,7 @@ import {
 import { createShowActiveProject } from "../../ui/reactions/activeProject";
 import type { StoredType } from "../../types/Types";
 import type { createAppShell } from "../../ui/views/home";
+import { createTitleReaction } from "../../ui/reactions/titleReaction";
 
 function initializeServices(
   store: StoredType,
@@ -27,6 +28,7 @@ function initializeServices(
 
   const handleDatabaseLoaded = createHandleDatabaseLoaded(bind, store, appBus);
   const handleStoreLoaded = createHandleStoreLoaded(ui.appShell);
+  const { handleTitleUpdated } = createTitleReaction();
   const handleProjectSelection =
     createHandleProjectSelection(showActiveProject);
 
@@ -34,6 +36,7 @@ function initializeServices(
   databaseBus.subscribe("database:update", handleDatabaseUpdate);
   appBus.subscribe("store:ready", handleStoreLoaded);
   appBus.subscribe("view:project", handleProjectSelection);
+  appBus.subscribe("project:title-updated", handleTitleUpdated);
 }
 
 export { databaseBus, appBus, storeBus, initializeServices };
