@@ -1,7 +1,7 @@
-import type { Command } from "../../../lib/command";
-import { dispatch } from "../../../store/storeOperations/dispatch";
-import { refreshCurrTask } from "../../UIreactions/taskReaction";
-import { getCurrProjId } from "../../views/home";
+import type { Command } from "../../lib/command";
+import { dispatch } from "../../store/storeOperations/dispatch";
+import { refreshCurrTask } from "../../ui/UIreactions/taskReaction";
+import { getCurrProjId } from "../../ui/views/home";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleUpdateTitle(match: HTMLElement, _e: Event) {
   const id = getCurrProjId();

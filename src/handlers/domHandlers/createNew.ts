@@ -1,8 +1,8 @@
-import type { Command } from "../../../lib/command";
-import { dispatch } from "../../../store/storeOperations/dispatch";
-import { refreshTask } from "../../UIreactions/taskReaction";
-import { ModalManager } from "../../views/component/Modal";
-import { getCurrProjId, refreshList, selectProject } from "../../views/home";
+import type { Command } from "../../lib/command";
+import { dispatch } from "../../store/storeOperations/dispatch";
+import { refreshTask } from "../../ui/UIreactions/taskReaction";
+import { ModalManager } from "../../ui/views/component/Modal";
+import { getCurrProjId, refreshList, selectProject } from "../../ui/views/home";
 
 // create new project
 function handleCreateProj(_match: HTMLElement, e: Event) {

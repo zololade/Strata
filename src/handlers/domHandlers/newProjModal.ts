@@ -1,4 +1,4 @@
-import { ModalManager } from "../../views/component/Modal";
+import { ModalManager } from "../../ui/views/component/Modal";
 
 //open modal
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

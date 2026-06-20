@@ -1,7 +1,16 @@
-import { handleNavBtn, handleNavClose } from "./handlers/navTrigger";
-import { handleCreateProj, handleCreateTask } from "./handlers/createNew";
-import { handleHideModal, handleOpenModal } from "./handlers/newProjModal";
-import { handleSelectProj } from "./handlers/viewProject";
+import {
+  handleNavBtn,
+  handleNavClose,
+} from "../../handlers/domHandlers/navTrigger";
+import {
+  handleCreateProj,
+  handleCreateTask,
+} from "../../handlers/domHandlers/createNew";
+import {
+  handleHideModal,
+  handleOpenModal,
+} from "../../handlers/domHandlers/newProjModal";
+import { handleSelectProj } from "../../handlers/domHandlers/viewProject";
 import {
   handlePreventNewLine,
   handleUpdateOverview,
@@ -9,7 +18,7 @@ import {
   handlePasteAsPlainText,
   handleUpdateTaskOverview,
   handleUpdateTaskTitle,
-} from "./handlers/updateFields";
+} from "../../handlers/domHandlers/updateFields";
 
 const main = document.querySelector("#app") as HTMLElement;
 
