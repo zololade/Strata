@@ -76,6 +76,17 @@
       min-width: 0;
     }
 
+    /* chrome bug */
+    .task__title:empty,
+    .task__title:has(br:only-child) {
+      max-height: calc(0.9rem * 1.5);
+    }
+
+    .task__overview:empty,
+    .task__overview:has(br:only-child) {
+      max-height: calc(0.8rem * 1.5);
+    }
+
     .task__flags {
       margin-top: 1rem;
 
