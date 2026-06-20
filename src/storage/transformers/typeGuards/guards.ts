@@ -1,4 +1,4 @@
-import { hasKeys } from "../../../lib/utils";
+import { hasKeys } from "../../../lib/guard";
 import type {
   Snapshot,
   ItemInput,

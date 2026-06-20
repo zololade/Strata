@@ -10,7 +10,7 @@ describe("rehydrateFactory", () => {
   describe("good data", () => {
     let store: StoredType | null = null;
     beforeAll(() => {
-      let data = TestData;
+      const data = TestData;
       store = rehydrateFactory(data);
     });
     it("creates correct number of project instances", () => {

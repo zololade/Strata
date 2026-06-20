@@ -4,7 +4,7 @@ import { EventBus } from "../../src/lib/EventBus";
 describe("EventBus", () => {
   let testEvent: EventBus;
   let message: string | null = null;
-  let action: (data: unknown) => void = (data) => {
+  const action: (data: unknown) => void = (data) => {
     if (typeof data === "string") message = data;
   };
 

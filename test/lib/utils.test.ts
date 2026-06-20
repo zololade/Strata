@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { hasKeys } from "../../src/lib/utils";
+import { hasKeys } from "../../src/lib/guard";
 
 describe("hasKeys", () => {
-  let testObj = {
+  const testObj = {
     name: "john",
     gender: "male",
     club: "arsenal",

@@ -1,7 +1,7 @@
 //data access object
 import { StoreReader } from "./transformers/serializer";
 import type { StoredType, Snapshot as Outgoing } from "../types/Types";
-import { hasKeys } from "../lib/utils";
+import { hasKeys } from "../lib/guard";
 import { seedData } from "./seedData";
 
 const storedData =

@@ -1,4 +1,4 @@
-let data = {
+const data = {
   projects: [
     {
       id: "proj-1",
@@ -44,7 +44,7 @@ let data = {
   ],
 };
 
-let badData = {
+const badData = {
   projects: [
     {
       id: "proj-1",

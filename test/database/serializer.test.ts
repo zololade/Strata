@@ -7,9 +7,9 @@ import { StoreReader } from "../../src/storage/transformers/serializer";
 describe("buildProjectGraph", () => {
   let result: Outgoing | null = null;
   beforeAll(() => {
-    let data = TestData;
-    let store: StoredType = rehydrateFactory(data);
-    let reader = new StoreReader(store);
+    const data = TestData;
+    const store: StoredType = rehydrateFactory(data);
+    const reader = new StoreReader(store);
     result = {
       projects: reader.hydrateProject(),
       tasks: reader.hydrateTask(),
