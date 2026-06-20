@@ -18,7 +18,7 @@
 
     .mainNav__title {
       color: var(--content-highlight-color);
-      font-size: 0.8rem;
+      font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.9rem);
       font-weight: 500;
     }
 
@@ -51,7 +51,7 @@
       white-space: nowrap;
 
       h3 {
-        font-size: 0.75rem;
+        font-size: clamp(0.65rem, 0.6rem + 0.3vw, 0.8rem);
         font-weight: 400;
       }
 

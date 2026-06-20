@@ -40,7 +40,7 @@
 
       [aria-hidden="true"] {
         margin-left: 0.35rem;
-        font-size: 0.8rem;
+        font-size: clamp(0.7rem, 0.65rem + 0.3vw, 0.8rem);
         font-weight: 500;
         min-width: 0;
         max-width: 14ch;
@@ -86,17 +86,17 @@
       padding: 2rem;
 
       .material-symbols-outlined {
-        font-size: 3rem;
+        font-size: clamp(2.25rem, 2rem + 2vw, 3.5rem);
       }
 
       h2 {
         color: var(--content-highlight-color);
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
       }
 
       p {
         max-width: 300px;
-        font-size: 0.875rem;
+        font-size: clamp(0.8rem, 0.75rem + 0.3vw, 0.95rem);
       }
 
       .emptyState__button {
@@ -134,7 +134,7 @@
         padding-top: 3.5rem;
         .material-symbols-outlined {
           font-weight: normal;
-          font-size: 1.5rem;
+          font-size: clamp(1.25rem, 1.1rem + 1vw, 1.75rem);
         }
       }
 
@@ -142,7 +142,7 @@
         margin-top: 1.25rem;
 
         button {
-          font-size: 0.8rem;
+          font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.9rem);
           border: none;
           padding: 0rem 0.35rem;
           border-radius: 15px;

@@ -6,7 +6,7 @@
     padding: 0 0.25rem;
 
     p {
-      font-size: 0.8rem;
+      font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.9rem);
     }
 
     .mainHeader__menu {
@@ -47,13 +47,13 @@
         gap: 0.5rem;
 
         p {
-          font-size: 0.7rem;
+          font-size: clamp(0.65rem, 0.6rem + 0.3vw, 0.8rem);
         }
 
         .separator {
           display: grid;
           place-content: center;
-          font-size: 0.5rem;
+          font-size: clamp(0.45rem, 0.4rem + 0.3vw, 0.6rem);
         }
       }
     }
@@ -82,14 +82,14 @@
     .task__title {
       color: var(--content-highlight-color);
       font-weight: 380;
-      transform: scale(0.9);
-      width: calc(100% / 0.9);
+      transform: scale(var(--title-responsive-scale));
+      width: calc(100% / var(--title-responsive-scale));
     }
     .task__overview {
       color: var(--content-dim-color);
       min-width: 0;
-      transform: scale(0.8);
-      width: calc(100% / 0.8);
+      transform: scale(var(--overview-responsive-scale));
+      width: calc(100% / var(--overview-responsive-scale));
     }
 
     /* chrome bug */
