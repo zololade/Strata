@@ -12,9 +12,9 @@ import type {
   TaskInstance,
 } from "../../types/Types";
 import { isSnapshot } from "./typeGuards/guards";
-import { Item } from "../../store/domainModels/Item";
+import { Item } from "../../store/Items/Item";
 import { Project } from "../../store/domainModels/Project";
-import { Task } from "../../store/domainModels/Task";
+import { Task } from "../../store/Tasks/Task";
 
 function rehydrateFactory(data: Snapshot) {
   const projects = new Map<string, ProjectInstance>();
