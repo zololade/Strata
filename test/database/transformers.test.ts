@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Project } from "../../src/store/Projects/Project";
+import { Project } from "../../src/store/domainModels/Project";
 import type { StoredType } from "../../src/lib/Types";
-import { Task } from "../../src/store/Tasks/Task";
-import { Item } from "../../src/store/Items/Item";
+import { Task } from "../../src/store/domainModels/Task";
+import { Item } from "../../src/store/domainModels/Item";
 import { rehydrateFactory } from "../../src/storage/transformers/rehydrate";
 import { badData, TestData } from "./TestData";
 

@@ -6,7 +6,7 @@ import type {
 } from "../../lib/Types";
 import { databaseBus } from "../../lib/Buses";
 import type { Result } from "../../lib/command";
-import { Task } from "../Tasks/Task";
+import { Task } from "./Task";
 
 class Project {
   id: string;

@@ -6,7 +6,7 @@ import type {
   TaskInput,
   TaskUpdate,
 } from "../../lib/Types";
-import { Item } from "../Items/Item";
+import { Item } from "./Item";
 
 class Task {
   id: string;
