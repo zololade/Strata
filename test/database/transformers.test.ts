@@ -3,7 +3,7 @@ import { Project } from "../../src/store/models/Project";
 import type { StoredType } from "../../src/lib/Types";
 import { Task } from "../../src/store/models/Task";
 import { Item } from "../../src/store/models/Item";
-import { rehydrateFactory } from "../../src/data/transformers/rehydrate";
+import { rehydrateFactory } from "../../src/storage/transformers/rehydrate";
 import { badData, TestData } from "./TestData";
 
 describe("rehydrateFactory", () => {

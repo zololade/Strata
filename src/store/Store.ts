@@ -1,5 +1,5 @@
 // project map shared state
-import { loadSnapshot } from "../data/transformers/rehydrate";
+import { loadSnapshot } from "../storage/transformers/rehydrate";
 import type { ItemInstance, ProjectInstance, TaskInstance } from "../lib/Types";
 
 class ProjectStore {

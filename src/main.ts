@@ -1,5 +1,5 @@
 import { initializeServices } from "./bootstrap/initializers/eventInit";
-import { initializeDatabase } from "./data/index";
+import { initializeDatabase } from "./storage/index";
 import { initializeEvents } from "./ui/events/eventDelegation";
 import "./ui/styles/app.css";
 
