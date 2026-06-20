@@ -9,7 +9,7 @@ import {
   createHandleStoreLoaded,
   handleDatabaseUpdate,
 } from "../../handlers/busHandlers/handlers";
-import { createShowActiveProject } from "../../ui/reactions/activeProject";
+import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
 import type { StoredType } from "../../types/Types";
 import type { createAppShell } from "../../ui/views/home";
 import { createTitleReaction } from "../../ui/reactions/titleReaction";
