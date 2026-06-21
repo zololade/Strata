@@ -1,6 +1,7 @@
 import { renderElement } from "../../lib/renderUtilities";
 import { viewProject } from "../views/component/detailPanel";
 import type { StoredType } from "../../types/Types";
+import { kebabMenuContent } from "../views/component/KebabMenu";
 
 type ShowActiveProjectDeps = {
   store: StoredType;
@@ -29,6 +30,26 @@ function createShowActiveProject({
     }
   }
 
+  function updateMainKebab(id: string) {
+    const kebabHost = document.querySelector(
+      ".project-kebab-container",
+    ) as HTMLElement | null;
+
+    if (!kebabHost) return;
+
+    renderElement(
+      kebabHost,
+      kebabMenuContent({
+        id,
+        type: "project",
+        options: [
+          { label: "Rename Project", action: "rename-project" },
+          { label: "Delete Project", action: "delete-project", danger: true },
+        ],
+      }),
+    );
+  }
+
   return function showActiveProject(data: unknown) {
     const viewPanel = document.querySelector(
       ".mainContent__workspace",
@@ -41,7 +62,9 @@ function createShowActiveProject({
       const project = store.projects.get(data);
       projectHeaderTitle.textContent = project ? project.title : "";
 
-      renderElement(viewPanel, viewProject(data, store));
+      renderElement(viewPanel, viewProject(data, store), false, () =>
+        updateMainKebab(data),
+      );
 
       updateList(data);
     }

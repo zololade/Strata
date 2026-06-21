@@ -79,12 +79,11 @@ function detailPanelShell(): PageData {
               },
             ],
           },
-          button({
-            cls: "toolbar__menu",
-            label: "Project options",
-            action: "not-set",
-            type: "more",
-          }),
+          {
+            tag: "div",
+            class: "project-kebab-container kebab-menu",
+            content: [],
+          },
         ],
       },
       {

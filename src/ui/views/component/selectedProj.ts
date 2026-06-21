@@ -6,6 +6,7 @@ import type {
   TaskInstance,
 } from "../../../types/Types";
 import { button } from "./btn";
+import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
 const selectedProj = (
@@ -174,12 +175,18 @@ function generateTaskContent(
             },
           ],
         },
-        button({
-          cls: "task__menu",
-          label: `task option`,
-          action: "not-set",
-          type: "more",
-        }),
+        {
+          tag: "div",
+          class: "kebab-menu",
+          content: kebabMenuContent({
+            id: currTask.id,
+            type: "task",
+            options: [
+              { label: "Edit Task", action: "edit-task" },
+              { label: "Delete Task", action: "delete-task", danger: true },
+            ],
+          }),
+        },
       ],
     },
     {
