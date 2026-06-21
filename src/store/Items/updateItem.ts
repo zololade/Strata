@@ -20,7 +20,13 @@ function updateItem(
   }
 
   if (payload.flag !== undefined) {
-    item.flag = payload.flag;
+    const flag = new Set(item.flag);
+    if (flag.has(payload.flag)) {
+      flag.delete(payload.flag);
+    } else {
+      flag.add(payload.flag);
+    }
+    item.flag = [...flag];
   }
 
   item.lastModified = Date.now();

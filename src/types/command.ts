@@ -1,10 +1,10 @@
 import type {
-  ItemInput,
+  ItemUpdate,
   NewItemInput,
   NewProjectInput,
   NewTaskInput,
-  ProjectInput,
-  TaskInput,
+  ProjectUpdate,
+  TaskUpdate,
 } from "./Types";
 
 type Command =
@@ -45,17 +45,17 @@ type Command =
   | {
       type: "updateProject";
       projectId: string;
-      data: Partial<Pick<ProjectInput, keyof ProjectInput>>;
+      data: ProjectUpdate;
     }
   | {
       type: "updateTask";
       taskId: string;
-      data: Partial<Pick<TaskInput, keyof TaskInput>>;
+      data: TaskUpdate;
     }
   | {
       type: "updateItem";
       itemId: string;
-      data: Partial<Pick<ItemInput, keyof ItemInput>>;
+      data: ItemUpdate;
     };
 
 type Result =

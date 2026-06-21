@@ -20,7 +20,13 @@ function updateTask(
   }
 
   if (payload.flag !== undefined) {
-    task.flag = payload.flag;
+    const flag = new Set(task.flag);
+    if (flag.has(payload.flag)) {
+      flag.delete(payload.flag);
+    } else {
+      flag.add(payload.flag);
+    }
+    task.flag = [...flag];
   }
 
   task.lastModified = Date.now();

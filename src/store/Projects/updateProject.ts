@@ -20,7 +20,13 @@ function updateProject(
   }
 
   if (payload.flag !== undefined) {
-    project.flag = payload.flag;
+    const flag = new Set(project.flag);
+    if (flag.has(payload.flag)) {
+      flag.delete(payload.flag);
+    } else {
+      flag.add(payload.flag);
+    }
+    project.flag = [...flag];
   }
 
   project.lastModified = Date.now();

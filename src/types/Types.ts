@@ -82,19 +82,19 @@ type StoredType = {
 interface ProjectUpdate {
   title?: string;
   overview?: string;
-  flag?: string[] | null;
+  flag?: string;
 }
 
 interface TaskUpdate {
   title?: string;
   overview?: string;
-  flag?: string[] | null;
+  flag?: string;
 }
 
 interface ItemUpdate {
   content?: string;
   note?: string;
-  flag?: string[] | null;
+  flag?: string;
 }
 
 export type {
