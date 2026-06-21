@@ -68,7 +68,7 @@
     transform: scale(0.8);
     width: calc(100% / 0.8);
 
-    max-height: calc(1rem * 1.5);
+    max-height: calc(1rem * 1.5(this should be updated along with line height));
     */
     .task__title,
     .task__overview {
