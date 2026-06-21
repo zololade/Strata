@@ -44,7 +44,10 @@ const selectedProj = (
             content: [
               {
                 tag: "button",
+                class: project.flag?.includes(val) ? "active" : "",
                 content: val,
+                ["data-action"]: "toggle-flag",
+                ["data-flag"]: val,
               },
             ],
           };

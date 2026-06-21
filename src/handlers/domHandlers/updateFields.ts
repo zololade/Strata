@@ -46,6 +46,31 @@ function createHandleUpdateOverview({
   };
 }
 
+function createHandleUpdateFlag({
+  dispatch,
+  getCurrProjId,
+}: Omit<UpdateProjectDeps, "bus">) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateFlag(match: HTMLElement, _e: Event) {
+    const id = getCurrProjId();
+    if (!id || !match) return;
+    const text = match.dataset["flag"];
+    if (text) {
+      const command: Command = {
+        type: "updateProject",
+        projectId: id,
+        data: { flag: text },
+      };
+
+      const result = dispatch(command);
+
+      if (result?.type === "updatedProject") {
+        match.classList.toggle("active");
+      }
+    }
+  };
+}
+
 type UpdateTaskDeps = {
   dispatch: (command: Command) => Result;
   refreshCurrTask: (id: string) => void;
@@ -153,6 +178,7 @@ function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
 export {
   createHandleUpdateTitle,
   createHandleUpdateOverview,
+  createHandleUpdateFlag,
   createHandleUpdateTaskTitle,
   createHandleUpdateTaskOverview,
   handlePreventNewLine,

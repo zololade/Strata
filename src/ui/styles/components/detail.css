@@ -145,12 +145,16 @@
           font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.9rem);
           border: none;
           padding: 0rem 0.35rem;
+          background: none;
           border-radius: 15px;
-          background: var(--add-btn-color-sec);
           border: var(--border);
 
           &:hover {
             background-color: var(--add-btn-hover-color-sec);
+          }
+          &.active {
+            background: var(--add-btn-color-sec);
+            color: var(--content-highlight-color);
           }
         }
       }
