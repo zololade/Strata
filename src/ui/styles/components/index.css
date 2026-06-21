@@ -15,6 +15,9 @@
 }
 
 .mainNav__close {
+  border: none;
+  cursor: pointer;
+  background: none;
   position: fixed;
   top: 0.6rem;
   left: 260px;
