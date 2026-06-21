@@ -24,7 +24,12 @@ function createAppShell(store: ProjectStore, bus: EventBus) {
         id: "backdrop",
         ["data-action"]: "close-nav",
       },
-      button("mainNav__close", "Close navigation", "close-nav", "close"),
+      button({
+        cls: "mainNav__close",
+        label: "Close navigation",
+        action: "close-nav",
+        type: "close",
+      }),
       projectLoader(store),
       [newProject(), detailPanelShell()],
     ]);

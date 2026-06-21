@@ -1,5 +1,13 @@
 import type { PageData } from "../../../lib/Page";
 
+type incoming = {
+  cls: string;
+  label: string;
+  action: string;
+  type: keyof typeof btnTypes;
+  flag?: string;
+};
+
 const btnTypes = {
   sideNav: "side_navigation",
   more: "more_horiz",
@@ -9,12 +17,7 @@ const btnTypes = {
   close: "close",
 };
 
-function button(
-  cls: string,
-  label: string,
-  action: string,
-  type: keyof typeof btnTypes,
-): PageData {
+function button({ cls, label, action, type, flag }: incoming): PageData {
   return {
     tag: "button",
     class: cls,
@@ -27,6 +30,7 @@ function button(
         content: btnTypes[type],
       },
     ],
+    ...(flag !== undefined && flag !== null && { "data-flag": flag }),
   };
 }
 

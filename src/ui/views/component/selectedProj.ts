@@ -71,12 +71,12 @@ const selectedProj = (
                 class: "tasks__mainHeader",
                 content: [
                   { tag: "p", content: "Add task" },
-                  button(
-                    "mainHeader__menu",
-                    `Create tasks button`,
-                    "create-task",
-                    "add",
-                  ),
+                  button({
+                    cls: "mainHeader__menu",
+                    label: `Create tasks button`,
+                    action: "create-task",
+                    type: "add",
+                  }),
                 ],
               }
             : [],
@@ -174,7 +174,12 @@ function generateTaskContent(
             },
           ],
         },
-        button("task__menu", `task option`, "not-set", "more"),
+        button({
+          cls: "task__menu",
+          label: `task option`,
+          action: "not-set",
+          type: "more",
+        }),
       ],
     },
     {
@@ -202,12 +207,12 @@ function generateTaskContent(
         {
           tag: "li",
           content: [
-            button(
-              "task__favorite",
-              `Add Task to favorite`,
-              "not-set",
-              "favor",
-            ),
+            button({
+              cls: "task__favorite",
+              label: `Add Task to favorite`,
+              action: "not-set",
+              type: "favor",
+            }),
           ],
         },
       ],

@@ -65,12 +65,12 @@ function detailPanelShell(): PageData {
             tag: "div",
             class: "toolbar__left",
             content: [
-              button(
-                "toolbar__side-nav",
-                "Show nav bar",
-                "show-nav",
-                "sideNav",
-              ),
+              button({
+                cls: "toolbar__side-nav",
+                label: "Show nav bar",
+                action: "show-nav",
+                type: "sideNav",
+              }),
               {
                 tag: "span",
                 ["aria-hidden"]: true,
@@ -79,7 +79,12 @@ function detailPanelShell(): PageData {
               },
             ],
           },
-          button("toolbar__menu", "Project options", "not-set", "more"),
+          button({
+            cls: "toolbar__menu",
+            label: "Project options",
+            action: "not-set",
+            type: "more",
+          }),
         ],
       },
       {

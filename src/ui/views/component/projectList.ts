@@ -17,7 +17,12 @@ function projectLoader(snapshot: StoredType): PageData {
             class: "mainNav__title",
             content: "Projects",
           },
-          button("mainNav__createBtn", "Add new project", "open-modal", "edit"),
+          button({
+            cls: "mainNav__createBtn",
+            label: "Add new project",
+            action: "open-modal",
+            type: "edit",
+          }),
         ],
       },
       {
