@@ -208,10 +208,14 @@ function generateTaskContent(
           tag: "li",
           content: [
             button({
-              cls: "task__favorite",
+              cls: currTask.flag?.includes("favorite")
+                ? "active task__favorite"
+                : "task__favorite",
+              id: ["task-id", currTask.id],
               label: `Add Task to favorite`,
-              action: "not-set",
+              action: "toggle-task-flag",
               type: "favor",
+              flag: "favorite",
             }),
           ],
         },

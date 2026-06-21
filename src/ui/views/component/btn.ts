@@ -6,6 +6,7 @@ type incoming = {
   action: string;
   type: keyof typeof btnTypes;
   flag?: string;
+  id?: [string, string];
 };
 
 const btnTypes = {
@@ -17,7 +18,7 @@ const btnTypes = {
   close: "close",
 };
 
-function button({ cls, label, action, type, flag }: incoming): PageData {
+function button({ cls, label, action, type, flag, id }: incoming): PageData {
   return {
     tag: "button",
     class: cls,
@@ -31,6 +32,7 @@ function button({ cls, label, action, type, flag }: incoming): PageData {
       },
     ],
     ...(flag !== undefined && flag !== null && { "data-flag": flag }),
+    ...(id !== undefined && id !== null && { [`data-${id[0]}`]: id[1] }),
   };
 }
 

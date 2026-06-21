@@ -113,6 +113,28 @@ function createHandleUpdateTaskOverview({
   };
 }
 
+function createHandleUpdateTaskFlag({
+  dispatch,
+  refreshCurrTask,
+}: UpdateTaskDeps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return function handleUpdateTaskFlag(match: HTMLElement, _e: Event) {
+    const taskId = match.dataset["taskId"];
+    const text = match.dataset["flag"];
+    if (!taskId || !match || !text) return;
+
+    const command: Command = {
+      type: "updateTask",
+      taskId,
+      data: { flag: text },
+    };
+    match.classList.toggle("active");
+    const result = dispatch(command);
+
+    if (result?.type === "updatedTask") refreshCurrTask(result.id);
+  };
+}
+
 //misc
 function handlePreventNewLine(match: HTMLElement, e: Event) {
   const inputEvent = e as InputEvent;
@@ -181,6 +203,7 @@ export {
   createHandleUpdateFlag,
   createHandleUpdateTaskTitle,
   createHandleUpdateTaskOverview,
+  createHandleUpdateTaskFlag,
   handlePreventNewLine,
   handlePasteAsPlainText,
 };

@@ -25,6 +25,7 @@ import {
   handlePreventNewLine,
   handlePasteAsPlainText,
   createHandleUpdateFlag,
+  createHandleUpdateTaskFlag,
 } from "../handlers/domHandlers/updateFields";
 import {
   handleNavBtn,
@@ -62,6 +63,10 @@ function init() {
       "toggle-flag": createHandleUpdateFlag({
         dispatch,
         getCurrProjId: ui.getCurrProjId,
+      }),
+      "toggle-task-flag": createHandleUpdateTaskFlag({
+        dispatch,
+        refreshCurrTask: taskReactions.refreshCurrTask,
       }),
       "open-modal": handleOpenModal,
       "close-modal": handleHideModal,
