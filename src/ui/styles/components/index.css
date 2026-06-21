@@ -19,8 +19,8 @@
   cursor: pointer;
   background: none;
   position: fixed;
-  top: 0.6rem;
-  left: 260px;
+  top: 1rem;
+  left: 270px;
   z-index: 1000;
   visibility: hidden;
   opacity: 0;
@@ -29,7 +29,7 @@
     visibility var(--transition-speed) ease-in-out;
   color: var(--content-highlight-color);
   .material-symbols-outlined {
-    font-size: 1.15rem;
+    font-size: 1.35rem;
   }
 }
 
