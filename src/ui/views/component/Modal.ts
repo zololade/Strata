@@ -66,16 +66,15 @@ function newProject(): PageData {
 }
 
 // src/ui/components/Modal.ts (new file)
-class ModalManager {
-  static open(selector: string) {
+const ModalManager = {
+  open(selector: string) {
     const dialog = document.querySelector(selector) as HTMLDialogElement;
     dialog?.showModal();
-  }
-
-  static close(selector: string) {
+  },
+  close(selector: string) {
     const dialog = document.querySelector(selector) as HTMLDialogElement;
     dialog?.close();
-  }
-}
+  },
+};
 
 export { newProject, ModalManager };

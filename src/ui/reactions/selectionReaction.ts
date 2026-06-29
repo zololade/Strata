@@ -1,4 +1,4 @@
-import { renderElement } from "../../lib/renderUtilities";
+import { renderElement } from "../../lib/Page";
 import { viewProject } from "../views/component/detailPanel";
 import type { StoredType } from "../../types/Types";
 import { kebabMenuContent } from "../views/component/KebabMenu";
@@ -22,6 +22,7 @@ function createShowActiveProject({ store, getPrevProjId, setPrevProjId }: ShowAc
     }
   }
 
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
   function updateMainKebab(id: string) {
     const kebabHost = document.querySelector(".project-kebab-container") as HTMLElement | null;
 

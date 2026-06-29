@@ -1,4 +1,4 @@
-import { renderElement } from "../../lib/renderUtilities";
+import { renderElement } from "../../lib/Page";
 import { formatDuration, getTimeObj } from "../../lib/time";
 import { viewProject } from "../views/component/detailPanel";
 import { generateTaskContent } from "../views/component/selectedProj";

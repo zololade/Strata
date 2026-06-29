@@ -18,7 +18,6 @@ function handleDatabaseUpdate(data: unknown) {
 }
 
 function createHandleStoreLoaded(appShell: () => void) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleStoreLoaded(_data: unknown) {
     appShell();
   };

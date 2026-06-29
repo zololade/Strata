@@ -8,7 +8,6 @@ type UpdateProjectDeps = {
 };
 
 function createHandleUpdateTitle({ dispatch, getCurrProjId, bus }: UpdateProjectDeps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTitle(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -25,7 +24,6 @@ function createHandleUpdateTitle({ dispatch, getCurrProjId, bus }: UpdateProject
 }
 
 function createHandleUpdateOverview({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateOverview(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -39,7 +37,6 @@ function createHandleUpdateOverview({ dispatch, getCurrProjId }: Omit<UpdateProj
 }
 
 function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateFlag(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -66,7 +63,6 @@ type UpdateTaskDeps = {
 };
 
 function createHandleUpdateTaskTitle({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -82,7 +78,6 @@ function createHandleUpdateTaskTitle({ dispatch, refreshCurrTask }: UpdateTaskDe
 }
 
 function createHandleUpdateTaskOverview({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -97,7 +92,6 @@ function createHandleUpdateTaskOverview({ dispatch, refreshCurrTask }: UpdateTas
 }
 
 function createHandleUpdateTaskFlag({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskFlag(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     const text = match.dataset["flag"];

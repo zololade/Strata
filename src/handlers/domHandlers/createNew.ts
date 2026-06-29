@@ -43,7 +43,6 @@ type CreateTaskDeps = {
 };
 
 function createHandleCreateTask({ dispatch, refreshTask, getCurrProjId }: CreateTaskDeps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleCreateTask(_match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (id) {

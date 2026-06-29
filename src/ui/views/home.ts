@@ -1,4 +1,4 @@
-import { renderElement } from "../../lib/renderUtilities";
+import { renderElement } from "../../lib/Page";
 import { detailPanelShell } from "./component/detailPanel";
 import { newProject } from "./component/Modal";
 import { generateList, projectLoader } from "./component/projectList";
