@@ -2,13 +2,8 @@
   "compilerOptions": {
     "target": "es2023",
     "module": "esnext",
-    "lib": [
-      "ES2023",
-      "DOM"
-    ],
-    "types": [
-      "vite/client"
-    ],
+    "lib": ["ES2023", "DOM"],
+    "types": ["vite/client"],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -33,10 +28,7 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "alwaysStrict": true,
-    "sourceMap": true,
+    "sourceMap": true
   },
-  "include": [
-    "src",
-    "test"
-  ],
+  "include": ["src", "test"]
 }
