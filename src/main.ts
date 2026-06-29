@@ -1,4 +1,5 @@
 import { init } from "./bootstrap/init";
+
 import "./ui/styles/app.css";
 
 //initialize app

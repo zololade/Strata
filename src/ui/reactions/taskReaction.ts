@@ -1,8 +1,8 @@
 import { renderElement } from "../../lib/Page";
 import { formatDuration, getTimeObj } from "../../lib/time";
+import type { StoredType } from "../../types/Types";
 import { viewProject } from "../views/component/detailPanel";
 import { generateTaskContent } from "../views/component/selectedProj";
-import type { StoredType } from "../../types/Types";
 
 type TaskReactionDeps = {
   store: StoredType;

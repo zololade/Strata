@@ -1,19 +1,7 @@
-// bootstrap/init.ts
-import { createStore } from "../store/Store";
-import { createDispatch } from "../store/dispatch";
-import {
-  initializeServices,
-  appBus,
-  //   databaseBus,
-} from "./initializers/eventInit";
-import { initializeDatabase } from "./initializers/databaseInit";
-import { createAppShell } from "../ui/views/home";
-import { createTaskReactions } from "../ui/reactions/taskReaction";
-import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
-
 // domHandlers factories
 import { createHandleCreateProj, createHandleCreateTask } from "../handlers/domHandlers/createNew";
-import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
+import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
+import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
 import {
   createHandleUpdateTitle,
   createHandleUpdateOverview,
@@ -24,8 +12,19 @@ import {
   createHandleUpdateFlag,
   createHandleUpdateTaskFlag,
 } from "../handlers/domHandlers/updateFields";
-import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
-import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
+import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
+import { createDispatch } from "../store/dispatch";
+// bootstrap/init.ts
+import { createStore } from "../store/Store";
+import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
+import { createTaskReactions } from "../ui/reactions/taskReaction";
+import { createAppShell } from "../ui/views/home";
+import { initializeDatabase } from "./initializers/databaseInit";
+import {
+  initializeServices,
+  appBus,
+  //   databaseBus,
+} from "./initializers/eventInit";
 
 function init() {
   const { store, bind } = createStore();

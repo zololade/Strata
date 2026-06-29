@@ -10,5 +10,15 @@
     "categories": {
         "correctness": "error",
         "suspicious": "warn"
+    },
+    "rules": {
+        "import/no-unassigned-import": [
+            "deny",
+            {
+                "allow": [
+                    "**/*.css"
+                ]
+            }
+        ]
     }
 }

@@ -1,8 +1,8 @@
 import type { Command, Result } from "../types/command";
 import * as Item from "./Items";
 import * as Project from "./Projects";
-import * as Task from "./Tasks";
 import type { ProjectStore } from "./Store";
+import * as Task from "./Tasks";
 
 function reducer(store: ProjectStore, command: Command): Result {
   switch (command.type) {

@@ -1,5 +1,5 @@
-import type { Command, Result } from "../../types/command";
 import type { EventBus } from "../../lib/EventBus";
+import type { Command, Result } from "../../types/command";
 
 type UpdateProjectDeps = {
   dispatch: (command: Command) => Result;

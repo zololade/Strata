@@ -1,5 +1,5 @@
-import { putProjects } from "../../storage/dao";
 import type { EventBus } from "../../lib/EventBus";
+import { putProjects } from "../../storage/dao";
 import type { StoredType } from "../../types/Types";
 
 function createHandleDatabaseLoaded(

@@ -1,6 +1,6 @@
 import { renderElement } from "../../lib/Page";
-import { viewProject } from "../views/component/detailPanel";
 import type { StoredType } from "../../types/Types";
+import { viewProject } from "../views/component/detailPanel";
 import { kebabMenuContent } from "../views/component/KebabMenu";
 
 type ShowActiveProjectDeps = {
