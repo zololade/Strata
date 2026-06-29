@@ -9,9 +9,7 @@ type HandlersByEvent = {
 
 function initializeEvents(handlers: HandlersByEvent) {
   const main = document.querySelector("#app") as HTMLElement;
-  const actionHandlers = new Map(
-    Object.entries(handlers) as [string, Record<string, HandlerFn>][],
-  );
+  const actionHandlers = new Map(Object.entries(handlers) as [string, Record<string, HandlerFn>][]);
 
   actionHandlers.forEach((_v, k) =>
     main.addEventListener(k, (e) => {

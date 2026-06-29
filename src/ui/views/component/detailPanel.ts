@@ -17,8 +17,7 @@ const defaultData = {
     { tag: "h2", content: "No project selected" },
     {
       tag: "p",
-      content:
-        "Select a project from the list or create a new one to get started",
+      content: "Select a project from the list or create a new one to get started",
     },
     {
       tag: "button",
@@ -39,10 +38,7 @@ const errorData = [
 ];
 
 //view selected project
-function viewProject(
-  projectId: string | null,
-  store: StoredType | null,
-): PageData {
+function viewProject(projectId: string | null, store: StoredType | null): PageData {
   const project = projectId && store && store.projects.get(projectId);
 
   return !projectId && !store

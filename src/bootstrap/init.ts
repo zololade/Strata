@@ -12,10 +12,7 @@ import { createTaskReactions } from "../ui/reactions/taskReaction";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
 
 // domHandlers factories
-import {
-  createHandleCreateProj,
-  createHandleCreateTask,
-} from "../handlers/domHandlers/createNew";
+import { createHandleCreateProj, createHandleCreateTask } from "../handlers/domHandlers/createNew";
 import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
 import {
   createHandleUpdateTitle,
@@ -27,14 +24,8 @@ import {
   createHandleUpdateFlag,
   createHandleUpdateTaskFlag,
 } from "../handlers/domHandlers/updateFields";
-import {
-  handleNavBtn,
-  handleNavClose,
-} from "../handlers/domHandlers/navTrigger";
-import {
-  handleOpenModal,
-  handleHideModal,
-} from "../handlers/domHandlers/newProjModal";
+import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
+import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
 
 function init() {
   const { store, bind } = createStore();

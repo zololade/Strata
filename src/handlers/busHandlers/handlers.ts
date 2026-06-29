@@ -24,9 +24,7 @@ function createHandleStoreLoaded(appShell: () => void) {
   };
 }
 
-function createHandleProjectSelection(
-  showActiveProject: (data: unknown) => void,
-) {
+function createHandleProjectSelection(showActiveProject: (data: unknown) => void) {
   return function handleProjectSelection(data: unknown) {
     showActiveProject(data);
   };

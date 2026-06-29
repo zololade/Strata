@@ -2,11 +2,7 @@ import { databaseBus } from "../../bootstrap/initializers/eventInit";
 import type { Result } from "../../types/command";
 import type { StoredType, TaskUpdate } from "../../types/Types";
 
-function updateTask(
-  store: StoredType,
-  taskId: string,
-  payload: TaskUpdate,
-): Result {
+function updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Result {
   //get the task then edit
   const task = store.tasks.get(taskId);
   if (!task) return { type: "notFound", entity: "task" };

@@ -6,9 +6,7 @@ function createTitleReaction() {
   }
 
   function updateSidebarTitle(id: string, title: string) {
-    const el = document.querySelector(
-      `[data-id="${id}"] h3`,
-    ) as HTMLElement | null;
+    const el = document.querySelector(`[data-id="${id}"] h3`) as HTMLElement | null;
     if (el) el.textContent = title;
   }
 

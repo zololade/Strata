@@ -1,18 +1,11 @@
 import type { PageData } from "../../../lib/Page";
 import { formatDuration, getTimeObj } from "../../../lib/time";
-import type {
-  ProjectInstance,
-  StoredType,
-  TaskInstance,
-} from "../../../types/Types";
+import type { ProjectInstance, StoredType, TaskInstance } from "../../../types/Types";
 import { button } from "./btn";
 import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
-const selectedProj = (
-  project: ProjectInstance,
-  store: StoredType,
-): PageData => {
+const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
   return {
     tag: "div",
     class: "workspace__container",
@@ -81,9 +74,7 @@ const selectedProj = (
                 ],
               }
             : [],
-          project.tasks.size > 0
-            ? generateTasks([...project.tasks], store)
-            : noTasksState,
+          project.tasks.size > 0 ? generateTasks([...project.tasks], store) : noTasksState,
         ],
       },
     ],
@@ -117,7 +108,7 @@ const noTasksState: PageData = {
 function generateTasks(ids: string[], store: StoredType): PageData[] {
   return ids
     .filter((id) => store.tasks.has(id))
-    .sort((a, b) => {
+    .toSorted((a, b) => {
       const taskA = store.tasks.get(a)!;
       const taskB = store.tasks.get(b)!;
       return taskB.createdAt - taskA.createdAt;
@@ -127,9 +118,7 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
 
       if (currTask) {
         const lastUpdated =
-          currTask.lastModified === 0
-            ? currTask.createdAt
-            : currTask.lastModified;
+          currTask.lastModified === 0 ? currTask.createdAt : currTask.lastModified;
 
         const duration = formatDuration(getTimeObj(lastUpdated));
 
@@ -145,10 +134,7 @@ function generateTasks(ids: string[], store: StoredType): PageData[] {
     .filter((val) => val !== null);
 }
 
-function generateTaskContent(
-  currTask: TaskInstance,
-  duration: string,
-): PageData[] {
+function generateTaskContent(currTask: TaskInstance, duration: string): PageData[] {
   return [
     {
       tag: "div",
@@ -215,9 +201,7 @@ function generateTaskContent(
           tag: "li",
           content: [
             button({
-              cls: currTask.flag?.includes("favorite")
-                ? "active task__favorite"
-                : "task__favorite",
+              cls: currTask.flag?.includes("favorite") ? "active task__favorite" : "task__favorite",
               id: ["task-id", currTask.id],
               label: `Add Task to favorite`,
               action: "toggle-task-flag",

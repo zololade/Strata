@@ -58,11 +58,7 @@ export default class Page {
 
   static snapshotRender(currentHost: HTMLElement, elem: PageData): void {
     const previousRecord = Page.DOM_RECORD.get(currentHost);
-    if (
-      previousRecord &&
-      JSON.stringify(previousRecord) === JSON.stringify(elem)
-    )
-      return;
+    if (previousRecord && JSON.stringify(previousRecord) === JSON.stringify(elem)) return;
 
     currentHost.innerHTML = "";
     const fragment = document.createDocumentFragment();
@@ -74,12 +70,7 @@ export default class Page {
 
   static pureRender(
     host: HTMLElement,
-    elem:
-      | HTMLElement
-      | DocumentFragment
-      | Text
-      | SVGSVGElement
-      | SVGPathElement,
+    elem: HTMLElement | DocumentFragment | Text | SVGSVGElement | SVGPathElement,
   ) {
     host.innerHTML = "";
     const fragment = document.createDocumentFragment();

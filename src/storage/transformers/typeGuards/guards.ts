@@ -1,21 +1,9 @@
 import { hasKeys } from "../../../lib/guard";
-import type {
-  Snapshot,
-  ItemInput,
-  ProjectInput,
-  TaskInput,
-} from "../../../types/Types";
+import type { Snapshot, ItemInput, ProjectInput, TaskInput } from "../../../types/Types";
 
 function isItem(v: unknown): v is ItemInput {
   return (
-    hasKeys(v, [
-      "id",
-      "content",
-      "flag",
-      "note",
-      "createdAt",
-      "lastModified",
-    ]) &&
+    hasKeys(v, ["id", "content", "flag", "note", "createdAt", "lastModified"]) &&
     typeof v.id === "string" &&
     typeof v.content === "string" &&
     typeof v.createdAt === "number" &&
@@ -26,15 +14,7 @@ function isItem(v: unknown): v is ItemInput {
 
 function isTask(v: unknown): v is TaskInput {
   return (
-    hasKeys(v, [
-      "id",
-      "title",
-      "overview",
-      "flag",
-      "items",
-      "createdAt",
-      "lastModified",
-    ]) &&
+    hasKeys(v, ["id", "title", "overview", "flag", "items", "createdAt", "lastModified"]) &&
     typeof v.id === "string" &&
     typeof v.title === "string" &&
     typeof v.overview === "string" &&
@@ -47,15 +27,7 @@ function isTask(v: unknown): v is TaskInput {
 
 function isProject(v: unknown): v is ProjectInput {
   return (
-    hasKeys(v, [
-      "id",
-      "title",
-      "overview",
-      "flag",
-      "tasks",
-      "createdAt",
-      "lastModified",
-    ]) &&
+    hasKeys(v, ["id", "title", "overview", "flag", "tasks", "createdAt", "lastModified"]) &&
     typeof v.id === "string" &&
     typeof v.title === "string" &&
     typeof v.overview === "string" &&

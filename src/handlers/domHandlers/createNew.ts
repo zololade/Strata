@@ -7,31 +7,18 @@ type CreateProjDeps = {
   selectProject: (id: string) => void;
 };
 
-function createHandleCreateProj({
-  dispatch,
-  refreshList,
-  selectProject,
-}: CreateProjDeps) {
+function createHandleCreateProj({ dispatch, refreshList, selectProject }: CreateProjDeps) {
   return function handleCreateProj(_match: HTMLElement, e: Event) {
     e.preventDefault();
-    const titleField = document.querySelector(
-      "#projTitle",
-    ) as HTMLInputElement | null;
-    const overviewField = document.querySelector(
-      "#projOverview",
-    ) as HTMLInputElement | null;
-    const listHost = document.querySelector(
-      ".mainNav__list",
-    ) as HTMLUListElement | null;
+    const titleField = document.querySelector("#projTitle") as HTMLInputElement | null;
+    const overviewField = document.querySelector("#projOverview") as HTMLInputElement | null;
+    const listHost = document.querySelector(".mainNav__list") as HTMLUListElement | null;
 
     if (titleField && overviewField) {
       const command: Command = {
         type: "createProject",
         data: {
-          title:
-            titleField.value.trim().length < 1
-              ? "New project"
-              : titleField.value,
+          title: titleField.value.trim().length < 1 ? "New project" : titleField.value,
           overview: overviewField.value,
           flag: null,
           tasks: [],
@@ -55,11 +42,7 @@ type CreateTaskDeps = {
   getCurrProjId: () => string | null;
 };
 
-function createHandleCreateTask({
-  dispatch,
-  refreshTask,
-  getCurrProjId,
-}: CreateTaskDeps) {
+function createHandleCreateTask({ dispatch, refreshTask, getCurrProjId }: CreateTaskDeps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleCreateTask(_match: HTMLElement, _e: Event) {
     const id = getCurrProjId();

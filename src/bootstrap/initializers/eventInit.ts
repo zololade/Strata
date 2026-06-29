@@ -28,8 +28,7 @@ function initializeServices(
   const handleDatabaseLoaded = createHandleDatabaseLoaded(bind, store, appBus);
   const handleStoreLoaded = createHandleStoreLoaded(ui.appShell);
   const { handleTitleUpdated } = createTitleReaction();
-  const handleProjectSelection =
-    createHandleProjectSelection(showActiveProject);
+  const handleProjectSelection = createHandleProjectSelection(showActiveProject);
 
   databaseBus.subscribe("database:loaded", handleDatabaseLoaded);
   databaseBus.subscribe("database:update", handleDatabaseUpdate);

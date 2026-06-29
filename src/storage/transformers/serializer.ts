@@ -1,9 +1,4 @@
-import type {
-  ItemInput,
-  ProjectInput,
-  StoredType,
-  TaskInput,
-} from "../../types/Types";
+import type { ItemInput, ProjectInput, StoredType, TaskInput } from "../../types/Types";
 
 // serializer builds from project map
 // it works with StoredType and build projects

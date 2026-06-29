@@ -2,10 +2,7 @@ import type { Result } from "../../types/command";
 import type { StoredType } from "../../types/Types";
 import { removeItem } from "../Items";
 
-function removeTask(
-  store: StoredType,
-  payload: { projectId: string; taskId: string },
-): Result {
+function removeTask(store: StoredType, payload: { projectId: string; taskId: string }): Result {
   const { taskId, projectId } = payload;
   //clean up items
   const items = store.tasks.get(taskId)?.items;

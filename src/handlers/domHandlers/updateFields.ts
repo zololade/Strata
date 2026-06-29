@@ -7,17 +7,12 @@ type UpdateProjectDeps = {
   bus: EventBus;
 };
 
-function createHandleUpdateTitle({
-  dispatch,
-  getCurrProjId,
-  bus,
-}: UpdateProjectDeps) {
+function createHandleUpdateTitle({ dispatch, getCurrProjId, bus }: UpdateProjectDeps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTitle(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
-    const text =
-      match.textContent.trim().length < 1 ? "New project" : match.textContent;
+    const text = match.textContent.trim().length < 1 ? "New project" : match.textContent;
     const command: Command = {
       type: "updateProject",
       projectId: id,
@@ -29,10 +24,7 @@ function createHandleUpdateTitle({
   };
 }
 
-function createHandleUpdateOverview({
-  dispatch,
-  getCurrProjId,
-}: Omit<UpdateProjectDeps, "bus">) {
+function createHandleUpdateOverview({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateOverview(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
@@ -46,10 +38,7 @@ function createHandleUpdateOverview({
   };
 }
 
-function createHandleUpdateFlag({
-  dispatch,
-  getCurrProjId,
-}: Omit<UpdateProjectDeps, "bus">) {
+function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateFlag(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
@@ -76,10 +65,7 @@ type UpdateTaskDeps = {
   refreshCurrTask: (id: string) => void;
 };
 
-function createHandleUpdateTaskTitle({
-  dispatch,
-  refreshCurrTask,
-}: UpdateTaskDeps) {
+function createHandleUpdateTaskTitle({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
@@ -95,10 +81,7 @@ function createHandleUpdateTaskTitle({
   };
 }
 
-function createHandleUpdateTaskOverview({
-  dispatch,
-  refreshCurrTask,
-}: UpdateTaskDeps) {
+function createHandleUpdateTaskOverview({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
@@ -113,10 +96,7 @@ function createHandleUpdateTaskOverview({
   };
 }
 
-function createHandleUpdateTaskFlag({
-  dispatch,
-  refreshCurrTask,
-}: UpdateTaskDeps) {
+function createHandleUpdateTaskFlag({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return function handleUpdateTaskFlag(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
@@ -170,9 +150,7 @@ function handlePasteAsPlainText(_match: HTMLElement, e: Event) {
     // Find the master parent contenteditable block
     const editableElement =
       (container.closest?.("[contenteditable]") as HTMLElement) ||
-      (container.nodeType === Node.ELEMENT_NODE
-        ? container
-        : container.parentElement);
+      (container.nodeType === Node.ELEMENT_NODE ? container : container.parentElement);
 
     // 4. Check if the element only contains your placeholder <br> tag
     if (editableElement && editableElement.querySelector("br:only-child")) {

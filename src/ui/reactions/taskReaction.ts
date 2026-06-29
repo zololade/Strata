@@ -13,17 +13,10 @@ function createTaskReactions({ store, getCurrProjId }: TaskReactionDeps) {
   function refreshTask(afterRender?: () => void) {
     const projId = getCurrProjId();
     if (projId) {
-      const viewPanel = document.querySelector(
-        ".mainContent__workspace",
-      ) as HTMLElement;
+      const viewPanel = document.querySelector(".mainContent__workspace") as HTMLElement;
       if (viewPanel) {
         if (afterRender) {
-          renderElement(
-            viewPanel,
-            viewProject(projId, store),
-            false,
-            afterRender,
-          );
+          renderElement(viewPanel, viewProject(projId, store), false, afterRender);
         } else {
           renderElement(viewPanel, viewProject(projId, store));
         }
@@ -33,15 +26,10 @@ function createTaskReactions({ store, getCurrProjId }: TaskReactionDeps) {
 
   function refreshCurrTask(id: string) {
     const currTask = store.tasks.get(id);
-    const host = document.querySelector(
-      `article[data-id="${id}"]`,
-    ) as HTMLElement;
+    const host = document.querySelector(`article[data-id="${id}"]`) as HTMLElement;
 
     if (currTask && host) {
-      const lastUpdated =
-        currTask.lastModified === 0
-          ? currTask.createdAt
-          : currTask.lastModified;
+      const lastUpdated = currTask.lastModified === 0 ? currTask.createdAt : currTask.lastModified;
       const duration = formatDuration(getTimeObj(lastUpdated));
       renderElement(host, generateTaskContent(currTask, duration));
     }

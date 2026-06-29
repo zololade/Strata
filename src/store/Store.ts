@@ -1,10 +1,6 @@
 // store/Store.ts
 import { loadSnapshot } from "../storage/transformers/rehydrate";
-import type {
-  ItemInstance,
-  ProjectInstance,
-  TaskInstance,
-} from "../types/Types";
+import type { ItemInstance, ProjectInstance, TaskInstance } from "../types/Types";
 
 class ProjectStore {
   projects = new Map<string, ProjectInstance>();

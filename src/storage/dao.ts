@@ -4,12 +4,9 @@ import type { StoredType, Snapshot as Outgoing } from "../types/Types";
 import { hasKeys } from "../lib/guard";
 import { seedData } from "./seedData";
 
-const storedData =
-  typeof localStorage !== "undefined" && localStorage.getItem("todoData");
+const storedData = typeof localStorage !== "undefined" && localStorage.getItem("todoData");
 
-let workingProjectData: Outgoing | null = storedData
-  ? JSON.parse(storedData)
-  : null;
+let workingProjectData: Outgoing | null = storedData ? JSON.parse(storedData) : null;
 
 // ==================== SEED INITIAL DATA ====================
 if (!workingProjectData) {

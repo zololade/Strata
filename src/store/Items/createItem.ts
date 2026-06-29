@@ -3,11 +3,7 @@ import type { Result } from "../../types/command";
 import type { NewItemInput, StoredType } from "../../types/Types";
 import { Item } from "./Item";
 
-function createItem(
-  store: StoredType,
-  taskId: string,
-  payload: NewItemInput,
-): Result {
+function createItem(store: StoredType, taskId: string, payload: NewItemInput): Result {
   const item = new Item(payload);
   const task = store.tasks.get(taskId);
 
