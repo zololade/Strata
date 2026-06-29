@@ -6,7 +6,6 @@
 :root,
 html,
 body {
-  scrollbar-gutter: stable both-edges;
   background-color: var(--bg-sidebar);
   color: var(--content-dim-color);
   font-family: "Inter", sans-serif;
