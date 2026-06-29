@@ -1,42 +1,35 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Project } from "../../src/store/Projects";
-import type { StoredType } from "../../src/types/Types";
-import { Task } from "../../src/store/Tasks";
-import { Item } from "../../src/store/Items";
+
 import { rehydrateFactory } from "../../src/storage/transformers/rehydrate";
-import { badData, TestData } from "./TestData";
+import { Item } from "../../src/store/Items";
+import { Project } from "../../src/store/Projects";
+import { Task } from "../../src/store/Tasks";
+import type { StoredType } from "../../src/types/Types";
+import { duplicateItemData, missingItemRefData, missingTaskRefData, TestData } from "./TestData";
 
 describe("rehydrateFactory", () => {
   describe("good data", () => {
-    let store: StoredType | null = null;
+    let store: StoredType;
     beforeAll(() => {
       const data = TestData;
       store = rehydrateFactory(data);
     });
     it("creates correct number of project instances", () => {
-      if (store) {
-        expect(store.projects.size).toBe(1);
-      }
+      expect(store.projects.size).toBe(1);
     });
 
     it("project tasks Set contains correct task ids", () => {
-      if (store) {
-        expect(store.tasks.size).toBe(1);
-      }
+      expect(store.tasks.size).toBe(1);
     });
 
     it("task items Set contains correct item ids", () => {
-      if (store) {
-        expect(store.items.size).toBe(2);
-      }
+      expect(store.items.size).toBe(2);
     });
 
     it("instances are stored in correct maps", () => {
-      if (store) {
-        expect(store.projects.has("proj-1")).toBe(true);
-        expect(store.tasks.has("task-1")).toBe(true);
-        expect(store.items.has("item-1")).toBe(true);
-      }
+      expect(store.projects.has("proj-1")).toBe(true);
+      expect(store.tasks.has("task-1")).toBe(true);
+      expect(store.items.has("item-1")).toBe(true);
     });
 
     it("project contains expected task ids", () => {
@@ -72,13 +65,13 @@ describe("rehydrateFactory", () => {
 
   describe("bad data", () => {
     it("throws on duplicate item ids", () => {
-      expect(() => rehydrateFactory(badData)).toThrow();
+      expect(() => rehydrateFactory(duplicateItemData)).toThrow("Duplicate Id");
     });
     it("throws on missing task reference", () => {
-      expect(() => rehydrateFactory(badData)).toThrow();
+      expect(() => rehydrateFactory(missingTaskRefData)).toThrow("Missing Tasks reference");
     });
     it("throws on missing item reference", () => {
-      expect(() => rehydrateFactory(badData)).toThrow();
+      expect(() => rehydrateFactory(missingItemRefData)).toThrow("Missing Items reference");
     });
   });
 });
