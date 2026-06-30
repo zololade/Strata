@@ -2,6 +2,7 @@
 import { createHandleCreateProj, createHandleCreateTask } from "../handlers/domHandlers/createNew";
 import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
 import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
+import { createHandleShowMenu } from "../handlers/domHandlers/showMenu";
 import {
   createHandleUpdateTitle,
   createHandleUpdateOverview,
@@ -17,14 +18,11 @@ import { createDispatch } from "../store/dispatch";
 // bootstrap/init.ts
 import { createStore } from "../store/Store";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
+import { showMenu } from "../ui/reactions/menuReaction";
 import { createTaskReactions } from "../ui/reactions/taskReaction";
 import { createAppShell } from "../ui/views/home";
 import { initializeDatabase } from "./initializers/databaseInit";
-import {
-  initializeServices,
-  appBus,
-  //   databaseBus,
-} from "./initializers/eventInit";
+import { initializeServices, appBus } from "./initializers/eventInit";
 
 function init() {
   const { store, bind } = createStore();
@@ -63,6 +61,7 @@ function init() {
       "select-project": createHandleSelectProj(ui.selectProject),
       "show-nav": handleNavBtn,
       "close-nav": handleNavClose,
+      "toggle-kebab": createHandleShowMenu(showMenu),
     },
     focusout: {
       "update-title": createHandleUpdateTitle({
