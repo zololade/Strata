@@ -6,5 +6,5 @@ import "./ui/styles/app.css";
 init();
 
 window.addEventListener("load", () => {
-  document.body.style.opacity = "1";
+  document.documentElement.classList.add("ready");
 });
