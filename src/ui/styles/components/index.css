@@ -53,7 +53,7 @@
       top: 0;
       height: var(--height);
       height: var(--dynamic-height);
-      transform: translateX(-100%);
+      transform: translateX(-200%);
       transition: transform 0.3s ease;
       z-index: 100;
       border: var(--border);
