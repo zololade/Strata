@@ -20,7 +20,7 @@ function projectLoader(snapshot: StoredType): PageData {
           button({
             cls: "mainNav__createBtn",
             label: "Add new project",
-            action: "open-modal",
+            action: "menu-close open-modal",
             type: "edit",
           }),
         ],
