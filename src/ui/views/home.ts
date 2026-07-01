@@ -8,6 +8,9 @@ import { generateList, projectLoader } from "./component/projectList";
 
 function createAppShell(store: ProjectStore, bus: EventBus) {
   const main = document.querySelector("#app") as HTMLElement;
+  //add an action
+  main.dataset["action"] = "menu-close";
+
   let selectedProjectId: string | null = null;
   let prevSelectedProjId: string | null = null;
 

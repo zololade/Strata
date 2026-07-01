@@ -6,4 +6,9 @@ function createHandleShowMenu(showMenu: (el: HTMLElement) => void) {
   };
 }
 
-export { createHandleShowMenu };
+function handleCloseMenu(_match: HTMLElement, _e: Event) {
+  let menus = document.querySelectorAll(".hidden");
+  menus.forEach((el) => ((el as HTMLElement).style.display = "none"));
+}
+
+export { createHandleShowMenu, handleCloseMenu };

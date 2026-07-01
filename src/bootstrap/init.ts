@@ -1,8 +1,8 @@
 // domHandlers factories
 import { createHandleCreateProj, createHandleCreateTask } from "../handlers/domHandlers/createNew";
+import { createHandleShowMenu, handleCloseMenu } from "../handlers/domHandlers/menuHandler";
 import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
 import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
-import { createHandleShowMenu } from "../handlers/domHandlers/showMenu";
 import {
   createHandleUpdateTitle,
   createHandleUpdateOverview,
@@ -62,6 +62,7 @@ function init() {
       "show-nav": handleNavBtn,
       "close-nav": handleNavClose,
       "toggle-kebab": createHandleShowMenu(showMenu),
+      "menu-close": handleCloseMenu,
     },
     focusout: {
       "update-title": createHandleUpdateTitle({
