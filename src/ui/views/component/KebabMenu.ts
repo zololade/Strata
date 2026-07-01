@@ -18,7 +18,7 @@ function kebabMenuContent({ id, type, options }: KebabMenuProps): PageData[] {
     button({
       cls: type === "project" ? "toolbar__menu" : "task__menu",
       label: "Options",
-      action: "toggle-kebab",
+      action: "menu-close toggle-kebab",
       type: "more",
       ...(id !== undefined &&
         id !== null && {
