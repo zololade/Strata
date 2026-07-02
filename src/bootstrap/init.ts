@@ -16,7 +16,7 @@ import {
 import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
 import { createDispatch } from "../store/dispatch";
 // bootstrap/init.ts
-import { createStore } from "../store/Store";
+import { createSnapshot, createStore } from "../store/Store";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
 import { showMenu } from "../ui/reactions/menuReaction";
 import { createTaskReactions } from "../ui/reactions/taskReaction";
@@ -26,6 +26,8 @@ import { initializeServices, appBus } from "./initializers/eventInit";
 
 function init() {
   const { store, bind } = createStore();
+  // const {store ,bind } = createSnapshot
+
   const dispatch = createDispatch(store);
   const ui = createAppShell(store, appBus);
 

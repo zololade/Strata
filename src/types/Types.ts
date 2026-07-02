@@ -72,6 +72,12 @@ interface ItemInstance extends EntityMeta {
   flag: string[] | null;
 }
 
+interface DBCollection {
+  projects: ProjectInstance[];
+  tasks: TaskInstance[];
+  items: ItemInstance[];
+}
+
 type StoredType = {
   projects: Map<string, ProjectInstance>;
   tasks: Map<string, TaskInstance>;
@@ -109,6 +115,7 @@ export type {
   ProjectInstance,
   TaskInstance,
   ItemInstance,
+  DBCollection,
   ProjectUpdate,
   TaskUpdate,
   ItemUpdate,
