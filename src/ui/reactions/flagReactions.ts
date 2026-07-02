@@ -14,7 +14,7 @@ function createFlagReaction(getCurrProjId: () => string | null) {
       const el = element as HTMLElement | null;
       if (el) {
         el.classList.toggle("active");
-        el.blur();
+        void el.offsetHeight;
       }
     }
   }
