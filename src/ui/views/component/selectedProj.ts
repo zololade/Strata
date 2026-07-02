@@ -6,9 +6,8 @@ import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
 const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
-  const task = () => {
-    return new Set([...store.tasks.values()].filter((t) => t.projectId === project.id));
-  };
+  const tasks = [...store.tasks.values()].filter((t) => t.projectId === project.id);
+
   return {
     tag: "div",
     class: "workspace__container",
@@ -62,7 +61,7 @@ const selectedProj = (project: ProjectInstance, store: StoredType): PageData => 
         tag: "div",
         class: "workspace__task",
         content: [
-          task().size > 0
+          tasks.length > 0
             ? {
                 tag: "div",
                 class: "tasks__mainHeader",
@@ -77,7 +76,7 @@ const selectedProj = (project: ProjectInstance, store: StoredType): PageData => 
                 ],
               }
             : [],
-          task().size > 0 ? generateTasks(task()) : noTasksState,
+          tasks.length > 0 ? generateTasks(tasks) : noTasksState,
         ],
       },
     ],
@@ -108,8 +107,8 @@ const noTasksState: PageData = {
   ],
 };
 
-function generateTasks(data: Set<TaskInstance>): PageData[] {
-  return [...data]
+function generateTasks(data: TaskInstance[]): PageData[] {
+  return data
     .toSorted((taskA, taskB) => {
       return taskB.createdAt - taskA.createdAt;
     })
