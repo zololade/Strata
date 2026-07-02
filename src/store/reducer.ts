@@ -1,10 +1,10 @@
 import type { Command, Result } from "../types/command";
+import type { StoredType } from "../types/Types";
 import * as Item from "./Items";
 import * as Project from "./Projects";
-import type { ProjectStore } from "./Store";
 import * as Task from "./Tasks";
 
-function reducer(store: ProjectStore, command: Command): Result {
+function reducer(store: StoredType, command: Command): Result {
   switch (command.type) {
     case "removeProject":
       return Project.removeProject(store, command.data);

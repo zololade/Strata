@@ -7,7 +7,7 @@ import type {
   TaskInstance,
 } from "../types/Types";
 
-class ProjectStore {
+class ProjectStore implements StoredType {
   projects = new Map<string, ProjectInstance>();
   tasks = new Map<string, TaskInstance>();
   items = new Map<string, ItemInstance>();
