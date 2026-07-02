@@ -42,7 +42,7 @@ async function init() {
     getCurrProjId: ui.getCurrProjId,
   });
 
-  initializeServices(store, ui, taskReactions.refreshTask); // wires database/store/project-selection events, calls ui.appShell() on store:ready
+  initializeServices(store, ui, taskReactions); // wires database/store/project-selection events, calls ui.appShell() on store:ready
 
   const handlers: HandlersByEvent = {
     click: {
@@ -59,7 +59,6 @@ async function init() {
       }),
       "toggle-task-flag": createHandleUpdateTaskFlag({
         dispatch,
-        refreshCurrTask: taskReactions.refreshCurrTask,
       }),
       "open-modal": handleOpenModal,
       "close-modal": handleHideModal,
@@ -80,11 +79,9 @@ async function init() {
       }),
       "update-task-title": createHandleUpdateTaskTitle({
         dispatch,
-        refreshCurrTask: taskReactions.refreshCurrTask,
       }),
       "update-task-overview": createHandleUpdateTaskOverview({
         dispatch,
-        refreshCurrTask: taskReactions.refreshCurrTask,
       }),
     },
     beforeinput: {

@@ -1,7 +1,13 @@
+type taskReactions = {
+  refreshTask: (afterRender?: (() => void) | undefined) => void;
+  refreshCurrTask: (id: string) => void;
+};
+
 function createUpdateReaction(
   refreshList: () => (listHost: HTMLElement, afterRender: () => void) => void,
   selectProject: (id: string) => void,
-  refreshTask: (afterRender?: (() => void) | undefined) => void,
+  refreshTask: taskReactions["refreshTask"],
+  refreshCurrTask: taskReactions["refreshCurrTask"],
 ) {
   // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
   function handleProjectCreated(data: unknown) {
@@ -23,7 +29,11 @@ function createUpdateReaction(
     }
   }
 
-  return { handleProjectCreated, handleTaskCreated };
+  function handleTaskUpdated(data: unknown) {
+    let id = data as string | null;
+    if (id) refreshCurrTask(id);
+  }
+  return { handleProjectCreated, handleTaskCreated, handleTaskUpdated };
 }
 
 export { createUpdateReaction };

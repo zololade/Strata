@@ -1,4 +1,5 @@
-import { databaseBus } from "../../bootstrap/initializers/eventInit";
+import { appBus } from "../../bootstrap/initializers/eventInit";
+import { enqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { StoredType, TaskUpdate } from "../../types/Types";
 
@@ -26,7 +27,17 @@ function updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Res
   }
 
   task.lastModified = Date.now();
-  databaseBus.publish("database:update", store);
+
+  enqueuePersist({
+    store: "tasks",
+    action: "put",
+    payload: task,
+    onSuccess: () => {
+      store.projects.set(task.id, task);
+      appBus.publish("task:updated", task.id);
+    },
+  });
+
   return { type: "updatedTask", id: taskId };
 }
 

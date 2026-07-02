@@ -55,10 +55,9 @@ function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectD
 
 type UpdateTaskDeps = {
   dispatch: (command: Command) => Result;
-  refreshCurrTask: (id: string) => void;
 };
 
-function createHandleUpdateTaskTitle({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
+function createHandleUpdateTaskTitle({ dispatch }: UpdateTaskDeps) {
   return function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -68,12 +67,12 @@ function createHandleUpdateTaskTitle({ dispatch, refreshCurrTask }: UpdateTaskDe
       taskId,
       data: { title: text },
     };
-    const result = dispatch(command);
-    if (result?.type === "updatedTask") refreshCurrTask(result.id);
+
+    dispatch(command);
   };
 }
 
-function createHandleUpdateTaskOverview({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
+function createHandleUpdateTaskOverview({ dispatch }: UpdateTaskDeps) {
   return function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -82,12 +81,11 @@ function createHandleUpdateTaskOverview({ dispatch, refreshCurrTask }: UpdateTas
       taskId,
       data: { overview: match.textContent || "" },
     };
-    const result = dispatch(command);
-    if (result?.type === "updatedTask") refreshCurrTask(result.id);
+    dispatch(command);
   };
 }
 
-function createHandleUpdateTaskFlag({ dispatch, refreshCurrTask }: UpdateTaskDeps) {
+function createHandleUpdateTaskFlag({ dispatch }: UpdateTaskDeps) {
   return function handleUpdateTaskFlag(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     const text = match.dataset["flag"];
@@ -99,9 +97,7 @@ function createHandleUpdateTaskFlag({ dispatch, refreshCurrTask }: UpdateTaskDep
       data: { flag: text },
     };
     match.classList.toggle("active");
-    const result = dispatch(command);
-
-    if (result?.type === "updatedTask") refreshCurrTask(result.id);
+    dispatch(command);
   };
 }
 
