@@ -1,3 +1,4 @@
+import type { ItemInstance, ProjectInstance, TaskInstance } from "../types/Types";
 import { seedData } from "./seedData";
 
 const DATABASE_NAME = "StrataDB";
@@ -11,34 +12,44 @@ function databaseOpen(): Promise<IDBDatabase> {
 
   request.addEventListener("upgradeneeded", function () {
     const db = request.result;
-    let newStoreCount = 0;
+    const projectStoreExist = db.objectStoreNames.contains(PROJECT_STORE);
+    const taskStoreExist = db.objectStoreNames.contains(TASK_STORE);
+    const itemStoreExist = db.objectStoreNames.contains(ITEM_STORE);
 
-    if (!db.objectStoreNames.contains(PROJECT_STORE)) {
-      newStoreCount++;
+    if (!projectStoreExist) {
       db.createObjectStore(PROJECT_STORE, { keyPath: "id" });
     }
-    if (!db.objectStoreNames.contains(TASK_STORE)) {
-      newStoreCount++;
+    if (!taskStoreExist) {
       db.createObjectStore(TASK_STORE, { keyPath: "id" });
     }
-    if (!db.objectStoreNames.contains(ITEM_STORE)) {
-      newStoreCount++;
+    if (!itemStoreExist) {
       db.createObjectStore(ITEM_STORE, { keyPath: "id" });
     }
-    if (newStoreCount === 3) {
-      let newDB = request.transaction;
-      if (newDB) {
-        const project = newDB.objectStore(PROJECT_STORE);
-        const task = newDB.objectStore(TASK_STORE);
-        const item = newDB.objectStore(ITEM_STORE);
 
-        seedData.projects.forEach((val) => project.put(val));
-        seedData.tasks.forEach((val) => task.put(val));
-        seedData.items.forEach((val) => item.put(val));
-      }
+    const newDB = request.transaction;
+    if (newDB) {
+      seedIfEmpty(newDB.objectStore(PROJECT_STORE), seedData.projects);
+      seedIfEmpty(newDB.objectStore(TASK_STORE), seedData.tasks);
+      seedIfEmpty(newDB.objectStore(ITEM_STORE), seedData.items);
     }
   });
   return wrapper(request);
+}
+
+function seedIfEmpty(
+  store: IDBObjectStore,
+  data: ProjectInstance[] | TaskInstance[] | ItemInstance[],
+) {
+  const countReq = store.count();
+  countReq.onsuccess = () => {
+    if (countReq.result === 0) {
+      data.forEach((val) => {
+        const putReq = store.put(val);
+        putReq.addEventListener("error", () => console.error("Seed put failed", putReq.error));
+      });
+    }
+  };
+  countReq.addEventListener("error", () => console.error("Count failed", countReq.error));
 }
 
 //helper
