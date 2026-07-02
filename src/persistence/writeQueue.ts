@@ -44,6 +44,7 @@ async function processQueue() {
   }
 
   queue.delete(ref);
+  if (ref.onSuccess) ref.onSuccess();
   processQueue();
 }
 

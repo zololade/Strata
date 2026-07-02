@@ -104,12 +104,12 @@ interface ItemUpdate {
 }
 
 type PersistOperation =
-  | { store: "projects"; action: "put"; payload: ProjectInstance }
-  | { store: "tasks"; action: "put"; payload: TaskInstance }
-  | { store: "items"; action: "put"; payload: ItemInstance }
-  | { store: "projects"; action: "delete"; id: string }
-  | { store: "tasks"; action: "delete"; id: string }
-  | { store: "items"; action: "delete"; id: string };
+  | { store: "projects"; action: "put"; payload: ProjectInstance; onSuccess?: () => void }
+  | { store: "tasks"; action: "put"; payload: TaskInstance; onSuccess?: () => void }
+  | { store: "items"; action: "put"; payload: ItemInstance; onSuccess?: () => void }
+  | { store: "projects"; action: "delete"; id: string; onSuccess?: () => void }
+  | { store: "tasks"; action: "delete"; id: string; onSuccess?: () => void }
+  | { store: "items"; action: "delete"; id: string; onSuccess?: () => void };
 
 export type {
   NewProjectInput,
