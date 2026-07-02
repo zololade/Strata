@@ -1,4 +1,4 @@
-import { databaseBus } from "../../bootstrap/initializers/eventInit";
+import { enqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { ItemUpdate, StoredType } from "../../types/Types";
 
@@ -26,7 +26,16 @@ function updateItem(store: StoredType, itemId: string, payload: ItemUpdate): Res
   }
 
   item.lastModified = Date.now();
-  databaseBus.publish("database:update", store);
+
+  enqueuePersist({
+    store: "items",
+    action: "put",
+    payload: item,
+    onSuccess: () => {
+      store.items.set(item.id, item);
+    },
+  });
+
   return { type: "updatedItem", id: itemId };
 }
 
