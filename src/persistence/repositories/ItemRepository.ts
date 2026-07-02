@@ -8,4 +8,9 @@ async function get(id: string) {
   return result;
 }
 
-export { get };
+async function put(payload: ItemInstance) {
+  const store = (await startTransaction(ITEM_STORE)).objectStore(ITEM_STORE).put(payload);
+  const result = await wrapper(store);
+  return result;
+}
+export { get, put };

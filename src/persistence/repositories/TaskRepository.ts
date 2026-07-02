@@ -7,5 +7,9 @@ async function get(id: string) {
   const result = await wrapper<TaskInstance | undefined>(store);
   return result;
 }
-
-export { get };
+async function put(payload: TaskInstance) {
+  const store = (await startTransaction(TASK_STORE)).objectStore(TASK_STORE).put(payload);
+  const result = await wrapper(store);
+  return result;
+}
+export { get, put };
