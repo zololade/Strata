@@ -1,13 +1,11 @@
-import type { EventBus } from "../../lib/EventBus";
 import type { Command, Result } from "../../types/command";
 
 type UpdateProjectDeps = {
   dispatch: (command: Command) => Result;
   getCurrProjId: () => string | null;
-  bus: EventBus;
 };
 
-function createHandleUpdateTitle({ dispatch, getCurrProjId, bus }: UpdateProjectDeps) {
+function createHandleUpdateTitle({ dispatch, getCurrProjId }: UpdateProjectDeps) {
   return function handleUpdateTitle(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -18,8 +16,6 @@ function createHandleUpdateTitle({ dispatch, getCurrProjId, bus }: UpdateProject
       data: { title: text },
     };
     dispatch(command);
-
-    bus.publish("project:title-updated", { id, title: text });
   };
 }
 

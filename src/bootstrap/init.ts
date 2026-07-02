@@ -73,7 +73,6 @@ async function init() {
       "update-title": createHandleUpdateTitle({
         dispatch,
         getCurrProjId: ui.getCurrProjId,
-        bus: appBus,
       }),
       "update-overview": createHandleUpdateOverview({
         dispatch,
