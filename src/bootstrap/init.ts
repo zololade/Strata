@@ -14,24 +14,31 @@ import {
   createHandleUpdateTaskFlag,
 } from "../handlers/domHandlers/updateFields";
 import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
+import { rehydrateFactory } from "../persistence/initialize";
+import { itemActions } from "../persistence/repositories/ItemRepository";
+import { projectActions } from "../persistence/repositories/ProjectRepository";
+import { taskActions } from "../persistence/repositories/TaskRepository";
 import { createDispatch } from "../store/dispatch";
 // bootstrap/init.ts
-import { createSnapshot, createStore } from "../store/Store";
+import { createSnapshot } from "../store/Store";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
 import { showMenu } from "../ui/reactions/menuReaction";
 import { createTaskReactions } from "../ui/reactions/taskReaction";
 import { createAppShell } from "../ui/views/home";
-import { initializeDatabase } from "./initializers/databaseInit";
 import { initializeServices, appBus } from "./initializers/eventInit";
 
-function init() {
-  const { store, bind } = createStore();
-  // const {store ,bind } = createSnapshot
+async function init() {
+  const { store, bind } = createSnapshot(rehydrateFactory);
+  const loadState = {
+    projects: await projectActions.getAll(),
+    tasks: await taskActions.getAll(),
+    items: await itemActions.getAll(),
+  };
 
   const dispatch = createDispatch(store);
   const ui = createAppShell(store, appBus);
 
-  initializeServices(store, bind, ui); // wires database/store/project-selection events, calls ui.appShell() on store:ready
+  initializeServices(store, ui); // wires database/store/project-selection events, calls ui.appShell() on store:ready
 
   const taskReactions = createTaskReactions({
     store,
@@ -93,8 +100,9 @@ function init() {
     },
   };
 
+  bind(loadState);
+  ui.appShell();
   initializeEvents(handlers);
-  initializeDatabase();
 }
 
 export { init };
