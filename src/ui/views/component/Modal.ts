@@ -14,6 +14,7 @@ function newProject(): PageData {
             tag: "fieldset",
             content: [
               { tag: "legend", content: "New project" },
+              { tag: "hr" },
               {
                 tag: "label",
                 class: "accessible",

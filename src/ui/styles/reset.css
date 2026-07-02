@@ -6,7 +6,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    scrollbar-gutter: stable both-edges;
+
+    *:not(dialog):not(textarea),
+    *:not(dialog):not(textarea)::before,
+    *:not(dialog):not(textarea)::after {
+      scrollbar-gutter: stable both-edges;
+    }
   }
 
   /* 2. Document & Layout Basics */

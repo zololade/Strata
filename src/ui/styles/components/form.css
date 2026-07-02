@@ -5,7 +5,6 @@
   background-color: var(--dialog-backdrop);
   backdrop-filter: blur(1px);
   border: none;
-  padding: 1rem;
 
   form {
     background-color: var(--bg-base-color);
@@ -30,8 +29,15 @@
         color: var(--content-highlight-color);
       }
 
-      * {
+      > *:not(:first-child):not(hr) {
         margin-top: 1rem;
+      }
+
+      hr {
+        border: none;
+        height: 1px;
+        background-color: var(--bg-border-color);
+        margin-top: 0.5rem;
       }
 
       input,
