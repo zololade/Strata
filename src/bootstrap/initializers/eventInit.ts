@@ -3,10 +3,7 @@ import { EventBus } from "../../lib/EventBus";
 const databaseBus = new EventBus();
 const appBus = new EventBus();
 
-import {
-  createHandleProjectSelection,
-  handleDatabaseUpdate,
-} from "../../handlers/busHandlers/handlers";
+import { createHandleProjectSelection } from "../../handlers/busHandlers/handlers";
 import type { StoredType } from "../../types/Types";
 import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
 import { createTitleReaction } from "../../ui/reactions/titleReaction";
@@ -22,7 +19,6 @@ function initializeServices(store: StoredType, ui: ReturnType<typeof createAppSh
   const { handleTitleUpdated } = createTitleReaction();
   const handleProjectSelection = createHandleProjectSelection(showActiveProject);
 
-  databaseBus.subscribe("database:update", handleDatabaseUpdate);
   appBus.subscribe("view:project", handleProjectSelection);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
 }
