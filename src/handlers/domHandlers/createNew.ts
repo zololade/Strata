@@ -29,6 +29,7 @@ function createHandleCreateProj({ dispatch, refreshList, selectProject }: Create
       overviewField.value = "";
       ModalManager.close(".dialog");
       const afterRender = refreshList();
+
       if (projData?.type === "createdProject" && listHost)
         afterRender(listHost, () => selectProject(projData.id));
     }

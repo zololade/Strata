@@ -5,6 +5,7 @@ class Item {
   content: string;
   note: string;
   flag: null | string[];
+  taskId: string;
   createdAt: number;
   lastModified: number;
 
@@ -13,6 +14,7 @@ class Item {
     this.note = param.note ?? "";
     this.content = param.content;
     this.flag = param.flag;
+    this.taskId = param.taskId;
     this.createdAt = "createdAt" in param ? param.createdAt : Date.now();
     this.lastModified = "lastModified" in param ? param.lastModified : 0;
   }

@@ -45,8 +45,9 @@ function createAppShell(store: ProjectStore, bus: EventBus) {
   }
 
   function refreshList() {
-    return (listHost: HTMLElement, afterRender: () => void) =>
+    return (listHost: HTMLElement, afterRender: () => void) => {
       renderElement(listHost, generateList(store), false, afterRender);
+    };
   }
 
   return {
