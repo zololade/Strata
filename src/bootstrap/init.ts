@@ -1,19 +1,5 @@
 // domHandlers factories
-import { createHandleCreateProj, createHandleCreateTask } from "../handlers/domHandlers/createNew";
-import { createHandleShowMenu, handleCloseMenu } from "../handlers/domHandlers/menuHandler";
-import { handleNavBtn, handleNavClose } from "../handlers/domHandlers/navTrigger";
-import { handleOpenModal, handleHideModal } from "../handlers/domHandlers/newProjModal";
-import {
-  createHandleUpdateTitle,
-  createHandleUpdateOverview,
-  createHandleUpdateTaskTitle,
-  createHandleUpdateTaskOverview,
-  handlePreventNewLine,
-  handlePasteAsPlainText,
-  createHandleUpdateFlag,
-  createHandleUpdateTaskFlag,
-} from "../handlers/domHandlers/updateFields";
-import { createHandleSelectProj } from "../handlers/domHandlers/viewProject";
+import { buildHandlersRegistry } from "../handlers/registry";
 import { rehydrateFactory } from "../persistence/initialize";
 import { itemActions } from "../persistence/repositories/ItemRepository";
 import { projectActions } from "../persistence/repositories/ProjectRepository";
@@ -22,79 +8,34 @@ import { createDispatch } from "../store/dispatch";
 // bootstrap/init.ts
 import { createSnapshot } from "../store/Store";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
-import { showMenu } from "../ui/reactions/menuReaction";
 import { createTaskReactions } from "../ui/reactions/taskReaction";
 import { createAppShell } from "../ui/views/home";
 import { initializeServices, appBus } from "./initializers/eventInit";
 
 async function init() {
-  const { store, bind } = createSnapshot(rehydrateFactory);
-  const loadState = {
-    projects: await projectActions.getAll(),
-    tasks: await taskActions.getAll(),
-    items: await itemActions.getAll(),
-  };
+  try {
+    const { store, bind } = createSnapshot(rehydrateFactory);
+    const loadState = {
+      projects: await projectActions.getAll(),
+      tasks: await taskActions.getAll(),
+      items: await itemActions.getAll(),
+    };
+    const dispatch = createDispatch(store);
+    const ui = createAppShell(store, appBus);
+    const taskReactions = createTaskReactions({
+      store,
+      getCurrProjId: ui.getCurrProjId,
+    });
+    const handlers: HandlersByEvent = buildHandlersRegistry(dispatch, ui);
 
-  const dispatch = createDispatch(store);
-  const ui = createAppShell(store, appBus);
-  const taskReactions = createTaskReactions({
-    store,
-    getCurrProjId: ui.getCurrProjId,
-  });
-
-  initializeServices(store, ui, taskReactions); // wires database/store/project-selection events, calls ui.appShell() on store:ready
-
-  const handlers: HandlersByEvent = {
-    click: {
-      "create-project": createHandleCreateProj({
-        dispatch,
-      }),
-      "create-task": createHandleCreateTask({
-        dispatch,
-        getCurrProjId: ui.getCurrProjId,
-      }),
-      "toggle-flag": createHandleUpdateFlag({
-        dispatch,
-        getCurrProjId: ui.getCurrProjId,
-      }),
-      "toggle-task-flag": createHandleUpdateTaskFlag({
-        dispatch,
-      }),
-      "open-modal": handleOpenModal,
-      "close-modal": handleHideModal,
-      "select-project": createHandleSelectProj(ui.selectProject),
-      "show-nav": handleNavBtn,
-      "close-nav": handleNavClose,
-      "toggle-kebab": createHandleShowMenu(showMenu),
-      "menu-close": handleCloseMenu,
-    },
-    focusout: {
-      "update-title": createHandleUpdateTitle({
-        dispatch,
-        getCurrProjId: ui.getCurrProjId,
-      }),
-      "update-overview": createHandleUpdateOverview({
-        dispatch,
-        getCurrProjId: ui.getCurrProjId,
-      }),
-      "update-task-title": createHandleUpdateTaskTitle({
-        dispatch,
-      }),
-      "update-task-overview": createHandleUpdateTaskOverview({
-        dispatch,
-      }),
-    },
-    beforeinput: {
-      "prevent-newline": handlePreventNewLine,
-    },
-    paste: {
-      "paste-plain-text": handlePasteAsPlainText,
-    },
-  };
-
-  bind(loadState);
-  ui.appShell();
-  initializeEvents(handlers);
+    bind(loadState);
+    initializeServices(store, ui, taskReactions);
+    ui.appShell();
+    initializeEvents(handlers);
+  } catch (error) {
+    console.error("App initialization failed:", error);
+    document.querySelector("#app")!.textContent = "Oops! Something went wrong loading the app.";
+  }
 }
 
 export { init };

@@ -104,6 +104,9 @@ function renderElement(
     }
   } else {
     render();
+    if (afterRender) {
+      afterRender();
+    }
   }
 }
 
