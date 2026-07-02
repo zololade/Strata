@@ -1,4 +1,4 @@
-import type { ItemInput, NewItemInput } from "../../types/Types";
+import type { ItemInstance, NewItemInput } from "../../types/Types";
 
 class Item {
   id: string;
@@ -9,7 +9,7 @@ class Item {
   createdAt: number;
   lastModified: number;
 
-  constructor(param: NewItemInput | ItemInput) {
+  constructor(param: NewItemInput | ItemInstance) {
     this.id = "id" in param ? param.id : crypto.randomUUID();
     this.note = param.note ?? "";
     this.content = param.content;

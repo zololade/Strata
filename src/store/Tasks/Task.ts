@@ -1,4 +1,4 @@
-import type { NewTaskInput, TaskInput } from "../../types/Types";
+import type { NewTaskInput, TaskInstance } from "../../types/Types";
 
 class Task {
   id: string;
@@ -9,7 +9,7 @@ class Task {
   createdAt: number;
   lastModified: number;
 
-  constructor(param: NewTaskInput | TaskInput) {
+  constructor(param: NewTaskInput | TaskInstance) {
     this.id = "id" in param ? param.id : crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;

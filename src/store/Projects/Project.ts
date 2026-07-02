@@ -1,4 +1,4 @@
-import type { NewProjectInput, ProjectInput } from "../../types/Types";
+import type { NewProjectInput, ProjectInstance } from "../../types/Types";
 
 class Project {
   id: string;
@@ -8,7 +8,7 @@ class Project {
   createdAt: number;
   lastModified: number;
 
-  constructor(param: NewProjectInput | ProjectInput) {
+  constructor(param: NewProjectInput | ProjectInstance) {
     this.id = "id" in param ? param.id : crypto.randomUUID();
     this.title = param.title;
     this.overview = param.overview;

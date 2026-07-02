@@ -24,32 +24,6 @@ interface NewItemInput {
   taskId: string;
 }
 
-type ProjectInput = EntityMeta & {
-  title: string;
-  overview: string;
-  flag: null | string[];
-};
-
-type TaskInput = EntityMeta & {
-  title: string;
-  overview: string;
-  flag: null | string[];
-  projectId: string;
-};
-
-type ItemInput = EntityMeta & {
-  content: string;
-  note: string;
-  flag: null | string[];
-  taskId: string;
-};
-
-interface Snapshot {
-  projects: ProjectInput[];
-  tasks: TaskInput[];
-  items: ItemInput[];
-}
-
 //app instance
 interface ProjectInstance extends EntityMeta {
   title: string;
@@ -115,10 +89,6 @@ export type {
   NewTaskInput,
   NewItemInput,
   StoredType,
-  ProjectInput,
-  TaskInput,
-  ItemInput,
-  Snapshot,
   ProjectInstance,
   TaskInstance,
   ItemInstance,

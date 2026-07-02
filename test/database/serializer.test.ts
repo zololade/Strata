@@ -1,8 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 
-import { rehydrateFactory } from "../../src/storage/transformers/rehydrate";
-import { StoreReader } from "../../src/storage/transformers/serializer";
-import type { StoredType, Snapshot as Outgoing } from "../../src/types/Types";
+import type { StoredType, DBCollection as Outgoing } from "../../src/types/Types";
 import { TestData } from "./TestData";
 
 describe("buildProjectGraph", () => {
