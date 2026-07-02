@@ -103,6 +103,14 @@ interface ItemUpdate {
   flag?: string;
 }
 
+type PersistOperation =
+  | { store: "projects"; action: "put"; payload: ProjectInstance }
+  | { store: "tasks"; action: "put"; payload: TaskInstance }
+  | { store: "items"; action: "put"; payload: ItemInstance }
+  | { store: "projects"; action: "delete"; id: string }
+  | { store: "tasks"; action: "delete"; id: string }
+  | { store: "items"; action: "delete"; id: string };
+
 export type {
   NewProjectInput,
   NewTaskInput,
@@ -119,4 +127,5 @@ export type {
   ProjectUpdate,
   TaskUpdate,
   ItemUpdate,
+  PersistOperation,
 };
