@@ -34,7 +34,7 @@ function updateProject(store: StoredType, projectId: string, payload: ProjectUpd
       if (payload.title !== undefined) {
         appBus.publish("project:title-updated", { id: projectId, title: project.title });
       }
-      if (payload.onPersistSuccess) if (payload.onPersistSuccess) payload.onPersistSuccess();
+      if (payload.onPersistSuccess) payload.onPersistSuccess();
     },
   });
 

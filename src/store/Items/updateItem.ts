@@ -33,6 +33,7 @@ function updateItem(store: StoredType, itemId: string, payload: ItemUpdate): Res
     payload: item,
     onSuccess: () => {
       store.items.set(item.id, item);
+      if (payload.onPersistSuccess) payload.onPersistSuccess();
     },
   });
 
