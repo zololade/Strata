@@ -150,9 +150,10 @@
           background: var(--bg-sidebar);
           border-radius: 15px;
           border: var(--border);
-
-          &:hover {
-            background-color: var(--add-btn-hover-color-sec);
+          @media (hover: hover) {
+            &:hover {
+              background-color: var(--add-btn-hover-color-sec);
+            }
           }
           &.active {
             background: var(--add-btn-color-sec);
