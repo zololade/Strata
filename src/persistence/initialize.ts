@@ -1,4 +1,5 @@
-import { databaseOpen } from "./db";
+import type { ItemInstance, ProjectInstance, TaskInstance } from "../types/Types";
+import { databaseOpen, wrapper } from "./db";
 
 async function openDatabase() {
   try {
@@ -36,4 +37,25 @@ const startTransaction = async function (storeType: string) {
   return (await dbStore).transaction(storeType, "readwrite");
 };
 
-export { startTransaction };
+function getActions<T extends ProjectInstance | TaskInstance | ItemInstance>(STORE_TYPE: string) {
+  return {
+    get: async function (id: string) {
+      const store = (await startTransaction(STORE_TYPE)).objectStore(STORE_TYPE).get(id);
+      const result = await wrapper<T | undefined>(store);
+      return result;
+    },
+    put: async function (payload: T) {
+      const store = (await startTransaction(STORE_TYPE)).objectStore(STORE_TYPE).put(payload);
+      const result = await wrapper(store);
+      return result;
+    },
+
+    delete: async function (id: string) {
+      const store = (await startTransaction(STORE_TYPE)).objectStore(STORE_TYPE).delete(id);
+      const result = await wrapper(store);
+      return result;
+    },
+  };
+}
+
+export { getActions };
