@@ -13,9 +13,7 @@ function createFlagReaction(getCurrProjId: () => string | null) {
       if (currentId !== projectId) return;
       const el = element as HTMLElement | null;
       if (el) {
-        setTimeout(() => {
-          el.classList.toggle("active");
-        }, 0);
+        el.classList.toggle("active");
       }
     }
   }

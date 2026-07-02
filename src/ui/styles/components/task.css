@@ -112,10 +112,6 @@
         border: none;
         padding: 0rem 0.35rem;
 
-        &:hover {
-          color: var(--content-highlight-color);
-          background: none;
-        }
         &.active {
           color: var(--content-highlight-color);
         }
