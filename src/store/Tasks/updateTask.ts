@@ -35,6 +35,7 @@ function updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Res
     onSuccess: () => {
       store.tasks.set(task.id, task);
       appBus.publish("task:updated", task.id);
+      if (payload.onPersistSuccess) payload.onPersistSuccess();
     },
   });
 

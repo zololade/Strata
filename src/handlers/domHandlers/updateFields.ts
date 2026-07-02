@@ -41,14 +41,9 @@ function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectD
       const command: Command = {
         type: "updateProject",
         projectId: id,
-        data: { flag: text },
+        data: { flag: text, onPersistSuccess: () => match.classList.toggle("active") },
       };
-
-      const result = dispatch(command);
-
-      if (result?.type === "updatedProject") {
-        match.classList.toggle("active");
-      }
+      dispatch(command);
     }
   };
 }
@@ -67,7 +62,6 @@ function createHandleUpdateTaskTitle({ dispatch }: UpdateTaskDeps) {
       taskId,
       data: { title: text },
     };
-
     dispatch(command);
   };
 }
@@ -94,9 +88,8 @@ function createHandleUpdateTaskFlag({ dispatch }: UpdateTaskDeps) {
     const command: Command = {
       type: "updateTask",
       taskId,
-      data: { flag: text },
+      data: { flag: text, onPersistSuccess: () => match.classList.toggle("active") },
     };
-    match.classList.toggle("active");
     dispatch(command);
   };
 }

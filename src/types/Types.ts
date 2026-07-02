@@ -62,18 +62,21 @@ interface ProjectUpdate {
   title?: string;
   overview?: string;
   flag?: string;
+  onPersistSuccess?: () => void;
 }
 
 interface TaskUpdate {
   title?: string;
   overview?: string;
   flag?: string;
+  onPersistSuccess?: () => void;
 }
 
 interface ItemUpdate {
   content?: string;
   note?: string;
   flag?: string;
+  onPersistSuccess?: () => void;
 }
 
 type PersistOperation =
