@@ -15,9 +15,9 @@ function reducer(store: ProjectStore, command: Command): Result {
     case "createProject":
       return Project.createProject(store, command.data);
     case "createTask":
-      return Task.createTask(store, command.projectId, command.data);
+      return Task.createTask(store, command.data);
     case "createItem":
-      return Item.createItem(store, command.taskId, command.data);
+      return Item.createItem(store, command.data);
     case "updateProject":
       return Project.updateProject(store, command.projectId, command.data);
     case "updateTask":

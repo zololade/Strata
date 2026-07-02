@@ -6,6 +6,9 @@ import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
 const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
+  const task = () => {
+    return new Set([...store.tasks.values()].filter((t) => t.projectId === project.id));
+  };
   return {
     tag: "div",
     class: "workspace__container",
@@ -59,7 +62,7 @@ const selectedProj = (project: ProjectInstance, store: StoredType): PageData => 
         tag: "div",
         class: "workspace__task",
         content: [
-          project.tasks.size > 0
+          task().size > 0
             ? {
                 tag: "div",
                 class: "tasks__mainHeader",
@@ -74,7 +77,7 @@ const selectedProj = (project: ProjectInstance, store: StoredType): PageData => 
                 ],
               }
             : [],
-          project.tasks.size > 0 ? generateTasks([...project.tasks], store) : noTasksState,
+          task().size > 0 ? generateTasks(task()) : noTasksState,
         ],
       },
     ],
@@ -105,16 +108,13 @@ const noTasksState: PageData = {
   ],
 };
 
-function generateTasks(ids: string[], store: StoredType): PageData[] {
-  return ids
-    .filter((id) => store.tasks.has(id))
-    .toSorted((a, b) => {
-      const taskA = store.tasks.get(a)!;
-      const taskB = store.tasks.get(b)!;
+function generateTasks(data: Set<TaskInstance>): PageData[] {
+  return [...data]
+    .toSorted((taskA, taskB) => {
       return taskB.createdAt - taskA.createdAt;
     })
     .map((val) => {
-      const currTask = store.tasks.get(val);
+      const currTask = val;
 
       if (currTask) {
         const lastUpdated =

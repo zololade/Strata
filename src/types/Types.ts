@@ -8,44 +8,43 @@ interface NewProjectInput {
   title: string;
   overview: string;
   flag: null | string[];
-  tasks: string[];
 }
 
 interface NewTaskInput {
   title: string;
   overview: string;
   flag: null | string[];
-  items: string[];
+  projectId: string;
 }
 
 interface NewItemInput {
   content: string;
   note: string;
   flag: null | string[];
+  taskId: string;
 }
 
 type ProjectInput = EntityMeta & {
   title: string;
   overview: string;
   flag: null | string[];
-  tasks: string[];
 };
 
 type TaskInput = EntityMeta & {
   title: string;
   overview: string;
   flag: null | string[];
-  items: string[];
+  projectId: string;
 };
 
 type ItemInput = EntityMeta & {
   content: string;
   note: string;
   flag: null | string[];
+  taskId: string;
 };
 
 interface Snapshot {
-  // version: number;
   projects: ProjectInput[];
   tasks: TaskInput[];
   items: ItemInput[];
@@ -56,20 +55,20 @@ interface ProjectInstance extends EntityMeta {
   title: string;
   overview: string;
   flag: string[] | null;
-  tasks: Set<string>;
 }
 
 interface TaskInstance extends EntityMeta {
   title: string;
   overview: string;
   flag: string[] | null;
-  items: Set<string>;
+  projectId: string;
 }
 
 interface ItemInstance extends EntityMeta {
   content: string;
   note: string;
   flag: string[] | null;
+  taskId: string;
 }
 
 interface DBCollection {

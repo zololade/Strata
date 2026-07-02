@@ -5,7 +5,7 @@ class Task {
   title: string;
   overview: string;
   flag: string[] | null;
-  items: Set<string>;
+  projectId: string;
   createdAt: number;
   lastModified: number;
 
@@ -14,7 +14,7 @@ class Task {
     this.title = param.title;
     this.overview = param.overview;
     this.flag = param.flag;
-    this.items = new Set(param.items);
+    this.projectId = param.projectId;
     this.createdAt = "createdAt" in param ? param.createdAt : Date.now();
     this.lastModified = "lastModified" in param ? param.lastModified : 0;
   }

@@ -21,7 +21,6 @@ function createHandleCreateProj({ dispatch, refreshList, selectProject }: Create
           title: titleField.value.trim().length < 1 ? "New project" : titleField.value,
           overview: overviewField.value,
           flag: null,
-          tasks: [],
         },
       };
       const projData = dispatch(command);
@@ -47,9 +46,8 @@ function createHandleCreateTask({ dispatch, refreshTask, getCurrProjId }: Create
     const id = getCurrProjId();
     if (id) {
       const command: Command = {
-        projectId: id,
         type: "createTask",
-        data: { title: "", overview: "", flag: null, items: [] },
+        data: { title: "", overview: "", flag: null, projectId: id },
       };
       const result = dispatch(command);
 
