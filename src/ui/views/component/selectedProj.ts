@@ -134,6 +134,26 @@ function generateTasks(data: Set<TaskInstance>): PageData[] {
     .filter((val) => val !== null);
 }
 
+function generateTaskStatus(duration: string) {
+  return [
+    {
+      tag: "p",
+      class: "status",
+      content: "ongoing",
+    },
+    {
+      tag: "div",
+      class: "separator",
+      content: "•",
+    },
+    {
+      tag: "p",
+      class: "task-date",
+      content: `${duration} ago`,
+    },
+  ];
+}
+
 function generateTaskContent(currTask: TaskInstance, duration: string): PageData[] {
   return [
     {
@@ -143,23 +163,7 @@ function generateTaskContent(currTask: TaskInstance, duration: string): PageData
         {
           tag: "div",
           class: "task__left",
-          content: [
-            {
-              tag: "p",
-              class: "status",
-              content: "ongoing",
-            },
-            {
-              tag: "div",
-              class: "separator",
-              content: "•",
-            },
-            {
-              tag: "p",
-              class: "task-date",
-              content: `${duration} ago`,
-            },
-          ],
+          content: [...generateTaskStatus(duration)],
         },
         {
           tag: "div",
@@ -215,4 +219,4 @@ function generateTaskContent(currTask: TaskInstance, duration: string): PageData
   ];
 }
 
-export { selectedProj, generateTaskContent };
+export { selectedProj, generateTaskStatus };

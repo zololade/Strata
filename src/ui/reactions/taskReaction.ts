@@ -2,7 +2,7 @@ import { renderElement } from "../../lib/Page";
 import { formatDuration, getTimeObj } from "../../lib/time";
 import type { StoredType } from "../../types/Types";
 import { viewProject } from "../views/component/detailPanel";
-import { generateTaskContent } from "../views/component/selectedProj";
+import { generateTaskStatus } from "../views/component/selectedProj";
 
 type TaskReactionDeps = {
   store: StoredType;
@@ -26,12 +26,14 @@ function createTaskReactions({ store, getCurrProjId }: TaskReactionDeps) {
 
   function refreshCurrTask(id: string) {
     const currTask = store.tasks.get(id);
-    const host = document.querySelector(`article[data-id="${id}"]`) as HTMLElement;
+    const host = document.querySelector(
+      `article[data-id="${id}"] .task__header .task__left`,
+    ) as HTMLElement;
 
     if (currTask && host) {
       const lastUpdated = currTask.lastModified === 0 ? currTask.createdAt : currTask.lastModified;
       const duration = formatDuration(getTimeObj(lastUpdated));
-      renderElement(host, generateTaskContent(currTask, duration));
+      renderElement(host, generateTaskStatus(duration));
     }
   }
 
