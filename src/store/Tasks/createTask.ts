@@ -1,3 +1,4 @@
+import { appBus } from "../../bootstrap/initializers/eventInit";
 import { enqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { NewTaskInput, StoredType } from "../../types/Types";
@@ -12,6 +13,7 @@ function createTask(store: StoredType, payload: NewTaskInput): Result {
     payload: task,
     onSuccess: () => {
       store.tasks.set(task.id, task);
+      appBus.publish("task:created", task.id);
     },
   });
 

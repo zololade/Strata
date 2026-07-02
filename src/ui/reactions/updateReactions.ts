@@ -1,13 +1,29 @@
 function createUpdateReaction(
   refreshList: () => (listHost: HTMLElement, afterRender: () => void) => void,
   selectProject: (id: string) => void,
+  refreshTask: (afterRender?: (() => void) | undefined) => void,
 ) {
-  return function handleProjectCreated(data: unknown) {
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
+  function handleProjectCreated(data: unknown) {
     const id = data as string | null;
     const listHost = document.querySelector(".mainNav__list") as HTMLUListElement | null;
     const afterRender = refreshList();
     if (listHost && id) afterRender(listHost, () => selectProject(id));
-  };
+  }
+
+  // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
+  function handleTaskCreated(data: unknown) {
+    const id = data as string | null;
+    if (id !== null) {
+      refreshTask(() => {
+        const selector = `h3[contenteditable="true"][data-task-id="${id}"]`;
+        const heading3 = document.querySelector(selector) as HTMLElement | null;
+        if (heading3) heading3.focus();
+      });
+    }
+  }
+
+  return { handleProjectCreated, handleTaskCreated };
 }
 
 export { createUpdateReaction };

@@ -10,7 +10,11 @@ import { createTitleReaction } from "../../ui/reactions/titleReaction";
 import { createUpdateReaction } from "../../ui/reactions/updateReactions";
 import type { createAppShell } from "../../ui/views/home";
 
-function initializeServices(store: StoredType, ui: ReturnType<typeof createAppShell>) {
+function initializeServices(
+  store: StoredType,
+  ui: ReturnType<typeof createAppShell>,
+  refreshTask: (afterRender?: (() => void) | undefined) => void,
+) {
   const showActiveProject = createShowActiveProject({
     store,
     getPrevProjId: ui.getPrevProjId,
@@ -19,11 +23,16 @@ function initializeServices(store: StoredType, ui: ReturnType<typeof createAppSh
 
   const { handleTitleUpdated } = createTitleReaction();
   const handleProjectSelection = createHandleProjectSelection(showActiveProject);
-  const handleProjectCreated = createUpdateReaction(ui.refreshList, ui.selectProject);
+  const { handleProjectCreated, handleTaskCreated } = createUpdateReaction(
+    ui.refreshList,
+    ui.selectProject,
+    refreshTask,
+  );
 
   appBus.subscribe("view:project", handleProjectSelection);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
   appBus.subscribe("project:created", handleProjectCreated);
+  appBus.subscribe("task:created", handleTaskCreated);
 }
 
 export { databaseBus, appBus, initializeServices };

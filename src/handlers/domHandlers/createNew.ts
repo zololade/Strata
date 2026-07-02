@@ -31,11 +31,10 @@ function createHandleCreateProj({ dispatch }: CreateProjDeps) {
 
 type CreateTaskDeps = {
   dispatch: (command: Command) => Result;
-  refreshTask: (cb: () => void) => void;
   getCurrProjId: () => string | null;
 };
 
-function createHandleCreateTask({ dispatch, refreshTask, getCurrProjId }: CreateTaskDeps) {
+function createHandleCreateTask({ dispatch, getCurrProjId }: CreateTaskDeps) {
   return function handleCreateTask(_match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (id) {
@@ -43,14 +42,7 @@ function createHandleCreateTask({ dispatch, refreshTask, getCurrProjId }: Create
         type: "createTask",
         data: { title: "", overview: "", flag: null, projectId: id },
       };
-      const result = dispatch(command);
-
-      refreshTask(() => {
-        if (result?.type !== "createdTask") return;
-        const selector = `h3[contenteditable="true"][data-task-id="${result.id}"]`;
-        const heading3 = document.querySelector(selector) as HTMLElement | null;
-        if (heading3) heading3.focus();
-      });
+      dispatch(command);
     }
   };
 }

@@ -37,13 +37,12 @@ async function init() {
 
   const dispatch = createDispatch(store);
   const ui = createAppShell(store, appBus);
-
-  initializeServices(store, ui); // wires database/store/project-selection events, calls ui.appShell() on store:ready
-
   const taskReactions = createTaskReactions({
     store,
     getCurrProjId: ui.getCurrProjId,
   });
+
+  initializeServices(store, ui, taskReactions.refreshTask); // wires database/store/project-selection events, calls ui.appShell() on store:ready
 
   const handlers: HandlersByEvent = {
     click: {
@@ -52,7 +51,6 @@ async function init() {
       }),
       "create-task": createHandleCreateTask({
         dispatch,
-        refreshTask: taskReactions.refreshTask,
         getCurrProjId: ui.getCurrProjId,
       }),
       "toggle-flag": createHandleUpdateFlag({
