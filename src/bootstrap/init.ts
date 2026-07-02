@@ -49,8 +49,6 @@ async function init() {
     click: {
       "create-project": createHandleCreateProj({
         dispatch,
-        refreshList: ui.refreshList,
-        selectProject: ui.selectProject,
       }),
       "create-task": createHandleCreateTask({
         dispatch,

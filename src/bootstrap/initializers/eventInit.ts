@@ -7,6 +7,7 @@ import { createHandleProjectSelection } from "../../handlers/busHandlers/handler
 import type { StoredType } from "../../types/Types";
 import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
 import { createTitleReaction } from "../../ui/reactions/titleReaction";
+import { createUpdateReaction } from "../../ui/reactions/updateReactions";
 import type { createAppShell } from "../../ui/views/home";
 
 function initializeServices(store: StoredType, ui: ReturnType<typeof createAppShell>) {
@@ -18,9 +19,11 @@ function initializeServices(store: StoredType, ui: ReturnType<typeof createAppSh
 
   const { handleTitleUpdated } = createTitleReaction();
   const handleProjectSelection = createHandleProjectSelection(showActiveProject);
+  const handleProjectCreated = createUpdateReaction(ui.refreshList, ui.selectProject);
 
   appBus.subscribe("view:project", handleProjectSelection);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
+  appBus.subscribe("project:created", handleProjectCreated);
 }
 
 export { databaseBus, appBus, initializeServices };

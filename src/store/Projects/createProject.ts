@@ -1,3 +1,4 @@
+import { appBus } from "../../bootstrap/initializers/eventInit";
 import { enqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { NewProjectInput, StoredType } from "../../types/Types";
@@ -12,6 +13,7 @@ function createProject(store: StoredType, payload: NewProjectInput): Result {
     payload: project,
     onSuccess: () => {
       store.projects.set(project.id, project);
+      appBus.publish("project:created", project.id);
     },
   });
 

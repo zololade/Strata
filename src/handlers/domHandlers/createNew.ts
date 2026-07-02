@@ -3,16 +3,13 @@ import { ModalManager } from "../../ui/views/component/Modal";
 
 type CreateProjDeps = {
   dispatch: (command: Command) => Result;
-  refreshList: () => (listHost: HTMLElement, cb: () => void) => void;
-  selectProject: (id: string) => void;
 };
 
-function createHandleCreateProj({ dispatch, refreshList, selectProject }: CreateProjDeps) {
+function createHandleCreateProj({ dispatch }: CreateProjDeps) {
   return function handleCreateProj(_match: HTMLElement, e: Event) {
     e.preventDefault();
     const titleField = document.querySelector("#projTitle") as HTMLInputElement | null;
     const overviewField = document.querySelector("#projOverview") as HTMLInputElement | null;
-    const listHost = document.querySelector(".mainNav__list") as HTMLUListElement | null;
 
     if (titleField && overviewField) {
       const command: Command = {
@@ -23,15 +20,11 @@ function createHandleCreateProj({ dispatch, refreshList, selectProject }: Create
           flag: null,
         },
       };
-      const projData = dispatch(command);
+      dispatch(command);
 
       titleField.value = "";
       overviewField.value = "";
       ModalManager.close(".dialog");
-      const afterRender = refreshList();
-
-      if (projData?.type === "createdProject" && listHost)
-        afterRender(listHost, () => selectProject(projData.id));
     }
   };
 }
