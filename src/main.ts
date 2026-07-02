@@ -1,5 +1,5 @@
 import { init } from "./bootstrap/init";
-import { get } from "./persistence/repositories/ProjectRepository";
+import { projectActions } from "./persistence/repositories/ProjectRepository";
 
 import "./ui/styles/app.css";
 
@@ -7,7 +7,7 @@ import "./ui/styles/app.css";
 init();
 
 (async function () {
-  const result = await get("proj-1");
+  const result = await projectActions.get("proj-1");
   console.log(result);
 })();
 

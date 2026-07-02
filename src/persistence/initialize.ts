@@ -55,6 +55,12 @@ function getActions<T extends ProjectInstance | TaskInstance | ItemInstance>(STO
       const result = await wrapper(store);
       return result;
     },
+
+    getAll: async function () {
+      const store = (await startTransaction(STORE_TYPE)).objectStore(STORE_TYPE).getAll();
+      const result = await wrapper<T[]>(store);
+      return result;
+    },
   };
 }
 
