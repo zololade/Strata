@@ -33,7 +33,7 @@ function updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Res
     action: "put",
     payload: task,
     onSuccess: () => {
-      store.projects.set(task.id, task);
+      store.tasks.set(task.id, task);
       appBus.publish("task:updated", task.id);
     },
   });
