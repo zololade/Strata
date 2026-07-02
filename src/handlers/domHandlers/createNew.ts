@@ -1,5 +1,4 @@
 import type { Command, Result } from "../../types/command";
-import { ModalManager } from "../../ui/views/component/Modal";
 
 type CreateProjDeps = {
   dispatch: (command: Command) => Result;
@@ -21,10 +20,6 @@ function createHandleCreateProj({ dispatch }: CreateProjDeps) {
         },
       };
       dispatch(command);
-
-      titleField.value = "";
-      overviewField.value = "";
-      ModalManager.close(".dialog");
     }
   };
 }

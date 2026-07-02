@@ -1,3 +1,5 @@
+import { ModalManager } from "../views/component/Modal";
+
 type taskReactions = {
   refreshTask: (afterRender?: (() => void) | undefined) => void;
   refreshCurrTask: (id: string) => void;
@@ -13,8 +15,15 @@ function createUpdateReaction(
   function handleProjectCreated(data: unknown) {
     const id = data as string | null;
     const listHost = document.querySelector(".mainNav__list") as HTMLUListElement | null;
-    const afterRender = refreshList();
-    if (listHost && id) afterRender(listHost, () => selectProject(id));
+    const titleField = document.querySelector("#projTitle") as HTMLInputElement | null;
+    const overviewField = document.querySelector("#projOverview") as HTMLInputElement | null;
+    if (titleField && overviewField) {
+      titleField.value = "";
+      overviewField.value = "";
+      ModalManager.close(".dialog");
+      const afterRender = refreshList();
+      if (listHost && id) afterRender(listHost, () => selectProject(id));
+    }
   }
 
   // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
