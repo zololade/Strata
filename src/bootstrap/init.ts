@@ -26,7 +26,7 @@ async function init() {
       store,
       getCurrProjId: ui.getCurrProjId,
     });
-    const handlers: HandlersByEvent = buildHandlersRegistry(dispatch, ui);
+    const handlers: HandlersByEvent = buildHandlersRegistry(dispatch, ui, appBus);
 
     bind(loadState);
     initializeServices(store, ui, taskReactions);

@@ -1,3 +1,4 @@
+import type { EventBus } from "../lib/EventBus";
 import type { Command, Result } from "../types/command";
 import { showMenu } from "../ui/reactions/menuReaction";
 import { createHandleCreateProj, createHandleCreateTask } from "./domHandlers/createNew";
@@ -25,7 +26,7 @@ type ui = {
   refreshList: () => (listHost: HTMLElement, afterRender: () => void) => void;
 };
 
-function buildHandlersRegistry(dispatch: (command: Command) => Result, ui: ui) {
+function buildHandlersRegistry(dispatch: (command: Command) => Result, ui: ui, appBus: EventBus) {
   return {
     click: {
       "create-project": createHandleCreateProj({
@@ -38,9 +39,12 @@ function buildHandlersRegistry(dispatch: (command: Command) => Result, ui: ui) {
       "toggle-flag": createHandleUpdateFlag({
         dispatch,
         getCurrProjId: ui.getCurrProjId,
+        bus: appBus,
       }),
       "toggle-task-flag": createHandleUpdateTaskFlag({
         dispatch,
+        getCurrProjId: ui.getCurrProjId,
+        bus: appBus,
       }),
       "open-modal": handleOpenModal,
       "close-modal": handleHideModal,

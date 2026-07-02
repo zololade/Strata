@@ -1,11 +1,13 @@
+import type { EventBus } from "../../lib/EventBus";
 import type { Command, Result } from "../../types/command";
 
 type UpdateProjectDeps = {
   dispatch: (command: Command) => Result;
   getCurrProjId: () => string | null;
+  bus: EventBus;
 };
 
-function createHandleUpdateTitle({ dispatch, getCurrProjId }: UpdateProjectDeps) {
+function createHandleUpdateTitle({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
   return function handleUpdateTitle(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -32,7 +34,7 @@ function createHandleUpdateOverview({ dispatch, getCurrProjId }: Omit<UpdateProj
   };
 }
 
-function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectDeps, "bus">) {
+function createHandleUpdateFlag({ dispatch, getCurrProjId, bus }: UpdateProjectDeps) {
   return function handleUpdateFlag(match: HTMLElement, _e: Event) {
     const id = getCurrProjId();
     if (!id || !match) return;
@@ -41,7 +43,11 @@ function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectD
       const command: Command = {
         type: "updateProject",
         projectId: id,
-        data: { flag: text, onPersistSuccess: () => match.classList.toggle("active") },
+        data: {
+          flag: text,
+          onPersistSuccess: () =>
+            bus.publish("flag:toggled", { type: "project", projectId: id, element: match }),
+        },
       };
       dispatch(command);
     }
@@ -50,9 +56,11 @@ function createHandleUpdateFlag({ dispatch, getCurrProjId }: Omit<UpdateProjectD
 
 type UpdateTaskDeps = {
   dispatch: (command: Command) => Result;
+  getCurrProjId: () => string | null;
+  bus: EventBus;
 };
 
-function createHandleUpdateTaskTitle({ dispatch }: UpdateTaskDeps) {
+function createHandleUpdateTaskTitle({ dispatch }: Pick<UpdateTaskDeps, "dispatch">) {
   return function handleUpdateTaskTitle(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -66,7 +74,7 @@ function createHandleUpdateTaskTitle({ dispatch }: UpdateTaskDeps) {
   };
 }
 
-function createHandleUpdateTaskOverview({ dispatch }: UpdateTaskDeps) {
+function createHandleUpdateTaskOverview({ dispatch }: Pick<UpdateTaskDeps, "dispatch">) {
   return function handleUpdateTaskOverview(match: HTMLElement, _e: Event) {
     const taskId = match.dataset["taskId"];
     if (!taskId || !match) return;
@@ -79,16 +87,21 @@ function createHandleUpdateTaskOverview({ dispatch }: UpdateTaskDeps) {
   };
 }
 
-function createHandleUpdateTaskFlag({ dispatch }: UpdateTaskDeps) {
+function createHandleUpdateTaskFlag({ dispatch, getCurrProjId, bus }: UpdateTaskDeps) {
   return function handleUpdateTaskFlag(match: HTMLElement, _e: Event) {
+    const id = getCurrProjId();
     const taskId = match.dataset["taskId"];
     const text = match.dataset["flag"];
-    if (!taskId || !match || !text) return;
+    if (!taskId || !match || !text || !id) return;
 
     const command: Command = {
       type: "updateTask",
       taskId,
-      data: { flag: text, onPersistSuccess: () => match.classList.toggle("active") },
+      data: {
+        flag: text,
+        onPersistSuccess: () =>
+          bus.publish("flag:toggled", { type: "task", projectId: id, element: match }),
+      },
     };
     dispatch(command);
   };

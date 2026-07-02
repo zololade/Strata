@@ -5,6 +5,7 @@ const appBus = new EventBus();
 
 import { createHandleProjectSelection } from "../../handlers/busHandlers/handlers";
 import type { StoredType } from "../../types/Types";
+import { createFlagReaction } from "../../ui/reactions/flagReactions";
 import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
 import { createTitleReaction } from "../../ui/reactions/titleReaction";
 import { createUpdateReaction } from "../../ui/reactions/updateReactions";
@@ -33,12 +34,14 @@ function initializeServices(
     reactions.refreshTask,
     reactions.refreshCurrTask,
   );
+  const { handleFlagToggled } = createFlagReaction(ui.getCurrProjId);
 
   appBus.subscribe("view:project", handleProjectSelection);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
   appBus.subscribe("project:created", handleProjectCreated);
   appBus.subscribe("task:created", handleTaskCreated);
   appBus.subscribe("task:updated", handleTaskUpdated);
+  appBus.subscribe("flag:toggled", handleFlagToggled);
 }
 
 export { databaseBus, appBus, initializeServices };
