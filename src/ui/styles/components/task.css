@@ -113,9 +113,14 @@
         padding: 0rem 0.35rem;
 
         &:hover {
+          color: inherit;
           background: none;
         }
-
+        @media (hover: hover) {
+          &:hover {
+            color: var(--content-highlight-color);
+          }
+        }
         &.active {
           color: var(--content-highlight-color);
         }
