@@ -27,22 +27,6 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* 3. Typography & Smart Wrapping */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    text-wrap: balance;
-  }
-
-  p,
-  li,
-  figcaption {
-    text-wrap: pretty;
-  }
-
   /* 4. Fluid Media Baseline */
   img,
   picture,
