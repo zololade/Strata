@@ -1,9 +1,6 @@
 // domHandlers factories
 import { buildHandlersRegistry } from "../handlers/registry";
-import { rehydrateFactory } from "../persistence/initialize";
-import { itemActions } from "../persistence/repositories/ItemRepository";
-import { projectActions } from "../persistence/repositories/ProjectRepository";
-import { taskActions } from "../persistence/repositories/TaskRepository";
+import { createPersistence } from "../persistence";
 import { createDispatch } from "../store/dispatch";
 // bootstrap/init.ts
 import { createSnapshot } from "../store/Store";
@@ -14,7 +11,9 @@ import { initializeServices, appBus } from "./initializers/eventInit";
 
 async function init() {
   try {
-    const { store, bind } = createSnapshot(rehydrateFactory);
+    const persistence = createPersistence();
+    const { projectActions, taskActions, itemActions, rehydrate } = persistence;
+    const { store, bind } = createSnapshot(rehydrate);
     const loadState = {
       projects: await projectActions.getAll(),
       tasks: await taskActions.getAll(),

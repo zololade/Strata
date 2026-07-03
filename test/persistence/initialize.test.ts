@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 
-import { rehydrateFactory } from "../../src/persistence/initialize";
+import { rehydrateFactory } from "../../src/persistence/lib/rehydrate";
 import type {
   ItemInstance,
   ProjectInstance,
