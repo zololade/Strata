@@ -1,9 +1,13 @@
-import { enqueuePersist } from "../../persistence/writeQueue";
+import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { StoredType } from "../../types/Types";
 import { removeItem } from "../Items";
 
-function removeTask(store: StoredType, payload: { taskId: string }): Result {
+function removeTask(
+  store: StoredType,
+  enqueuePersist: EnqueuePersist,
+  payload: { taskId: string },
+): Result {
   const { taskId } = payload;
   //clean up items
   enqueuePersist({
@@ -13,7 +17,7 @@ function removeTask(store: StoredType, payload: { taskId: string }): Result {
     onSuccess: () => {
       store.tasks.delete(taskId);
       const items = [...store.items.values()].filter((val) => val.taskId === taskId);
-      items.forEach((val) => removeItem(store, { itemId: val.id }));
+      items.forEach((val) => removeItem(store, enqueuePersist, { itemId: val.id }));
     },
   });
 

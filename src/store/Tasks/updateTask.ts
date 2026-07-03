@@ -1,9 +1,14 @@
 import { appBus } from "../../bootstrap/initializers/eventInit";
-import { enqueuePersist } from "../../persistence/writeQueue";
+import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { StoredType, TaskUpdate } from "../../types/Types";
 
-function updateTask(store: StoredType, taskId: string, payload: TaskUpdate): Result {
+function updateTask(
+  store: StoredType,
+  enqueuePersist: EnqueuePersist,
+  taskId: string,
+  payload: TaskUpdate,
+): Result {
   //get the task then edit
   const task = store.tasks.get(taskId);
   if (!task) return { type: "notFound", entity: "task" };

@@ -6,6 +6,7 @@ type ActionsObject = {
   taskActions: Actions<TaskInstance>;
   itemActions: Actions<ItemInstance>;
 };
+type EnqueuePersist = (operation: PersistOperation) => void;
 
 function createWriteQueue({ projectActions, taskActions, itemActions }: ActionsObject) {
   const queue = new Set<PersistOperation>();
@@ -55,4 +56,4 @@ function createWriteQueue({ projectActions, taskActions, itemActions }: ActionsO
   return { enqueuePersist };
 }
 
-export { createWriteQueue };
+export { createWriteQueue, type EnqueuePersist };

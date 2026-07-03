@@ -1,9 +1,14 @@
 import { appBus } from "../../bootstrap/initializers/eventInit";
-import { enqueuePersist } from "../../persistence/writeQueue";
+import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { ProjectUpdate, StoredType } from "../../types/Types";
 
-function updateProject(store: StoredType, projectId: string, payload: ProjectUpdate): Result {
+function updateProject(
+  store: StoredType,
+  enqueuePersist: EnqueuePersist,
+  projectId: string,
+  payload: ProjectUpdate,
+): Result {
   //get the project then edit
   const project = store.projects.get(projectId);
   if (!project) return { type: "notFound", entity: "project" };

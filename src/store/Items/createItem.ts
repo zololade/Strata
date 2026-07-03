@@ -1,9 +1,13 @@
-import { enqueuePersist } from "../../persistence/writeQueue";
+import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { NewItemInput, StoredType } from "../../types/Types";
 import { Item } from "./Item";
 
-function createItem(store: StoredType, payload: NewItemInput): Result {
+function createItem(
+  store: StoredType,
+  enqueuePersist: EnqueuePersist,
+  payload: NewItemInput,
+): Result {
   const item = new Item(payload);
 
   enqueuePersist({

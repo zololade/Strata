@@ -1,8 +1,13 @@
-import { enqueuePersist } from "../../persistence/writeQueue";
+import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { ItemUpdate, StoredType } from "../../types/Types";
 
-function updateItem(store: StoredType, itemId: string, payload: ItemUpdate): Result {
+function updateItem(
+  store: StoredType,
+  enqueuePersist: EnqueuePersist,
+  itemId: string,
+  payload: ItemUpdate,
+): Result {
   //get the item then edit
   const item = store.items.get(itemId);
   if (!item) return { type: "notFound", entity: "item" };
