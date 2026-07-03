@@ -2,6 +2,7 @@
 import { buildHandlersRegistry } from "../handlers/registry";
 import { createPersistence } from "../persistence";
 import { createDispatch } from "../store/dispatch";
+import { createReducer } from "../store/reducer";
 // bootstrap/init.ts
 import { createSnapshot } from "../store/Store";
 import { initializeEvents, type HandlersByEvent } from "../ui/eventDelegation";
@@ -12,14 +13,15 @@ import { initializeServices, appBus } from "./initializers/eventInit";
 async function init() {
   try {
     const persistence = createPersistence();
-    const { projectActions, taskActions, itemActions, rehydrate } = persistence;
+    const { projectActions, taskActions, itemActions, enqueuePersist, rehydrate } = persistence;
     const { store, bind } = createSnapshot(rehydrate);
     const loadState = {
       projects: await projectActions.getAll(),
       tasks: await taskActions.getAll(),
       items: await itemActions.getAll(),
     };
-    const dispatch = createDispatch(store);
+    const reducer = createReducer(enqueuePersist);
+    const dispatch = createDispatch(store, reducer);
     const ui = createAppShell(store, appBus);
     const taskReactions = createTaskReactions({
       store,
