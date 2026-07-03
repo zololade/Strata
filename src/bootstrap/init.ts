@@ -20,9 +20,9 @@ async function init() {
       tasks: await taskActions.getAll(),
       items: await itemActions.getAll(),
     };
-    const reducer = createReducer(enqueuePersist);
-    const dispatch = createDispatch(store, reducer);
     const ui = createAppShell(store, appBus);
+    const reducer = createReducer(enqueuePersist, appBus);
+    const dispatch = createDispatch(store, reducer);
     const taskReactions = createTaskReactions({
       store,
       getCurrProjId: ui.getCurrProjId,

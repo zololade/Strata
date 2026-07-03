@@ -1,4 +1,4 @@
-import { appBus } from "../../bootstrap/initializers/eventInit";
+import type { EventBus } from "../../lib/EventBus";
 import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { ProjectUpdate, StoredType } from "../../types/Types";
@@ -6,6 +6,7 @@ import type { ProjectUpdate, StoredType } from "../../types/Types";
 function updateProject(
   store: StoredType,
   enqueuePersist: EnqueuePersist,
+  appBus: EventBus,
   projectId: string,
   payload: ProjectUpdate,
 ): Result {

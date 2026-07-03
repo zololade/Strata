@@ -1,4 +1,4 @@
-import { appBus } from "../../bootstrap/initializers/eventInit";
+import type { EventBus } from "../../lib/EventBus";
 import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { StoredType, TaskUpdate } from "../../types/Types";
@@ -6,6 +6,7 @@ import type { StoredType, TaskUpdate } from "../../types/Types";
 function updateTask(
   store: StoredType,
   enqueuePersist: EnqueuePersist,
+  appBus: EventBus,
   taskId: string,
   payload: TaskUpdate,
 ): Result {

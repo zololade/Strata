@@ -1,4 +1,4 @@
-import { appBus } from "../../bootstrap/initializers/eventInit";
+import type { EventBus } from "../../lib/EventBus";
 import type { EnqueuePersist } from "../../persistence/writeQueue";
 import type { Result } from "../../types/command";
 import type { NewTaskInput, StoredType } from "../../types/Types";
@@ -7,6 +7,7 @@ import { Task } from "./Task";
 function createTask(
   store: StoredType,
   enqueuePersist: EnqueuePersist,
+  appBus: EventBus,
   payload: NewTaskInput,
 ): Result {
   const task = new Task(payload);
