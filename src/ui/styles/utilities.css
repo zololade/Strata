@@ -73,7 +73,7 @@
   border: none;
   background: none;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.85rem);
 }
 
 .kebab-dropdown button:hover {
