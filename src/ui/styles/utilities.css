@@ -19,7 +19,6 @@
 .btn__label {
   font-size: 0.75rem;
   font-weight: 500;
-  margin-left: 0.25rem;
 }
 
 /*flex*/
@@ -98,19 +97,34 @@
   display: none;
 }
 
-/* Hide emoji by default, show material icon */
+/* emoji */
+/* show */
+button.active .material-symbols-outlined,
 button .emoji-icon {
   display: none;
 }
+/* hide */
+button.active .emoji-icon,
 button .material-symbols-outlined {
   display: inline-block;
 }
 
-/* When active: show emoji, hide material icon */
-button.active .material-symbols-outlined {
-  display: none;
+.icon-wrapper {
+  display: inline-grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-content: center;
+  line-height: 1;
 }
-button.active .emoji-icon {
-  display: inline-block;
-  font-size: 0.75rem;
+.icon-wrapper .material-symbols-outlined,
+.icon-wrapper .emoji-icon {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.icon-wrapper .material-symbols-outlined {
+  font-size: 1rem;
+}
+.icon-wrapper .emoji-icon {
+  font-size: 0.8rem;
 }

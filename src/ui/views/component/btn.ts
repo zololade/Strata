@@ -44,8 +44,10 @@ function button({ cls, label, action, type, flag, id, context }: incoming): Page
   // Build the content array for the button
   let content: PageData[] = [];
 
-  if (isMaterialIcon) {
-    content.push(
+  const iconWrapper = {
+    tag: "span",
+    class: "icon-wrapper",
+    content: [
       {
         tag: "span",
         class: "material-symbols-outlined",
@@ -56,7 +58,11 @@ function button({ cls, label, action, type, flag, id, context }: incoming): Page
         class: "emoji-icon",
         content: iconEmojiMap[iconName] || "",
       },
-    );
+    ],
+  };
+
+  if (isMaterialIcon) {
+    content.push(iconWrapper);
   } else {
     content.push({ tag: "span", content: iconName });
   }
