@@ -23,6 +23,7 @@ function initializeServices(
     selectors,
     getPrevProjId: ui.getPrevProjId,
     setPrevProjId: ui.setPrevProjId,
+    refreshList: ui.refreshList,
   });
 
   const { handleTitleUpdated } = createTitleReaction();

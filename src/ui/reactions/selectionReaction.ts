@@ -2,18 +2,19 @@ import { renderElementAsync } from "../../lib/Page";
 import type { StoreSelectors } from "../../store";
 import { viewProject } from "../views/component/detailPanel";
 import { kebabMenuContent } from "../views/component/KebabMenu";
-import { generateList } from "../views/component/projectList";
 
 type ShowActiveProjectDeps = {
   selectors: StoreSelectors;
   getPrevProjId: () => string | null;
   setPrevProjId: (id: string) => void;
+  refreshList: () => (listHost: HTMLElement, afterRender?: () => void) => Promise<void>;
 };
 
 function createShowActiveProject({
   selectors,
   getPrevProjId,
   setPrevProjId,
+  refreshList,
 }: ShowActiveProjectDeps) {
   function updateList(id: string) {
     const listContainer = document.querySelector(".mainNav__list") as HTMLDialogElement | null;
@@ -56,13 +57,8 @@ function createShowActiveProject({
     if (data === null) {
       if (viewPanel) await renderElementAsync(viewPanel, viewProject());
       if (projectHeaderTitle) projectHeaderTitle.textContent = "Project";
-
       if (kebabHost) await renderElementAsync(kebabHost, []);
-
-      if (listHost) {
-        const listData = generateList(selectors.projects.getAll());
-        await renderElementAsync(listHost, listData);
-      }
+      if (listHost) await refreshList()(listHost);
       return;
     }
 
