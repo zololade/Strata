@@ -16,7 +16,7 @@ function createHandleDelete({ dispatch, getCurrProjId, bus }: DeleteProjDeps) {
         data: {
           projectId: id,
           onPersistSuccess: () => {
-            bus.publish("delete:project", id);
+            bus.publish("delete:project", null);
           },
         },
       };
@@ -26,14 +26,15 @@ function createHandleDelete({ dispatch, getCurrProjId, bus }: DeleteProjDeps) {
   }
 
   function handleDeleteTask(match: HTMLElement, _e: Event) {
-    const id = match.dataset["task-id"];
+    const id = match.dataset["taskId"];
+
     if (id) {
       const command: Command = {
         type: "removeTask",
         data: {
           taskId: id,
           onPersistSuccess: () => {
-            bus.publish("delete:task", id);
+            bus.publish("delete:task");
           },
         },
       };

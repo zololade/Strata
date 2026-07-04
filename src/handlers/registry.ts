@@ -2,6 +2,7 @@ import type { EventBus } from "../lib/EventBus";
 import type { Command, Result } from "../types/command";
 import { showMenu } from "../ui/reactions/menuReaction";
 import { createHandleCreateProj, createHandleCreateTask } from "./domHandlers/createNew";
+import { createHandleDelete } from "./domHandlers/delete";
 import { createHandleShowMenu, handleCloseMenu } from "./domHandlers/menuHandler";
 import { handleNavBtn, handleNavClose } from "./domHandlers/navTrigger";
 import { handleHideModal, handleOpenModal } from "./domHandlers/newProjModal";
@@ -36,6 +37,16 @@ function buildHandlersRegistry(dispatch: (command: Command) => Result, ui: ui, a
         dispatch,
         getCurrProjId: ui.getCurrProjId,
       }),
+      "delete:project": createHandleDelete({
+        dispatch: dispatch,
+        getCurrProjId: ui.getCurrProjId,
+        bus: appBus,
+      }).handleDeleteProj,
+      "delete:task": createHandleDelete({
+        dispatch: dispatch,
+        getCurrProjId: ui.getCurrProjId,
+        bus: appBus,
+      }).handleDeleteTask,
       "toggle-flag": createHandleUpdateFlag({
         dispatch,
         getCurrProjId: ui.getCurrProjId,

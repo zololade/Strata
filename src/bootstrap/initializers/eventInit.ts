@@ -37,7 +37,9 @@ function initializeServices(
   appBus.subscribe("view:project", showActiveProject);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
   appBus.subscribe("project:created", handleProjectCreated);
+  appBus.subscribe("delete:project", showActiveProject);
   appBus.subscribe("task:created", handleTaskCreated);
+  appBus.subscribe("delete:task", () => reactions.refreshTask());
   appBus.subscribe("task:updated", handleTaskUpdated);
   appBus.subscribe("flag:toggled", handleFlagToggled);
 }

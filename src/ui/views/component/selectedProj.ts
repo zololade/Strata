@@ -170,7 +170,7 @@ function generateTaskContent(currTask: TaskInstance, duration: string): PageData
             type: "task",
             options: [
               { label: "Edit Task", action: "edit-task" },
-              { label: "Delete Task", action: "delete-task", danger: true },
+              { label: "Delete Task", action: "delete:task", danger: true },
             ],
           }),
         },

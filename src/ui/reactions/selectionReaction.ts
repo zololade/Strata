@@ -39,7 +39,7 @@ function createShowActiveProject({
         type: "project",
         options: [
           { label: "Rename Project", action: "rename-project" },
-          { label: "Delete Project", action: "delete-project", danger: true },
+          { label: "Delete Project", action: "delete:project", danger: true },
         ],
       }),
     );
@@ -48,6 +48,14 @@ function createShowActiveProject({
   return function showActiveProject(data: unknown) {
     const viewPanel = document.querySelector(".mainContent__workspace") as HTMLElement | null;
     const projectHeaderTitle = document.querySelector("#projDetailTitle") as HTMLElement | null;
+
+    if (data === null) {
+      // Clear the panel and title
+
+      if (viewPanel) renderElement(viewPanel, viewProject()); // empty state
+      if (projectHeaderTitle) projectHeaderTitle.textContent = "";
+      return;
+    }
 
     if (viewPanel && projectHeaderTitle && typeof data === "string") {
       const project = selectors.projects.getById(data);
