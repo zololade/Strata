@@ -75,7 +75,6 @@ function createShowActiveProject({
         await renderElementAsync(
           viewPanel,
           viewProject({ project: project, tasks: selectors.tasks.getByProjectId(data) }),
-          true,
         );
 
         await updateMainKebab(data);
