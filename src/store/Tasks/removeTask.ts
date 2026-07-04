@@ -3,11 +3,12 @@ import type { Result } from "../../types/command";
 import type { StoredType } from "../../types/Types";
 import { removeItem } from "../Items";
 
-function removeTask(
-  store: StoredType,
-  enqueuePersist: EnqueuePersist,
-  payload: { taskId: string },
-): Result {
+type Payload = {
+  taskId: string;
+  onPersistSuccess?: () => void;
+};
+
+function removeTask(store: StoredType, enqueuePersist: EnqueuePersist, payload: Payload): Result {
   const { taskId } = payload;
   //clean up items
   enqueuePersist({
@@ -18,6 +19,7 @@ function removeTask(
       store.tasks.delete(taskId);
       const items = [...store.items.values()].filter((val) => val.taskId === taskId);
       items.forEach((val) => removeItem(store, enqueuePersist, { itemId: val.id }));
+      if (payload.onPersistSuccess) payload.onPersistSuccess();
     },
   });
 

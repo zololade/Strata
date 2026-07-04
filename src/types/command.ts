@@ -24,18 +24,21 @@ type Command =
       type: "removeProject";
       data: {
         projectId: string;
+        onPersistSuccess?: () => void;
       };
     }
   | {
       type: "removeTask";
       data: {
         taskId: string;
+        onPersistSuccess?: () => void;
       };
     }
   | {
       type: "removeItem";
       data: {
         itemId: string;
+        onPersistSuccess?: () => void;
       };
     }
   | {
