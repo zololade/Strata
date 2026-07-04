@@ -34,36 +34,28 @@ function button({ cls, label, action, type, flag, id, context }: incoming): Page
   const iconName = btnTypes[type];
   const isMaterialIcon = materialTypes.includes(iconName);
 
-  const iconContent =
-    isMaterialIcon && !context
-      ? {
-          tag: "span",
-          class: "material-symbols-outlined",
-          content: iconName,
-        }
-      : context && isMaterialIcon
-        ? [
-            {
-              tag: "span",
-              class: "material-symbols-outlined",
-              content: iconName,
-            },
-            {
-              tag: "span",
-              content: type,
-            },
-          ]
-        : {
-            tag: "span",
-            content: iconName,
-          };
+  const iconSpan = isMaterialIcon
+    ? {
+        tag: "span",
+        class: "material-symbols-outlined",
+        content: iconName,
+      }
+    : {
+        tag: "span",
+        content: iconName,
+      };
+
+  // If context is true, show both icon and text label
+  const content = context
+    ? [iconSpan, { tag: "span", class: "btn__label", content: type }]
+    : [iconSpan];
 
   return {
     tag: "button",
     class: cls,
     ["aria-label"]: label,
     ["data-action"]: action,
-    content: [iconContent],
+    content: [content],
     ...(flag !== undefined && flag !== null && { "data-flag": flag }),
     ...(id !== undefined && id !== null && { [`data-${id[0]}`]: id[1] }),
   };

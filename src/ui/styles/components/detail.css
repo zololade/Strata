@@ -151,7 +151,6 @@
           border-radius: 15px;
           display: flex;
           align-items: center;
-          gap: 0.15rem;
 
           @media (hover: hover) {
             &:hover {

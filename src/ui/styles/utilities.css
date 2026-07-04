@@ -16,6 +16,12 @@
   background: none;
 }
 
+.btn__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
 /*flex*/
 .mainNav__toolbar,
 .mainContent__header,
