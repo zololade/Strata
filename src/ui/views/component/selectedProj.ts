@@ -5,9 +5,7 @@ import { button } from "./btn";
 import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
-const selectedProj = (project: ProjectInstance, allTasks: TaskInstance[]): PageData => {
-  const tasks = allTasks.filter((t) => t.projectId === project.id);
-
+const selectedProj = (project: ProjectInstance, tasks: TaskInstance[]): PageData => {
   return {
     tag: "div",
     class: "workspace__container",

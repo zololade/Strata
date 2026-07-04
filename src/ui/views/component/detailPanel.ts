@@ -5,7 +5,7 @@ import { selectedProj } from "./selectedProj";
 
 type IncomingViewData = {
   project: ProjectInstance;
-  allTask: TaskInstance[];
+  tasks: TaskInstance[];
 };
 
 //default data
@@ -44,7 +44,7 @@ const errorData = [
 
 //view selected project
 function viewProject(data?: IncomingViewData): PageData {
-  return !data ? defaultData : data ? selectedProj(data.project, data.allTask) : errorData;
+  return !data ? defaultData : data ? selectedProj(data.project, data.tasks) : errorData;
 }
 
 function detailPanelShell(): PageData {
