@@ -5,7 +5,7 @@ type incoming = {
   label: string;
   action: string;
   type: keyof typeof btnTypes;
-  context?: boolean;
+  context?: string | null;
   flag?: string;
   id?: [string, string];
 };
@@ -18,6 +18,7 @@ const btnTypes = {
   add: "add_2",
   close: "close",
   important: "priority_high",
+  star: "star",
 };
 
 const materialTypes = [
@@ -28,10 +29,11 @@ const materialTypes = [
   "add_2",
   "close",
   "priority_high",
+  "star",
 ];
 
 const iconEmojiMap: Record<string, string> = {
-  favorite: "⭐",
+  star: "⭐",
   priority_high: "🚩",
 };
 
@@ -61,7 +63,7 @@ function button({ cls, label, action, type, flag, id, context }: incoming): Page
 
   // If context is true, add the label
   if (context) {
-    content.push({ tag: "span", class: "btn__label", content: type });
+    content.push({ tag: "span", class: "btn__label", content: context });
   }
 
   return {
