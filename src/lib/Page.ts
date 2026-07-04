@@ -81,8 +81,9 @@ function pureRender(
 function renderElement(
   host: HTMLElement,
   data: PageData,
-  skipDiff?: boolean,
+  skipTransition?: boolean,
   afterRender?: () => void,
+  skipDiff?: boolean,
 ) {
   //check if host is available
   if (!host) return;
@@ -95,7 +96,7 @@ function renderElement(
     }
   };
 
-  if (document.startViewTransition) {
+  if (document.startViewTransition && !skipTransition) {
     const transition = document.startViewTransition(render);
     if (afterRender) {
       transition.finished.then(() => {
@@ -110,9 +111,14 @@ function renderElement(
   }
 }
 
-function renderElementAsync(host: HTMLElement, data: PageData, skipDiff?: boolean): Promise<void> {
+function renderElementAsync(
+  host: HTMLElement,
+  data: PageData,
+  skipTransition: boolean = false,
+  skipDiff: boolean = false,
+): Promise<void> {
   return new Promise((resolve) => {
-    renderElement(host, data, skipDiff, resolve);
+    renderElement(host, data, skipTransition, resolve, skipDiff);
   });
 }
 

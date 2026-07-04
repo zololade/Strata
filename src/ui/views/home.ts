@@ -45,8 +45,8 @@ function createAppShell(selectors: StoreSelectors, bus: EventBus) {
   }
 
   function refreshList() {
-    return async (listHost: HTMLElement, afterRender?: () => void) => {
-      await renderElementAsync(listHost, generateList(selectors.projects.getAll()));
+    return async (listHost: HTMLElement, skipTransition = false, afterRender?: () => void) => {
+      await renderElementAsync(listHost, generateList(selectors.projects.getAll()), skipTransition);
       if (afterRender) afterRender();
     };
   }

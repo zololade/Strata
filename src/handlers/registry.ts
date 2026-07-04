@@ -24,7 +24,11 @@ type ui = {
   selectProject: (id: string) => void;
   getPrevProjId: () => string | null;
   setPrevProjId: (id: string) => string;
-  refreshList: () => (listHost: HTMLElement, afterRender: () => void) => void;
+  refreshList: () => (
+    listHost: HTMLElement,
+    skipTransition: boolean,
+    afterRender: () => void,
+  ) => void;
 };
 
 function buildHandlersRegistry(dispatch: (command: Command) => Result, ui: ui, appBus: EventBus) {

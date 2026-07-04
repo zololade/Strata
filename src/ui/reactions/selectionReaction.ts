@@ -7,7 +7,11 @@ type ShowActiveProjectDeps = {
   selectors: StoreSelectors;
   getPrevProjId: () => string | null;
   setPrevProjId: (id: string) => void;
-  refreshList: () => (listHost: HTMLElement, afterRender?: () => void) => Promise<void>;
+  refreshList: () => (
+    listHost: HTMLElement,
+    skipTransition: boolean,
+    afterRender?: () => void,
+  ) => Promise<void>;
 };
 
 function createShowActiveProject({
@@ -44,6 +48,7 @@ function createShowActiveProject({
           { label: "Delete Project", action: "delete:project", danger: true },
         ],
       }),
+      true,
     );
   }
 
@@ -55,10 +60,10 @@ function createShowActiveProject({
     const listHost = document.querySelector(".mainNav__list") as HTMLElement | null;
 
     if (data === null) {
-      if (viewPanel) await renderElementAsync(viewPanel, viewProject());
+      if (viewPanel) await renderElementAsync(viewPanel, viewProject(), true);
       if (projectHeaderTitle) projectHeaderTitle.textContent = "Project";
-      if (kebabHost) await renderElementAsync(kebabHost, []);
-      if (listHost) await refreshList()(listHost);
+      if (kebabHost) await renderElementAsync(kebabHost, [], true);
+      if (listHost) await refreshList()(listHost, true);
       return;
     }
 
@@ -70,6 +75,7 @@ function createShowActiveProject({
         await renderElementAsync(
           viewPanel,
           viewProject({ project: project, tasks: selectors.tasks.getByProjectId(data) }),
+          true,
         );
 
         await updateMainKebab(data);

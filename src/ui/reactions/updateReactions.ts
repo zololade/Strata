@@ -6,7 +6,11 @@ type taskReactions = {
 };
 
 function createUpdateReaction(
-  refreshList: () => (listHost: HTMLElement, afterRender?: () => void) => Promise<void>,
+  refreshList: () => (
+    listHost: HTMLElement,
+    skipTransition: boolean,
+    afterRender?: () => void,
+  ) => Promise<void>,
   selectProject: (id: string) => void,
   refreshTask: taskReactions["refreshTask"],
   refreshCurrTask: taskReactions["refreshCurrTask"],
@@ -22,7 +26,7 @@ function createUpdateReaction(
       overviewField.value = "";
       ModalManager.close(".dialog");
       const afterRender = refreshList();
-      if (listHost && id) await afterRender(listHost, () => selectProject(id));
+      if (listHost && id) await afterRender(listHost, true, () => selectProject(id));
     }
   }
 
