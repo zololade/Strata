@@ -3,6 +3,7 @@ import type { Wrapper } from "./lib/wrapper";
 function createDatabase(wrapper: Wrapper) {
   const DATABASE_NAME = "StrataDB";
   const DB_VERSION = 2;
+  const CURRENT_SEED_VERSION = 2;
   const PROJECT_STORE = "projects";
   const TASK_STORE = "tasks";
   const ITEM_STORE = "items";
@@ -35,6 +36,7 @@ function createDatabase(wrapper: Wrapper) {
     TASK_STORE,
     ITEM_STORE,
     META_STORE,
+    CURRENT_SEED_VERSION,
   };
 }
 

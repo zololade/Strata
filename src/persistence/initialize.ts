@@ -6,13 +6,14 @@ type Store = {
   TASK_STORE: string;
   ITEM_STORE: string;
   META_STORE: string;
+  CURRENT_SEED_VERSION: number;
 };
 
 function createInitialize(
   databaseOpen: () => Promise<IDBDatabase>,
   customSeedData: { projects: ProjectInstance[]; tasks: TaskInstance[]; items: ItemInstance[] },
   wrapper: Wrapper,
-  { PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE }: Store,
+  { PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE, CURRENT_SEED_VERSION }: Store,
 ) {
   // cache database
   let dbInstance: IDBDatabase | null = null;
@@ -38,8 +39,8 @@ function createInitialize(
     const tx = db.transaction(META_STORE, "readwrite");
     const metaStore = tx.objectStore(META_STORE);
 
-    const seededCheck = await wrapper(metaStore.get("seeded"));
-    if (seededCheck) return; // Already seeded
+    const seededCheck = await wrapper(metaStore.get("seed:version"));
+    if (seededCheck === CURRENT_SEED_VERSION) return; // seed upto date
 
     const seedTx = db.transaction([PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE], "readwrite");
     await seedIfEmpty(seedTx.objectStore(PROJECT_STORE), customSeedData.projects);
@@ -47,7 +48,7 @@ function createInitialize(
     await seedIfEmpty(seedTx.objectStore(ITEM_STORE), customSeedData.items);
     const meta = seedTx.objectStore(META_STORE);
 
-    await wrapper(meta.put({ key: "seeded", value: true }));
+    await wrapper(meta.put({ key: "seed:version", value: CURRENT_SEED_VERSION }));
 
     await new Promise((resolve, reject) => {
       seedTx.addEventListener("complete", resolve);

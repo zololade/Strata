@@ -10,7 +10,7 @@ import { createWriteQueue } from "./writeQueue";
 
 export function createPersistence(customSeedData = defaultSeedData) {
   // 1. Open database connection (with seeding)
-  const { databaseOpen, PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE } =
+  const { databaseOpen, PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE, CURRENT_SEED_VERSION } =
     createDatabase(wrapper);
 
   // 2. Lazy transaction starter
@@ -19,6 +19,7 @@ export function createPersistence(customSeedData = defaultSeedData) {
     TASK_STORE,
     ITEM_STORE,
     META_STORE,
+    CURRENT_SEED_VERSION,
   });
 
   // 3. Create CRUD actions for each store
