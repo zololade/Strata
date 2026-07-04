@@ -5,12 +5,13 @@
   background-color: var(--dialog-backdrop);
   backdrop-filter: blur(1px);
   border: none;
+  padding: 1.5rem;
 
   form {
     background-color: var(--bg-base-color);
     box-shadow: var(--form-card-shadow);
     max-width: 450px;
-    margin: 1.5rem;
+    margin: auto;
     border: var(--border);
     padding: 1rem;
     border-radius: 8px;
