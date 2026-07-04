@@ -31,7 +31,7 @@ function createAppShell(selectors: StoreSelectors, bus: EventBus) {
         cls: "mainNav__close",
         label: "Close navigation",
         action: "close-nav",
-        type: "Close",
+        type: "close",
       }),
       projectLoader(selectors.projects.getAll()),
       [newProject(), detailPanelShell()],

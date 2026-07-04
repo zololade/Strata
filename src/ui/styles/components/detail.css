@@ -153,10 +153,6 @@
           align-items: center;
           gap: 0.15rem;
 
-          span:last-of-type {
-            text-transform: lowercase;
-          }
-
           @media (hover: hover) {
             &:hover {
               color: var(--content-highlight-color);

@@ -64,7 +64,7 @@ function detailPanelShell(): PageData {
                 cls: "toolbar__side-nav",
                 label: "Show nav bar",
                 action: "show-nav",
-                type: "SideNav",
+                type: "sideNav",
               }),
               {
                 tag: "span",

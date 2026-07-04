@@ -32,7 +32,7 @@ const selectedProj = (project: ProjectInstance, tasks: TaskInstance[]): PageData
       {
         tag: "ul",
         class: "project__flags",
-        content: ["Important", "Favorite"].map((val) => {
+        content: ["important", "favorite"].map((val) => {
           return {
             tag: "li",
             content: [
@@ -40,7 +40,7 @@ const selectedProj = (project: ProjectInstance, tasks: TaskInstance[]): PageData
                 cls: project.flag?.includes(val) ? "active" : "",
                 label: val,
                 action: "toggle-flag",
-                type: val === "Important" ? "Important" : "Favorite",
+                type: val === "important" ? "important" : "favorite",
                 flag: val,
                 context: true,
               }),
@@ -70,7 +70,7 @@ const selectedProj = (project: ProjectInstance, tasks: TaskInstance[]): PageData
                     cls: "mainHeader__menu",
                     label: `Create tasks button`,
                     action: "create-task",
-                    type: "Add",
+                    type: "add",
                   }),
                 ],
               }
@@ -207,7 +207,7 @@ function generateTaskContent(currTask: TaskInstance, duration: string): PageData
               id: ["task-id", currTask.id],
               label: `Add Task to favorite`,
               action: "toggle-task-flag",
-              type: "Favorite",
+              type: "favorite",
               flag: "favorite",
             }),
           ],

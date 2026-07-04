@@ -11,13 +11,13 @@ type incoming = {
 };
 
 const btnTypes = {
-  SideNav: "side_navigation",
-  More: "more_horiz",
-  Edit: "edit_square",
-  Favorite: "favorite",
-  Add: "add_2",
-  Close: "close",
-  Important: "priority_high",
+  sideNav: "side_navigation",
+  more: "more_horiz",
+  edit: "edit_square",
+  favorite: "favorite",
+  add: "add_2",
+  close: "close",
+  important: "priority_high",
 };
 
 const materialTypes = [
