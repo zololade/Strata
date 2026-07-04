@@ -19,6 +19,7 @@ const btnTypes = {
   close: "close",
   important: "priority_high",
   star: "star",
+  flag: "flag",
 };
 
 const materialTypes = [
@@ -30,11 +31,12 @@ const materialTypes = [
   "close",
   "priority_high",
   "star",
+  "flag",
 ];
 
 const iconEmojiMap: Record<string, string> = {
   star: "⭐",
-  priority_high: "🚩",
+  flag: "🚩",
 };
 
 function button({ cls, label, action, type, flag, id, context }: incoming): PageData {

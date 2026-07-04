@@ -40,7 +40,7 @@ const selectedProj = (project: ProjectInstance, tasks: TaskInstance[]): PageData
                 cls: project.flag?.includes(val) ? "active" : "",
                 label: val,
                 action: "toggle-flag",
-                type: val === "important" ? "important" : "star",
+                type: val === "important" ? "flag" : "star",
                 flag: val,
                 context: val,
               }),
