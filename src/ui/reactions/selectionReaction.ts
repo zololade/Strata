@@ -1,7 +1,8 @@
-import { renderElement } from "../../lib/Page";
+import { renderElementAsync } from "../../lib/Page";
 import type { StoreSelectors } from "../../store";
 import { viewProject } from "../views/component/detailPanel";
 import { kebabMenuContent } from "../views/component/KebabMenu";
+import { generateList } from "../views/component/projectList";
 
 type ShowActiveProjectDeps = {
   selectors: StoreSelectors;
@@ -27,12 +28,12 @@ function createShowActiveProject({
   }
 
   // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
-  function updateMainKebab(id: string) {
+  async function updateMainKebab(id: string) {
     const kebabHost = document.querySelector(".project-kebab-container") as HTMLElement | null;
 
     if (!kebabHost) return;
 
-    renderElement(
+    await renderElementAsync(
       kebabHost,
       kebabMenuContent({
         id,
@@ -45,15 +46,23 @@ function createShowActiveProject({
     );
   }
 
-  return function showActiveProject(data: unknown) {
+  // oxlint-disable-next-line unicorn/consistent-function-scoping
+  return async function showActiveProject(data: unknown) {
     const viewPanel = document.querySelector(".mainContent__workspace") as HTMLElement | null;
     const projectHeaderTitle = document.querySelector("#projDetailTitle") as HTMLElement | null;
+    const kebabHost = document.querySelector(".project-kebab-container") as HTMLElement | null;
+    const listHost = document.querySelector(".mainNav__list") as HTMLElement | null;
 
     if (data === null) {
-      // Clear the panel and title
+      if (viewPanel) await renderElementAsync(viewPanel, viewProject());
+      if (projectHeaderTitle) projectHeaderTitle.textContent = "Project";
 
-      if (viewPanel) renderElement(viewPanel, viewProject()); // empty state
-      if (projectHeaderTitle) projectHeaderTitle.textContent = "";
+      if (kebabHost) await renderElementAsync(kebabHost, []);
+
+      if (listHost) {
+        const listData = generateList(selectors.projects.getAll());
+        await renderElementAsync(listHost, listData);
+      }
       return;
     }
 
@@ -62,13 +71,12 @@ function createShowActiveProject({
       projectHeaderTitle.textContent = project ? project.title : "";
 
       if (project) {
-        renderElement(
+        await renderElementAsync(
           viewPanel,
           viewProject({ project: project, tasks: selectors.tasks.getByProjectId(data) }),
-          false,
-          () => updateMainKebab(data),
         );
 
+        await updateMainKebab(data);
         updateList(data);
       }
     }

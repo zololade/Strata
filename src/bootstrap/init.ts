@@ -30,7 +30,7 @@ async function init() {
 
     bind(loadState);
     initializeServices(selectors, ui, taskReactions);
-    ui.appShell();
+    await ui.appShell();
     initializeEvents(handlers);
   } catch (error) {
     console.error("App initialization failed:", error);

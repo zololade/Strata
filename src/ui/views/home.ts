@@ -1,5 +1,5 @@
 import type { EventBus } from "../../lib/EventBus";
-import { renderElement } from "../../lib/Page";
+import { renderElementAsync } from "../../lib/Page";
 import type { StoreSelectors } from "../../store";
 import { button } from "./component/btn";
 import { detailPanelShell } from "./component/detailPanel";
@@ -18,8 +18,8 @@ function createAppShell(selectors: StoreSelectors, bus: EventBus) {
   const getPrevProjId = () => prevSelectedProjId;
   const setPrevProjId = (id: string) => (prevSelectedProjId = id);
 
-  function appShell() {
-    renderElement(main, [
+  async function appShell() {
+    await renderElementAsync(main, [
       { tag: "h1", class: "accessible", content: "Strata" },
       {
         tag: "div",
@@ -45,8 +45,9 @@ function createAppShell(selectors: StoreSelectors, bus: EventBus) {
   }
 
   function refreshList() {
-    return (listHost: HTMLElement, afterRender: () => void) => {
-      renderElement(listHost, generateList(selectors.projects.getAll()), false, afterRender);
+    return async (listHost: HTMLElement, afterRender?: () => void) => {
+      await renderElementAsync(listHost, generateList(selectors.projects.getAll()));
+      if (afterRender) afterRender();
     };
   }
 

@@ -6,13 +6,13 @@ type taskReactions = {
 };
 
 function createUpdateReaction(
-  refreshList: () => (listHost: HTMLElement, afterRender: () => void) => void,
+  refreshList: () => (listHost: HTMLElement, afterRender?: () => void) => Promise<void>,
   selectProject: (id: string) => void,
   refreshTask: taskReactions["refreshTask"],
   refreshCurrTask: taskReactions["refreshCurrTask"],
 ) {
   // oxlint-disable-next-line unicorn/consistent-function-scoping -- factory runs once at composition root
-  function handleProjectCreated(data: unknown) {
+  async function handleProjectCreated(data: unknown) {
     const id = data as string | null;
     const listHost = document.querySelector(".mainNav__list") as HTMLUListElement | null;
     const titleField = document.querySelector("#projTitle") as HTMLInputElement | null;
@@ -22,7 +22,7 @@ function createUpdateReaction(
       overviewField.value = "";
       ModalManager.close(".dialog");
       const afterRender = refreshList();
-      if (listHost && id) afterRender(listHost, () => selectProject(id));
+      if (listHost && id) await afterRender(listHost, () => selectProject(id));
     }
   }
 

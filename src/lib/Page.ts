@@ -110,4 +110,10 @@ function renderElement(
   }
 }
 
-export { type PageData, renderElement };
+function renderElementAsync(host: HTMLElement, data: PageData, skipDiff?: boolean): Promise<void> {
+  return new Promise((resolve) => {
+    renderElement(host, data, skipDiff, resolve);
+  });
+}
+
+export { type PageData, renderElement, renderElementAsync };
