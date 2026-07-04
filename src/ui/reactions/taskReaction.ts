@@ -15,7 +15,7 @@ function createTaskReactions({ selectors, getCurrProjId }: TaskReactionDeps) {
     if (projId) {
       const viewPanel = document.querySelector(".mainContent__workspace") as HTMLElement;
       let project = selectors.projects.getById(projId);
-      let allTask = selectors.tasks.getAll();
+      let allTask = selectors.tasks.getByProjectId(projId);
       if (viewPanel && project && allTask) {
         if (afterRender) {
           renderElement(viewPanel, viewProject({ project, allTask }), false, afterRender);

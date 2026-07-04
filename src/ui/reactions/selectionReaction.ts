@@ -56,7 +56,7 @@ function createShowActiveProject({
       if (project) {
         renderElement(
           viewPanel,
-          viewProject({ project: project, allTask: selectors.tasks.getAll() }),
+          viewProject({ project: project, allTask: selectors.tasks.getByProjectId(data) }),
           false,
           () => updateMainKebab(data),
         );
