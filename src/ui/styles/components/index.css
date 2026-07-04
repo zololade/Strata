@@ -13,6 +13,13 @@
   font-weight: normal;
   font-size: 1rem;
 }
+.emoji-icon {
+  font-size: 0.75rem;
+}
+.btn__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
 
 .mainNav__close {
   border: none;

@@ -16,11 +16,6 @@
   background: none;
 }
 
-.btn__label {
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
 /*flex*/
 .mainNav__toolbar,
 .mainContent__header,
@@ -118,13 +113,5 @@ button .material-symbols-outlined {
 }
 .icon-wrapper .material-symbols-outlined,
 .icon-wrapper .emoji-icon {
-  font-size: 0.8rem;
   line-height: 1;
-}
-
-.icon-wrapper .material-symbols-outlined {
-  font-size: 1rem;
-}
-.icon-wrapper .emoji-icon {
-  font-size: 0.8rem;
 }
