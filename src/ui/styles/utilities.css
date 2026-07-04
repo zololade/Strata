@@ -97,3 +97,20 @@
 .hidden {
   display: none;
 }
+
+/* Hide emoji by default, show material icon */
+button .emoji-icon {
+  display: none;
+}
+button .material-symbols-outlined {
+  display: inline-block;
+}
+
+/* When active: show emoji, hide material icon */
+button.active .material-symbols-outlined {
+  display: none;
+}
+button.active .emoji-icon {
+  display: inline-block;
+  font-size: 0.75rem;
+}

@@ -30,32 +30,46 @@ const materialTypes = [
   "priority_high",
 ];
 
+const iconEmojiMap: Record<string, string> = {
+  favorite: "⭐",
+  priority_high: "🚩",
+};
+
 function button({ cls, label, action, type, flag, id, context }: incoming): PageData {
   const iconName = btnTypes[type];
   const isMaterialIcon = materialTypes.includes(iconName);
 
-  const iconSpan = isMaterialIcon
-    ? {
+  // Build the content array for the button
+  let content: PageData[] = [];
+
+  if (isMaterialIcon) {
+    content.push(
+      {
         tag: "span",
         class: "material-symbols-outlined",
         content: iconName,
-      }
-    : {
+      },
+      {
         tag: "span",
-        content: iconName,
-      };
+        class: "emoji-icon",
+        content: iconEmojiMap[iconName] || "",
+      },
+    );
+  } else {
+    content.push({ tag: "span", content: iconName });
+  }
 
-  // If context is true, show both icon and text label
-  const content = context
-    ? [iconSpan, { tag: "span", class: "btn__label", content: type }]
-    : [iconSpan];
+  // If context is true, add the label
+  if (context) {
+    content.push({ tag: "span", class: "btn__label", content: type });
+  }
 
   return {
     tag: "button",
     class: cls,
     ["aria-label"]: label,
     ["data-action"]: action,
-    content: [content],
+    content: content,
     ...(flag !== undefined && flag !== null && { "data-flag": flag }),
     ...(id !== undefined && id !== null && { [`data-${id[0]}`]: id[1] }),
   };
