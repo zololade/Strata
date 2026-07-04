@@ -14,6 +14,11 @@ function createInitialize(
   wrapper: Wrapper,
   { PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE }: Store,
 ) {
+  // cache database
+  let dbInstance: IDBDatabase | null = null;
+  let openPromise: Promise<IDBDatabase> | null = null;
+  let seedingDone = false;
+
   async function openDatabase() {
     try {
       const db = await databaseOpen();
@@ -50,24 +55,33 @@ function createInitialize(
     });
   }
 
-  async function getDbStore(retryCount = 0) {
+  async function getDbStore(retryCount = 0): Promise<IDBDatabase> {
+    if (dbInstance) return dbInstance;
+    if (openPromise) return openPromise;
+
     retryCount++;
-    try {
-      const db = await openDatabase();
-      await ensureSeeded(db);
-      return db;
-    } catch (error) {
-      console.error(error);
-      if (retryCount < 5) {
-        return new Promise<IDBDatabase>((resolve) => {
-          setTimeout(() => {
-            resolve(getDbStore(retryCount));
-          }, 1000);
-        });
-      } else {
+    openPromise = (async () => {
+      try {
+        const db = await openDatabase();
+        if (!seedingDone) {
+          await ensureSeeded(db);
+          seedingDone = true;
+        }
+        dbInstance = db;
+        openPromise = null;
+        return db;
+      } catch (error) {
+        openPromise = null;
+        console.error(error);
+        if (retryCount < 5) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return getDbStore(retryCount);
+        }
         throw new Error("something went wrong", { cause: error });
       }
-    }
+    })();
+
+    return openPromise;
   }
 
   const startTransaction = async function (storeType: string) {
