@@ -6,11 +6,11 @@ A Project management app.
 
 - ✅ Create project
 - ✅ View project
-- ⬜ Delete project
+- ✅ Delete project
 - ✅ Edit project (inline, detail panel)
 - ✅ Create task
 - ⬜ View task detail (expand items)
-- ⬜ Delete task
+- ✅ Delete task
 - ✅ Edit task
 - ⬜ Create item
 - ⬜ View item
@@ -21,7 +21,7 @@ A Project management app.
 
 - ✅ Empty states (no projects, no tasks)
 - ✅ Responsive design
-- ⬜ Flags UI (model already done)
+- ✅ Flags UI (model already done)
 - ⬜ README with screenshots
 - ✅ Live demo (gh-pages config already done)
 
