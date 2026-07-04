@@ -4,7 +4,7 @@ const databaseBus = new EventBus();
 const appBus = new EventBus();
 
 import { createHandleProjectSelection } from "../../handlers/busHandlers/handlers";
-import type { StoredType } from "../../types/Types";
+import type { StoreSelectors } from "../../store";
 import { createFlagReaction } from "../../ui/reactions/flagReactions";
 import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
 import { createTitleReaction } from "../../ui/reactions/titleReaction";
@@ -16,12 +16,12 @@ type taskReactions = {
 };
 
 function initializeServices(
-  store: StoredType,
+  selectors: StoreSelectors,
   ui: ReturnType<typeof createAppShell>,
   reactions: taskReactions,
 ) {
   const showActiveProject = createShowActiveProject({
-    store,
+    selectors,
     getPrevProjId: ui.getPrevProjId,
     setPrevProjId: ui.setPrevProjId,
   });

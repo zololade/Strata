@@ -1,31 +1,33 @@
 import { renderElement } from "../../lib/Page";
 import { formatDuration, getTimeObj } from "../../lib/time";
-import type { StoredType } from "../../types/Types";
+import type { StoreSelectors } from "../../store";
 import { viewProject } from "../views/component/detailPanel";
 import { generateTaskStatus } from "../views/component/selectedProj";
 
 type TaskReactionDeps = {
-  store: StoredType;
+  selectors: StoreSelectors;
   getCurrProjId: () => string | null;
 };
 
-function createTaskReactions({ store, getCurrProjId }: TaskReactionDeps) {
+function createTaskReactions({ selectors, getCurrProjId }: TaskReactionDeps) {
   function refreshTask(afterRender?: () => void) {
     const projId = getCurrProjId();
     if (projId) {
       const viewPanel = document.querySelector(".mainContent__workspace") as HTMLElement;
-      if (viewPanel) {
+      let project = selectors.projects.getById(projId);
+      let allTask = selectors.tasks.getAll();
+      if (viewPanel && project && allTask) {
         if (afterRender) {
-          renderElement(viewPanel, viewProject(projId, store), false, afterRender);
+          renderElement(viewPanel, viewProject({ project, allTask }), false, afterRender);
         } else {
-          renderElement(viewPanel, viewProject(projId, store));
+          renderElement(viewPanel, viewProject({ project, allTask }));
         }
       }
     }
   }
 
   function refreshCurrTask(id: string) {
-    const currTask = store.tasks.get(id);
+    const currTask = selectors.tasks.getById(id);
     const host = document.querySelector(
       `article[data-id="${id}"] .task__header .task__left`,
     ) as HTMLElement;

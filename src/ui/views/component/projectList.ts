@@ -1,9 +1,9 @@
 import type { PageData } from "../../../lib/Page";
-import type { StoredType } from "../../../types/Types";
+import type { ProjectInstance } from "../../../types/Types";
 import { button } from "./btn";
 
 // load projects
-function projectLoader(snapshot: StoredType): PageData {
+function projectLoader(projects: ProjectInstance[]): PageData {
   return {
     tag: "aside",
     class: "mainNav",
@@ -28,20 +28,20 @@ function projectLoader(snapshot: StoredType): PageData {
       {
         tag: "ul",
         class: "mainNav__list",
-        content: [generateList(snapshot)],
+        content: [generateList(projects)],
       },
     ],
   };
 }
 
-function generateList(snapshot: StoredType): PageData {
-  return [...snapshot.projects].flatMap(([k, v]) => ({
+function generateList(projects: ProjectInstance[]): PageData {
+  return projects.flatMap((v) => ({
     tag: "li",
     content: [
       {
         tag: "button",
         ["data-action"]: "select-project",
-        ["data-id"]: k,
+        ["data-id"]: v.id,
         content: [{ tag: "h3", content: v.title }],
       },
     ],

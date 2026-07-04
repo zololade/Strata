@@ -1,12 +1,12 @@
 import type { PageData } from "../../../lib/Page";
 import { formatDuration, getTimeObj } from "../../../lib/time";
-import type { ProjectInstance, StoredType, TaskInstance } from "../../../types/Types";
+import type { ProjectInstance, TaskInstance } from "../../../types/Types";
 import { button } from "./btn";
 import { kebabMenuContent } from "./KebabMenu";
 
 //selected project data
-const selectedProj = (project: ProjectInstance, store: StoredType): PageData => {
-  const tasks = [...store.tasks.values()].filter((t) => t.projectId === project.id);
+const selectedProj = (project: ProjectInstance, allTasks: TaskInstance[]): PageData => {
+  const tasks = allTasks.filter((t) => t.projectId === project.id);
 
   return {
     tag: "div",

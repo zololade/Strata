@@ -1,15 +1,19 @@
 import { renderElement } from "../../lib/Page";
-import type { StoredType } from "../../types/Types";
+import type { StoreSelectors } from "../../store";
 import { viewProject } from "../views/component/detailPanel";
 import { kebabMenuContent } from "../views/component/KebabMenu";
 
 type ShowActiveProjectDeps = {
-  store: StoredType;
+  selectors: StoreSelectors;
   getPrevProjId: () => string | null;
   setPrevProjId: (id: string) => void;
 };
 
-function createShowActiveProject({ store, getPrevProjId, setPrevProjId }: ShowActiveProjectDeps) {
+function createShowActiveProject({
+  selectors,
+  getPrevProjId,
+  setPrevProjId,
+}: ShowActiveProjectDeps) {
   function updateList(id: string) {
     const listContainer = document.querySelector(".mainNav__list") as HTMLDialogElement | null;
 
@@ -46,12 +50,19 @@ function createShowActiveProject({ store, getPrevProjId, setPrevProjId }: ShowAc
     const projectHeaderTitle = document.querySelector("#projDetailTitle") as HTMLElement | null;
 
     if (viewPanel && projectHeaderTitle && typeof data === "string") {
-      const project = store.projects.get(data);
+      const project = selectors.projects.getById(data);
       projectHeaderTitle.textContent = project ? project.title : "";
 
-      renderElement(viewPanel, viewProject(data, store), false, () => updateMainKebab(data));
+      if (project) {
+        renderElement(
+          viewPanel,
+          viewProject({ project: project, allTask: selectors.tasks.getAll() }),
+          false,
+          () => updateMainKebab(data),
+        );
 
-      updateList(data);
+        updateList(data);
+      }
     }
   };
 }

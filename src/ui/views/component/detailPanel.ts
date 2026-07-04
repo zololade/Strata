@@ -1,7 +1,12 @@
 import type { PageData } from "../../../lib/Page";
-import type { StoredType } from "../../../types/Types";
+import type { ProjectInstance, TaskInstance } from "../../../types/Types";
 import { button } from "./btn";
 import { selectedProj } from "./selectedProj";
+
+type IncomingViewData = {
+  project: ProjectInstance;
+  allTask: TaskInstance[];
+};
 
 //default data
 const defaultData = {
@@ -38,14 +43,8 @@ const errorData = [
 ];
 
 //view selected project
-function viewProject(projectId: string | null, store: StoredType | null): PageData {
-  const project = projectId && store && store.projects.get(projectId);
-
-  return !projectId && !store
-    ? defaultData
-    : store && projectId && project
-      ? selectedProj(project, store)
-      : errorData;
+function viewProject(data?: IncomingViewData): PageData {
+  return !data ? defaultData : data ? selectedProj(data.project, data.allTask) : errorData;
 }
 
 function detailPanelShell(): PageData {
@@ -85,7 +84,7 @@ function detailPanelShell(): PageData {
       {
         tag: "div",
         class: "mainContent__workspace",
-        content: [viewProject(null, null)],
+        content: [viewProject()],
       },
     ],
   };
