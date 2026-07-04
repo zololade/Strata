@@ -21,7 +21,7 @@ function projectLoader(projects: ProjectInstance[]): PageData {
             cls: "mainNav__createBtn",
             label: "Add new project",
             action: "menu-close open-modal",
-            type: "edit",
+            type: "Edit",
           }),
         ],
       },

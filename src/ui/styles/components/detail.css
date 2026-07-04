@@ -147,17 +147,23 @@
           font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.9rem);
           border: none;
           padding: 0rem 0.35rem;
-          background: var(--bg-sidebar);
+          background: none;
           border-radius: 15px;
-          border: var(--border);
+          display: flex;
+          align-items: center;
+          gap: 0.15rem;
+
+          span:last-of-type {
+            text-transform: lowercase;
+          }
 
           @media (hover: hover) {
             &:hover {
-              background-color: var(--add-btn-hover-color-sec);
+              color: var(--content-highlight-color);
+              background-color: none;
             }
           }
           &.active {
-            background: var(--add-btn-color-sec);
             color: var(--content-highlight-color);
           }
         }
