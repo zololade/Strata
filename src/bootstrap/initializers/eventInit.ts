@@ -3,7 +3,6 @@ import { EventBus } from "../../lib/EventBus";
 const databaseBus = new EventBus();
 const appBus = new EventBus();
 
-import { createHandleProjectSelection } from "../../handlers/busHandlers/handlers";
 import type { StoreSelectors } from "../../store";
 import { createFlagReaction } from "../../ui/reactions/flagReactions";
 import { createShowActiveProject } from "../../ui/reactions/selectionReaction";
@@ -27,7 +26,6 @@ function initializeServices(
   });
 
   const { handleTitleUpdated } = createTitleReaction();
-  const handleProjectSelection = createHandleProjectSelection(showActiveProject);
   const { handleProjectCreated, handleTaskCreated, handleTaskUpdated } = createUpdateReaction(
     ui.refreshList,
     ui.selectProject,
@@ -36,7 +34,7 @@ function initializeServices(
   );
   const { handleFlagToggled } = createFlagReaction(ui.getCurrProjId);
 
-  appBus.subscribe("view:project", handleProjectSelection);
+  appBus.subscribe("view:project", showActiveProject);
   appBus.subscribe("project:title-updated", handleTitleUpdated);
   appBus.subscribe("project:created", handleProjectCreated);
   appBus.subscribe("task:created", handleTaskCreated);
