@@ -40,7 +40,7 @@ function createInitialize(
     const metaStore = tx.objectStore(META_STORE);
 
     const seededCheck = await wrapper(metaStore.get("seed:version"));
-    if (seededCheck === CURRENT_SEED_VERSION) return; // seed upto date
+    if (seededCheck === CURRENT_SEED_VERSION) return; // seed up to date
 
     const seedTx = db.transaction([PROJECT_STORE, TASK_STORE, ITEM_STORE, META_STORE], "readwrite");
     await seedIfEmpty(seedTx.objectStore(PROJECT_STORE), customSeedData.projects);
