@@ -2,7 +2,7 @@
 
 A Project management app.
 
-## Phase 1 — Core CRUD (Must Ship)**
+## Phase 1 — Core CRUD (Must Ship)\*\*
 
 - ✅ Create project
 - ✅ View project
@@ -17,7 +17,7 @@ A Project management app.
 - ⬜ Delete item
 - ⬜ Edit item
 
-## Phase 2 — Polish & Deploy**
+## Phase 2 — Polish & Deploy\*\*
 
 - ✅ Empty states (no projects, no tasks)
 - ✅ Responsive design
@@ -25,14 +25,14 @@ A Project management app.
 - ⬜ README with screenshots
 - ✅ Live demo (gh-pages config already done)
 
-## Phase 3 — Differentiators (Pick 2-3)**
+## Phase 3 — Differentiators (Pick 2-3)\*\*
 
 - ⬜ Search/filter projects
 - ⬜ Data export/import (JSON)
 - ✅ Dark mode
 - ⬜ Drag and drop reordering
 
-## Ignore for now**
+## Ignore for now\*\*
 
 - Due dates
 - Priorities
