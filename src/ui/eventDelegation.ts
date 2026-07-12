@@ -11,7 +11,7 @@ function initializeEvents(handlers: HandlersByEvent) {
   const main = document.querySelector("#app") as HTMLElement;
   const actionHandlers = new Map(Object.entries(handlers) as [string, Record<string, HandlerFn>][]);
 
-  actionHandlers.forEach((_v, k) =>
+  actionHandlers.forEach((v, k) =>
     main.addEventListener(k, (e) => {
       const target = e.target as HTMLElement;
       if (!target) return;
@@ -20,13 +20,11 @@ function initializeEvents(handlers: HandlersByEvent) {
       if (!el) return;
       const action = el.dataset["action"];
       const actions = action?.split(" ") ?? [];
-      const eventType = actionHandlers.get(k);
-      if (eventType) {
-        actions.forEach((a) => {
-          const handler = eventType[a];
-          if (handler) handler(el, e);
-        });
-      }
+
+      actions.forEach((a) => {
+        const handler = v[a];
+        if (handler) handler(el, e);
+      });
     }),
   );
 }
